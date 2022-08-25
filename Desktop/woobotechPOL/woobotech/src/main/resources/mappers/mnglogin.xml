@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mnglogin">
+	<select id="checkCuSano" resultType="int">
+		select count(*)
+		from c_cust
+		where cu_sano = #{loginid}
+	</select>
+
+	<select id="checkTscmCuSano" resultType="int">
+		select count(*)
+		from c_cust a
+		join t_scm_cust b
+		on a.cu_code = b.custcode
+		where a.cu_sano = #{loginid}
+	</select>
+
+	<select id="selectMngDTO" resultType="com.woobotech.service.web.dto.MngDTO">
+		select cu_code
+		, cu_sangho
+		, cu_master
+		, cu_sano
+		, cu_juso
+		from c_cust
+		where cu_sano = #{loginid}
+	</select>
+	
+	<select id="checkPWD" parameterType="map" resultType="int">
+		select count(*)
+		from T_SCM_CUST
+		where custcode = #{custcode}
+		and custpw = #{custpw}
+	</select>
+	
+	<select id="getCuCode" resultType="string">
+		select cu_code
+		from c_cust
+		where cu_sano = #{loginid}
+	</select>
+
+	<insert id="insertScmCust" parameterType="string">
+		INSERT INTO T_SCM_CUST(
+		CUSTCODE
+		,CUSTPW
+		,P_DELIVERYHOUR
+		,P_DELIVERYMIN
+		,AREA
+		,U_DELIVERYHOUR
+		,U_DELIVERYMIN
+		,EMAIL1
+		,EMAIL2
+		,EMAIL3
+		,EMAIL4
+		,EMAIL5
+		)
+		VALUES(
+		#{custcode}
+		,'a1234'
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		,' '
+		)
+	</insert>  
+	
+	<select id="getMemberById" resultType="com.woobotech.service.web.dto.MemberDTO">
+		select id
+		, pw
+		, plant
+		, grade
+		,email
+		from t_scm_member
+		where id = #{id}
+	</select>
+	
+	<select id="getCountById" resultType="int">
+		select count(*)
+		from t_scm_member
+		where id = #{id}
+	</select>
+
+</mapper>

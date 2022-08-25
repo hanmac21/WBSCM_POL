@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- 인터셉터 객체 생성 -->
+	<beans:bean id="authenticationInterceptor"
+		class="com.woobotech.service.common.SessionIntercepter">
+	</beans:bean>
+
+	<!-- Interceptor 설정 -->
+	<interceptors>
+
+		<interceptor>
+			<mapping path="/**/" />
+			<beans:ref bean="authenticationInterceptor" />
+		</interceptor>
+		
+		<beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<beans:property name="paramName" value="lang"/>
+		</beans:bean>
+		
+	</interceptors>
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/asset/**" location="/asset/" />
+	<resources mapping="/resimg/woobo/**" location="D://Apache2.2//htdocs//woobo" />
+	
+	<!-- 리포트 툴용 C드라이브 내부 report 폴더 -->
+	<resources mapping="/report/*" location="C:\report" />
+	
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/"/>
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- 아이디 중복 검사용 서비스 -->
+	<context:component-scan base-package="com.woobotech.service" />
+
+</beans:beans>

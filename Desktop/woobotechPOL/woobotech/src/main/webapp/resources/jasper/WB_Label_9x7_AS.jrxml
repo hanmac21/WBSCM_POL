@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WB_Label_9x7_AS" pageWidth="255" pageHeight="198" columnWidth="255" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9b5fc1c1-3549-4d48-8f5d-04a6844f3c5f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WooBo"/>
+	<parameter name="qtrbarcode" class="java.lang.String"/>
+	<parameter name="qpno" class="java.lang.String"/>
+	<parameter name="qmemo" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select substr(a.indate,1,4)||'-'||substr(a.indate,5,2)||'-'||substr(a.indate,7,2) as indate,b.madate,a.cname,a.pno,a.carkind,REPLACE(a.pname,'<br>','') as pname,b.qty,b.totalqty,b.barcode from t_scm_trade a inner join t_scm_barcode b on a.barcode = b.tradebarcode where a.barcode = $P{qtrbarcode} and a.pno = $P{qpno} and b.pno = $P{qpno} order by b.barcode]]>
+	</queryString>
+	<field name="INDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="INDATE"/>
+	</field>
+	<field name="MADATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MADATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="MADATE"/>
+	</field>
+	<field name="CNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CNAME"/>
+	</field>
+	<field name="PNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PNO"/>
+	</field>
+	<field name="CARKIND" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CARKIND"/>
+		<property name="com.jaspersoft.studio.field.label" value="CARKIND"/>
+	</field>
+	<field name="PNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="PNAME"/>
+		<property name="com.jaspersoft.studio.field.Forecolor" value="BLACK"/>
+		<property name="com.jaspersoft.studio.field.Backcolor" value="BLACK"/>
+	</field>
+	<field name="QTY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="QTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="QTY"/>
+	</field>
+	<field name="TOTALQTY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="TOTALQTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTALQTY"/>
+	</field>
+	<field name="BARCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BARCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="BARCODE"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="198" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement mode="Opaque" x="58" y="10" width="186" height="39" forecolor="#FFFFFF" backcolor="#030303" uuid="6aa7d7c6-c99d-4029-ab57-cd3408b49895"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" size="13" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="48" height="39" uuid="e1e03e07-ed5f-4bcf-b304-26d08b5f7d49"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" isBold="false"/>
+				</textElement>
+				<text><![CDATA[품    명]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="58" y="49" width="140" height="27" uuid="13990903-a298-4464-ae2c-6efb73e94377"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="49" width="48" height="27" uuid="ed85c02c-b99f-4a18-a99a-6092af522802"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[공급업체]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="76" width="48" height="27" uuid="0b9133d8-4036-4eab-b4f4-a6e13f1fc8a4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[수    량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="130" width="48" height="27" uuid="1f4d90ce-047e-43f5-83a4-d3e207820620"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[비    고]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="76" width="48" height="27" uuid="e111210f-2fef-423c-b25f-eca0b9c0f8ea"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[차    종]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="103" width="48" height="27" uuid="9148fa6b-2053-4837-82e2-260f2113c45f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[입고일자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="103" width="48" height="27" uuid="b4d8917f-7934-4170-ae15-9d61f066ee01"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[생산일자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="49" width="46" height="27" uuid="924527e9-aa09-48d1-9b2a-b760b5ee4a38"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<text><![CDATA[검사:완료]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="76" width="66" height="27" uuid="b7920798-e55a-4334-91e3-d77516e5893d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="58" y="130" width="186" height="27" uuid="17a267e9-33a3-4799-a2f6-e08684b40406"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{qmemo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="76" width="72" height="27" uuid="0e92bb97-fc4c-4e51-98f8-4a01e820ce81"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CARKIND}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="103" width="72" height="27" uuid="87066c0f-3c85-4e6a-93c7-cd5b14a2e33b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="103" width="66" height="27" uuid="abc4aeeb-4c44-4fd5-a2f4-52565924a2a7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MADATE}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="" mode="Transparent" x="32" y="160" width="188" height="33" uuid="ed2074ba-3b92-4af8-9e10-5cc390af0cfd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" barWidth="3" barHeight="56" rotation="None">
+					<jr:codeExpression><![CDATA[$F{BARCODE}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="198" y="180" width="47" height="13" uuid="a3261bba-b059-4762-abc1-74f5e9ccdf81"/>
+				<textElement textAlignment="Right">
+					<font fontName="나눔고딕 ExtraBold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

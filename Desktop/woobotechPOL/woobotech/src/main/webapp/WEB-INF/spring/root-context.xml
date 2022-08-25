@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!--oracle -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@176.122.244.138:1521:REXPOL" /><!-- 218.147.154.81:1521:INBUS" -->
+		<property name="username" value="rexpol" />
+		<property name="password" value="inbus" />
+	</bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:mappers/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<!--mssql 000 Wbptmes -->
+	<bean id="dataSourceWBPTMES" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url" value="jdbc:jtds:sqlserver://218.147.154.84:6433/WBPTMES;tds=8.0;lastupdatecount=true" />
+		<property name="username" value="wbptmesuser" />
+		<property name="password" value="wbptmesuser123@" />
+	</bean>
+
+	<bean id="sqlSessionFactoryWBPTMES"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceWBPTMES" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:wbptmes/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionWBPTMES" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryWBPTMES" />
+	</bean>
+	
+	<!--mssql 001 Wbusmes -->
+	<bean id="dataSourceWBUSMES" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url" value="jdbc:jtds:sqlserver://61.76.134.91:1433/WBUSMES;tds=8.0;lastupdatecount=true" />
+		<property name="username" value="wbmesuser" />
+		<property name="password" value="wbmesuser" />	
+	</bean>
+
+	<bean id="sqlSessionFactoryWBUSMES"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceWBUSMES" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:wbusmes/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionWBUSMES" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryWBUSMES" />
+	</bean>
+
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="transactionManagerWBPTMES" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceWBPTMES" />
+	</bean>
+	
+	<bean id="transactionManagerWBUSMES" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceWBUSMES" />
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
+	
+	<mybatis-spring:scan
+		base-package="com.woobotech.mapper" />
+
+	<context:component-scan
+		base-package="com.woobotech.service" />
+
+	<tx:annotation-driven />
+
+	<!-- 이메일 주소 설정 부분 -->	
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="mail.woobotech.com" />
+		<property name="port" value="25" />
+		<property name="username" value="admin@woobotech.com" />
+		<property name="password" value="!woobo77" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.ssl.enable">false</prop>
+				<prop key="mail.debug">true</prop>
+				<!-- <prop key="mail.smtp.ssl.trust">mail.woobotech.com</prop> <prop 
+					key="mail.smtp.ssl.protocols">TLSv1.2</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- maximum file size in bytes 50MB -->
+		<property name="maxUploadSize" value="52428800" />
+	</bean>
+
+	<!-- bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"> 
+		</bean -->
+
+	<!-- bean id="uploadPath" class="java.lang.String"> <constructor-arg value="C:\\Program 
+		Files (x86)\\Apache Software Foundation\\Apache2.2\\htdocs\\playmate"> </constructor-arg> 
+		</bean -->
+
+	<!-- bean id="uploadPath" class="java.lang.String"> <constructor-arg value="//ds554023//tomcat//webapps//img"> 
+		</constructor-arg> </bean -->
+
+	<!-- bean id="uploadPath" class="java.lang.String"> <constructor-arg value="//xxpetpark//tomcat//webapps//resource//pet"> 
+		</constructor-arg> </bean -->
+
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="D:\\Apache2.2\\htdocs\\woobo">
+		</constructor-arg>
+	</bean>
+
+</beans>

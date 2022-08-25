@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WB_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="55a4035b-2da4-4a83-ab4f-aaaa7fcc5eb6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WBDataAdapter.xml"/>
+	<queryString language="SQL">
+		<![CDATA[select  *   from 
+  (select rownum rowno from t_scm_trade where rownum < 10) a,
+  (select rownum rowno
+        ,t1.barcode                                       
+        ,t1.indate                            
+        ,t1.pono                              
+        ,t1.cno as custcode                   
+        ,t1.pno  as itemcode                  
+        ,t3.spec  as itemqty                  
+        ,t1.pname as itemname                 
+        ,TO_CHAR(t1.qty,'9,999') as c_qty                              
+        ,t2.cu_sangho as custname             
+        ,t2.cu_sano                           
+        ,t1.mkdate                           
+        ,t1.prdate                           
+        ,t2.cu_master                          
+        ,t1.memo                          
+        ,t2.cu_juso                          
+        ,t4.CU_JUSO as bake                          
+        ,nvl(t2.cu_uptae, '') as cu_uptae                          
+        ,nvl(t2.cu_upjong,'') as cu_upjong                         
+       ,(select deliveryno from T_SCM_DELIVERY where tradebarcode =t1.barcode and rownum <=1) as deliveryno from T_SCM_TRADE t1 LEFT OUTER JOIN c_cust t2 ON t1.cno = t2.cu_code LEFT OUTER JOIN T_MI_ITEM t3 ON t1.pno= t3.ITEMCODE1  LEFT OUTER JOIN c_cust_bak t4 ON t2.cu_code = t4.cu_code where barcode ='20220104058' ) b
+  where  b.rowno(+) = a.rowno]]>
+	</queryString>
+	<field name="ROWNO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ROWNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ROWNO"/>
+	</field>
+	<field name="COLUMN_2" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ROWNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="ROWNO"/>
+	</field>
+	<field name="BARCODE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="BARCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="BARCODE"/>
+	</field>
+	<field name="INDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="INDATE"/>
+	</field>
+	<field name="PONO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PONO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PONO"/>
+	</field>
+	<field name="CUSTCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CUSTCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CUSTCODE"/>
+	</field>
+	<field name="ITEMCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITEMCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITEMCODE"/>
+	</field>
+	<field name="ITEMQTY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITEMQTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITEMQTY"/>
+	</field>
+	<field name="ITEMNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITEMNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITEMNAME"/>
+	</field>
+	<field name="C_QTY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="C_QTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="C_QTY"/>
+	</field>
+	<field name="CUSTNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CUSTNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CUSTNAME"/>
+	</field>
+	<field name="CU_SANO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CU_SANO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CU_SANO"/>
+	</field>
+	<field name="MKDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MKDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="MKDATE"/>
+	</field>
+	<field name="PRDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PRDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRDATE"/>
+	</field>
+	<field name="CU_MASTER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CU_MASTER"/>
+		<property name="com.jaspersoft.studio.field.label" value="CU_MASTER"/>
+	</field>
+	<field name="MEMO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MEMO"/>
+		<property name="com.jaspersoft.studio.field.label" value="MEMO"/>
+	</field>
+	<field name="CU_JUSO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CU_JUSO"/>
+		<property name="com.jaspersoft.studio.field.label" value="CU_JUSO"/>
+	</field>
+	<field name="BAKE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BAKE"/>
+		<property name="com.jaspersoft.studio.field.label" value="BAKE"/>
+	</field>
+	<field name="CU_UPTAE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CU_UPTAE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CU_UPTAE"/>
+	</field>
+	<field name="CU_UPJONG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CU_UPJONG"/>
+		<property name="com.jaspersoft.studio.field.label" value="CU_UPJONG"/>
+	</field>
+	<field name="DELIVERYNO" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="DELIVERYNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="DELIVERYNO"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="23" width="154" height="28" uuid="a8666b76-d8bd-4f3a-850c-8c94be6236fb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="KoPubWorld돋움체 Light" size="18"/>
+				</textElement>
+				<text><![CDATA[거래명세표]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="278" y="71" width="110" height="20" uuid="46caebca-cc2c-4f9b-8357-252e7b2882a9">
+					<property name="com.jaspersoft.studio.unit.barHeight" value="px"/>
+					<property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="1" barHeight="25">
+					<jr:codeExpression><![CDATA[$F{BARCODE}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="278" y="91" width="110" height="10" uuid="ac49047e-a97f-4318-ab3f-5cd8f31967fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="KoPubWorld돋움체 Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BARCODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="550" y="23" width="154" height="28" uuid="f3fa3b18-af45-43e6-89d1-44f6baf5c5b7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="KoPubWorld돋움체 Light" size="18"/>
+				</textElement>
+				<text><![CDATA[거래명세표]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="52" width="154" height="15" uuid="36a38471-6392-4453-9e7f-f8a41b84c7c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<text><![CDATA[(공급자용)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="52" width="154" height="15" uuid="e4aa224b-9cb1-4799-b488-454f3bf554e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<text><![CDATA[(공급받는자용)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="86" width="137" height="15" uuid="1ace851d-65df-4966-a03a-6accf142991a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[작성일자 :            년     월     일]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="86" width="13" height="15" uuid="a97e6351-0b2b-4d6e-b39e-8be36972ffb1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(6)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="86" width="13" height="15" uuid="320dbd87-90ae-4551-8633-9308b052c7ea"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(4,6)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="86" width="21" height="15" uuid="c4b8e652-7b67-43dc-ba16-14b9c4f75f84"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(0,4)]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="690" y="71" width="110" height="20" uuid="85241b25-2b3e-4cef-97ca-27fdb59a59ef">
+					<property name="com.jaspersoft.studio.unit.barHeight" value="px"/>
+					<property name="com.jaspersoft.studio.unit.barWidth" value="px"/>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="1" barHeight="25">
+					<jr:codeExpression><![CDATA[$F{BARCODE}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="690" y="91" width="110" height="10" uuid="12c288f3-ccfa-4000-834a-a532fc2fb26c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="KoPubWorld돋움체 Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BARCODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="411" y="86" width="137" height="15" uuid="f48e87c8-728c-46ff-a0b2-f0ffc5b940c0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[작성일자 :            년     월     일]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="494" y="86" width="13" height="15" uuid="7c706412-066c-435e-b7e6-8ed961b8f821"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(6)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="86" width="13" height="15" uuid="e029b274-da95-43d8-961c-98c4abe439d1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(4,6)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="86" width="21" height="15" uuid="7f468085-9ea4-4910-84a6-e0f75f1e5c32"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDATE}.substring(0,4)]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="110" splitType="Stretch">
+			<line>
+				<reportElement x="400" y="-111" width="1" height="221" uuid="fe540169-ac58-4d67-8ccc-1112694f458f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="5" width="17" height="94" uuid="2cf20538-aead-4c7c-9a16-c461d1280b17"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[공  급  자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="5" width="24" height="15" uuid="b6c7a4db-d70b-46ba-b6e0-5750c2449298"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="20" width="24" height="29" uuid="5d51a60b-0b78-497d-b554-0d669482364a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[상호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="49" width="24" height="29" uuid="0be719b4-b5b0-4bf5-b945-8a26d2bcf099"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[주소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="78" width="24" height="21" uuid="8c8811ad-2af5-421f-a907-26526c1d6722"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[업태]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="5" width="148" height="15" uuid="6a3b5199-e0ab-415d-8cad-9fa42d6df05d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_SANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="111" y="20" width="24" height="29" uuid="46999370-9eb5-4c93-b546-131cd552a26f"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="78" width="25" height="21" uuid="c0c86ad0-2820-4c83-9a2b-d8aa0f5d6c89"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[종목]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="20" width="70" height="29" uuid="83926031-e319-4360-b43f-0f48df7e4e86">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3da007db-68b0-4998-8424-469e9950a494"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="20" width="54" height="29" uuid="8128f108-b689-48ba-a64e-b4105124bdba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b17a3a8-eeda-4350-a043-70ef6fdca5c1"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_MASTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="41" y="49" width="148" height="29" uuid="c3f6376f-139a-42e3-9fcd-1eb214c6fe6f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a962405-62c9-48d5-aa47-4305a328bfe7"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BAKE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="41" y="78" width="69" height="21" uuid="332bdbbe-ecff-4b3e-895b-e7a502531410">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ade78a58-236f-40cc-a0c8-5456db6ab747"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPTAE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="78" width="54" height="21" uuid="c71c85d3-e078-4a6b-b535-d9b904237ea8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24e3228c-5249-4021-8b13-aeaf3295b040"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPJONG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="201" y="5" width="17" height="94" uuid="affd112e-7676-423a-ad23-37104c3bbdc7"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[공  급  받  는  자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="5" width="24" height="15" uuid="e6a6d5b4-2596-445c-8949-a76b9cbe3b4e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="20" width="24" height="29" uuid="32d789a9-3260-446c-9755-9831c3098ac6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[상호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="49" width="24" height="29" uuid="89b9d4b2-639a-4339-b0a3-5c8be91e7842"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[주소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="78" width="24" height="21" uuid="932e9dcb-3a68-400c-b2a2-ac3cb1e0b435"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[업태]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="242" y="5" width="148" height="15" uuid="4f17bd3a-b057-440b-bf88-19d586d769a6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_SANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="312" y="20" width="24" height="29" uuid="c7612d28-5c1b-4803-8382-187ae05629af"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="78" width="25" height="21" uuid="9fb5823e-4b16-4bb5-a511-9f72b8eb394d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[종목]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="242" y="20" width="70" height="29" uuid="8c1075ae-a551-49f9-9db6-73f10174b79c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3da007db-68b0-4998-8424-469e9950a494"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="20" width="54" height="29" uuid="a60805e9-3725-48ae-82be-cb10905657e1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b17a3a8-eeda-4350-a043-70ef6fdca5c1"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_MASTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="49" width="148" height="29" uuid="69b74d41-4abc-4905-b85f-0de0e755dc42">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a962405-62c9-48d5-aa47-4305a328bfe7"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BAKE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="78" width="69" height="21" uuid="a22237d8-6d41-4313-960a-5fcde4a7c9ac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ade78a58-236f-40cc-a0c8-5456db6ab747"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPTAE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="78" width="54" height="21" uuid="1ad7457f-bc8f-48c6-9080-dccb48843c2e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24e3228c-5249-4021-8b13-aeaf3295b040"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPJONG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="412" y="5" width="17" height="94" uuid="f6b5e36c-6172-4ad8-96bf-25f78853e627"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[공  급  자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="5" width="24" height="15" uuid="96a6afa4-294c-4dd4-8148-4d8591c23a6b"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="20" width="24" height="29" uuid="6674e850-1f44-43a4-b99b-6d07c7eb409e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[상호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="49" width="24" height="29" uuid="84eafc57-eee3-4fdc-baa7-de3ba225e6c9"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[주소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="78" width="24" height="21" uuid="f1dcca9c-1a47-4fe7-a13c-43bd81ab3001"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[업태]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="453" y="5" width="148" height="15" uuid="7dca082a-7f3c-4ef0-a9c8-416ae7c246b6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_SANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="523" y="20" width="24" height="29" uuid="18473db9-a9fd-4c64-aae3-16edd1a49b28"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="78" width="25" height="21" uuid="b26c7581-b63c-4664-bfd3-9868274116ed"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[종목]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="453" y="20" width="70" height="29" uuid="56a829f0-f107-4f17-b9db-45c2a7a0bb85">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3da007db-68b0-4998-8424-469e9950a494"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="547" y="20" width="54" height="29" uuid="0811984d-e89b-4e18-b070-b9c4cc66e266">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b17a3a8-eeda-4350-a043-70ef6fdca5c1"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_MASTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="49" width="148" height="29" uuid="c3796dbd-72e1-407b-a677-db7b6b09ba18">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a962405-62c9-48d5-aa47-4305a328bfe7"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BAKE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="78" width="69" height="21" uuid="4aa3b4b2-2da5-41cb-862d-58c48a1d4231">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ade78a58-236f-40cc-a0c8-5456db6ab747"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPTAE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="547" y="78" width="54" height="21" uuid="9202af2a-ef22-4252-82e3-93f083d8227c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24e3228c-5249-4021-8b13-aeaf3295b040"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPJONG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="613" y="5" width="17" height="94" uuid="d3084457-dea0-4277-a2c4-a665900c6f55"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[공  급  받  는  자]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="5" width="24" height="15" uuid="ac5b5154-ef6e-44b6-89d1-094d1ccdb95e"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[번호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="20" width="24" height="29" uuid="41562e64-0a1f-439b-9ba3-36f83858f75a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[상호]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="49" width="24" height="29" uuid="9f51c15d-4b5a-479c-ba87-3a2c89224e38"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[주소]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="78" width="24" height="21" uuid="a61445d5-019e-4603-9255-ba9249d5e887"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[업태]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="654" y="5" width="148" height="15" uuid="80f15abe-887c-4304-9543-e420a8881c4a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_SANO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="724" y="20" width="24" height="29" uuid="c1df513d-7e2c-4329-87b4-219a8f143db5"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[성명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="723" y="78" width="25" height="21" uuid="f971eb7b-133d-40db-a93c-3e66d94ced4a"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[종목]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="654" y="20" width="70" height="29" uuid="7a747080-ed51-4d63-80aa-b090226b81f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3da007db-68b0-4998-8424-469e9950a494"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUSTNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="748" y="20" width="54" height="29" uuid="b003357d-ed98-4b7f-a805-b4b005913d29">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b17a3a8-eeda-4350-a043-70ef6fdca5c1"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_MASTER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="654" y="49" width="148" height="29" uuid="20c67c45-65c6-4d48-af3c-7b32c7591d36">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a962405-62c9-48d5-aa47-4305a328bfe7"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BAKE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="654" y="78" width="69" height="21" uuid="fe5fa91d-2cf9-4a54-a065-c177622acb88">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ade78a58-236f-40cc-a0c8-5456db6ab747"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPTAE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="748" y="78" width="54" height="21" uuid="1ff1aa04-9821-4081-bfe8-f7503f2690be">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24e3228c-5249-4021-8b13-aeaf3295b040"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CU_UPJONG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="0" width="114" height="22" uuid="4b6c324c-5011-4084-bb8f-786e1a6660d1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c493e7c5-2f24-480e-8b22-baa5668c91eb"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[부품품번]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="121" height="22" uuid="d492c63c-66e3-44b2-9caa-8bd542973b41">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be0164ec-a06e-46bb-8407-fa6fb29125b5"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[품    명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="0" width="35" height="22" uuid="1757d738-d5d0-4a0d-892a-597d946be69d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[납품]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="22" uuid="e01d8700-2c73-4f04-97bb-328f2a499220">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01de65e2-a9e2-4bfa-a67a-8b0951e56e3d"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[LOT NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="35" height="22" uuid="8e26b76d-baea-4e52-806b-b855bd6f0ca1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[불량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="35" height="22" uuid="47df5c0d-1274-4bda-b5d2-dc6fb2f5a069">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[입하]]></text>
+			</staticText>
+			<line>
+				<reportElement x="400" y="1" width="1" height="23" uuid="d001e933-08d3-4627-9f73-de6ec7747734"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="462" y="0" width="114" height="22" uuid="19710261-9000-492f-939a-5d3f07abd829">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c493e7c5-2f24-480e-8b22-baa5668c91eb"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[부품품번]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="576" y="0" width="121" height="22" uuid="6fdb2b2e-6a66-42dd-8fec-1a1563047205">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be0164ec-a06e-46bb-8407-fa6fb29125b5"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[품    명]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="0" width="35" height="22" uuid="e979d74f-d116-49f8-a490-4302a0807302">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[납품]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="0" width="50" height="22" uuid="0f37e940-7383-464c-87a5-86ce704e0e4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01de65e2-a9e2-4bfa-a67a-8b0951e56e3d"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[LOT NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="0" width="35" height="22" uuid="12cdbc51-21d7-4e6c-9ea8-8564571e4c89">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[불량]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="767" y="0" width="35" height="22" uuid="86bac207-435a-4bad-8db5-62392e1c7fbd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[입하]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="50" y="0" width="114" height="27" uuid="4daa3f74-8230-4200-a8be-fa5b5f5751c1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c493e7c5-2f24-480e-8b22-baa5668c91eb"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="0" width="121" height="27" uuid="360c8b13-f93a-48b3-9f81-2b65fcbc8472">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be0164ec-a06e-46bb-8407-fa6fb29125b5"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="0" width="35" height="27" uuid="d8a32a88-9390-4c7e-acd3-10b61ad97c60">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C_QTY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="50" height="27" uuid="8fab947c-3ac8-41c9-a76f-9daccb4be6ae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01de65e2-a9e2-4bfa-a67a-8b0951e56e3d"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MKDATE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="400" y="1" width="1" height="26" uuid="c1ac2500-a411-466e-b410-95263c5c2685"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="355" y="0" width="35" height="27" uuid="97209a45-a3d5-443f-93b2-c562a823ef67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="35" height="27" uuid="16d305ce-9214-40b2-a039-3cec50c2710d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="462" y="0" width="114" height="27" uuid="c2826be2-0b3d-4619-9617-16cd12033962">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c493e7c5-2f24-480e-8b22-baa5668c91eb"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="576" y="0" width="121" height="27" uuid="d6d9ec17-0351-418d-83b7-f4c13aaf4cb9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="be0164ec-a06e-46bb-8407-fa6fb29125b5"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="0" width="50" height="27" uuid="adc09d41-2cfa-4974-bd3d-655a89c77ec2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01de65e2-a9e2-4bfa-a67a-8b0951e56e3d"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MKDATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="767" y="0" width="35" height="27" uuid="d0faceae-9f0d-44a0-9e6b-72b72a38ec94">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="732" y="0" width="35" height="27" uuid="dbaf6630-b0df-4cc3-9eb6-5e994079d6f6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="697" y="0" width="35" height="27" uuid="83fa8dd0-832c-4d50-baaf-051d78a9c05d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a86a4da-0803-43b9-bdcf-aa939d0deb27"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{C_QTY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<line>
+				<reportElement x="400" y="0" width="1" height="8" uuid="115658ff-058f-4871-b4bd-d18c9427db4d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="59" splitType="Stretch">
+			<line>
+				<reportElement x="400" y="0" width="1" height="56" uuid="c4bd1aa1-b958-4e87-8447-c7b6791afed8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="50" height="54" uuid="38195dc2-701e-43d8-b1eb-e512994721ef"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[비 고]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="1" width="160" height="54" uuid="98b0618a-cb59-47f4-b400-af37b7c1f6ce"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="1" width="10" height="54" uuid="eb036203-1ec7-4b55-8d95-b58c99a07214"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[결 재]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="1" width="48" height="13" uuid="bb2c7fed-624b-4a65-bd04-4d605bd5320d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[수입검사]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="1" width="48" height="13" uuid="e6c9e84b-771f-4a26-b661-f725f13ef7dc"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[자재검사]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="1" width="48" height="13" uuid="0ff01bb7-b2b0-440d-a60b-3d57d7469b78"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[담  당]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="14" width="48" height="41" uuid="b0ebc79f-686c-4df7-a21f-9224269e5ed3"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="14" width="48" height="41" uuid="c81323a5-dc17-4905-ab30-c18716d00e9c"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="14" width="48" height="41" uuid="8afbedd0-a472-4096-b833-9baefbd265b6"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="1" width="50" height="54" uuid="eb0cae58-7ec5-47e4-a9f7-8785d8cd7d36"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[비 고]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="462" y="1" width="160" height="54" uuid="784cce20-6a3f-4577-9f82-738a88b93210"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="648" y="1" width="10" height="54" uuid="57230f1c-eece-4cf6-9a27-addf0aa707f3"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[결 재]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="658" y="1" width="48" height="13" uuid="22e55436-778d-4a22-8714-49b73e301871"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[수입검사]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="706" y="1" width="48" height="13" uuid="c2cf170f-730a-4a13-b632-9d4d72f544e8"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[자재검사]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="754" y="1" width="48" height="13" uuid="b0e7a71f-d594-43ed-b3f0-1ff535c5c016"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[담  당]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="658" y="14" width="48" height="41" uuid="40302fb8-5ad5-49fd-9b30-72b4128b0343"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="706" y="14" width="48" height="41" uuid="f69a9889-80e4-4ff3-b59c-19d4c6116e37"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="754" y="14" width="48" height="41" uuid="477653a1-08fa-4f14-bac0-50c8054a5a1d"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<pen lineWidth="0.2"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="KoPubWorld돋움체 Light" size="8"/>
+					<paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+				</textElement>
+				<text><![CDATA[ ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

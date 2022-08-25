@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WB_Label_4x2" pageWidth="113" pageHeight="56" columnWidth="113" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9b5fc1c1-3549-4d48-8f5d-04a6844f3c5f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WooBo"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<queryString language="SQL">
+		<![CDATA[select a.indate,mkdate,a.cname,a.pno,a.carkind,a.pname,b.qty,b.totalqty from t_scm_trade a inner join t_scm_barcode b on a.barcode = b.tradebarcode where a.barcode = '20220106011']]>
+	</queryString>
+	<field name="INDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="INDATE"/>
+	</field>
+	<field name="MKDATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MKDATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="MKDATE"/>
+	</field>
+	<field name="CNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CNAME"/>
+	</field>
+	<field name="PNO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PNO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PNO"/>
+	</field>
+	<field name="CARKIND" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CARKIND"/>
+		<property name="com.jaspersoft.studio.field.label" value="CARKIND"/>
+	</field>
+	<field name="PNAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PNAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="PNAME"/>
+	</field>
+	<field name="QTY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="QTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="QTY"/>
+	</field>
+	<field name="TOTALQTY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="TOTALQTY"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTALQTY"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="6" width="86" height="14" uuid="6aa7d7c6-c99d-4029-ab57-cd3408b49895"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="6" width="20" height="14" uuid="e1e03e07-ed5f-4bcf-b304-26d08b5f7d49"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="나눔고딕 ExtraBold" size="6"/>
+				</textElement>
+				<text><![CDATA[품    명]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="" x="4" y="23" width="79" height="25" uuid="ed2074ba-3b92-4af8-9e10-5cc390af0cfd"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" barHeight="56">
+					<jr:codeExpression><![CDATA[$F{PNO}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="83" y="34" width="27" height="14" uuid="a3261bba-b059-4762-abc1-74f5e9ccdf81"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
