@@ -569,7 +569,7 @@ public class WooboTechController {
   // 사용자 관리
   @RequestMapping(value = "/mng_manger_view")
   public ModelAndView mng_manager_view(HttpServletRequest request, Locale locale, Model model,
-      @RequestParam Map<String, String> param) {
+      @RequestParam Map<String, String> param) throws SQLException {
     logger.info("▷▶▷▶▷▶mng_manger_view start");
 
 
@@ -586,10 +586,17 @@ public class WooboTechController {
     }
     param.put("cust_code", session_cu_code);
     WooboTechDao dao = new WooboTechDao();
-    MangerDTO board = dao.mng_manger_view(param);
-    model.addAttribute("board", board);
-    logger.info("◁◀◁◀◁◀ mng_manger_view end");
-    return new ModelAndView("mng/mng_manger_view");
+    int cnt = dao.userCount(session_cu_code);
+    if(cnt>0) {
+      MangerDTO board = dao.mng_manger_view(param);
+      model.addAttribute("board", board);
+      logger.info("◁◀◁◀◁◀ mng_manger_view end");
+      return new ModelAndView("mng/mng_manger_view");
+    }else {
+      model.addAttribute("msg","등록된 사용자 정보가 없습니다.");
+      logger.info("◁◀◁◀◁◀ mng_manger_view end");
+      return new ModelAndView("mng/mng_manger_view");
+    }
   }
 
   // 자료실 글 삭제

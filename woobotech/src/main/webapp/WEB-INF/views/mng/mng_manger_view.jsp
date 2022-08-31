@@ -169,7 +169,15 @@
 	<!-- /.modal-dialog -->
 </div>
 <script type="text/javascript">
-	
+function callP(){
+	console.log("부모창에 있는 함수 call호출");
+	closeP();
+}
+var msg = "${msg}";
+if (msg!= "") {
+	alert(msg);
+	callP();
+}	 
  $(function () {
     
     var loginId = getCookie("loginId");

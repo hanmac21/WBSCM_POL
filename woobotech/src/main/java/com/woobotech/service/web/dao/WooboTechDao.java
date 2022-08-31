@@ -13831,7 +13831,7 @@ public class WooboTechDao {
     sql.append("						   ,a.itemcode										\n");
     sql.append("						   ,A.condate										\n");
     sql.append("						   ,sum(gQTY) mrp_qty								\n");
-    sql.append("                           ,case when up_date>= TO_CHAR(SYSDATE-48/24, 'YYYYMMDDHH24MI') then 1 else 0 end as changed");
+    sql.append("                           ,0 as changed"); //case when up_date>= TO_CHAR(SYSDATE-48/24, 'YYYYMMDDHH24MI') then 1 else 0 end
     sql.append("				     FROM   T_PP_MRP_REQUIREMENT2 a							\n");
     sql.append("					 LEFT OUTER JOIN T_MI_ITEM c							\n");
     sql.append("					 ON	    a.gubun = c.gubun								\n");
@@ -13851,7 +13851,7 @@ public class WooboTechDao {
     sql.append("'");
    
     
-    sql.append("					GROUP BY 	A.gubun, A.branch, A.itemcode, A.condate	    , case when up_date>= TO_CHAR(SYSDATE-48/24, 'YYYYMMDDHH24MI') then 1 else 0 end\n");
+    sql.append("					GROUP BY 	A.gubun, A.branch, A.itemcode, A.condate	    , 0\n");        //case when up_date>= TO_CHAR(SYSDATE-48/24, 'YYYYMMDDHH24MI') then 1 else 0 end
 
     if (alldate != null) {
       if (alldate.equals("0")) {
@@ -14014,7 +14014,7 @@ public class WooboTechDao {
     }
 
     if (!"".equals(custname)) {
-      sql.append("and  (UPPER(cu_sangho) like '%'||");
+      sql.append("and  ((UPPER(cu_sangho) like '%'||");
       sql.append("UPPER('");
       sql.append(custname);
       sql.append("')");
@@ -14028,7 +14028,7 @@ public class WooboTechDao {
     if (!"".equals(custcode)) {
       sql.append("or c.custcode ='%");
       sql.append(custcode);
-      sql.append("%'");
+      sql.append("%')");
     }
 
     if (!"".equals(carname)) {// 차종 검색
@@ -16139,7 +16139,7 @@ public class WooboTechDao {
       sql2.append("'");   
       sql.append("UPDATE T_SCM_TRADE SET USEYN = 'N', intf_yn='N', intf_ymdhms=' ' WHERE barcode='");
       sql.append(barcode);
-     
+      sql.append("'");
 
       pstmt = conn.prepareStatement(sql.toString());
       pstmt3 = conn.prepareStatement(sql2.toString());
@@ -16591,8 +16591,11 @@ public class WooboTechDao {
     sql.append("AND			A.PNO ='");
     sql.append(pno);
     sql.append("'");
+    sql.append("AND         B.PNO ='");
+    sql.append(pno);
+    sql.append("'");
     sql.append("ORDER BY A.BARCODE");
-
+    
     System.out.println(sql.toString());
     return (ArrayList<LabelDTO>) this.jdbcTemplate.query(sql.toString(), this.mapper18);
   }
@@ -16626,7 +16629,7 @@ public class WooboTechDao {
     sql.append(
         "FROM   T_SCM_CUST  A																									     					 \n");
     sql.append(
-        "JOIN   C_CUST_BAK  B																															 \n");
+        "JOIN   C_CUST  B																															 \n");
     sql.append(
         "ON	   A.CUSTCODE = B.CU_CODE																													 \n");
     sql.append(
@@ -16753,7 +16756,7 @@ public class WooboTechDao {
     sql.append(
         "ON	 A.CUSTCODE = C.CU_CODE																														 \n");
     sql.append(
-        "LEFT OUTER JOIN		C_CUST_BAK B																												 \n");
+        "LEFT OUTER JOIN		C_CUST B																												 \n");
     sql.append(
         "ON   A.CUSTCODE = B.CU_CODE																														 \n");
 
@@ -17254,6 +17257,30 @@ public class WooboTechDao {
       jFunction.close(rs, pstmt, conn);
     }
     return list; 
+  }
+  // 사용자관리 정보가 있는지 확인하는 쿼리
+  public int userCount(String custcode) throws SQLException {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    StringBuffer sql = new StringBuffer();
+    int result = 0;
+    try {
+      conn = dataSource.getConnection();
+      conn.setAutoCommit(false);
+      sql.append("select custcode from t_scm_cust where custcode = '");
+      sql.append(custcode);
+      sql.append("'");
+      pstmt = conn.prepareStatement(sql.toString());
+      result = pstmt.executeUpdate();
+     
+    } catch(Exception e){
+      e.printStackTrace();
+    } finally {
+      jFunction.close(rs, pstmt, conn);
+    }
+    
+    return result;
   }
 
 }

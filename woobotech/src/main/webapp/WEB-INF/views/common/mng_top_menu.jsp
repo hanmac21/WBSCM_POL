@@ -135,12 +135,25 @@ function fnMangerView(){
 		data : {
 		}
 	}).done(function(data) {
+			
 		$("#modalPop4").html("");
-		$("#modalPop4").html(data);
+		console.log("show1");
 		$('#modalPop4').modal('show');
+		console.log("show2");
+		$("#modalPop4").html(data);
+		
+		
+		console.log("show3");
+		
 		//	$('span.number').number( true, 0 );
 	});
 }
+
+   function closeP(){
+ 		console.log("자식창에서 호출");
+ 		$('#modalPop4').modal('hide');
+ 		console.log("숨김");
+ 	}
 
 function fnMangerSave(){
 	var p_deliveryhour =$('#p_deliveryhour').val(); 
