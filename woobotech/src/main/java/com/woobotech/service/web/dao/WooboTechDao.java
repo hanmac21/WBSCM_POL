@@ -825,7 +825,7 @@ public class WooboTechDao {
     sql.append("        ,t1.memo                          \n");
     sql.append("		,t1.memo2							\n");
     sql.append("        ,t2.cu_juso                          \n");
-    sql.append("        ,t4.CU_JUSO as bake                          \n");
+    sql.append("        ,' '       as bake                   \n");
     sql.append("        ,nvl(t2.cu_uptae, '') as cu_uptae                          \n");
     sql.append("        ,nvl(t2.cu_upjong,'') as cu_upjong                         \n");
     sql.append(
@@ -842,7 +842,7 @@ public class WooboTechDao {
     // sql.append(" from T_SCM_TRADE t1, c_cust t2 , T_MI_ITEM t3 , c_cust_bak t4
     // \n");
     sql.append(
-        "  from T_SCM_TRADE t1 LEFT OUTER JOIN c_cust t2 ON t1.cno = t2.cu_code LEFT OUTER JOIN T_MI_ITEM t3 ON t1.pno= t3.ITEMCODE1  LEFT OUTER JOIN c_cust_bak t4 ON t2.cu_code = t4.cu_code                       \n");
+        "  from T_SCM_TRADE t1 LEFT OUTER JOIN c_cust t2 ON t1.cno = t2.cu_code LEFT OUTER JOIN T_MI_ITEM t3 ON t1.pno= t3.ITEMCODE1                         \n");
     sql.append("  where t1.barcode ='");
     sql.append(barcode);
     sql.append("'");

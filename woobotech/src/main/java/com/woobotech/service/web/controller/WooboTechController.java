@@ -3042,7 +3042,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3098,7 +3098,7 @@ public class WooboTechController {
       System.out.println(paramMap.toString());
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3183,7 +3183,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3258,7 +3258,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3340,7 +3340,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3408,7 +3408,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3491,7 +3491,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3572,7 +3572,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
@@ -3652,7 +3652,7 @@ public class WooboTechController {
       // parameters.put("LabelDataSource", new JRMapCollectionDataSource(paramMaps));
 
       Class.forName("oracle.jdbc.driver.OracleDriver");
-      conn = DriverManager.getConnection("176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
+      conn = DriverManager.getConnection("jdbc:oracle:thin:@176.122.244.138:1521:REXPOL", "rexpol", "inbus");/*"jdbc:oracle:thin:@218.147.154.81:1521:INBUS", "REXERP",
           "INBUS");*/
 
       JasperPrint print = JasperFillManager.fillReport(jasperReport, paramMap, conn);
