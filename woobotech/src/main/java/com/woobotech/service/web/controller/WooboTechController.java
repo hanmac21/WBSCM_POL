@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -525,23 +526,24 @@ public class WooboTechController {
     String formattedDate = dateFormat.format(date);
     WooboTechDao dao = new WooboTechDao();
     param.put("startdate", startdate);
-
-    itemCount = dao.mng_re_trns_count(param);
-    List board = dao.mng_re_trns(param, page, itemCountPerPage);
-
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
-    model.addAttribute("serverTime", formattedDate);
-    model.addAttribute("board", board);
-    model.addAttribute("board", board);
-    model.addAttribute("itemCount", itemCount);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("maxPage", maxPage);
-    model.addAttribute("paging", paging);
-    model.addAttribute("startdate", DateUtil.addFormat(startdate));
-    model.addAttribute("itemCountPerPage", itemCountPerPage);
-    model.addAttribute("prdate", board);
+    if(pageView!="mng_re_trns") {
+      itemCount = dao.mng_re_trns_count(param);
+      List board = dao.mng_re_trns(param, page, itemCountPerPage);
+      
+      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+  
+      model.addAttribute("serverTime", formattedDate);
+      model.addAttribute("board", board);
+      model.addAttribute("board", board);
+      model.addAttribute("itemCount", itemCount);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("maxPage", maxPage);
+      model.addAttribute("paging", paging);
+      model.addAttribute("startdate", DateUtil.addFormat(startdate));
+      model.addAttribute("itemCountPerPage", itemCountPerPage);
+      model.addAttribute("prdate", board);
+    }
     logger.info("◁◀◁◀◁◀ mng_re_trns end");
     return "mng/" + pageView;
   }
@@ -593,7 +595,7 @@ public class WooboTechController {
       logger.info("◁◀◁◀◁◀ mng_manger_view end");
       return new ModelAndView("mng/mng_manger_view");
     }else {
-      model.addAttribute("msg","등록된 사용자 정보가 없습니다.");
+      model.addAttribute("msg","There is no registered user information.");
       logger.info("◁◀◁◀◁◀ mng_manger_view end");
       return new ModelAndView("mng/mng_manger_view");
     }
@@ -713,20 +715,21 @@ public class WooboTechController {
 
     String formattedDate = dateFormat.format(date);
     WooboTechDao dao = new WooboTechDao();
-
-    itemCount = dao.mng_data_file_count(param);
-    List board = dao.mng_data_file(param, page, itemCountPerPage);
-
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
-    model.addAttribute("serverTime", formattedDate);
-    model.addAttribute("board", board);
-    model.addAttribute("itemCount", itemCount);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("maxPage", maxPage);
-    model.addAttribute("paging", paging);
-    model.addAttribute("itemCountPerPage", itemCountPerPage);
+    if(pageView!="mng_data_file") {
+      itemCount = dao.mng_data_file_count(param);
+      List board = dao.mng_data_file(param, page, itemCountPerPage);
+  
+      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+  
+      model.addAttribute("serverTime", formattedDate);
+      model.addAttribute("board", board);
+      model.addAttribute("itemCount", itemCount);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("maxPage", maxPage);
+      model.addAttribute("paging", paging);
+      model.addAttribute("itemCountPerPage", itemCountPerPage);
+    }
     logger.info("◁◀◁◀◁◀ mng_data_file end");
     return "mng/" + pageView;
   }
@@ -1142,11 +1145,12 @@ public class WooboTechController {
     logger.info("◁◀◁◀◁◀ mng_cw_noti_add end");
     return "mng/mng_cw_noti_add";
   }
-
+  
   // 협력사 게시판 조회
   @RequestMapping(value = "/mng_cw_noti")
   public String mng_cw_noti(HttpServletRequest request, Locale locale, Model model,
       @RequestParam Map<String, String> param) {
+    long date1;
     logger.info("▷▶▷▶▷▶mng_cw_noti start");
 
     Date date = new Date();
@@ -1157,41 +1161,41 @@ public class WooboTechController {
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
 
-    try {
-      page = Integer.parseInt(request.getParameter("page"));
-
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      // e.printStackTrace();
-    }
+    /*
+     * try {page = Integer.parseInt(request.getParameter("page"));
+     * 
+     * } catch (Exception e) { // TODO Auto-generated catch block e.printStackTrace(); }
+     */
 
     int itemCount;
     // int itemCountPerPage = 30;
     int pageCountPerPaging = 10;
     HttpSession session = request.getSession();
     String session_cu_code = (String) session.getAttribute("cu_code");
-
+ 
     param.put("session_cu_code", session_cu_code);
     String formattedDate = dateFormat.format(date);
     WooboTechDao dao = new WooboTechDao();
-
-    itemCount = dao.mng_cw_noti_count(param);
-    List board = dao.mng_cw_noti(param, page, itemCountPerPage);
-
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
-    int num = (itemCount - (page - 1) * itemCountPerPage);
-
-    model.addAttribute("serverTime", formattedDate);
-    model.addAttribute("board", board);
-    model.addAttribute("board", board);
-    model.addAttribute("num", num);
-    model.addAttribute("itemCount", itemCount);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("maxPage", maxPage);
-    model.addAttribute("paging", paging);
-    model.addAttribute("itemCountPerPage", itemCountPerPage);
+    if(pageView!="mng_cw_noti") {
+      itemCount = dao.mng_cw_noti_count(param);      
+      List board = dao.mng_cw_noti(param, page, itemCountPerPage);
+     
+      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+  
+      int num = (itemCount - (page - 1) * itemCountPerPage);
+  
+      model.addAttribute("serverTime", formattedDate);
+      model.addAttribute("board", board);
+      model.addAttribute("board", board);
+      model.addAttribute("num", num);
+      model.addAttribute("itemCount", itemCount);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("maxPage", maxPage);
+      model.addAttribute("paging", paging);
+      model.addAttribute("itemCountPerPage", itemCountPerPage);
+    }
+   
     logger.info("◁◀◁◀◁◀ mng_cw_noti end");
     return "mng/" + pageView;
   }
@@ -1372,7 +1376,7 @@ public class WooboTechController {
     Date date = new Date();
     DateFormat dateFormat =
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-    String pageView = F.nullCheck(request.getParameter("pageView"), "mng_noti");
+    String pageView = F.nullCheck(request.getParameter("pageView"), "mng_noti");System.out.println("@@@@@@@@@@@@@@@@@@@@@"+request.getParameter("pageView"));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -1391,25 +1395,26 @@ public class WooboTechController {
 
     String formattedDate = dateFormat.format(date);
     WooboTechDao dao = new WooboTechDao();
-
-    itemCount = dao.mng_noti_count(param);
-    List board = dao.mng_noti(param, page, itemCountPerPage);
-    // List file = dao.mng_noti_file(param);
-
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
-    int num = (itemCount - (page - 1) * itemCountPerPage);
-
-    model.addAttribute("serverTime", formattedDate);
-    model.addAttribute("board", board);
-    model.addAttribute("num", num);
-    model.addAttribute("board", board);
-    model.addAttribute("itemCount", itemCount);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("maxPage", maxPage);
-    model.addAttribute("paging", paging);
-    model.addAttribute("itemCountPerPage", itemCountPerPage);
+    if(pageView!="mng_noti") {
+      itemCount = dao.mng_noti_count(param);
+      List board = dao.mng_noti(param, page, itemCountPerPage);
+      // List file = dao.mng_noti_file(param);
+  
+      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+  
+      int num = (itemCount - (page - 1) * itemCountPerPage);
+  
+      model.addAttribute("serverTime", formattedDate);
+      model.addAttribute("board", board);
+      model.addAttribute("num", num);
+      model.addAttribute("board", board);
+      model.addAttribute("itemCount", itemCount);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("maxPage", maxPage);
+      model.addAttribute("paging", paging);
+      model.addAttribute("itemCountPerPage", itemCountPerPage);
+    }
     // model.addAttribute("board2", file );
     logger.info("◁◀◁◀◁◀ mng_noti end");
     return "mng/" + pageView;
@@ -1782,7 +1787,7 @@ public class WooboTechController {
     String check_date = param.get("check_date"); // 입고일자
     System.out.println("거래명세서 버튼 클릭해서 값 보내는 check_date==> " + check_date);
     String prdate = param.get("prdate");
-    String branch = param.get("branch");
+    String branch = "000";//param.get("branch");
     System.out.println("들어가는 공장 ==>" + branch);
     String tqty2 = param.get("tqty2");
     System.out.println("요구 수량 ==> " + tqty2);
@@ -2527,7 +2532,7 @@ public class WooboTechController {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
+System.out.println("페이지 뷰 확인 "+pageView);
     // DateUtil.getDayOfWeek("");
     logger.info("◁◀◁◀◁◀ mng_buy_plan end");
     return new ModelAndView("mng/" + pageView);
@@ -2888,7 +2893,7 @@ public class WooboTechController {
         session.setAttribute("admin_id", "master");
         session.setAttribute("cu_sano", "master");
         session.setAttribute("cu_master", "");
-        session.setAttribute("cu_sangho", "우보테크");
+        session.setAttribute("cu_sangho", "WOOBOTECH");
         session.setAttribute("cu_code", "master");
         session.setMaxInactiveInterval(-1);
 
@@ -2909,7 +2914,7 @@ public class WooboTechController {
           ModelAndView mav = new ModelAndView();
           logger.info("[mng_login_user] login fail!!!");
           mav.setViewName("mng/mng_login");
-          mav.addObject("msg", "아이디나 암호가 올바르지 않습니다.");
+          mav.addObject("msg", "Your ID or password is incorrect.");
           logger.info("[mng_login_user] end");
           return mav;
         }
@@ -2922,13 +2927,13 @@ public class WooboTechController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mng/mng_login");
-        mav.addObject("msg", "등록되었습니다. 다시 로그인 해주세요.");
+        mav.addObject("msg", "Registered. Pleas login again.");
 
         return mav;
       } else {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mng/mng_login");
-        mav.addObject("msg", "아이디나 암호가 올바르지 않습니다.");
+        mav.addObject("msg", "Your ID or password is incorrect.");
 
         return mav;
       }
@@ -2943,7 +2948,7 @@ public class WooboTechController {
     } else {
       ModelAndView mav = new ModelAndView();
       mav.setViewName("mng/mng_login");
-      mav.addObject("msg", "아이디나 암호가 올바르지 않습니다.");
+      mav.addObject("msg", "Your ID or password is incorrect.");
 
       logger.info("[mng_login_user] end");
       return mav;
@@ -3841,7 +3846,7 @@ public class WooboTechController {
     int row = wdao.emailCount(custcode);
     logger.info("결과컨트롤러:{}", row);
     if (row == 0) {
-      model.addAttribute("msg", "등록된 이메일이 없습니다.");
+      model.addAttribute("msg", "No registered email.");
     } else {
       model.addAttribute("list", wdao.emailList(custcode));
     }

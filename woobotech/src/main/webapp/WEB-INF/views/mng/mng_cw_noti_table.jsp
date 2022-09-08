@@ -602,7 +602,7 @@
 	
 	//★★★★★삭제예정220721★★★★★ 끝
 
-	function getUserList(page, keyword) {
+	/* function getUserList(page, keyword) {
 		//alert("serch2!2222");
 		var form = document.formdata;
 		var title = $('#p_title').val();
@@ -633,7 +633,7 @@
 			//	$('td.number').number( true, 0 );
 			//	$('span.number').number( true, 0 );
 		});
-	}
+	} */
 	//협력사에 댓글 수정
 	//★★★★★삭제예정220721★★★★★ 시작
 	function fnqna_cw_u(idx,brd_no,id,pass_id,vi_pass,cont){//인덱스값,게시판번호,id,입력한 비밀번호,댓글에대한 비밀번호,수정하는 내용

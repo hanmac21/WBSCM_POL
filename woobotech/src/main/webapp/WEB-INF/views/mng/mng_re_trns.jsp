@@ -590,8 +590,10 @@ function currentTime(){
 	
 	$(document).ready(function() {
 		//$('#Progress_Loading').hide();
-		
+		$('#ok').click();
+		console.log("search 클릭1");
 	}).ajaxStart(function(){
+		console.log("search 클릭");
 		FunLoadingBarStart();
 		//$('#Progress_Loading').show();
 	}).ajaxStop(function(){
@@ -1143,7 +1145,7 @@ function currentTime(){
 		}
 
 		 function getUserList(page, keyword) {
-			 
+			 console.log("11");
 		 	var form = document.formdata;
 		 	
 		 	var startdate = $('#startdate').val();

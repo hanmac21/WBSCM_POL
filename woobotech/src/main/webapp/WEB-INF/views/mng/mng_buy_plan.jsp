@@ -2153,7 +2153,7 @@ vertical-align:top; !important
 			
 			prdate   = $("#outdate").val();
 			branch = getCookie("branch");
-			
+			console.log(branch+"branch");
 			//alert(tqty2);
 			//alert(i_qty);
 			console.log(prdate +"aa"+indate);

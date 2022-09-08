@@ -181,8 +181,8 @@
 							<span> Contents : </span> &nbsp;<input type="text" id="s_contents"	autocomplete="off"	name="s_contents" style="margin-right:15px; width: 200px"	value="" 
 							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}"
 							/>&nbsp;&nbsp;
-							<input	type="button" class="btn btn-warning" onclick="getUserList('1')"
-								value="View" style="margin-left: 50px;margin-right: 50px;" id="ok"/>
+							<input	type="button" class="btn btn-warning" onclick="getUserList('1')" 
+								value="view" style="margin-left: 50px;margin-right: 50px;" id="ok"/>
 								<%if("master".equals(admin)){%>
 								<input type="button" class="btn btn-info"
 								onclick="fnNotiAdd()" value="New" /> 
@@ -458,9 +458,7 @@
 	});
 	$(document).ready(function() {
 		//$('#Progress_Loading').hide();
-		var ic = ${itemCount}
-		var cp = ${currentPage}
-		var icp = ${itemCountPerPage}
+		
 		/* alert(ic);
 		alert(cp);
 		alert(icp); */
@@ -471,15 +469,21 @@
 	}).ajaxStop(function(){
 		$('#Progress_Loading').hide();
 	}); */
-	
+	/* $(document).ajaxStart(function(){FunLoadingBarStart();})
+
+	$(document).ajaxStop(function(){FunLoadingBarEnd();}); */
 	$(document).ready(function() {
-		//$('#Progress_Loading').hide();
+		$('#ok').click();
+		console.log("search 클릭1");
+		
 	}).ajaxStart(function(){
-		//$('#Progress_Loading').show();
+		console.log("search 클릭");
 		FunLoadingBarStart();
+		
+		//$('#Progress_Loading').show();
 	}).ajaxStop(function(){
-		//$('#Progress_Loading').hide();
 		FunLoadingBarEnd();
+		//$('#Progress_Loading').hide();
 	});
 	
 /* 	function currentTime(){
@@ -968,7 +972,8 @@
 	 }	
 
 	function getUserList(page, keyword) {
-
+		console.log("11");
+	
 		var form = document.formdata;
 
 		var title = $('#p_title').val();
@@ -977,6 +982,8 @@
 	 	var enddate = $('#enddate').val();
 		var pageView = "mng_noti_table";
 		var itemCountPerPage =  $('#itemCountPerPage').val();
+		console.log("22");
+		FunLoadingBarStart();
 		$.ajax({
 			type : "post",
 			url : "mng_noti",
@@ -993,6 +1000,8 @@
 		}).done(function(data) {
 			$("#tabledata").html("");
 			$("#tabledata").html(data);
+			FunLoadingBarEnd();
+			console.log("33");
 			//	$('td.number').number( true, 0 );
 			//	$('span.number').number( true, 0 );
 		});

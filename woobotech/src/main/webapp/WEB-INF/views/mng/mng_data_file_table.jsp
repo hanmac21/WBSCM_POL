@@ -622,7 +622,7 @@
 	//★★★★★삭제예정220722★★★★★끝
 	
 
-	function getUserList(page, keyword) {
+	/* function getUserList(page, keyword) {
 
 		var form = document.formdata;
 
@@ -652,7 +652,7 @@
 			//	$('span.number').number( true, 0 );
 		});
 
-	}
+	} */
 	</script>
 
 	<script>

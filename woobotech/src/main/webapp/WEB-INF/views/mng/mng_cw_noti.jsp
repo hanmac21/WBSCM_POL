@@ -460,27 +460,31 @@
 		
 		
 	});
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		//$('#Progress_Loading').hide();
 		var ic = ${itemCount}
 		var cp = ${currentPage}
 		var icp = ${itemCountPerPage}
-	});
+	}); */
 	/* .ajaxStart(function(){
 		$('#Progress_Loading').show();
 	}).ajaxStop(function(){
 		$('#Progress_Loading').hide();
 	}); */
-	
-	$(document).ready(function() {
+	 /* $(document).ajaxStart(function(){FunLoadingBarStart();})
+
+	$(document).ajaxStop(function(){FunLoadingBarEnd();});  */
+	 $(document).ready(function() {
 		//$('#Progress_Loading').hide();
+		console.log("ok");
+		 $('#ok').click();
 	}).ajaxStart(function(){
 		//$('#Progress_Loading').show();
 		FunLoadingBarStart();
 	}).ajaxStop(function(){
 		//$('#Progress_Loading').hide();
 		FunLoadingBarEnd();
-	});
+	}); 
 	//★★★★★삭제예정220721★★★★★ 
 	/* function currentTime(){
 		
@@ -850,6 +854,7 @@
 	//★★★★★삭제예정220721★★★★★ 끝
 	function getUserList(page, keyword) {
 		//alert("serch!");
+		console.log("220907확인");
 		var form = document.formdata;
 		var title = $('#p_title').val();
 		var s_contents = $('#s_contents').val();
@@ -858,6 +863,7 @@
 		var pageView = "mng_cw_noti_table";
 		var itemCountPerPage =  $('#itemCountPerPage').val();
 		var custname =  $('#p_cu_sangho').val();
+		FunLoadingBarStart()
 		$.ajax({
 			type : "post",
 			url : "mng_cw_noti",
@@ -876,6 +882,8 @@
 		}).done(function(data) {
 			$("#tabledata").html("");
 			$("#tabledata").html(data);
+			FunLoadingBarEnd()
+			console.log("ajax end");
 			//	$('td.number').number( true, 0 );
 			//	$('span.number').number( true, 0 );
 		});

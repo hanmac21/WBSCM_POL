@@ -625,7 +625,7 @@ public class WooboTechDao {
 
       info.setCu_sangho(rs.getString("cu_sangho"));
       info.setCu_upjong(rs.getString("cu_upjong"));
-      info.setCu_uptae(rs.getString("cu_uptae"));
+      info.setCu_uptae(rs.getString("cu_sano"));
       info.setCu_master(rs.getString("cu_master"));
       info.setCu_juso(rs.getString("cu_juso"));
       info.setCustcode(rs.getString("custcode"));
@@ -8662,7 +8662,7 @@ public class WooboTechDao {
     sql.append(
         "             Group by gubun, branch, itemcode)   xx on a.gubun = xx.gubun AND a.branch = xx.branch AND a.itemcode = xx.itemcode                                                                                                                                                                                                                                                                                      \n");
     sql.append(
-        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch=m.Branch                                                                                                                                                               \n");
+        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch='000'                                                                                                                                                               \n");
     sql.append(
         " left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode                                                                                                                                                                                     \n");
     sql.append(
@@ -8835,7 +8835,7 @@ public class WooboTechDao {
     sql.append(
         "             Group by gubun, branch, itemcode)   xx on a.gubun = xx.gubun AND a.branch = xx.branch AND a.itemcode = xx.itemcode                                                                                                                                                                                                                                                                                      \n");
     sql.append(
-        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch=m.Branch                                                                                                                                                               \n");
+        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch='000'                                                                                                                                                               \n");
     sql.append(
         " left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode                                                                                                                                                                                     \n");
     sql.append(
@@ -9025,7 +9025,7 @@ public class WooboTechDao {
     sql.append(
         "             Group by gubun, branch, itemcode)   xx on a.gubun = xx.gubun AND a.branch = xx.branch AND a.itemcode = xx.itemcode                                                                                                                                                                                                                                                                                      \n");
     sql.append(
-        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch=m.Branch                                                                                                                                                               \n");
+        " left outer join t_mi_Machine m on a.gubun=m.gubun and a.machine=m.mccode and a.Branch='000'                                                                                                                                                               \n");
     sql.append(
         " left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode                                                                                                                                                                                     \n");
     sql.append(
@@ -9473,7 +9473,7 @@ public class WooboTechDao {
       sql.append("%')");//
     }
 
-    System.out.println(sql.toString());
+    //System.out.println(sql.toString());
 
     return this.jdbcTemplate.queryForObject(sql.toString(), Integer.class);
   }
@@ -9642,7 +9642,7 @@ public class WooboTechDao {
     sql.append(
         "ORDER BY seq 																										  ");
 
-    System.out.println(sql.toString());
+    //System.out.println(sql.toString());
 
     return (List<NotiDTO>) this.jdbcTemplate.query(sql.toString(), this.mapper8);
 
@@ -16732,7 +16732,7 @@ public class WooboTechDao {
     sql.append(
         "select t.* from (select ROWNUM as row_seq, x.* from																												 \n");
     sql.append(
-        "(SELECT C.CU_SANGHO, C.CU_UPJONG, C.CU_UPTAE, C.CU_MASTER																						 \n");
+        "(SELECT C.CU_SANGHO, C.CU_UPJONG, C.CU_SANO, C.CU_MASTER																						 \n");
     sql.append(
         "	   ,A.AREA																																	 \n");
     sql.append(
@@ -16772,7 +16772,7 @@ public class WooboTechDao {
     }
 
     if (!"".equals(cu_code)) {
-      sql.append(" AND UPPER(C.CU_CODE) LIKE '%'||");
+      sql.append(" AND UPPER(C.CU_SANO) LIKE '%'||");
       sql.append("UPPER('");
       sql.append(cu_code);
       sql.append("')");

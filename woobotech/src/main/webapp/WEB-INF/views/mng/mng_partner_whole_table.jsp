@@ -14,7 +14,7 @@
 												<th style="text-align: center; font-size: 18x;">Sequence</th>
 												<th style="text-align: center; font-size: 18x;">Partner</th>
 												<th style="text-align: center; font-size: 18x;">Type of business</th>
-												<th style="text-align: center; font-size: 18x;">The state of one's business conditions</th>
+												<th style="text-align: center; font-size: 18x;">Business number</th>
 												<th style="text-align: center; font-size: 18x;">Representative</th>
 												<th style="text-align: center; font-size: 18x;">Address</th>
 												<th style="text-align: center; font-size: 18x;">Place of departure</th>

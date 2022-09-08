@@ -186,7 +186,7 @@
 			var region = document.getElementById("${vo.row_num}").innerText;
 			
 			if(region==="000"){
-				document.getElementById("${vo.row_num}").innerText = "평택";
+				document.getElementById("${vo.row_num}").innerText = "POLAND";
 			}else if(region==="001"){
 				document.getElementById("${vo.row_num}").innerText = "울산";
 			}
