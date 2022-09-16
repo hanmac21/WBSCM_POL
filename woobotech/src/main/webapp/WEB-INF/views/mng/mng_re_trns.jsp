@@ -351,6 +351,11 @@ function currentTime(){
 																			onclick="fnDelivertView2('${vo.deliveryno}','Delivery completed')"
 																			style="font-size: 18px" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In transit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
 																	</c:when>
+																	<c:when test="${vo.dstate=='In transit'}">
+																		<input type="button" class="btn btn-primary"
+																			onclick="fnDelivertView2('${vo.deliveryno}','Delivery completed')"
+																			style="font-size: 18px" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In transit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+																	</c:when>
 																	<c:otherwise>
 																		<input type="button" class="btn btn-info"
 																			style="font-size: 18px" value="&nbsp;&nbsp;&nbsp;Delivery completed&nbsp;&nbsp;" />
@@ -1088,7 +1093,7 @@ function currentTime(){
 	}
 	
 	function fnDelivertView2(deliveryno,dstate){
-		
+		console.log("220916확인");
 		$.ajax({
 			type : "post",
 			url : "mng_delivery_view2",

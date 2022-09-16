@@ -1949,7 +1949,7 @@ public class WooboTechController {
     TrnsDTO info = arrList.get(0);
     String sangho = info.getCustname();
     sangho = sangho.replace("<br>", "");
-    System.out.println("상호확인"+info.getCustname());
+    System.out.println("상호확인"+info.getDeliveryno());
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
     model.addAttribute("cu_sano",
@@ -2217,7 +2217,7 @@ public class WooboTechController {
     return "mng/mng_label_add";
   }
 
-  // 구매계획관리 - 거래명세서     //★★★★★삭제예정220726★★★★★
+  // 구매계획관리 - 거래명세서     
 
   @RequestMapping(value = "/mng_trns_dt")
   public String mng_trns_dt(Locale locale, Model model) {

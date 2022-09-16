@@ -68,6 +68,11 @@
 																			onclick="fnDelivertView2('${vo.deliveryno}','배송완료')"
 																			style="font-size: 18px; width:199px;" value="In &nbsp;&nbsp;transit" />
 																	</c:when>
+																	<c:when test="${vo.dstate=='In transit'}">
+																		<input type="button" class="btn btn-primary"
+																			onclick="fnDelivertView2('${vo.deliveryno}','배송완료')"
+																			style="font-size: 18px; width:199px;" value="In &nbsp;&nbsp;transit" />
+																	</c:when>
 																	<c:otherwise>
 																		<input type="button" class="btn btn-info"
 																			style="font-size: 18px; width:199px;" value="Delivery&nbsp;&nbsp; completed&nbsp" />
