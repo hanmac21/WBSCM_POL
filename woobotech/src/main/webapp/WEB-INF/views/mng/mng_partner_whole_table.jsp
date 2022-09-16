@@ -33,7 +33,11 @@
 													
 														<c:set var="i" value="${i+1 }" />
 														<tr style="border-bottom:1px solid #E0E0E0">
-															<td style="text-align: center;">${i }</td>
+															<td style="text-align: center;"><fmt:parseNumber value="${itemCount }" var="itemCount"/>
+																<fmt:parseNumber value="${currentPage }" var="currentPage"/>
+																<fmt:parseNumber value="${itemCountPerPage }" var="itemCountPerPage"/>
+																<c:set var="no" value="${itemCount - ((currentPage - 1) * itemCountPerPage ) - i + 1}"/>
+																${no }</td>
 															<td style="text-align: center;">${vo.cu_sangho}</td>
 															<td style="text-align: center;">${vo.cu_upjong }</td>
 															<td style="text-align: center;">${vo.cu_uptae }</td>

@@ -378,10 +378,10 @@
            success: function(result){
                 	   
                 	   if(result=='1'){
-                		   alert("정상 등록되었습니다.");
+                		   alert("Successfully registered");
                 		   location.reload();
                 	   }else{
-                		   alert("관리자에게 문의 하세요!");
+                		   alert("Please contact the administrator!");
                 	   }
                    	
                    }
@@ -477,10 +477,10 @@
            success: function(result){
                 	   
               	   if(result=='1'){
-              		   alert("정상 등록되었습니다.");
+              		   alert("Successfully registered.");
               		   location.reload();
               	   }else{
-              		   alert("관리자에게 문의 하세요!");
+              		   alert("Please contact the administrator.");
               	   }
                  	
                  }
@@ -693,10 +693,10 @@
            }).done(function(data){
         	   var isOk= data;
         	   if(isOk ==1){
-        		   alert("정상등록되었습니다");
+        		   alert("Successfully registered.");
         		   fnCwNotiDt(brd_no);
         	   }else{
-        		   alert('댓글등록실패');
+        		   alert('Failed to register comments');
         	   }
            });
 		
@@ -743,10 +743,10 @@
 	           }).done(function(data){
 	        	   var isOk= data;
 	        	   if(isOk ==1){
-	        		   alert("정상등록되었습니다");
+	        		   alert("Successfully registered.");
 	        		   fnCwNotiDt(brd_no);
 	        	   }else{
-	        		   alert('댓글등록실패');
+	        		   alert('Failed to register comments');
 	        	   }
 	           });
 	}

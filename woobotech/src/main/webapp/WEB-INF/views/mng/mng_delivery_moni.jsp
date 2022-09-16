@@ -885,6 +885,13 @@ th{
 					document.getElementById("${vo.row_num}").innerText = "배송지연";
 				} */
 				
+				if(state==="출하준비중"){
+					document.getElementById("${vo.row_num}").innerText = "Preparing for shipment";
+				}else if(state==="배송중"){
+					document.getElementById("${vo.row_num}").innerText = "In transit";
+				} else if(state==="배송완료"){
+					document.getElementById("${vo.row_num}").innerText = "Delivery complited";
+				}
 				//배송중인 제품들 시간 비교 2022-04-25 정인우
 				if(state==="배송중"){
 					if(result){

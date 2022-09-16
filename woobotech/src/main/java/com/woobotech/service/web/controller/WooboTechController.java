@@ -754,7 +754,7 @@ public class WooboTechController {
     return "ajaxResult";
   }
 
-  // 수정                    //★★★★★삭제예정220725★★★★★ mng_delivery관련
+  // 수정                    //★ mng_delivery관련
   @RequestMapping(value = "/mng_delivery_state_u", method = {RequestMethod.POST})
   public String mng_delivery_state_u(HttpServletRequest request, Locale locale, Model model,
       @RequestParam Map<String, String> param) {
@@ -1881,7 +1881,7 @@ public class WooboTechController {
       info.setPno(arr_itemcode1[i]);
       info.setPname(arr_itemnames[i]);
       info.setQty(arr_i_qty[i]);
-      info.setDstate("출하준비중");
+      info.setDstate("Preparing for shipment");
       info.setDtime("");
       info.setDtime2("");
       info.setTradebarcode(result_barcode);
@@ -1900,7 +1900,7 @@ public class WooboTechController {
     info2.setPno(arr_itemcode1[0]);
     info2.setPname(arr_itemnames[0]);
     info2.setQty(arr_i_qty[0]);
-    info2.setDstate("출하준비중");
+    info2.setDstate("Preparing for shipment");
     info2.setDtime("");
     info2.setDtime2("");
     info2.setTradebarcode(result_barcode);
@@ -1913,6 +1913,7 @@ public class WooboTechController {
     String cu_sangho = (String) session.getAttribute("cu_sangho");
     String cu_master = (String) session.getAttribute("cu_master");
     String cu_juso = (String) session.getAttribute("cu_juso");
+    System.out.println("상호확인"+cu_sangho);
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));//발행일자
     // model.addAttribute("cu_sangho", cu_sangho);//발행일자
@@ -1944,14 +1945,17 @@ public class WooboTechController {
         }
       }
     }
-
+    
     TrnsDTO info = arrList.get(0);
+    String sangho = info.getCustname();
+    sangho = sangho.replace("<br>", "");
+    System.out.println("상호확인"+info.getCustname());
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
     model.addAttribute("cu_sano",
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
-    model.addAttribute("cu_sangho", info.getCustname());
+    model.addAttribute("cu_sangho", sangho);
     model.addAttribute("cu_master", info.getCu_master());
     model.addAttribute("cu_juso", info.getCu_juso());
     model.addAttribute("bak_juso", info.getBak_juso());// 211101 백주소
@@ -3006,7 +3010,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
 
     String qtrbarcode = param.get("trbarcode");
     String qpno = param.get("pno");
-    String qmemo = F.nullCheck(param.get("qmemo"), "  ");
+    String qmemo = F.nullCheck(param.get("memo"), "  ");
 
     System.out.println(qtrbarcode);
     System.out.println(qpno);
@@ -3147,7 +3151,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
 
     String qtrbarcode = param.get("trbarcode");
     String qpno = param.get("pno");
-    String qmemo = F.nullCheck(param.get("qmemo"), "  ");
+    String qmemo = F.nullCheck(param.get("memo"), "  ");
 
     System.out.println(qtrbarcode);
     System.out.println(qpno);
@@ -3456,7 +3460,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
 
     String qtrbarcode = param.get("trbarcode");
     String qpno = param.get("pno");
-    String qmemo = F.nullCheck(param.get("qmemo"), "  ");
+    String qmemo = F.nullCheck(param.get("memo"), "  ");
 
     System.out.println(qtrbarcode);
     System.out.println(qpno);
@@ -3617,7 +3621,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
 
     String qtrbarcode = param.get("trbarcode");
     String qpno = param.get("pno");
-    String qmemo = F.nullCheck(param.get("qmemo"), "  ");
+    String qmemo = F.nullCheck(param.get("memo"), "  ");
 
     System.out.println(qtrbarcode);
     System.out.println(qpno);

@@ -32,7 +32,7 @@ table{
 }
 </style>
 <body>
-	<div class="modal-dialog" style="width: 60%; height:72%; overflow: scroll;">
+	<div class="modal-dialog" style="width:63%; height:71%; overflow: scroll;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" id="close"
@@ -41,9 +41,9 @@ table{
 				</button>
 				
 				<div style="float:left;">
-					<h4 class="modal-title"><!-- 거래명세서 -->Transaction statement</h4>
-					<h4 class="modal-title" style="text-align: center;" id="sp_p_biz_nm"></h4>
-					<!-- 현재 적용된 순번 -->Current applied sequence : <span id = "p_memo3"> ${memo2 }</span>
+					<h4 class="modal-title">Transaction statement</h4>
+					<%-- <h4 class="modal-title" style="text-align: center;" id="sp_p_biz_nm"></h4>
+					현재 적용된 순번 : <span id = "p_memo3"> ${memo2 }</span> --%>
 				</div>
 				
 				<div style="width: 100%" style="float: right;">
@@ -52,16 +52,6 @@ table{
 								<!-- button type="button" class="btn btn-info pull-right" 			onclick="fnTransPrint()">인쇄</button-->
 								
 								<c:choose>
-									<%-- <c:when test="${pageview eq 'mng_trns_data'}">
-										<button type="button" class="btn btn-info pull-right print_btn" id="print1"  
-											style="margin-left: 15px" onclick="fnTrnsPop('${barcode}','${prdate}')">인쇄</button>
-											<button type="button" class="btn btn-info pull-right print_btn" id="print2"  
-											style="margin-left: 10px" onclick="fnTrnsForcePop('${barcode}','${prdate}')">인쇄 (라벨발행 무시)</button>
-									</c:when>	
-									<c:otherwise>
-										<button type="button" class="btn btn-info pull-right print_btn" 
-											style="margin-left: 10px" onclick="fnTrnsRePop('${barcode}','${prdate}')">인쇄</button>
-									</c:otherwise> --%>
 									<c:when test="${pageview eq 'mng_trns_data'}">
 										<button type="button" class="btn btn-info pull-right print_btn" id="print1"  
 											style="margin-left: 15px" onclick="fnTrnsPop('${barcode}','${memo}')">Print</button>
@@ -78,27 +68,30 @@ table{
 									style="margin-left: 10px" onclick="fnTrnsPop('${barcode}','${prdate}')">Report</button> --%>
 									
 								<button type="button" class="btn btn-warning pull-right"
-									style="margin-right: 10px" onclick="fnMemoSet('${barcode}')" id="ok">apply</button>
+									style="margin-right: 10px" onclick="fnMemoSet('${barcode}')" id="ok2">Apply</button>
 								<input type="text" class="pull-right"
 									placeholder="Write down" value=""  
 									style="width: 300px; height: 30px; margin-right: 10px"
-									id="s_memo1" onKeypress="javascript:if(event.keyCode==13){$('#ok').click(); $('#s_memo1').val('');}">
-								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">ETC :  </span>	
+									id="s_memo1" onKeypress="javascript:if(event.keyCode==13){$('#ok2').click(); $('#s_memo1').val('');}">
+								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">Remarks :  </span>	
+								<!--  <button type="button" class="btn btn-info pull-right print_btn" id="labelPrintAll"  
+											style="margin-right: 20px" onclick="fnAllLabel('${barcode }')" disabled>전체 재발행(라벨프린터)</button>-->
 								<c:forEach var="vo" items="${ text }" varStatus="status">
 									<c:choose>
-										<c:when test="${vo.dstate=='출하준비중'}">		<!--DB저장된 한글 영어로 바꾸기-->
+										<c:when test="${vo.dstate=='Preparing for shipment'}">
 											<button type="button" class="btn  btn-warning pull-right"
 												style="margin-right: 10px"
 												onclick="fnDelivertView('${deliveryno}','In transit')"
 												style="font-size: 15px">Preparing for shipment</button>
 										</c:when>
 
-										<c:when test="${vo.dstate=='배송중'}">
+										<c:when test="${vo.dstate=='In transit'}">
 											<input type="button" class="btn  btn-primary pull-right"
 												style="margin-right: 10px"
 												onclick="fndelivery_u2('${deliveryno}','Delivery completed')"
 												style="font-size: 15px" value="In transit" />
 										</c:when>
+										
 										<c:otherwise>
 											<input type="button" class="btn  btn-info pull-right"
 												style="margin-right: 10px" style="font-size: 15px"
@@ -111,47 +104,8 @@ table{
 			</div>
 			<div class="modal-body" id="modalbody1">
 				<div class="">
-				<!-- <div class="box box-info"> -->
-
-					<!-- /.box-header -->
-					<!-- form start -->
 							<input type="hidden" id="p_u_id" name="p_u_id" value="">
-							<%-- <div style="width: 100%">
-								<button type="button" class="btn btn-success pull-right"
-									style="margin-left: 10px" data-dismiss="modal">닫기</button>
-								<!-- button type="button" class="btn btn-info pull-right" 			onclick="fnTransPrint()">인쇄</button-->
-								<button type="button" class="btn btn-info pull-right print_btn"
-									onclick="fnTrnsPop('${barcode}','${prdate}')">인쇄</button>
-								<button type="button" class="btn btn-warning pull-right"
-									style="margin-right: 10px" onclick="fnMemoSet('${barcode}')" id="ok">적용</button>
-								<input type="text" class="pull-right"
-									placeholder="비고에 들어갈 내용을 작성하세요" value=""
-									style="width: 300px; height: 30px; margin-right: 10px"
-									id="s_memo" onKeypress="javascript:if(event.keyCode==13){$('#ok').click(); $('#s_memo').val('');}">
-								<c:forEach var="vo" items="${ text }" varStatus="status">
-									<c:choose>
-										<c:when test="${vo.dstate=='출하준비중'}">
-											<input type="button" class="btn  btn-warning"
-												style="margin-right: 10px"
-												onclick="fnDelivertView('${deliveryno}','배송중')"
-												style="font-size: 15px" value="출하준비중" />
-										</c:when>
-										<c:when test="${vo.dstate=='배송중'}">
-											<input type="button" class="btn  btn-primary"
-												style="margin-right: 10px"
-												onclick="fndelivery_u2('${deliveryno}','배송완료')"
-												style="font-size: 15px" value="배송중" />
-										</c:when>
-										<c:otherwise>
-											<input type="button" class="btn  btn-info"
-												style="margin-right: 10px" style="font-size: 15px"
-												value="배송완료" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<input type="hidden" value="${vo.itemcode1}">
-							</div> --%>
-							<!-- <br> <br> -->
+							 
 							<page size="A4">
 
 							<div id="all_trans_print">
@@ -162,141 +116,46 @@ table{
 											
 											<div class="row"
 												style="width: 100%; margin-bottom: 10px; text-align: center">
-												<span style="font-size: 20px"><U><B><!-- 거래명세표 -->Transaction statement</B></U></span><br>
-												<!-- (공급자용) -->(For suppliers)
+												<span style="font-size: 24px"><U><B>Transaction statement</B></U></span><br>
+												
 												<input type="hidden" value="${board.size() }" id="all"/>
+												<input type="hidden" id="p_sumqty" style="height:26px;" <fmt:formatNumber value="${sumqty}" pattern="#,##0" />>
 											</div>
-											<div>
-												<div class="row" style="float: right;">
-													<div class="row"
-														style="width: 35%; margin-right: 30px; margin-bottom: 10px; text-align: center;">
-														<img src="/resimg/woobo/barcode/${barcode}.png"
+											<div style="width:100%">
+												<div class="row" style="width: 50%; margin-right: 10px;  text-align: right; float: right;">
+													<img src="/resimg/woobo/barcode/${barcode}.png"
 															style="width: 200px; height: 40px;"><br>
-															<span style="font-size:20px;padding-left:40px;"> ${barcode}</span>
-													</div>
+															<span style="font-size:20px;padding-right:50px;"> ${barcode}</span><br>
+													<span style="font-size: 12px">Receiver </span> &nbsp; <br>
+													Woobotech<br>
+													Al. Armii Krajowej 39,  <br>
+													44-240 Żory
+													<br>
+													<br>
 												</div>
-												<div class="row" style="margin-left: 10px; float: left;">			
-													<span style="font-size: 12px; "><!-- 수량합계 -->Total Qty :</span> &nbsp; &nbsp;<span id="p_sumqty" style="height:26px;"><fmt:formatNumber value="${sumqty}" pattern="#,##0" /></span><br>										
-													<span style="font-size: 12px"><!-- 발행순번 -->Printing order : </span> &nbsp; <input type="text" id="s_memo2" name="s_memo2" style="width: 100px" 
-													 onKeypress="javascript:if(event.keyCode==13){$('#ok2').click(); $('#s_memo2').val('');}"/>
-													<button type="button" class="btn" onclick="fnMemoSet2('${barcode}')" style="font-size: 12px; margin-left:1px; margin-bottom:1px; height:29px;" id="ok2">apply</button> <br>
-													<!-- <span style="font-size: 12px">작성일자 : ${outdate}</span> -->
+												<div class="row" style="margin-left: 10px; float: left; width:50%">
 													<span style="font-size: 12px; "><!-- 작성일자 -->Date :</span> &nbsp; <input
 														type="text" id="outdate" name="outdate", autocomplete='off' readonly='true'
 														style="width: 100px;" value="${prdate}" onchange="changed(this)"/>
-														<button type="button" class="btn" onclick="fnMemoSet3('${barcode}')" style="font-size: 12px;  margin-top:-1px;  height:29px;" id="ok2">apply</button> <br>
-													<!-- <input type="text" id="outdate" name="outdate" value="${outdate} ">  -->
-													
-												</div>
-											</div>
-
-											<table
-												style="border: hidden; width: 100%; word-wrap: break-all;">
-												<tr>
-													<td width="49%">
-														<table border="1" bordercolor="#A2AFCC"
-															style="width: 100%; word-break: break-all">
-															<colgroup>
-																<col style="width: 10%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-															</colgroup>
-															<tr>
-																<td rowspan="4"
-																	style="font-size: 11px; text-align: center; align-items: center">s<br>u<br>p<br>p<br>l<br>i<br>e<br>r
-																</td>
-																<td style="font-size: 11px; text-align: center;">Number
-																</td>
-																<td colspan="3"
-																	style="font-size: 11px; text-align: center;">${cu_sano}</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">Company name</td>
-																<td style="font-size: 7px; text-align: center;">${cu_sangho}
-																</td>
-																<td style="font-size: 11px; text-align: center;">Name</td>
-																<td style="font-size: 11px; text-align: center;">${cu_master}</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">Address</td>
-																<c:choose>
+														<button type="button" class="btn" onclick="fnMemoSet3('${barcode}')" style="font-size: 12px;  margin-top:-1px;  height:29px;" id="ok2">apply</button><br>
+													<br>
+													<br><span style="font-size: 12px">Supplier </span><br>
+													<span style="font-size: 14px">${cu_sangho}</span><br>
+													<%-- <c:choose>
 																	<c:when test="${null ne cu_juso }">
-																		<td colspan="3"
-																			style="font-size: 9px; text-align: center;">${bak_juso}</td>
-																	</c:when>
-																	<c:otherwise>
-																		<td colspan="3"
-																			style="font-size: 9px; text-align: center;">${cu_juso}</td>
-																	</c:otherwise>
-																</c:choose>
-																<!--  <td colspan="3"  -->
-																<!--  style="font-size: 9px; text-align: center;">${cu_juso}</td> -->
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">The state of one's <br>business conditions</td>
-																<td style="font-size: 11px; text-align: center;">${cu_uptae}
-																</td>
-																<td style="font-size: 11px; text-align: center;">Type</td>
-																<td style="font-size: 11px; text-align: center;">${cu_upjong}</td>
-															</tr>
-
-														</table>
-													</td>
-
-													<td width="2%" style="border: hidden;"></td>
-
-													<td width="49%">
-														<table
-															style="width: 100%; table-layout: fixed; word-break: break-all;"
-															border="1" bordercolor="#A2AFCC">
-															<colgroup>
-																<%-- <col style="width: 10%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-																<col style="width: 16%">
-																<col style="width: 29%"> --%>
-															</colgroup>
-															<tr style="height: 25%">
-																<td rowspan="4"
-																	style="font-size: 11px; text-align: center; width: 15%">the<br>recipient<br>of<br>the<br>supply
-																</td>
-																<td style="font-size: 11px; text-align: center;">number
-																</td>
-																<td colspan="3"
-																	style="font-size: 11px; text-align: center;">137-81-29744</td>
-															</tr>
-															<tr style="height: 25%">
-																<td style="font-size: 7px; text-align: center;">company name</td>
-																<td
-																	style="font-size: 5px; text-align: center; word-break: break-all;">WOOBOTECH
-																</td>
-																<td style="font-size: 11px; text-align: center;">name</td>
-																<td style="font-size: 11px; text-align: center;">Jung Hae-il</td>
-															</tr>
-															<tr style="height: 25%">
-																<td
-																	style="font-size: 11px; text-align: center; width: 20%">address</td>
-																<td colspan="3"
-																	style="font-size: 8px; text-align: center; width: 80%; word-break: break-all" id="wjuso">
-																	
-																	${board[0].loc }
 																		
-																</td>
-															</tr>
-															<tr style="height: 25%">
-																<td style="font-size: 11px; text-align: center;">the state of one's <br>business conditions</td>
-																<td style="font-size: 11px; text-align: center;">Produce
-																</td>
-																<td style="font-size: 11px; text-align: center;">Type</td>
-																<td style="font-size: 11px; text-align: center;">Automotive Parts</td>
-															</tr>
-
-														</table>
-													</td>
-												</tr>
-											</table>
+																			<span style="font-size: 9px; text-align: center;">adt</span>
+																	</c:when>
+																	<c:otherwise> --%>
+																		<span
+																			style="font-size: 14px; text-align: center;">${cu_juso}</span>
+																	<%-- </c:otherwise>
+																</c:choose> --%><br>
+													<br>
+													<br>
+												</div>
+												
+											</div>
 
 											<table border="1">
 												<tr>
@@ -305,14 +164,13 @@ table{
 															<thead>
 																<tr>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 5%"">LOT
-																		NO</th>
+																		style="text-align: center; font-size: 13px; width: 5%"">No.</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 20%"><!-- 규격 -->Standard</th>
+																		style="text-align: center; font-size: 13px; width: 20%">Part Name</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 45%">Item name</th>
+																		style="text-align: center; font-size: 13px; width: 45%">Part Number</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 10%"">Delivery</th>
+																		style="text-align: center; font-size: 13px; width: 10%"">Qty</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%">Printing status</th>
 																	<th
@@ -330,7 +188,7 @@ table{
 																		<c:set var="i" value="${i+1 }"/>	
 
 																			<tr style="height: 30px;">
-																				<td style="text-align: center; font-size: 13px">${vo.madate}</td>
+																				<td style="text-align: center; font-size: 13px">${status.count}</td>
 																				<!-- <td style="text-align: center; visibility:hidden; font-size: 13px">${vo.itemcode1}</td> -->
 																				<td style="text-align: center; font-size: 13px">${vo.itemqty}</td>
 																				<td style="text-align: center; font-size: 13px; line-height: 115%;">
@@ -347,7 +205,7 @@ table{
 																					
 																					<c:when test="${pageview eq 'mng_re_trns_data'}">
 																						<td style="text-align: center; font-size: 13px"><span
-																							id="label_text${i}">Reissue</span></td>
+																							id="label_text${i}">재발행</span></td>
 																					</c:when>
 
 																					<c:otherwise>
@@ -389,25 +247,14 @@ table{
 																	</c:when>
 																	<c:otherwise>
 																		<tr>
-																			<td colspan="12">There is nothing to indicate in the specification</td>
+																			<td colspan="12">명세서에 표기할 내용이 없습니다.</td>
 																		</tr>
 																	</c:otherwise>
 
 																</c:choose>
-																<%-- <c:forEach var="i" begin="1" end="${9 - board.size()}">
-
-																	<tr style="height: 30px;">
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center">&nbsp;</td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																	</tr>
-
-																</c:forEach> --%>
 															</tbody>
 														</table>
+														
 													</td>
 												</tr>
 											</table>
@@ -415,11 +262,12 @@ table{
 												<tr>
 													<td style="width: 55%; border: hidden;">
 														<table>
-															<tr style="height: 100px">
-																<td style="width: 20%; text-align: center;" rowspan="2">
-																	ETC
+															<tr >
+																<td style=" text-align: center;">
+																	Remarks
 																</td>
-
+															</tr>
+															<tr style="height: 50px">
 																<td
 																	style="width: 80%; text-align: center; padding-left: 10px"
 																	rowspan="2"><span id="p_memo"> ${memo}</span></td>
@@ -427,277 +275,25 @@ table{
 														</table>
 													</td>
 
-													<td style="width: 5%; border: hidden;"></td>
-
-													<td style="width: 40%; border: hidden;">
-														<table>
-															<tr style="height: 50px">
-																<td style="text-align: center;" rowspan="2">Payment
-																</td>
-
-																<td style="text-align: center; width: 30%">Incoming inspection</td>
-																<td style="text-align: center; width: 30%">Material inspection</td>
-																<td style="text-align: center; width: 30%">Name</td>
-															</tr>
-															<tr style="height: 50px">
-																<td></td>
-																<td></td>
-																<td></td>
-															</tr>
-														</table>
-													</td>
+												</tr>
+											</table>
+											<table style="margin-top:10px; border:0px;">
+												<tr style="text-align:center;">
+													<td style="border:0px;">Supplier Sign/Podpis dostawcy</td>
+													<td style="border:0px;">Driver Sign/Podpis kierowcy</td>
+													<td style="border:0px;">Reciever Sign/Podpis odbiorcy</td>
+												</tr>
+												<tr style="height:120px;">
+													<td style="border:0px;"><div style="border-bottom:1px solid #bbc6d3;"></div></td>
+													<td style="border:0px;"><div style="border-bottom:1px solid #bbc6d3;"></div></td>
+													<td style="border:0px;"><div style="border-bottom:1px solid #bbc6d3;"></div></td>	
+												</tr>
+												<tr>
+													
 												</tr>
 											</table>
 										</td>
-										
-										<%-- <td width="50%">
-											<div class="row"
-												style="width: 100%; margin-bottom: 10px; text-align: center">
-												<span style="font-size: 20px"><U><B>거래명세표</B></U></span><br>
-												(공급받는자용)
-
-											</div>
-											
-											<div>
-											<div class="row" style="float: right;">
-												<div class="row"
-													style="width: 35%; margin-right: 30px; margin-bottom: 10px; text-align: center;">
-													<img src="/resimg/woobo/barcode/${barcode}.png"
-														style="width: 200px; height: 40px;">
-												</div>
-											</div>
-											
-											<div class="row" style="margin-left: 10px; float: left;">
-												<!-- <span style="font-size: 12px">작성일자 : ${outdate}</span> -->
-												<span style="font-size: 12px">작성일자 :</span> &nbsp; <input
-													type="text" id="outdate2" name="outdate2"
-													style="width: 100px; border:0 solid black;" value="${prdate}" readonly/>
-
-												<!-- <input type="text" id="outdate" name="outdate" value="${outdate} ">  -->
-											</div>
-											</div>
-
-											<table style="border: hidden;">
-
-												<tr>
-													<td width="49%">
-														<table width="100%" border="1" bordercolor="#A2AFCC">
-															<colgroup>
-																<col style="width: 10%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-															</colgroup>
-															<tr>
-																<td rowspan="4"
-																	style="font-size: 11px; vertical-align: center; align-items: center">공<br>급<br>자
-																</td>
-																<td style="font-size: 11px; text-align: center;">번호
-																</td>
-																<td colspan="3"
-																	style="font-size: 11px; text-align: center;">${cu_sano}</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">상호</td>
-																<td style="font-size: 5px; text-align: center;">${cu_sangho}
-																</td>
-																<td style="font-size: 11px; text-align: center;">성명</td>
-																<td style="font-size: 11px; text-align: center;">${cu_master}</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">주소</td>
-																<c:choose>
-																	<c:when test="${null ne cu_juso }">
-																		<td colspan="3"
-																			style="font-size: 9px; text-align: center;">${bak_juso}</td>
-																	</c:when>
-																	<c:otherwise>
-																		<td colspan="3"
-																			style="font-size: 9px; text-align: center;">${cu_juso}</td>
-																	</c:otherwise>
-																</c:choose>
-																<!--  <td colspan="3" -->
-																<!-- style="font-size: 8px; text-align: center;">${cu_juso}</td> -->
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">업태</td>
-																<td style="font-size: 11px; text-align: center;">${cu_uptae}
-																</td>
-																<td style="font-size: 11px; text-align: center;">종목</td>
-																<td style="font-size: 11px; text-align: center;">${cu_upjong}</td>
-															</tr>
-
-														</table>
-													</td>
-
-													<td width="2%" style="border: hidden;"></td>
-
-													<td width="49%">
-														<table style="width: 100%" border="1"
-															bordercolor="#A2AFCC">
-															<colgroup>
-																<col style="width: 10%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-																<col style="width: 16%">
-																<col style="width: 29%">
-															</colgroup>
-															<tr width="100%">
-																<td rowspan="4"
-																	style="font-size: 11px; text-align: center;">공<br>급<br>받<br>는<br>자
-																</td>
-																<td style="font-size: 11px; text-align: center;">번호
-																</td>
-																<td colspan="3"
-																	style="font-size: 11px; text-align: center;">137-81-29744</td>
-															</tr>
-															<tr>
-																<td style="font-size: 7px; text-align: center;">상호</td>
-																<td style="font-size: 9px; text-align: center;">(주)우보테크
-																</td>
-																<td style="font-size: 11px; text-align: center;">성명</td>
-																<td style="font-size: 11px; text-align: center;">정해일</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">주소</td>
-																<td colspan="3"
-																	style="font-size: 9px; text-align: center;" id="wjuso2">
-																	
-																	${board[0].loc }
-																
-																</td>
-															</tr>
-															<tr>
-																<td style="font-size: 11px; text-align: center;">업태</td>
-																<td style="font-size: 11px; text-align: center;">제조
-																</td>
-																<td style="font-size: 11px; text-align: center;">종목</td>
-																<td style="font-size: 11px; text-align: center;">자동차
-																	부품</td>
-															</tr>
-
-														</table>
-													</td>
-												</tr>
-											</table>
-
-
-
-
-											<table border="1">
-												<tr>
-													<td style="width: 55%; border: hidden;">
-														<table>
-															<thead>
-																<tr>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 5%"">LOT
-																		NO</th>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 20%">규격</th>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 45%">품명</th>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 10%"">납품</th>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 10%">발행여부</th>
-																	<th
-																		style="text-align: center; font-size: 13px; width: 10%">입하</th>
-
-
-																</tr>
-															</thead>
-															<tbody>
-
-																<c:choose>
-																	<c:when test="${ board.size() > 0 }">
-																		<c:forEach var="vo" items="${ board }"
-																			varStatus="status">
-
-																			<tr style="height: 30px;">
-																				<td style="text-align: center; font-size: 13px">${vo.madate}</td>
-																				<!--<td style="text-align: center;  visibility:hidden; font-size: 13px">${vo.itemcode1}</td> -->
-																				<td style="text-align: center; font-size: 13px">${vo.itemqty}</td>
-																				<td style="text-align: center; font-size: 13px; line-height: 115%;">
-																					${fn:replace(vo.itemname,replaceChar,"<br/>")}
-																				</td>
-																				<td class="number"
-																					style="text-align: center; font-size: 13px">${vo.i_qty}</td>
-																				<td style="text-align: center; font-size: 13px"></td>
-																				<td style="text-align: center; font-size: 13px"></td>
-
-																			</tr>
-
-																		</c:forEach>
-																	</c:when>
-																	<c:otherwise>
-																		<tr>
-																			<td colspan="12">명세서에 표기할 내용이 없습니다.</td>
-																		</tr>
-																	</c:otherwise>
-
-																</c:choose>
-																<c:forEach var="i" begin="1" end="${9 - board.size()}">
-
-																	<tr style="height: 30px;">
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center">&nbsp;</td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																		<td style="text-align: center; font-size: 13px"></td>
-																	</tr>
-
-																</c:forEach>
-															</tbody>
-														</table>
-													</td>
-												</tr>
-											</table>
-
-
-											<table border="1">
-												<tr>
-													<td style="width: 55%; border: hidden;">
-														<table>
-															<tr style="height: 100px">
-																<td style="width: 20%; text-align: center;" rowspan="2">
-																	비<br>고
-																</td>
-
-																<td
-																	style="width: 80%; text-align: center; padding-left: 10px"
-																	rowspan="2"><span id="p_memo2"> ${memo}</span></td>
-															</tr>
-														</table>
-													</td>
-
-													<td style="width: 5%; border: hidden;"></td>
-
-													<td style="width: 40%; border: hidden;">
-														<table>
-															<tr style="height: 50px">
-																<td style="text-align: center;" rowspan="2">결<br>재
-																</td>
-
-																<td style="text-align: center; width: 30%">수입검사</td>
-																<td style="text-align: center; width: 30%">자재검사</td>
-																<td style="text-align: center; width: 30%">담당</td>
-															</tr>
-															<tr style="height: 50px">
-																<td></td>
-																<td></td>
-															</tr>
-														</table>
-													</td>
-												</tr>
-											</table>
-
-										</td> --%>
-
 									</tr>
-
 								</table>
 
 							</div>
@@ -803,7 +399,7 @@ $(function() {
 			document.getElementById("wjuso2").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
 		} */
 		
-		var loc1 = document.getElementById("wjuso").innerText;
+		/* var loc1 = document.getElementById("wjuso").innerText;
 		//var loc2 = document.getElementById("wjuso2").innerText;
 		
 		if(loc1==='000'){
@@ -812,7 +408,7 @@ $(function() {
 		}else if(loc1==='001'){
 			document.getElementById("wjuso").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
 			//document.getElementById("wjuso2").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
-		}
+		} */
 		
 		<c:forEach var="vo" items="${ board }"
 			varStatus="status">
@@ -984,7 +580,7 @@ function fnTrnsPop(barcode,prdate){
 		alert("라벨을 먼저 발행해주세요.");
 		return;
 	} */	
-	var text = prdate.substring(0,4)+"-" +prdate.substring(5,7)+"-" +prdate.substring(8,10);
+	//var text = prdate.substring(0,4)+"-" +prdate.substring(5,7)+"-" +prdate.substring(8,10);
 	//alert("받아오는 값"+text);
 	
 	//alert(chk_already);
@@ -1015,7 +611,7 @@ function fnTrnsPop(barcode,prdate){
 	
 		var chk = document.getElementById("label_text${vo.label_idx}").innerText;
 		
-		if(chk==="발행완료"){		//DB저장된 한글 영어로 바꾸기
+		if(chk==="Issuance completed"){		//DB저장된 한글 영어로 바꾸기
 			cnt = cnt+1;
 		}
 		
@@ -1040,7 +636,7 @@ function fnTrnsPop(barcode,prdate){
 		cnt = cnt*1;
 	}
 	//alert(cnt);
-	var memo2 = document.getElementById('p_memo3').innerText;
+	//var memo2 = document.getElementById('p_memo3').innerText;
 	
 	//var memo = document.getElementById('p_memo2').innerText;
 	var memo = document.getElementById('p_memo').innerText;		//220618
@@ -1191,7 +787,7 @@ function fnTrnsForcePop(barcode,prdate){
 		window.open("mng_trns_jprint?barcode="+barcode+"&amount="+amount+"&memo="+memo+"&prdate="+prdate+"&sumqty="+sumqty,"Report Print",'height=900, width=1500');
 	}
 	else if(code !== 'a1234'){
-		alert("Passwords don't match. Please check the password")
+		alert("Passwords don't match. Please check the password");
 	}
 	 //★★★★★삭제예정220721★★★★★이페이지 주석 제거
 	//alert(${board});

@@ -933,7 +933,13 @@ function currentTime(){
 	}
 	
 	function fndelivery_u2(deliveryno, dstate){
-		
+		if(dstate==="출하준비중"){
+			dstate = "Preparing for shipment"
+		}else if(dstate==="배송중"){
+			dstate="In transit"
+		}else if(dstate==="배송완료"){
+			dstate="Delivery completed"
+		}
 		if(!confirm("Do you want to change to ["+dstate +"]state?")){
 			return;
 		}
@@ -984,7 +990,14 @@ function currentTime(){
 	}
 	
 	function fndelivery_u(deliveryno, dstate){
-		
+		console.log("2209161"+deliveryno);
+		if(dstate==="출하준비중"){
+			dstate = "Preparing for shipment"
+		}else if(dstate==="배송중"){
+			dstate="In transit"
+		}else if(dstate==="배송완료"){
+			dstate="Delivery completed"
+		}
 		if(!confirm("Do you want to change to ["+dstate +"]state?")){
 			
 			return;

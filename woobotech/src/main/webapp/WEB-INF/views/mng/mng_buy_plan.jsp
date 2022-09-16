@@ -1897,7 +1897,7 @@ vertical-align:top; !important
 				}	
 			window.open("mng_label_a4print?pno="+pno+"&trbarcode="+barcode+"&memo="+memo+"&chk="+chk,"Report Print",'height=900, width=900');
 			});
-			document.getElementById("btnLaClose").innerText = "닫기";
+			document.getElementById("btnLaClose").innerText = "Close";
 			$("#btnLaClose").removeAttr("onclick");
 			$("#btnLaClose").attr("onclick","fnclose3()");
 			
@@ -1917,7 +1917,7 @@ vertical-align:top; !important
 				}	
 			window.open("mng_label_a4double?pno="+pno+"&trbarcode="+barcode+"&memo="+memo+"&chk="+chk,"Report Print",'height=900, width=900');
 			});
-			document.getElementById("btnLaClose").innerText = "닫기";
+			document.getElementById("btnLaClose").innerText = "Close";
 			$("#btnLaClose").removeAttr("onclick");
 			$("#btnLaClose").attr("onclick","fnclose3()");
 			
@@ -2153,7 +2153,23 @@ vertical-align:top; !important
 			
 			prdate   = $("#outdate").val();
 			branch = getCookie("branch");
-			console.log(branch+"branch");
+			
+			// 협력사 한곳만 선택가능
+			var custcodeChk = new Array();//납품처코드
+			var custcodeTemp = "";
+			for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
+				var chk = $('#tablebody').find('tr').eq(i).children().find('table').children().find('.tr').eq(check_find).find('input[type="checkbox"]').is(':checked');
+				if (chk == true) {
+					custcodeChk[i] = $('#tablebody').find('tr').eq(i).find('.custcode').text();
+					if(custcodeTemp == ""){
+						custcodeTemp = custcodeChk[i];
+					}else if(custcodeTemp != custcodeChk[i]){
+						alert("Only one supplier can be selected for one transaction statement.");
+						return;
+					}
+				}
+			}
+			
 			//alert(tqty2);
 			//alert(i_qty);
 			console.log(prdate +"aa"+indate);
@@ -3033,7 +3049,7 @@ vertical-align:top; !important
 		
 		//211102 배송준비중 전송
 		function fnDelivertView(deliveryno,dstate){
-			
+			console.log("220916 뷰"+deliveryno);
 			$.ajax({
 				type : "post",
 				url : "mng_delivery_view",
@@ -3082,7 +3098,14 @@ vertical-align:top; !important
 		
 		//211102 배송준비중 전송
 		function fndelivery_u(deliveryno, dstate){
-			
+			console.log("220916"+deliveryno);
+			if(dstate==="출하준비중"){
+				dstate = "Preparing for shipment"
+			}else if(dstate==="배송중"){
+				dstate="In transit"
+			}else if(dstate==="배송완료"){
+				dstate="Delivery completed"
+			}
 			if(!confirm("Do you want to change to ["+dstate +"]state?")){
 				
 				return;
