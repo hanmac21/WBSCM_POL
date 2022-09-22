@@ -61,6 +61,11 @@ public class LabelDTO {
   }
 
   public String getMadate() {
+    madate = madate.replaceAll("-", "");
+    String year = madate.substring(0, 4);
+    String month = madate.substring(4, 6);
+    String day = madate.substring(6, 8);
+    madate = day +"-"+ month +"-"+ year;
     return madate;
   }
 

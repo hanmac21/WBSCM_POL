@@ -410,11 +410,11 @@
 	
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -426,11 +426,11 @@
 	});
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#enddate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  

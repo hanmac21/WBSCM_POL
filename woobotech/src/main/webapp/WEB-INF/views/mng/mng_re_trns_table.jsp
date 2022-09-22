@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <%-- <div id="page" style="float:right;">
@@ -49,7 +49,9 @@
 															<td style="text-align: center;">${vo.row_num}</td>
 															<td style="text-align: center;">${vo.barcode}</td>
 															<td style="text-align: center;" id="${vo.row_num }">${vo.plant }</td>
-															<td style="text-align: center;">${vo.indate}</td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyyMMdd'/>																														
+															<td style="text-align: center;"><fmt:formatDate pattern='ddMMyyyy' value='${indate}' /></td>
+
 															<td style="text-align: center;">${vo.cno}</td>
 															<td style="text-align: center;">${vo.cname}</td>
 															<td style="text-align: center;">${vo.carkind}</td>
@@ -57,7 +59,7 @@
 															<td style="text-align: center;">
 															
 															<c:choose>
-																	<c:when test="${vo.dstate=='출하준비중'}"><!--DB저장된 한글 영어로 바꾸기-->
+																	<c:when test="${vo.dstate=='Preparing for shipment'}"><!--DB저장된 한글 영어로 바꾸기-->
 																		<input type="button" class="btn btn-warning"
 																			onclick="fnDelivertView('${vo.deliveryno}','배송중','${vo.plant }')"
 																			style="font-size: 18px" value="Preparing for shipment" />
@@ -80,7 +82,8 @@
 																</c:choose>
 															<input type="button" class="btn bg-maroon"	onclick="fnTrns('${vo.barcode}','${vo.prdate }')"			style="font-size: 18px" value="Reissue" />
 															</td>
-															<td style="text-align: center;">${vo.prdate}</td>
+															<fmt:parseDate value='${vo.prdate}' var='prdate' pattern='yyyy-MM-dd'/>
+															<td style="text-align: center;"><fmt:formatDate pattern='dd-MM-yyyy' value='${prdate}' /></td>
 															<td style="text-align: center;">
 																<input type="checkbox" name="del" id="${vo.barcode }" data-chkBar="${vo.barcode }" class="chkbox">&nbsp;&nbsp;&nbsp;
 																<button type="button" onclick="fnDel('${vo.barcode}')">Delete</button>

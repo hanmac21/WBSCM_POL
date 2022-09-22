@@ -114,6 +114,11 @@ public class TrnsDTO {
   }
 
   public String getPrdate() {
+    prdate = prdate.replaceAll("-", "");
+    String year = prdate.substring(0, 4);
+    String month = prdate.substring(4, 6);
+    String day = prdate.substring(6, 8);
+    prdate = day +"-"+ month +"-"+ year;
     return prdate;
   }
 

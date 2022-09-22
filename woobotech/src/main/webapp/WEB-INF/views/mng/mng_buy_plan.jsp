@@ -504,7 +504,7 @@ vertical-align:top; !important
 																			<%-- <input type="text" class="day1_lot"
 																			id="lot1_${status.count}" autocomplete="off"
 																			name="day1_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;"> --%>
 																			
 																			<input type="text" class="day1_lot" id="lot1_${status.count}" name="day1_lot"
@@ -542,7 +542,7 @@ vertical-align:top; !important
 																			<input type="text" class="day2_lot"
 																			id="lot2_${status.count}" autocomplete="off"
 																			name="day2_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -578,7 +578,7 @@ vertical-align:top; !important
 																			<input type="text" class="day3_lot"
 																			id="lot3_${status.count}" autocomplete="off"
 																			name="day3_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -614,7 +614,7 @@ vertical-align:top; !important
 																			<input type="text" class="day4_lot"
 																			id="lot4_${status.count}" autocomplete="off"
 																			name="day4_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -649,7 +649,7 @@ vertical-align:top; !important
 																			<input type="text" class="day5_lot"
 																			id="lot5_${status.count}" autocomplete="off"
 																			name="day5_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -683,7 +683,7 @@ vertical-align:top; !important
 																			<input type="text" class="day6_lot"
 																			id="lot6_${status.count}" autocomplete="off"
 																			name="day6_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -717,7 +717,7 @@ vertical-align:top; !important
 																			<input type="text" class="day7_lot"
 																			id="lot7_${status.count}" autocomplete="off"
 																			name="day7_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -751,7 +751,7 @@ vertical-align:top; !important
 																			<input type="text" class="day8_lot"
 																			id="lot8_${status.count}" autocomplete="off"
 																			name="day8_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -785,7 +785,7 @@ vertical-align:top; !important
 																			<input type="text" class="day9_lot"
 																			id="lot9_${status.count}" autocomplete="off"
 																			name="day9_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -819,7 +819,7 @@ vertical-align:top; !important
 																			<input type="text" class="day10_lot"
 																			id="lot10_${status.count}" autocomplete="off"
 																			name="day10_lot" value="" size="10"
-																			placeholder="yyyy-mm-dd"
+																			placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -852,7 +852,7 @@ vertical-align:top; !important
 																		<td width="60%" style="border: hidden; padding: 2px;">
 																			<input type="text" class="day11_lot"
 																			id="lot11_${status.count}" value="" size="10"
-																			name="day11_lot" placeholder="yyyy-mm-dd"
+																			name="day11_lot" placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -885,7 +885,7 @@ vertical-align:top; !important
 																		<td width="60%" style="border: hidden; padding: 2px;">
 																			<input type="text" class="day12_lot"
 																			id="lot12_${status.count}" value="" size="10"
-																			name="day12_lot" placeholder="yyyy-mm-dd"
+																			name="day12_lot" placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -918,7 +918,7 @@ vertical-align:top; !important
 																		<td width="60%" style="border: hidden; padding: 2px;">
 																			<input type="text" class="day13_lot"
 																			id="lot13_${status.count}" value="" size="10"
-																			name="day13_lot" placeholder="yyyy-mm-dd"
+																			name="day13_lot" placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -951,7 +951,7 @@ vertical-align:top; !important
 																		<td width="60%" style="border: hidden; padding: 2px;">
 																			<input type="text" class="day14_lot"
 																			id="lot14_${status.count}" value="" size="10"
-																			name="day14_lot" placeholder="yyyy-mm-dd"
+																			name="day14_lot" placeholder="dd-mm-yyyy"
 																			style="display: none; width: 85px;">
 																		</td>
 																	</tr>
@@ -1175,11 +1175,11 @@ vertical-align:top; !important
 	<script type="text/javascript">
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -1191,11 +1191,11 @@ vertical-align:top; !important
 	});
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#ma_date").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -1707,7 +1707,7 @@ vertical-align:top; !important
 			var i_qty = new Array(); //입력한 수량
 			var lotno = new Array(); //입력한 lotno
 			var indate="";
-			var dstate ="출하준비중";
+			var dstate ="Preparing for shipment";
 			var delivery_date = "";
 			var delivery_hour = $("#p_delivery_hour").val();
 			var delivery_min = "";
@@ -2390,6 +2390,7 @@ vertical-align:top; !important
 			car_type = $('#tablebody').find('tr').eq(idx).find('.car_type').text();
 			i_qty    = $('#tablebody').find('tr').eq(idx).find('.'+check_day).val();
 			lotno    = $('#tablebody').find('tr').eq(idx).find('.' +check_day+'_lot').val();
+			console.log("날짜확인"+lotno);
 			prdate   = $("#outdate").val();
 			indate = check_date;
 			
@@ -2397,7 +2398,7 @@ vertical-align:top; !important
 				alert("Please check the creation date");
 				return;
 			}
-			
+			FunLoadingBarStart();
 			$.ajax({
 				type : "post",
 				url : "mng_label_add",
@@ -2419,6 +2420,7 @@ vertical-align:top; !important
 				$("#modalPop").html("");
 				$("#modalPop").html(data);
 				$('#modalPop').modal({backdrop:'static'});
+				FunLoadingBarEnd();
 				//	$('span.number').number( true, 0 );
 			});
 			
@@ -2636,7 +2638,9 @@ vertical-align:top; !important
 				alert("Please enter the production date");
 				return;
 			}
-			
+			$("#modalPop").html("");
+			$("#modalPop").modal('hide');
+			FunLoadingBarStart();
 			$.ajax({
 				type : "post",
 				url : "mng_label_print",
@@ -2664,11 +2668,11 @@ vertical-align:top; !important
 					production3:production3,
 				}
 			}).done(function(data) {
-				$("#modalPop").html("");
-				$("#modalPop").modal('hide');
+				
 				$("#modalPop2").html("");
 				$("#modalPop2").html(data);
 				$('#modalPop2').modal({backdrop:'static'});
+				FunLoadingBarEnd();
 				//cnt=cnt+1;
 				//	$('span.number').number( true, 0 );
 			});
@@ -3182,82 +3186,82 @@ vertical-align:top; !important
 		$(function() {
 			$('span.number').number(true, 0);
 			/* $('#startdate').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('#ma_date').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day1_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day2_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day3_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day4_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day5_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day6_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day7_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day8_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day9_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day10_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day11_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day12_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day13_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('input[name="day14_lot"]').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			}); */

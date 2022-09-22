@@ -3,11 +3,14 @@ package com.woobotech.service.jutil;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
+import org.joda.time.format.DateTimeFormat;
 
 public class DateUtil {
 
@@ -36,13 +39,13 @@ public class DateUtil {
   private static final long MILLISECOND_OF_DAY = 24 * 60 * 60 * 1000;
 
   // GMT를 기준으로 9시간후
-  private static final int GMT_OFFSET = 9 * 60 * 60 * 1000;
+  private static final int GMT_OFFSET = 2 * 60 * 60 * 1000;
 
   // private static final Locale CURRENT_LOCALE = Locale.KOREA;
 
   private static final String DEFAULT_DATE_FORMAT = "yyyyMMdd";
 
-  private static final SimpleTimeZone SIMPLE_TIME_ZONE = new SimpleTimeZone(GMT_OFFSET, "KST");
+  private static final SimpleTimeZone SIMPLE_TIME_ZONE = new SimpleTimeZone(GMT_OFFSET, "CEST");
 
   static Calendar cal_s;
   static Calendar cal_e;
@@ -51,6 +54,39 @@ public class DateUtil {
    * Private constructor, to prevent construction.
    */
   private DateUtil() {} // constructor
+  
+  /**
+   * // 20220918
+   * ddMMyyyy or dd-MM-yyyy-> yyyyMMdd
+   * @param date
+   * @return
+   */
+  public static String getConvertDate(String strDate) {
+    String rtn = "";
+    if(strDate != null && strDate != "") {
+      strDate = strDate.replaceAll("-", "");
+      String day = strDate.substring(0, 2);
+      String month = strDate.substring(2, 4);
+      String year = strDate.substring(4, 8);
+      rtn = year + month + day;
+    }else {
+      //rtn = DateUtil.getCurrentDate(); gmt +2 current time
+    }
+    return rtn;
+  }
+  public static String getConvertDate2(String strDate) {
+    String rtn = "";
+    if(strDate != null && strDate != "") {
+      strDate = strDate.replaceAll("-", "");
+      String day = strDate.substring(0, 2);
+      String month = strDate.substring(2, 4);
+      String year = strDate.substring(4, 8);
+      rtn = year+"-" + month +"-"+ day;
+    }else {
+      //rtn = DateUtil.getCurrentDate(); gmt +2 current time
+    }
+    return rtn;
+  }
 
   /**
    * YYYYmmdd의 날짜 형식을 YYYY-mm-dd형식으로 변환

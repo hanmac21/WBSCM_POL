@@ -4,6 +4,8 @@
 <html>
 <head>
 <%@ include file="../common/jsHeader.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>우보테크(관리자)</title>
 <link rel="shortcut icon" href="asset/dist/img/wbfavi.ico">
@@ -457,11 +459,11 @@ th, td {
 	<script type="text/javascript">
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -777,12 +779,12 @@ th, td {
 	<script>
 		$(function() {
 			/* $('#startdate').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			}); */
 			$('#enddate').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});

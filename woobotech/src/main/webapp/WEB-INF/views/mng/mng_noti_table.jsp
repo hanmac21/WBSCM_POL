@@ -155,8 +155,9 @@
 															</c:choose>
 															</a></td>
 															<td style="font-size: 18px; text-align:center">WOOBOTECH</td>
-															<td style="font-size: 18px; text-align:center"> ${ vo.reg_date}</td>
-															<td  style="font-size: 18px; text-align:center">${ vo.hit}</td>
+															<fmt:parseDate value='${vo.reg_date}' var='regDate' pattern='yyyy-MM-dd HH:mm:ss'/>															
+															<td style="font-size: 18px; text-align:center"><fmt:formatDate pattern='dd-MM-yyyy HH:mm:ss' value='${regDate}' /></td>
+															<td style="font-size: 18px; text-align:center">${ vo.hit}</td>
 
 														</tr>
 													</c:forEach>

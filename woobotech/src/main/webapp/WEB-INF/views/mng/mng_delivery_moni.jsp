@@ -226,15 +226,18 @@ th{
 								<td style="font-size: 22px; text-align: center" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -254,16 +257,18 @@ th{
 								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
-								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -298,15 +303,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -340,15 +348,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -382,15 +393,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -424,15 +438,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -466,15 +483,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -508,15 +528,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -550,15 +573,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -592,15 +618,18 @@ th{
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
 								
+								<fmt:parseDate value='${vo.dtime}' var='dtime' pattern='yyyy-MM-dd HH:mm'/>								
 								<td style="font-size: 22px; text-align: center">
+									<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime}' />
 									<c:set var = "dtime" value="${vo.dtime }"/>
-									${fn:substring(dtime,0,10) } <br>
+									 <br>
 									${fn:substring(dtime,11,16) }
 								</td>
-								
+								<fmt:parseDate value='${vo.dtime2}' var='dtime2' pattern='yyyy-MM-dd HH:mm'/>	
 								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+								<fmt:formatDate pattern='dd-MM-yyyy' value='${dtime2}' />
 									<c:set var = "dtime2" value="${vo.dtime2 }"/>
-									${fn:substring(dtime2,0,10) } <br>
+									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
 								
@@ -957,9 +986,9 @@ th{
 			
 			//var indate = getParameterByName('indate');
 			//alert(indate);
-			var ydate = indate.substring(0,4) + " / ";
-			var mdate = indate.substring(4,6) + " / ";
-			var ddate = indate.substring(6,8) + "";
+			var ydate = indate.substring(0,2) + " / ";
+			var mdate = indate.substring(2,4) + " / ";
+			var ddate = indate.substring(4,8) + "";
 				
 			document.getElementById("date").innerHTML = ydate + mdate + ddate;
 			//★★★★★삭제예정220721★★★★★주석삭제

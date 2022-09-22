@@ -138,7 +138,7 @@ public class WooboTechController {
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_delivery_moni");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String indate = F.nullCheck(request.getParameter("indate"), "");
+    String indate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("indate"), ""));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "10"));
 
@@ -187,6 +187,7 @@ public class WooboTechController {
   @RequestMapping(value = "/mng_delivery_detail")
   public String mng_delivery_dt(Locale locale, HttpServletRequest request, Model model,
       @RequestParam Map<String, String> param) {
+    logger.info("▷▶▷▶▷▶ mng_delivery_detail start");
     HttpSession session = request.getSession();
     String session_cu_code = (String) session.getAttribute("cu_code");
 
@@ -202,7 +203,7 @@ public class WooboTechController {
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_delivery_moni");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String indate = F.nullCheck(request.getParameter("indate"), "");
+    String indate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("indate"), ""));
     String cno = F.nullCheck(request.getParameter("cno"), "");
     String branch = F.nullCheck(request.getParameter("branch"), "");
     int itemCountPerPage =
@@ -245,7 +246,7 @@ public class WooboTechController {
     model.addAttribute("maxPage", maxPage);
     model.addAttribute("paging", paging);
     model.addAttribute("itemCountPerPage", itemCountPerPage);
-
+    logger.info("▷▶▷▶▷▶ mng_delivery_detail end");
     return "mng/mng_delivery_detail";
   }
 
@@ -384,6 +385,7 @@ public class WooboTechController {
       String temp_itemcode = arrList.get(i).getItemcode1();
       sumqty = sumqty + Integer.parseInt(arrList.get(i).getI_qty());
     }
+    System.out.println("info확인"+info);
     // System.out.println("cu_juso:"+cu_juso);
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
@@ -392,10 +394,14 @@ public class WooboTechController {
     model.addAttribute("cu_sano",
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
-    model.addAttribute("cu_sangho", info.getCustname());
+    String sangho = info.getCustname();
+    sangho = sangho.replace("<br>", "");
+    model.addAttribute("cu_sangho", sangho);
     model.addAttribute("cu_juso", info.getCu_juso());
     System.out.println("cu_juso:" + cu_juso);
+    model.addAttribute("prdate", info.getPrdate());
     System.out.println(" 재발행 작성일자" + info.getPrdate());
+    
     System.out.println(" 재발행 월" + info.getPrdate().substring(4, 7));
     // model.addAttribute("outdate", info.getPrdate().substring(0,4)+"년"
     // +info.getPrdate().substring(5,7)+"월" +info.getPrdate().substring(8,10)+"일");//발행일자
@@ -410,7 +416,8 @@ public class WooboTechController {
     model.addAttribute("pageview", "mng_re_trns_data");
     model.addAttribute("memo", info.getMemo());
     model.addAttribute("memo2", info.getMemo2());
-    model.addAttribute("prdate", info.getPrdate());
+    
+    System.out.println(" 재발행 작성일자" + info.getPrdate());
     model.addAttribute("itemcode", info.getItemcode1());
     model.addAttribute("sumqty",sumqty );
     logger.info("◁◀◁◀◁◀ mng_retrns_data end");
@@ -503,7 +510,8 @@ public class WooboTechController {
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_re_trns");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
+
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
     try {           //★★★★★삭제예정220725★★★★★   try-catch문만 삭제
@@ -513,12 +521,13 @@ public class WooboTechController {
       // TODO Auto-generated catch block
       // e.printStackTrace();
     }
+    /*
     if (!"".equals(startdate)) {
       startdate = startdate.replaceAll("-", "");
     } else {
       startdate = DateUtil.getCurrentDate();
     }
-
+     */
     int itemCount;
     // int itemCountPerPage = 30;
     int pageCountPerPaging = 10;
@@ -804,7 +813,7 @@ public class WooboTechController {
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_delivery");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
     try {
@@ -863,7 +872,7 @@ public class WooboTechController {
     logger.info("▷▶▷▶▷▶mng_production_plan start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_production_plan");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -1427,7 +1436,7 @@ public class WooboTechController {
     logger.info("▷▶▷▶▷▶mng_stock_plan start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_stock_plan");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
 
     int itemCountPerPage =
@@ -1503,7 +1512,7 @@ public class WooboTechController {
     logger.info("▷▶▷▶▷▶mng_biz_plan start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_biz_plan");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -1584,7 +1593,7 @@ public class WooboTechController {
         arrayDay[i] = temp_date.replaceAll("-", "");
         // 0~6 : 일~월
       }
-
+System.out.println("날짜확인220919"+str_day1);
       model.addAttribute("str_day1", str_day1);
       model.addAttribute("str_day2", str_day2);
       model.addAttribute("str_day3", str_day3);
@@ -1949,7 +1958,7 @@ public class WooboTechController {
     TrnsDTO info = arrList.get(0);
     String sangho = info.getCustname();
     sangho = sangho.replace("<br>", "");
-    System.out.println("상호확인"+info.getDeliveryno());
+    System.out.println("상호확인"+info.getCustname());
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
     model.addAttribute("cu_sano",
@@ -1998,9 +2007,10 @@ public class WooboTechController {
     int box_qty3 = Integer.parseInt(param.get("box_qty3"));
     String lotno = param.get("lotno");
     String indate = param.get("indate");
-    String madate = param.get("madate");
-    String madate2 = param.get("madate2");
-    String madate3 = param.get("madate3");
+    String madate = DateUtil.getConvertDate2(param.get("madate"));
+    String madate2 = DateUtil.getConvertDate2(F.nullCheck(param.get("madate2"), ""));
+    String madate3 = DateUtil.getConvertDate2(F.nullCheck(param.get("madate3"), ""));
+    System.out.println("220919@@@@@@@@@@@@@@@@@@@"+madate);
     String memo = param.get("memo");
     String branch = param.get("branch");
     String production = param.get("production");
@@ -2012,7 +2022,7 @@ public class WooboTechController {
     // 주문수량 /박스수량
     WooboTechDao dao = new WooboTechDao();
     
-    dao.mng_label_del(param);
+    dao.mng_label_del(param); 
    
     int is_exist = dao.mng_qty_exist(param);
    
@@ -2058,7 +2068,12 @@ public class WooboTechController {
       }
 
     }
-
+    madate = madate.replaceAll("-", "");
+    String year = madate.substring(0, 4);
+    String month = madate.substring(4, 6);
+    String day = madate.substring(6, 8);
+    madate = day +"-"+ month +"-"+ year;
+    System.out.println("madate 확인"+madate);
     model.addAttribute("board", arrList_Label);
     model.addAttribute("itemname", itemname);
     model.addAttribute("itemcode1", itemcode1);
@@ -2093,7 +2108,7 @@ public class WooboTechController {
     // String memo= param.get("memo");
 
     // 주문수량 /박수수량
-
+     
     String trbarcode = param.get("trbarcode");
     String pno = param.get("pno");
     WooboTechDao wdao = new WooboTechDao();
@@ -2145,7 +2160,8 @@ public class WooboTechController {
     // model.addAttribute("madate", madate );
     // model.addAttribute("memo", memo);
     model.addAttribute("board", arrList_Label);
-    System.out.println(arrList_Label.size());
+    System.out.println(arrList_Label);
+    System.out.println(indate);
     logger.info("◁◀◁◀◁◀ mng_label_reprint end");
     return "mng/mng_label_reprint";
   }
@@ -2158,7 +2174,12 @@ public class WooboTechController {
     String custname = param.get("custname");
     String itemcode1 = param.get("itemcode1");
     String itemname = param.get("itemname");
-    String indate = param.get("indate");
+    String indate =  param.get("indate");
+    indate = indate.replaceAll("-", "");
+    String year = indate.substring(0, 4);
+    String month = indate.substring(4, 6);
+    String day = indate.substring(6, 8);
+    indate = day +"-"+ month+"-" + year;
     String qty = param.get("qty");
     String i_qty = param.get("i_qty");
     String custcode = param.get("custcode");
@@ -2217,7 +2238,7 @@ public class WooboTechController {
     return "mng/mng_label_add";
   }
 
-  // 구매계획관리 - 거래명세서     
+  // 구매계획관리 - 거래명세서     //★★★★★삭제예정220726★★★★★
 
   @RequestMapping(value = "/mng_trns_dt")
   public String mng_trns_dt(Locale locale, Model model) {
@@ -2233,7 +2254,7 @@ public class WooboTechController {
       @RequestParam Map<String, String> param) {
     logger.info("▷▶▷▶▷▶mng_buy_plan start");
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -2441,7 +2462,7 @@ public class WooboTechController {
         // System.out.println("i==>"+i);
         // 0~6 : 일~월
       }
-     
+      System.out.println("날짜확인220919"+str_day1);
       model.addAttribute("str_day1", str_day1);
       model.addAttribute("str_day2", str_day2);
       model.addAttribute("str_day3", str_day3);
@@ -2549,7 +2570,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
       @RequestParam Map<String, String> param) {
     logger.info("▷▶▷▶▷▶mng_buy_incomeplan start");
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -3708,7 +3729,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
 
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -3783,7 +3804,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
 
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -3942,7 +3963,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_export_master");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
     try {

@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="row">
 	<div class="col-xs-12">
 		<div class="box">
@@ -19,20 +19,34 @@
 												<th>Product plan</th>
 												<th>Basic Stock</th>
 												<th>Safety Stock</th>
-												<th>${str_day1}</th>
-												<th>${str_day2}</th>
-												<th>${str_day3}</th>
-												<th>${str_day4}</th>
-												<th>${str_day5}</th>
-												<th>${str_day6}</th>
-												<th>${str_day7}</th>
-												<th>${str_day8}</th>
-												<th>${str_day9}</th>
-												<th>${str_day10}</th>
-												<th>${str_day11}</th>
-												<th>${str_day12}</th>
-												<th>${str_day13}</th>
-												<th>${str_day14}</th>
+												<fmt:parseDate value='${str_day1}' var='strDay1' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day2}' var='strDay2' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day3}' var='strDay3' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day4}' var='strDay4' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day5}' var='strDay5' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day6}' var='strDay6' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day7}' var='strDay7' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day8}' var='strDay8' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day9}' var='strDay9' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day10}' var='strDay10' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day11}' var='strDay11' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day12}' var='strDay12' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day13}' var='strDay13' pattern='yyyy-MM-dd'/>
+												<fmt:parseDate value='${str_day14}' var='strDay14' pattern='yyyy-MM-dd'/>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay1}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay2}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay3}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay4}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay5}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay6}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay7}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay8}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay9}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay10}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay11}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay12}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay13}' /></th>
+												<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay14}' /></th>
 												<th style="text-align: center;">Total</th>
 												<th style="text-align: center;">Expected stock</th>
 											</tr>

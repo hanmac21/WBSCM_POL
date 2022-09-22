@@ -59,7 +59,7 @@
 
 									<div class="col-sm-3">
 										<input type="password" class="form-control" name="note_pass"
-											id="note_pass" placeholder="" value="">
+											id="p_pass" placeholder="" value="">
 									</div>
 								</c:when>
 								<c:otherwise>

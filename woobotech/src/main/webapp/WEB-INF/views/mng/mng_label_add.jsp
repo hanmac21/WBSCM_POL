@@ -87,11 +87,11 @@
 								style="font-size: 14px">Production date</label>
 
 							<div class="col-sm-10">
-								<input type="date" class="form-control" name="p_madate"
+								<input type="text" placeholder="dd-mm-yyyy"  class="form-control" name="p_madate"
 									id="p_madate" value="${madate}" placeholder="dd-mm-yyyy"  style="margin-left: 3px; width:145px; float:left; background-color:#ffffff" readonly='true'>
-								<input type="date" class="form-control" name="p_madate2"
+								<input type="text" placeholder="dd-mm-yyyy"  class="form-control" name="p_madate2"
 									id="p_madate2" value="${madate2}" placeholder="dd-mm-yyyy"  style="margin-left: 16px; width:145px; float:left;  background-color:#ffffff"" readonly='true'>
-								<input type="date" class="form-control" name="p_madate3"
+								<input type="text" placeholder="dd-mm-yyyy"  class="form-control" name="p_madate3"
 									id="p_madate3" value="${madate3}" placeholder="dd-mm-yyyy"  style="margin-left: 16px; width: 145px; float:left;  background-color:#ffffff"" readonly='true'>
 							</div>
 						</div>
@@ -173,7 +173,7 @@
 	//var h_tag_cnt=0;
 	$(function() {
 	$("#p_madate").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -183,7 +183,7 @@
 });
 	$(function() {
 		$("#p_madate2").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -193,7 +193,7 @@
 	});
 	$(function() {
 		$("#p_madate3").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  

@@ -360,18 +360,18 @@ table{
 
 $(function() {
 	/* $('#p_delivery_date').datepicker({
-		format : 'yyyy-mm-dd'
+		format : 'dd-mm-yyyy'
 	}); */
 	
 	$("#outdate").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
 	  }).on('change',function(){
 			$('.datepicker').hide();
 	  });
-	
+
 
 });
 	$('td.number').number(true, 0);
@@ -399,7 +399,7 @@ $(function() {
 			document.getElementById("wjuso2").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
 		} */
 		
-		/* var loc1 = document.getElementById("wjuso").innerText;
+		 /* var loc1 = document.getElementById("wjuso").innerText;
 		//var loc2 = document.getElementById("wjuso2").innerText;
 		
 		if(loc1==='000'){
@@ -408,7 +408,7 @@ $(function() {
 		}else if(loc1==='001'){
 			document.getElementById("wjuso").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
 			//document.getElementById("wjuso2").innerText = '울산광역시 울주군 언양읍 반천산업로 108-67';
-		} */
+		}  */
 		
 		<c:forEach var="vo" items="${ board }"
 			varStatus="status">
@@ -422,6 +422,17 @@ $(function() {
 		var pno = $('#${vo.itemcode1 }').val();
 		//alert(pno);
 		
+	var lacnt = ${vo.lacnt} * 1;
+	//alert(cnt);cnt
+	console.log(lacnt);
+	if(lacnt>=1){
+		//document.getElementById("${vo.itemcode1 }+reTrnsBtn").style.display="block";
+		document.getElementById("${vo.itemcode1 }+reTrnsBtn").disabled=false;
+		//document.getElementById("labelPrintAll").disabled=false;
+		document.getElementById("label_text${n}").innerText = 'print';
+	}else{
+		document.getElementById("label_text${n}").innerText = 'unprinted';
+	}
 		
 		
 		/* $.ajax({
@@ -452,7 +463,7 @@ $(function() {
 	});
 	
 	function jtrnsprint(barcode, memo){
-		//var memo = document.getElementById('p_memo2').innerText;
+		var memo = document.getElementById('p_memo').innerText;
 			
 		//var amount = ((({board.size()} / 10) + 1) * 10);
 		
@@ -508,7 +519,8 @@ $(function() {
 		  
 		  //alert(pno);
 		  //alert(trbarcode);
-		  	
+		  $("#modalPop3").modal('hide');
+		  	FunLoadingBarStart();
 			$.ajax({
 				type : "post",
 				url : "mng_label_reprint",
@@ -519,10 +531,11 @@ $(function() {
 				}
 			}).done(function(data) {
 				//$("#modalPop3").html("");
-				$("#modalPop3").modal('hide');
+				
 				$("#modalPop2").html("");
 				$("#modalPop2").html(data);
 				$('#modalPop2').modal({backdrop:'static'});
+				FunLoadingBarEnd();
 			});
 		}
 	

@@ -43,7 +43,7 @@ public class ExcelController {
     logger.info("▷▶▷▶▷▶mng_buy_plan_excel start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan_excel");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
@@ -51,7 +51,7 @@ public class ExcelController {
     HttpSession session = request.getSession();
 
     String text = (String) session.getAttribute("cu_sangho");
-    System.out.print("세션에서 받아오는 값 ->" + text);
+    System.out.println("세션에서 받아오는 값 ->" + text);
     String session_cu_code = (String) session.getAttribute("cu_code");
 
     if (session_cu_code == null) {
@@ -251,7 +251,7 @@ public class ExcelController {
     logger.info("▷▶▷▶▷▶mng_biz_plan_excel start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_biz_plan_excel");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate =  DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     String result = F.nullCheck(request.getParameter("alldtate"), "");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
@@ -396,7 +396,7 @@ public class ExcelController {
     logger.info("▷▶▷▶▷▶mng_production_plan_excel start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_production_plan_excel");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate =  DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     String result = F.nullCheck(request.getParameter("alldtate"), "");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
@@ -546,7 +546,7 @@ public class ExcelController {
     logger.info("▷▶▷▶▷▶mng_stock_plan_excel start");
 
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_stock_plan_excel");
-    String startdate = F.nullCheck(request.getParameter("startdate"), "");
+    String startdate =  DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
 
     int itemCountPerPage =

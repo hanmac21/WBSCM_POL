@@ -542,11 +542,11 @@ function currentTime(){
 	<script type="text/javascript">
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -777,7 +777,7 @@ function currentTime(){
 
 	//메모적용
 	function fnMemoSet(barcode){
-		var memo = $("#s_memo").val();
+		var memo = $("#s_memo1").val();
 		var len= memo.length;
 		if(len>20){
 			alert("Please enter no more than 20 characters")
@@ -901,7 +901,8 @@ function currentTime(){
 	
 	function fnTrns(barcode){
 		//alert("재발행 합니다!");
-		
+		FunLoadingBarStart();
+
 		$.ajax({
 			type : "post",
 			url : "mng_re_trns_data",
@@ -915,6 +916,7 @@ function currentTime(){
 			$("#modalPop3").html("");
 			$("#modalPop3").html(data);
 			$('#modalPop3').modal('show');
+			FunLoadingBarEnd();
 			//	$('span.number').number( true, 0 );
 		});
 		
@@ -1176,7 +1178,7 @@ function currentTime(){
 		 	
 		 	var without = getCookie("without");
 		 	//alert(without);
-		 	
+		 	FunLoadingBarStart();
 		 	$.ajax({
 		 		type:"post",
 		 		url:"mng_re_trns",
@@ -1195,6 +1197,7 @@ function currentTime(){
 		 			$("#tabledata").html(data);
 		 			//alert("end2 -> 안됨");
 		 			$('td.number').number( true, 0 );
+		 			FunLoadingBarEnd();
 		 			//alert("end");
 		 		//	$('span.number').number( true, 0 );
 		 		});
@@ -1331,12 +1334,12 @@ function currentTime(){
 	<script>
 	  $( function() {
 		  /* $('#startdate').datepicker ({ 
-			  format: 'yyyy-mm-dd'
+			  format: 'dd-mm-yyyy'
 		  }).on('change',function(){
 				$('.datepicker').hide();
 		  }); */
 		  $('#enddate').datepicker ({
-			  format: 'yyyy-mm-dd'
+			  format: 'dd-mm-yyyy'
 		   }).on('change',function(){
 				$('.datepicker').hide();
 		   });

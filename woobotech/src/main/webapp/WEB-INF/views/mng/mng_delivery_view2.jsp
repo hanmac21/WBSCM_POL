@@ -236,11 +236,11 @@ function getYyyyMmDdHhMmToString(date){
 
 $(function() {
 	/* $('#p_delivery_date').datepicker({
-		format : 'yyyy-mm-dd'
+		format : 'dd-mm-yyyy'
 	}); */
 	
 	$('#p_delivery_date2').datepicker ({ 
-		  format: 'yyyy-mm-dd'
+		  format: 'dd-mm-yyyy'
 	  }).on('change',function(){
 			$('.datepicker').hide();
 	  });

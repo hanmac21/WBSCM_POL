@@ -816,7 +816,7 @@ table{
 		
 		var lacnt = ${vo.lacnt} * 1;
 		//alert(cnt);cnt
-		console.log(lacnt);
+		console.log("lacnt확인"+lacnt);
 		if(lacnt>=1){
 			//document.getElementById("${vo.itemcode1 }+reTrnsBtn").style.display="block";
 			document.getElementById("${vo.itemcode1 }+reTrnsBtn").disabled=false;

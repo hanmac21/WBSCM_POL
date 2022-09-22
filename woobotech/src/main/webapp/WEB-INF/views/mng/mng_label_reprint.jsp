@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <style>
@@ -137,7 +138,8 @@ tr.space {
 															<td class="td" style="text-align: center;">Qty</td>
 															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.indate}</span></td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd.MM.yyyy' value='${indate}' /></span></td>
 															
 														</tr>
 														<tr>
@@ -219,7 +221,8 @@ tr.space {
 															<td class="td" style="text-align: center;"><!-- 수량 -->QTY</td>
 															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><!-- 입고일자 -->Date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;">${vo.indate}</span></td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${indate}' /></span></td>
 															
 														</tr>
 														<tr>
@@ -228,7 +231,8 @@ tr.space {
 															<td class="td" style="font-size: 14px;text-align: center;">ETC</td>
 															<td class="td" style="font-size: 14px;text-align: center;"></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><!-- 생산일자 -->Production date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;">${vo.mkdate}</span></td>
+															<fmt:parseDate value='${vo.mkdate}' var='mkdate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${mkdate}' /></span></td>
 															
 														</tr>
 														

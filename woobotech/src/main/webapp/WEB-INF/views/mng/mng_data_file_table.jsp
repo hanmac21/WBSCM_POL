@@ -149,7 +149,8 @@
 															</c:choose>
 															</a></td>
 															<td style="font-size: 18px; text-align:center" width="20%">WOOBOTECH</td>
-															<td style="font-size: 18px; text-align:center" width="25%">${ vo.reg_date}</td>
+															<fmt:parseDate value='${vo.reg_date}' var='regDate' pattern='yyyy-MM-dd HH:mm:ss'/>															
+															<td style="font-size: 18px; text-align:center"><fmt:formatDate pattern='dd-MM-yyyy HH:mm:ss' value='${regDate}' /></td>
 															<td style="font-size: 18px; text-align:center" width="5%">${ vo.hit}</td>
 														</tr>
 													</c:forEach>
@@ -319,9 +320,9 @@
 
 	<script type="text/javascript">
 	
-	//★★★★★삭제예정220722★★★★★시작
+	
 
-	/* function fnfile_d(brd_no,seq){
+	 function fnfile_d(brd_no,seq){
 		
 		if(!confirm("파일을 삭제 하시겠습니까?")){
 			
@@ -338,11 +339,11 @@
 		}).done(function(data) {
 			var isOk = data;
 			if (isOk == 1) {
-				alert('정상 처리되었습니다.');
+				alert('Successfully processed.');
 				fnDataFileDt(brd_no);
 				//location.reload();
 			}else{
-				alert('등록 실패');
+				alert('Registration failed.');
 				//alert('비밀번호 일치하지 않습니다.');
 			}
 
@@ -355,19 +356,19 @@
 	function fnDataFileDt_u(){
 		
 		var contents = CKEDITOR.instances.p_contents.getData();	
-		
+		console.log("220921");
 		if($("#p_p_title").val()==''){
-			alert("재목을 입력해주세요");
+			alert("Please enter a title.");
 			return;
 		}
 		
 		if($("#p_pass").val()==''){
-			alert("비밀번호를 입력해주세요");
+			alert("Please enter your password.");
 			return;
 		}
 		
 		if(contents==''){
-			alert("내용을 입력해주세요");
+			alert("Please enter the contents.");
 			return;
 		}
 		
@@ -378,8 +379,8 @@
        formData.append("img2",  $("#file2")[0].files[0]);
        formData.append("img3",  $("#file3")[0].files[0]);
        formData.append("img4",  $("#file4")[0].files[0]);
-       formData.append("img5",  $("#file5")[0].files[0]); */
-      /*  formData.append("brd_no", $("#p_brd_no").val());
+       formData.append("img5",  $("#file5")[0].files[0]);  */
+       formData.append("brd_no", $("#p_brd_no").val());
        formData.append("good_group_cd", $("#p_good_group_cd").val());
        formData.append("title", $("#p_p_title").val());
        formData.append("pass", $("#p_pass").val());
@@ -395,10 +396,10 @@
            success: function(result){
                 	   
                 	   if(result=='1'){
-                		   alert("정상 등록되었습니다.");
+                		   alert("Successfully registered.");
                 		   location.reload();
                 	   }else{
-                		   alert("관리자에게 문의하세요.");
+                		   alert("Fix failed.");
                 	   }
                    	
                    }
@@ -435,17 +436,17 @@
 		
 		
 		if($("#p_p_title").val()==''){
-			alert("제목을 입력해주세요");
+			alert("Please enter a title.");
 			return;
 		}
 		
 		if($("#p_pass").val()==''){
-			alert("비밀번호를 입력해주세요");
+			alert("Please enter your password.");
 			return;
 		}
 		
 		if(contents==''){
-			alert("내용을 입력해주세요");
+			alert("Please enter the contents.");
 			return;
 		}
 		
@@ -467,11 +468,11 @@
 	   $("#contents").val(contents) 	;
 	   var form = $('#form1')[0];
        var formData = new FormData(form);
-       formData.append("img1",  $("#file1")[0].files[0]);
+       /* formData.append("img1",  $("#file1")[0].files[0]);
        formData.append("img2",  $("#file2")[0].files[0]);
        formData.append("img3",  $("#file3")[0].files[0]);
        formData.append("img4",  $("#file4")[0].files[0]);
-       formData.append("img5",  $("#file5")[0].files[0]);
+       formData.append("img5",  $("#file5")[0].files[0]); */
        formData.append("title", $("#p_p_title").val());
        formData.append("pass", $("#p_pass").val());
       // formData.append("contents",contents);
@@ -480,15 +481,15 @@
       var file2=$("#file2").val();
       var file3=$("#file3").val();
       var file4=$("#file4").val();
-      var file5=$("#file5").val(); */
+      var file5=$("#file5").val(); 
       
-     /*  if(!file1){
-    	  alert("파일을 첨부해주세요");
+      if(!file1){
+    	  alert("Please attach the file.");
     	  return;
-      } */
+      } 
       
-     /*  if(!(file1==''||file2==''||file3==''||file4==''||file5=='')){
-    	  alert("파일을 확인해주세요.");
+       if(!(file1==''||file2==''||file3==''||file4==''||file5=='')){
+    	  alert("Please check the file.");
     	  return;
       }
       
@@ -501,10 +502,10 @@
            success: function(result){
                 	   
                 	   if(result=='1'){
-                		   alert("정상 등록되었습니다.");
+                		   alert("Successfully registered.");
                 		   location.reload();
                 	   }else{
-                		   alert("관리자에게 문의 하세요!");
+                		   alert("Please contact the administrator.");
                 	   }
                    	
                    }
@@ -519,19 +520,19 @@
 
 		if ($('#'+id).val() == '') {
 			return;
-		} */
-		/*
-		if ($.inArray(ext, [ 'jpg' ]) == -1) {
+		}
+		
+		/* if ($.inArray(ext, [ 'jpg' ]) == -1) {
 
 			alert('jpg 파일만 업로드 할수 있습니다.');
 
 			return;
 
-		}
-		*/
+		} */
+		
 
 		//파일 사이즈 체크
-		/* var iSize = 0;
+		 var iSize = 0;
 		if (window.ActiveXObject) {
 			var objFSO = new ActiveXObject("Scripting.FileSystemObject");
 
@@ -618,11 +619,11 @@
 			$("#tabledata2").html(data);
 		});
 
-	} */ 
-	//★★★★★삭제예정220722★★★★★끝
+	}  
+	
 	
 
-	/* function getUserList(page, keyword) {
+	 function getUserList(page, keyword) {
 
 		var form = document.formdata;
 
@@ -652,7 +653,7 @@
 			//	$('span.number').number( true, 0 );
 		});
 
-	} */
+	} 
 	</script>
 
 	<script>

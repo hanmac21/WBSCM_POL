@@ -364,7 +364,7 @@ $(function() {
 	}); */
 	
 	$("#outdate").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  

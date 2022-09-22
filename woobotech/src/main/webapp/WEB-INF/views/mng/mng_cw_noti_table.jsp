@@ -153,7 +153,8 @@
 																
 																</a></td>
 															<td style="font-size: 18px; text-align:center">${ vo.cu_sangho}</td>
-															<td style="font-size: 18px; text-align:center">${ vo.reg_date}</td>
+															<fmt:parseDate value='${vo.reg_date}' var='regDate' pattern='yyyy-MM-dd HH:mm:ss'/>															
+															<td style="font-size: 18px; text-align:center"><fmt:formatDate pattern='dd-MM-yyyy HH:mm:ss' value='${regDate}' /></td>
 															<td style="font-size: 18px; text-align:center">${ vo.hit}</td>
 
 														</tr>
@@ -330,26 +331,26 @@
 
 	
 	
-	//★★★★★삭제예정220721★★★★★ 시작
+	
 	function fnCwNotiDt_u(){
 		
 		var contents = CKEDITOR.instances.p_contents.getData();	
 		
 		if($("#p_cno").val()==''){
-			alert("협력사를 선택해주세요");
+			alert("Please select a partner");
 			return;
 		}
 		
 		if($("#p_p_title").val()==''){
-			alert("제목을 입력해주세요");
+			alert("Please enter a title");
 			return;
 		}
 		if($("#cw_noti_pass").val()==''){
-			alert("비밀번호를 입력하세요.");
+			alert("Please enter your password.");
 			return;
 		}
 		if(contents==''){
-			alert("내용을 입력해주세요");
+			alert("Please enter the contents.");
 			return;
 		}
 		
@@ -409,34 +410,34 @@
 		 	
 		 }	
 	
-	//★★★★★삭제예정220721★★★★★ 끝
+	
 	function fnclose(){
 		$('#modalPop').modal('hide');
  	}
-	//★★★★★삭제예정220721★★★★★ 시작
+	
 	function fnCwNoti_i(){
 		
 		var contents = CKEDITOR.instances.p_contents.getData();	
 		
 		
 		if($("#p_cno").val()==''){
-			alert("협력사를 선택해주세요");
+			alert("Please select a partner");
 			return;
 		}
 		
 		
 		if($("#p_p_title").val()==''){
-			alert("제목을 입력해주세요");
+			alert("Please enter a title.");
 			return;
 		}
 		
 		if($("#p_pass").val()==''){
-			alert("비밀번호를 입력하세요.");
+			alert("Please enter your password.");
 			return;
 		}
 		
 		if(contents==''){
-			alert("내용을 입력해주세요");
+			alert("Please enter the contents.");
 			return;
 		}
 		//if($("#p_option1").val()==''){
@@ -635,7 +636,7 @@
 		});
 	} */
 	//협력사에 댓글 수정
-	//★★★★★삭제예정220721★★★★★ 시작
+	
 	function fnqna_cw_u(idx,brd_no,id,pass_id,vi_pass,cont){//인덱스값,게시판번호,id,입력한 비밀번호,댓글에대한 비밀번호,수정하는 내용
 		
 		//var contents = CKEDITOR.instances.p_contents.getData();	
@@ -644,17 +645,17 @@
 		var temp=$('#'+vi_pass).val();
 		var cont=$('#'+cont).val();
 		if(cont==''){
-			alert("댓글 내용을 입력해주세요");
+			alert("Please enter the comments.");
 			return;
 		}
 		
 		if(pass ==''){
-			alert("댓글비밀번호를 입력해주세요");
+			alert("Please enter your comment password.");
 			return;
 		}
 		
 		if(pass != temp){
-			alert('비밀번호가 일치하지 않습니다. 비밀번호를 확인해주세요.');
+			alert("Passwords don't match. Please check the password.");
 			return;
 		}
 		//alert ("idx값 :"+idx);
@@ -701,20 +702,20 @@
            });
 		
 	}
-	//★★★★★삭제예정220721★★★★★ 끝
+	
 	//협력사 댓글 입력
-	//★★★★★삭제예정220721★★★★★시작
+	
 	function fnQna_cw_i(brd_no){
 		
 		//var contents = CKEDITOR.instances.p_p_contents.getData();
 		
 		if($("#p_pass").val()==''){
-			alert("비밀번호을 입력해주세요");
+			alert("Please enter your password.");
 			return;
 		}
 		
 		if($("#p_p_content").val()==''){
-			alert("댓글을 입력해주세요");
+			alert("Please enter the comments.");
 			return;
 		}
 		
@@ -756,12 +757,12 @@
 	<script>
 		$(function() {
 			$('#startdate').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});
 			$('#enddate').datepicker({
-				format : 'yyyy-mm-dd'
+				format : 'dd-mm-yyyy'
 			}).on('change',function(){
 				$('.datepicker').hide();
 			});

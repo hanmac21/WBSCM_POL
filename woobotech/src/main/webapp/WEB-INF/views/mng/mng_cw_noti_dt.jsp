@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../common/jsHeader.jsp"%>
 
 <style>
@@ -163,7 +163,7 @@
 																<div><input type="text" style="width:380px;display:none;" id="update_qna_${vo.idx}"  value="${vo.qna}"name="text"></div></td>
 																<c:choose>
 																	<c:when test ="${session_cu_sangho  ==  vo.cno }">
-																		<td style="border-right:1px solid #FFFFFF"><button type="button" onclick="fnqna_cw_u(${vo.idx},${board.brd_no},this.id,'p_p_pass_${vo.idx}','verifty_${vo.idx}','update_qna_${vo.idx}')">수정</button><button type="button" onclick="fnqna_cw_d(${vo.idx},${board.brd_no},this.id,'p_p_pass_${vo.idx}','verifty_${vo.idx}')">Delete</button></td>
+																		<td style="border-right:1px solid #FFFFFF"><button type="button" onclick="fnqna_cw_u(${vo.idx},${board.brd_no},this.id,'p_p_pass_${vo.idx}','verifty_${vo.idx}','update_qna_${vo.idx}')">modify</button><button type="button" onclick="fnqna_cw_d(${vo.idx},${board.brd_no},this.id,'p_p_pass_${vo.idx}','verifty_${vo.idx}')">Delete</button></td>
 																		<td style="border-right:1px solid #FFFFFF"><input type="password" id="p_p_pass_${vo.idx}" style="width:100px;" placeholder="comment password"></td>
 																	</c:when>
 																	<c:otherwise>
@@ -171,7 +171,9 @@
 																		<td style="border-right:1px solid #FFFFFF"></td>
 																	</c:otherwise>
 																</c:choose>
-																<td>${vo.upd_date}&nbsp;&nbsp;<input type="hidden" id="verifty_${vo.idx}" value="${vo.qpass}"/></td>
+																<td><fmt:parseDate value='${vo.upd_date}' var='upd_date' pattern='yyyy-MM-dd HH:mm:ss'/>															
+															<fmt:formatDate pattern='dd-MM-yyyy HH:mm:ss' value='${upd_date}' />
+															&nbsp;&nbsp;<input type="hidden" id="verifty_${vo.idx}" value="${vo.qpass}"/></td>
 															</tr>
 														</c:forEach>
 													</c:when>

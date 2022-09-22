@@ -950,7 +950,7 @@ public class WooboTechDao {
     }
 
     if (without.equals("yes")) {
-      sql.append("AND NOT b.DSTATE = '배송완료'");
+      sql.append("AND NOT b.DSTATE = 'Delivery completed'");
     }
 
     sql.append("  and a.useyn='Y'               \n");
@@ -1012,7 +1012,7 @@ public class WooboTechDao {
     }
 
     if (without.equals("yes")) {
-      sql.append("AND NOT b.DSTATE = '배송완료'");
+      sql.append("AND NOT b.DSTATE = 'Delivery completed'");
     }
     sql.append("  AND a.useyn = 'Y'");
     // sql.append(" group by a.barcode,a.indate,a.cno,a.cname,a.prdate,a.plant \n");
@@ -1380,7 +1380,7 @@ public class WooboTechDao {
       conn = dataSource.getConnection();
       conn.setAutoCommit(false);
       String barcode = map.get("barcode");
-      String prDate = map.get("prDate");
+      String prDate = DateUtil.getConvertDate2(map.get("prDate"));
 
       System.out.println("barcode : " + barcode);
       System.out.println("prDate : " + prDate);
@@ -1589,9 +1589,11 @@ public class WooboTechDao {
             }
 
           }
-        }
+        }result = 1;
+      }else {
+        result = -1;
       }
-      result = 1;
+      
       conx.commit();
     } catch (Exception e) {
       e.printStackTrace();
@@ -1753,8 +1755,8 @@ public class WooboTechDao {
 
     String gubun = F.nullCheck(param.get("gubun"), "");
     String com_text = F.nullCheck(param.get("com_text"), "");
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate =  DateUtil.getConvertDate(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate =  DateUtil.getConvertDate(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
 
@@ -1801,8 +1803,8 @@ public class WooboTechDao {
     StringBuffer sql = new StringBuffer();
     int end = page * itemCountPerPage;
     int start = end - itemCountPerPage + 1;
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate =  DateUtil.getConvertDate(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate =  DateUtil.getConvertDate(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
 
@@ -2105,7 +2107,7 @@ public class WooboTechDao {
     try {
       conx = dataSource.getConnection();
       conx.setAutoCommit(false);
-      String delivery_date = map.get("delivery_date");
+      String delivery_date = DateUtil.getConvertDate2(map.get("delivery_date"));
       System.out.println("delivery_date==>" + delivery_date);
       String deliveryno = map.get("deliveryno");
       System.out.println("deliveryno==>" + deliveryno);
@@ -2231,7 +2233,7 @@ public class WooboTechDao {
     try {
       conx = dataSource.getConnection();
       conx.setAutoCommit(false);
-      String delivery_date = map.get("delivery_date");
+      String delivery_date =  DateUtil.getConvertDate2(map.get("delivery_date"));
       System.out.println("delivery_date==>" + delivery_date);
       String deliveryno = map.get("deliveryno");
       System.out.println("deliveryno==>" + deliveryno);
@@ -9417,8 +9419,8 @@ public class WooboTechDao {
     String gubun = F.nullCheck(param.get("gubun"), "");
     String com_text = F.nullCheck(param.get("com_text"), "");
     String session_cu_code = param.get("session_cu_code");
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate =  DateUtil.getConvertDate2(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate =  DateUtil.getConvertDate(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
     String custname = F.nullCheck(param.get("custname"), "");
@@ -9481,8 +9483,8 @@ public class WooboTechDao {
   // 협력사 게시판
   public List<NotiDTO> mng_cw_noti(Map<String, String> param, int page, int itemCountPerPage) {
     String session_cu_code = param.get("session_cu_code");
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate =  DateUtil.getConvertDate2(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate =  DateUtil.getConvertDate2(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
     String custname = F.nullCheck(param.get("custname"), "");
@@ -10221,8 +10223,8 @@ public class WooboTechDao {
   // 공지사항 카운트
   public int mng_noti_count(Map<String, String> param) {
 
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate =  DateUtil.getConvertDate2(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate =  DateUtil.getConvertDate2(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
 
@@ -10273,8 +10275,8 @@ public class WooboTechDao {
     int start = end - itemCountPerPage + 1;
     String title = F.nullCheck(param.get("title"), "");
     String s_contents = F.nullCheck(param.get("s_contents"), "");
-    String startdate = F.nullCheck(param.get("startdate"), "").replaceAll("-", "");
-    String enddate = F.nullCheck(param.get("enddate"), "").replaceAll("-", "");
+    String startdate = DateUtil.getConvertDate2(F.nullCheck(param.get("startdate"), "")).replaceAll("-", "");
+    String enddate = DateUtil.getConvertDate2(F.nullCheck(param.get("enddate"), "")).replaceAll("-", "");
 
     // rownum 게시판 뿌리기 순서는 날짜
     sql.append(
@@ -11054,7 +11056,7 @@ public class WooboTechDao {
           ps4.setInt(index++, 0); // priece
           ps4.setInt(index++, 0); // amount
           ps4.setString(index++, map.get("prdate"));
-          ps4.setString(index++, info.getMadate());
+          ps4.setString(index++, DateUtil.getConvertDate2(info.getMadate()));
           ps4.setString(index++, info.getCar_type());
           ps4.setString(index++, map.get("branch"));
           ps4.setString(index++, info.getTqty2());
@@ -11212,14 +11214,15 @@ public class WooboTechDao {
       String custcode = param.get("custcode");
       String car_type = param.get("car_type");
       String lotno = F.nullCheck(param.get("lotno"), " ");
-      String indate = F.nullCheck(param.get("indate"));
-      indate = indate.replace("-","");
+      String indate =  DateUtil.getConvertDate(F.nullCheck(param.get("indate")));
       indate = indate.substring(2,8);
-      // String indate = param.get("indate");
-      String madate = F.nullCheck(param.get("madate"), " ");
-      String madate2 =F.nullCheck(param.get("madate2"), " ");
-      String madate3 =F.nullCheck(param.get("madate3"), " ");
+      System.out.println("indate확인1"+indate);
       
+      // String indate = param.get("indate");
+      String madate = DateUtil.getConvertDate2(F.nullCheck(param.get("madate"), ""));
+      String madate2 =DateUtil.getConvertDate2(F.nullCheck(param.get("madate2"), ""));
+      String madate3 =DateUtil.getConvertDate2(F.nullCheck(param.get("madate3"), ""));
+      System.out.println("220919 ghkrdls "+madate);
       
       
       int production = Integer.parseInt(param.get("production"));

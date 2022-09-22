@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <%-- <div id="page" style="float:right;">
@@ -29,48 +29,62 @@
 							<th style="text-align: center; " class="buyPlan">partner<br>(partner Code)</th>
 							<th style="text-align: center; " class="buyPlan">Item code<br>(item name)</th>
 							<th style="text-align: center;" class="buyPlan">Car</th>
+							<fmt:parseDate value='${str_day1}' var='strDay1' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day2}' var='strDay2' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day3}' var='strDay3' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day4}' var='strDay4' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day5}' var='strDay5' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day6}' var='strDay6' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day7}' var='strDay7' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day8}' var='strDay8' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day9}' var='strDay9' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day10}' var='strDay10' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day11}' var='strDay11' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day12}' var='strDay12' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day13}' var='strDay13' pattern='yyyy-MM-dd'/>
+							<fmt:parseDate value='${str_day14}' var='strDay14' pattern='yyyy-MM-dd'/>
 							<th style="text-align: center;"><input type="hidden"
 								class="icheck buyPlan" name="boxAll" id="check_box1"
-								onclick="checkAll(this, 'box1');" value="${str_day1}" />${str_day1}</th>
+								onclick="checkAll(this, 'box1');" value="${str_day1}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay1}' /></th>
 							<th style="text-align: center;"class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box2"
-								onclick="checkAll(this, 'box2');" value="${str_day2}" />${str_day2}</th>
+								onclick="checkAll(this, 'box2');" value="${str_day2}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay2}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box3"
-								onclick="checkAll(this, 'box3');" value="${str_day3}" />${str_day3}</th>
+								onclick="checkAll(this, 'box3');" value="${str_day3}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay3}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box4"
-								onclick="checkAll(this, 'box4');" value="${str_day4}" />${str_day4}</th>
+								onclick="checkAll(this, 'box4');" value="${str_day4}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay4}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box5"
-								onclick="checkAll(this, 'box5');" value="${str_day5}" />${str_day5}</th>
+								onclick="checkAll(this, 'box5');" value="${str_day5}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay5}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box6"
-								onclick="checkAll(this, 'box6');" value="${str_day6}" />${str_day6}</th>
+								onclick="checkAll(this, 'box6');" value="${str_day6}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay6}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box7"
-								onclick="checkAll(this, 'box7');" value="${str_day7}" />${str_day7}</th>
+								onclick="checkAll(this, 'box7');" value="${str_day7}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay7}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box8"
-								onclick="checkAll(this, 'box8');" value="${str_day8}" />${str_day8}</th>
+								onclick="checkAll(this, 'box8');" value="${str_day8}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay8}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box9"
-								onclick="checkAll(this, 'box9');" value="${str_day9}" />${str_day9}</th>
+								onclick="checkAll(this, 'box9');" value="${str_day9}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay9}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box10"
-								onclick="checkAll(this, 'box10');" value="${str_day10}" />${str_day10}</th>
+								onclick="checkAll(this, 'box10');" value="${str_day10}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay10}' /></th>
 							<th style="text-align: center; " class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box11"
-								onclick="checkAll(this, 'box11');" value="${str_day11}" />${str_day11}</th>
+								onclick="checkAll(this, 'box11');" value="${str_day11}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay11}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box12"
-								onclick="checkAll(this, 'box12');" value="${str_day12}" />${str_day12}</th>
+								onclick="checkAll(this, 'box12');" value="${str_day12}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay12}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box13"
-								onclick="checkAll(this, 'box13');" value="${str_day13}" />${str_day13}</th>
+								onclick="checkAll(this, 'box13');" value="${str_day13}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay13}' /></th>
 							<th style="text-align: center;" class="buyPlan"><input type="hidden"
 								class="icheck" name="boxAll" id="check_box14"
-								onclick="checkAll(this, 'box14');" value="${str_day14}" />${str_day14}</th>
+								onclick="checkAll(this, 'box14');" value="${str_day14}" /><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay14}' /></th>
 							<th style="text-align: center; width: 5%" class="buyPlan">Total</th>
 						</tr>
 					</thead>
@@ -126,10 +140,10 @@
 														<%-- <input type="text" class="day1_lot"
 																	id="lot1_${status.count}" autocomplete="off"
 																	name="day1_lot" value="" size="10"
-																	placeholder="yyyy-mm-dd"
+																	placeholder="dd-mm-yyyy"
 																	style="display: none; width: 85px;"> --%>
 																			
-														<input type="date" class="day1_lot" id="lot1_${status.count}" name="day1_lot" readonly
+														<input type="text" placeholder="dd-mm-yyyy" class="day1_lot" id="lot1_${status.count}" name="day1_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -168,10 +182,10 @@
 														<%-- <input type="text" class="day1_lot"
 																	id="lot1_${status.count}" autocomplete="off"
 																	name="day1_lot" value="" size="10"
-																	placeholder="yyyy-mm-dd"
+																	placeholder="dd-mm-yyyy"
 																	style="display: none; width: 85px;"> --%>
 																			
-														<input type="date" class="day1_lot" id="lot1_${status.count}" name="day1_lot" readonly
+														<input type="text" placeholder="dd-mm-yyyy" class="day1_lot" id="lot1_${status.count}" name="day1_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -210,9 +224,9 @@
 														<%-- <input type="text" class="day2_lot"
 														id="lot2_${status.count}" autocomplete="off"
 														name="day2_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -252,9 +266,9 @@
 														<%-- <input type="text" class="day2_lot"
 														id="lot2_${status.count}" autocomplete="off"
 														name="day2_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -294,9 +308,9 @@
 														<%-- <input type="text" class="day3_lot"
 														id="lot3_${status.count}" autocomplete="off"
 														name="day3_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -336,9 +350,9 @@
 														<%-- <input type="text" class="day3_lot"
 														id="lot3_${status.count}" autocomplete="off"
 														name="day3_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -378,9 +392,9 @@
 														<%-- <input type="text" class="day4_lot"
 														id="lot4_${status.count}" autocomplete="off"
 														name="day4_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -419,9 +433,9 @@
 														<%-- <input type="text" class="day4_lot"
 														id="lot4_${status.count}" autocomplete="off"
 														name="day4_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -461,9 +475,9 @@
 														<%-- <input type="text" class="day5_lot"
 														id="lot5_${status.count}" autocomplete="off"
 														name="day5_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -503,9 +517,9 @@
 														<%-- <input type="text" class="day5_lot"
 														id="lot5_${status.count}" autocomplete="off"
 														name="day5_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -545,9 +559,9 @@
 														<%-- <input type="text" class="day6_lot"
 														id="lot6_${status.count}" autocomplete="off"
 														name="day6_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -586,9 +600,9 @@
 														<%-- <input type="text" class="day6_lot"
 														id="lot6_${status.count}" autocomplete="off"
 														name="day6_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -627,9 +641,9 @@
 														<%-- <input type="text" class="day7_lot"
 														id="lot7_${status.count}" autocomplete="off"
 														name="day7_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -668,9 +682,9 @@
 														<%-- <input type="text" class="day7_lot"
 														id="lot7_${status.count}" autocomplete="off"
 														name="day7_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -709,9 +723,9 @@
 														<%-- <input type="text" class="day8_lot"
 														id="lot8_${status.count}" autocomplete="off"
 														name="day8_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -750,9 +764,9 @@
 														<%-- <input type="text" class="day8_lot"
 														id="lot8_${status.count}" autocomplete="off"
 														name="day8_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -791,9 +805,9 @@
 														<%-- <input type="text" class="day9_lot"
 														id="lot9_${status.count}" autocomplete="off"
 														name="day9_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -832,9 +846,9 @@
 														<%-- <input type="text" class="day9_lot"
 														id="lot9_${status.count}" autocomplete="off"
 														name="day9_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -874,9 +888,9 @@
 														<%-- <input type="text" class="day10_lot"
 														id="lot10_${status.count}" autocomplete="off"
 														name="day10_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -915,9 +929,9 @@
 														<%-- <input type="text" class="day10_lot"
 														id="lot10_${status.count}" autocomplete="off"
 														name="day10_lot" value="" size="10"
-														placeholder="yyyy-mm-dd"
+														placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -956,9 +970,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day11_lot"
 														id="lot11_${status.count}" value="" size="10"
-														name="day11_lot" placeholder="yyyy-mm-dd"
+														name="day11_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -996,9 +1010,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day11_lot"
 														id="lot11_${status.count}" value="" size="10"
-														name="day11_lot" placeholder="yyyy-mm-dd"
+														name="day11_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1037,9 +1051,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day12_lot"
 														id="lot12_${status.count}" value="" size="10"
-														name="day12_lot" placeholder="yyyy-mm-dd"
+														name="day12_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1073,14 +1087,14 @@
 												<tr style="height: 15px;">
 													<td width="40%" style="border: hidden; padding: 2px;">
 														<span style="display: none;"
-														id="text_lot12_${status.count}">Production date&nbsp; :</span>
+														id="text_lot12_${status.count}">Production date[${status.count}]&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day12_lot"
 														id="lot12_${status.count}" value="" size="10"
-														name="day12_lot" placeholder="yyyy-mm-dd"
+														name="day12_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1119,9 +1133,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day13_lot"
 														id="lot13_${status.count}" value="" size="10"
-														name="day13_lot" placeholder="yyyy-mm-dd"
+														name="day13_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1159,9 +1173,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day13_lot"
 														id="lot13_${status.count}" value="" size="10"
-														name="day13_lot" placeholder="yyyy-mm-dd"
+														name="day13_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1199,9 +1213,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day14_lot"
 														id="lot14_${status.count}" value="" size="10"
-														name="day14_lot" placeholder="yyyy-mm-dd"
+														name="day14_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1237,9 +1251,9 @@
 													<td width="60%" style="border: hidden; padding: 2px;">
 														<%-- <input type="text" class="day14_lot"
 														id="lot14_${status.count}" value="" size="10"
-														name="day14_lot" placeholder="yyyy-mm-dd"
+														name="day14_lot" placeholder="dd-mm-yyyy"
 														style="display: none; width: 85px; text-align: right;"> --%>
-														<input type="date" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly='true'
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -1327,7 +1341,7 @@
 <script type="text/javascript">
 $(function() {
 	$(".day1_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1337,7 +1351,7 @@ $(function() {
 });
 $(function() {
 	$(".day2_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1347,7 +1361,7 @@ $(function() {
 });
 $(function() {
 	$(".day3_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1357,7 +1371,7 @@ $(function() {
 });
 $(function() {
 	$(".day4_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1367,7 +1381,7 @@ $(function() {
 });
 $(function() {
 	$(".day5_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1377,7 +1391,7 @@ $(function() {
 });
 $(function() {
 	$(".day6_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1387,7 +1401,7 @@ $(function() {
 });
 $(function() {
 	$(".day7_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1397,7 +1411,7 @@ $(function() {
 });
 $(function() {
 	$(".day8_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1407,7 +1421,7 @@ $(function() {
 });
 $(function() {
 	$(".day9_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1417,7 +1431,7 @@ $(function() {
 });
 $(function() {
 	$(".day10_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1427,7 +1441,7 @@ $(function() {
 });
 $(function() {
 	$(".day11_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1437,7 +1451,7 @@ $(function() {
 });
 $(function() {
 	$(".day12_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1447,7 +1461,7 @@ $(function() {
 });
 $(function() {
 	$(".day13_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1457,7 +1471,7 @@ $(function() {
 });
 $(function() {
 	$(".day14_lot").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
@@ -1468,73 +1482,73 @@ $(function() {
 $('span.number').number(true, 0);
 	$(function() {
 		/* $('input[name="day1_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		
 		$('input[name="day2_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day3_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day4_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day5_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day6_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day7_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day8_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day9_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day10_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day11_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day12_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day13_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		});
 		$('input[name="day14_lot"]').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}).on('change',function(){
 			$('.datepicker').hide();
 		}); */

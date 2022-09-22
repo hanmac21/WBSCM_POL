@@ -183,7 +183,7 @@ th, td {
 						<%-- <input type="text" id="startdate"
 							name="startdate" style="margin-right: 10px; width: 100px"
 							autocomplete="off" value="${startdate}" />  --%>
-						<input type="date" id="startdate" name="startdate" value="${startdate }" style="width:125px; margin-right:10px;" readonly/>	
+						<input type="text" id="startdate" name="startdate" value="${startdate }" style="width:125px; margin-right:10px;" readonly/>	
 							
 						<%
 						if ("master".equals(admin)) {
@@ -491,11 +491,11 @@ th, td {
 	<script type="text/javascript">
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -870,12 +870,12 @@ th, td {
 	<script>
 	  $( function() {
 		  /* $('#startdate').datepicker ({ 
-			  format: 'yyyy-mm-dd' 
+			  format: 'dd-mm-yyyy' 
 		  }).on('change',function(){
 				$('.datepicker').hide();
 		  }); */
 		  $('#enddate').datepicker ({ 
-			  format: 'yyyy-mm-dd' 
+			  format: 'dd-mm-yyyy' 
 		  }).on('change',function(){
 				$('.datepicker').hide();
 		  });

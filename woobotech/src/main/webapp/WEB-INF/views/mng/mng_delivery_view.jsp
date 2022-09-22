@@ -33,7 +33,7 @@
 									<span>Departure date</span>
 								</div>
 								<div style="float:left; margin-left:48px;">
-								<input type="date"  name="p_delivery_date" readonly
+								<input type="text"  name="p_delivery_date" readonly placeholder="dd-mm-yyyy"
 									id="p_delivery_date" value="">
 								</div>	
 							</div>
@@ -243,11 +243,11 @@ function getYyyyMmDdHhMmToString(date){
 
 $(function() {
 	/* $('#p_delivery_date').datepicker({
-		format : 'yyyy-mm-dd'
+		format : 'dd-mm-yyyy'
 	}); */
 	
 	$("#p_delivery_date").datepicker ({ 
-		  format: 'yyyy-mm-dd',
+		  format: 'dd-mm-yyyy',
 		  todayBtn:true,
 		  todayBtn:'linked'
 		  
