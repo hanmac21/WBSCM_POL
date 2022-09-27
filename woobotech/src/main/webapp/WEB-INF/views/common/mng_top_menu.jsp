@@ -177,7 +177,11 @@ function fnMangerSave(){
 	var user3 = $('#user3').val();
 	var user4 = $('#user4').val();
 	var user5 = $('#user5').val();
-	
+	var orPw = $('#p_org_pw').val();
+	if(orPw==null || orPw==""){
+		alert("Please enter your current password.");
+		return;
+	}
 	if(new_pw !=new_pw_ok ){//211027 변경된 비밀번호와 비밀번호 확인을 일치 하지 않을 경우
 		alert("변경 비밀번호와 비밀번호확인이 일치하지 않습니다. ");
 		return;
@@ -228,14 +232,14 @@ function fnMangerSave(){
 	}).done(function(data) {
 		var isOk = data;
 		if (isOk == 1) {
-			alert('정상 처리되었습니다.');
+			alert('Successfully processed.');
   			
   			$('#modalPop4').modal('hide');
 			//location.reload();
 		}else if(isOk ==-1){
-			alert('비밀번호가 잘못 되었습니다.');
+			alert("Passwords don't match");
 		}else{
-			alert('등록 실패');
+			alert('Registration failed');
 		}
 
 	});

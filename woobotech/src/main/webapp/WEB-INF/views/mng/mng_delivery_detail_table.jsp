@@ -49,7 +49,32 @@
 			<tbody>
 				<c:choose>
 
-					<c:when test="${ board.size() >= 10 }">
+					<c:when test="${ board.size() >= 10 and vo.dtime ne ' '}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center">-</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+								
+								<td style="font-size: 22px; text-align: center">-</td>
+								<%-- <td style="font-size: 18px; text-align: center" id="state+${vo.row_num }">${vo.dstate }</td> --%>
+								<td style="font-size: 22px; text-align: center" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:when test="${ board.size() >= 10 and vo.dtime eq ' '}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center">${vo.cname }</td>

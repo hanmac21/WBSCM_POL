@@ -213,7 +213,7 @@ th{
 			<tbody>
 				<c:choose>
 
-					<c:when test="${ board.size() >= 10 }">
+					<c:when test="${ board.size() >= 10 and vo.dtime ne null }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center">${vo.cname }</td>
@@ -241,8 +241,35 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() >= 10 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+
+								
+								<td style="font-size: 22px; text-align: center" id="delay+${vo.row_num }">-</td>
+								<%-- <td style="font-size: 18px; text-align: center" id="state+${vo.row_num }">${vo.dstate }</td> --%>
+								<td style="font-size: 22px; text-align: center" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 1 }">
+					<c:when test="${ board.size() eq 1 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
@@ -281,8 +308,45 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 1 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="9">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 2 }">
+					<c:when test="${ board.size() eq 2 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
@@ -320,8 +384,45 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 2 and vo.dtime == null }">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="8">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 3 }">
+					<c:when test="${ board.size() eq 3 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
@@ -359,8 +460,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 3 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="7">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 4 }">
+					<c:when test="${ board.size() eq 4 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
@@ -398,8 +535,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 4 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="6">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 5 }">
+					<c:when test="${ board.size() eq 5 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
@@ -437,8 +610,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 5 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="5">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 6 }">
+					<c:when test="${ board.size() eq 6 and vo.dtime ne null }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
@@ -476,8 +685,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 6 and vo.dtime == null }">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="4">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 7 }">
+					<c:when test="${ board.size() eq 7 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
@@ -515,8 +760,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 7 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="3">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 8 }">
+					<c:when test="${ board.size() eq 8 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
@@ -554,8 +835,44 @@ th{
 							</tr>
 						</c:forEach>
 					</c:when>
+					<c:when test="${ board.size() eq 8 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="2">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 					
-					<c:when test="${ board.size() eq 9 }">
+					<c:when test="${ board.size() eq 9 and vo.dtime ne null}">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
 								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
@@ -576,6 +893,42 @@ th{
 									<br>
 									${fn:substring(dtime2,11,16) }
 								</td>
+								
+								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>
+							</tr>
+						</c:forEach>
+						<c:forEach var="num" begin="1" end="1">
+							<tr>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="test"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;"></td>
+								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state"></td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:when test="${ board.size() eq 9 and vo.dtime == null}">
+						<c:forEach var="vo" items="${board }">
+							<tr class="line" id="line+${vo.row_num }">
+								<td style="font-size: 22px; text-align: center;">${vo.cname } </td>
+								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.area }</td>
+								
+								<td style="font-size: 22px; text-align: center">
+									<c:set var = "dtime" value="${vo.dtime }"/>
+									${fn:substring(dtime,0,10) } <br>
+									${fn:substring(dtime,11,16) }
+								</td>
+
+								<td style="font-size: 22px; text-align: center" id="date+${vo.row_num }">
+									<c:set var = "dtime2" value="${vo.dtime2 }"/>
+									${fn:substring(dtime2,0,10) } <br>
+									${fn:substring(dtime2,11,16) }
+								</td>
+
 								
 								<td style="font-size: 22px; text-align: center;" id="delay+${vo.row_num }">-</td>
 								<td style="font-size: 22px; text-align: center;" id="${vo.row_num }" class="state">${vo.dstate }</td>

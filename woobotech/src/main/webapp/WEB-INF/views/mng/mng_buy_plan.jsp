@@ -5,7 +5,7 @@
 <head>
 <%@ include file="../common/jsHeader.jsp"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>우보테크</title>
+<title>Woobotech</title>
 <link rel="shortcut icon" href="asset/dist/img/wbfavi.ico">
 <link rel="icon" href="asset/dist/img/wbfavi.ico">
 <!-- Tell the browser to be responsive to screen width -->

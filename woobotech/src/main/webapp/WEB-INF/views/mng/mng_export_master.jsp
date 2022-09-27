@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -509,11 +510,11 @@ function currentTime(){
 	<script type="text/javascript">
 	$(function() {
 		/* $('#p_delivery_date').datepicker({
-			format : 'yyyy-mm-dd'
+			format : 'dd-mm-yyyy'
 		}); */
 		
 		$("#startdate").datepicker ({ 
-			  format: 'yyyy-mm-dd',
+			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'
 			  
@@ -1251,12 +1252,12 @@ function currentTime(){
 	<script>
 	  $( function() {
 		  /* $('#startdate').datepicker ({ 
-			  format: 'yyyy-mm-dd'
+			  format: 'dd-mm-yyyy'
 		  }).on('change',function(){
 				$('.datepicker').hide();
 		  }); */
 		  $('#enddate').datepicker ({
-			  format: 'yyyy-mm-dd'
+			  format: 'dd-mm-yyyy'
 		   }).on('change',function(){
 				$('.datepicker').hide();
 		   });

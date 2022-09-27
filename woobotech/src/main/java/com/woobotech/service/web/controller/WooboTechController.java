@@ -163,13 +163,14 @@ public class WooboTechController {
     param.put("indate", indate);
     // System.out.println(indate);
     itemCount = wdao.mng_delivery_moni_count(param);
+    System.out.println("220926확인");
     totalCount = wdao.mng_delivery_moni_total(param);
     System.out.println("갯수 : " + itemCount);
 
     List board = wdao.mng_delivery_moni(param, page, itemCountPerPage);
-
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+    System.out.println("220926확인1");
+    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);System.out.println("220926확인2");
+    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);System.out.println("220926확인3");
 
     model.addAttribute("serverTime", formattedDate);
     model.addAttribute("board", board);
@@ -238,7 +239,7 @@ public class WooboTechController {
 
     int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
     List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
+System.out.println("220926 dtime확인 "+board.get(0));
     model.addAttribute("serverTime", formattedDate);
     model.addAttribute("board", board);
     model.addAttribute("itemCount", itemCount);
@@ -455,9 +456,11 @@ public class WooboTechController {
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
 
     // 상호 번호 자르는 갯수 수정 3-2-5
+    if(info.getCu_sano().length()>7) {
     model.addAttribute("cu_sano",
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
+    }
     model.addAttribute("cu_sangho", info.getCustname());
     model.addAttribute("cu_juso", info.getCu_juso());
     System.out.println("cu_juso:" + cu_juso);
@@ -1959,11 +1962,14 @@ System.out.println("날짜확인220919"+str_day1);
     String sangho = info.getCustname();
     sangho = sangho.replace("<br>", "");
     System.out.println("상호확인"+info.getCustname());
+    System.out.println("22092사업자번호 확인"+info.getCu_sano());
     // model.addAttribute("cu_sano",
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
+    if(info.getCu_sano().length()>7) {
     model.addAttribute("cu_sano",
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
+    }
     model.addAttribute("cu_sangho", sangho);
     model.addAttribute("cu_master", info.getCu_master());
     model.addAttribute("cu_juso", info.getCu_juso());
@@ -3836,21 +3842,22 @@ System.out.println("페이지 뷰 확인 "+pageView);
     if (!"mng_partner_whole".equals(pageView)) {
       itemCount = wdao.mng_partner_count(param);
       board = wdao.mng_partner_list(param, page, itemCountPerPage);
+      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+
+      // System.out.println(board);
+
+      model.addAttribute("serverTime", formattedDate);
+      model.addAttribute("board", board);
+      model.addAttribute("itemCount", itemCount);
+      model.addAttribute("currentPage", page);
+      model.addAttribute("maxPage", maxPage);
+      model.addAttribute("paging", paging);
+      model.addAttribute("startdate", DateUtil.addFormat(startdate));
+      model.addAttribute("itemCountPerPage", itemCountPerPage);
     }
 
-    int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
-    List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
-
-    // System.out.println(board);
-
-    model.addAttribute("serverTime", formattedDate);
-    model.addAttribute("board", board);
-    model.addAttribute("itemCount", itemCount);
-    model.addAttribute("currentPage", page);
-    model.addAttribute("maxPage", maxPage);
-    model.addAttribute("paging", paging);
-    model.addAttribute("startdate", DateUtil.addFormat(startdate));
-    model.addAttribute("itemCountPerPage", itemCountPerPage);
+    
 
     logger.info("WHOLE PARTNER END@@@@@@@@@@@@@@@@@@@@@@");
     return "mng/" + pageView;

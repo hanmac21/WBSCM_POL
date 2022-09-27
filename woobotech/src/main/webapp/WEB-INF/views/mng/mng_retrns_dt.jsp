@@ -714,7 +714,7 @@ function fnTrnsRePop(barcode,prdate){
 	var all = document.getElementById("all").value;
 	all = all*1;
 	//alert(all);
-	var memo2 = document.getElementById('p_memo3').innerText;
+	//var memo2 = document.getElementById('p_memo3').innerText;
 	
 	//var memo = document.getElementById('p_memo2').innerText;
 	var memo = document.getElementById('p_memo').innerText;
