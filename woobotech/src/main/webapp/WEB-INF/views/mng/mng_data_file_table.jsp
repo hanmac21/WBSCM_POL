@@ -468,11 +468,11 @@
 	   $("#contents").val(contents) 	;
 	   var form = $('#form1')[0];
        var formData = new FormData(form);
-       /* formData.append("img1",  $("#file1")[0].files[0]);
+       formData.append("img1",  $("#file1")[0].files[0]);
        formData.append("img2",  $("#file2")[0].files[0]);
        formData.append("img3",  $("#file3")[0].files[0]);
        formData.append("img4",  $("#file4")[0].files[0]);
-       formData.append("img5",  $("#file5")[0].files[0]); */
+       formData.append("img5",  $("#file5")[0].files[0]);
        formData.append("title", $("#p_p_title").val());
        formData.append("pass", $("#p_pass").val());
       // formData.append("contents",contents);

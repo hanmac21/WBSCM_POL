@@ -732,24 +732,25 @@
        formData.append("img4",  $("#file4")[0].files[0]);
        formData.append("img5",  $("#file5")[0].files[0]);
        formData.append("title", $("#p_p_title").val());
+       
        formData.append("pass", $("#p_pass").val());
       // formData.append("contents",contents);
       
-      var file1=$("#file1").val();
+      /* var file1=$("#file1").val();
       var file2=$("#file2").val();
       var file3=$("#file3").val();
       var file4=$("#file4").val();
-      var file5=$("#file5").val();
+      var file5=$("#file5").val(); */
       
      /*  if(!file1){
     	  alert("파일을 첨부해주세요");
     	  return;
       } */
       
-      if(!(file1==''||file2==''||file3==''||file4==''||file5=='')){
+     /*  if(!(file1==''||file2==''||file3==''||file4==''||file5=='')){
     	  alert("Please check the file.");
     	  return;
-      }
+      } */
       
       $.ajax({
            url: 'mng_data_file_add_i',

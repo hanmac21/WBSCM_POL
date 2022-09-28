@@ -367,7 +367,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-
+		getUserList( '1' ,'');
 	}).ajaxStart(function(){
 		FunLoadingBarStart();
 	}).ajaxStop(function(){

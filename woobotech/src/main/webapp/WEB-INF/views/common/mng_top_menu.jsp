@@ -14,6 +14,10 @@
 		f.submit();
 	}
 </script>
+<style type="text/css" class="init">
+
+
+</style>
 
 <%
 	HttpSession leftSes = request.getSession();
@@ -49,7 +53,7 @@
 	}
 %>
 
-<div class="container  pull-left">
+<div class="container  pull-left" style="width:90%">
 	<div class="navbar-header">
 		<a href="mng_buy_plan?menu=0" class="navbar-brand"><img src="resources/img/logo6.png" style="height: 30px; padding-bottom: 5px;"></a>
 		<button type="button" class="navbar-toggle collapsed"
@@ -64,22 +68,22 @@
 	<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
 
 		<ul class="nav navbar-nav">
-			<li class="<%=menu[8]%>"><a href="mng_re_trns?menu=8">Transaction statement</a></li>
-			<li class="<%=menu[0]%>"><a href="mng_buy_plan?menu=0">Purchase Plan</a></li>
-			<li class="<%=menu[1]%>"><a href="mng_biz_plan?menu=1">sale plan</a></li>
-			<li class="<%=menu[2]%>"><a href="mng_production_plan?menu=2">Production plan </a></li>
-			<li class="<%=menu[3]%>"><a href="mng_stock_plan?menu=3">Inventory view</a></li>
+			<li class="<%=menu[8]%>"><a href="mng_re_trns?menu=8" style="font-size:17px;">Transaction statement</a></li>
+			<li class="<%=menu[0]%>"><a href="mng_buy_plan?menu=0" style="font-size:17px;">Purchase Plan</a></li>
+			<li class="<%=menu[1]%>"><a href="mng_biz_plan?menu=1" style="font-size:17px;">sale plan</a></li>
+			<li class="<%=menu[2]%>"><a href="mng_production_plan?menu=2" style="font-size:17px;">Production plan </a></li>
+			<li class="<%=menu[3]%>"><a href="mng_stock_plan?menu=3" style="font-size:17px;">Inventory view</a></li>
 			<!-- li class="<%=menu[5]%>"><a href="mng_delivery?menu=5">배송관리</a></li-->
 			
 			 <%-- <li class="<%=menu[11]%>"><a href="mng_export_master?menu=11">반출증 관리</a></li> --%>
 			
-			<li class="<%=menu[4]%>"><a href="mng_noti?menu=4">Notice - Bulletin Board</a></li>
-			<li class="<%=menu[6]%>"><a href="mng_cw_noti?menu=6">Partner - Bulletin Board</a></li>
-			<li class="<%=menu[7]%>"><a href="mng_data_file?menu=7">library</a></li>
+			<li class="<%=menu[4]%>"><a href="mng_noti?menu=4" style="font-size:17px;">Notice - Bulletin Board</a></li>
+			<li class="<%=menu[6]%>"><a href="mng_cw_noti?menu=6" style="font-size:17px;">Partner - Bulletin Board</a></li>
+			<li class="<%=menu[7]%>"><a href="mng_data_file?menu=7" style="font-size:17px;">library</a></li>
 			
 			<!-- 메일 발송용 협력사 관리자 관리용 관리자 관리 탭 --> 
 			<%if("master".equals(admin_id)){ %>
-				<li class="<%=menu[9]%>"><a href="mng_partner_whole?menu=9">Partner management</a></li>
+				<li class="<%=menu[9]%>"><a href="mng_partner_whole?menu=9"  style="font-size:17px;">Partner management</a></li>
 			<%} %>
 			<%-- <%if("master".equals(admin_id)){ %>
 				<li class="<%=menu[10]%>"><a href="mng_member_whole?menu=10"><spring:message code="MANmgmt" text="MANmgmt"/></a></li>

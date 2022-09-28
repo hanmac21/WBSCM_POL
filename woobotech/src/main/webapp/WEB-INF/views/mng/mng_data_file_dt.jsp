@@ -210,7 +210,7 @@ function fnDataFile_d(){
 	
 	var brd_no = $("#p_brd_no").val();
 	//var cno = $("#p_cno").val();
-	var pass = $("#note_pass").val();
+	var pass = $("#p_pass").val();
 	
 	if(brd_no==''){
 		alert('You cannot delete the comments.');

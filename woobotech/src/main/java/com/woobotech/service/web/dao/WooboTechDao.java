@@ -1974,22 +1974,25 @@ public class WooboTechDao {
       ps.setString(index++, contents);
       ps.setString(index++, session_cu_code);
       ps.setString(index++, pass);
-
+      System.out.println("파일등록확인2209281");
       if (ps.executeUpdate() > 0) {
+        System.out.println("파일등록확인2209282");
         ps.close();
 
         MultipartHttpServletRequest multipartHttpServletRequest =
             (MultipartHttpServletRequest) request;
-
+        //System.out.println("파일이름확인1"+request);
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-
+        //System.out.println("파일이름확인1"+multipartHttpServletRequest.getFileNames());
         MultipartFile multipartFile = null;
         int seq = 1;
+        System.out.println("파일등록확인2209283");
         while (iterator.hasNext()) {
-
+          System.out.println("파일등록확인2209284");
           multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-
+          
           if (multipartFile.isEmpty() == false) {
+           
             // email =
             // fileName.substring(0,fileName.indexOf(".jpg"));
 
