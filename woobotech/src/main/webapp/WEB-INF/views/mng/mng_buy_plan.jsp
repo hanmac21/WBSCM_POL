@@ -3146,6 +3146,10 @@ vertical-align:top; !important
 				alert("Please check the estimated arrival date");
 				return;
 			}
+			if(!confirm("Do you want to change to ["+dstate +"]state?")){
+				
+				return;
+			}
 			
 			
 			$.ajax({

@@ -48,7 +48,7 @@
 								</div>	
 
 								<div style="float:left; margin-left:48px;">			
-								<select id="p_delivery_hour" name="p_delivery_hour" onchange="fnDeliveryTimeSet()">
+								<select id="p_delivery_hour" name="p_delivery_hour" style="width:50px; font-size:18px;"onchange="fnDeliveryTimeSet()">
 									<option value="00">00</option>
 									<option value="01">01</option>
 									<option value="02">02</option>
@@ -75,7 +75,7 @@
 									<option value="23">23</option>
 								</select>
 								hour
-								<select id="p_delivery_min" name="p_delivery_min" onchange="fnDeliveryTimeSet()">
+								<select id="p_delivery_min" name="p_delivery_min" style="width:50px; font-size:18px;" onchange="fnDeliveryTimeSet()">
 									<option value="00">00</option>
 									<option value="10">10</option>
 									<option value="20">20</option>
@@ -99,7 +99,7 @@
 								</div>
 								
 								<div style="float:left; margin-left:20px;">
-								<select id="p_du_hour" name="p_du_hour">
+								<select id="p_du_hour" name="p_du_hour" style="width:50px; font-size:18px;">
 									<option value="00">00</option>
 									<option value="01">01</option>
 									<option value="02">02</option>
@@ -126,7 +126,7 @@
 									<option value="23">23</option>
 								</select>
 								hour
-								<select id="p_du_min" name="p_du_min">
+								<select id="p_du_min" name="p_du_min" style="width:50px; font-size:18px;">
 									<option value="00">00</option>
 									<option value="10">10</option>
 									<option value="20">20</option>
@@ -269,7 +269,7 @@ $(function() {
 function fnDeliveryTimeSet(){
 	var plant = "${plant}";
 	
-	if(plant==="000"){
+	//if(plant==="000"){
 		//alert("평택");
 		var psHour = $('#ps_delivery_hour').val();
 		var pHour = $('#p_delivery_hour').val();
@@ -303,7 +303,7 @@ function fnDeliveryTimeSet(){
 		$('#p_du_hour').val(hour).prop("selected",true);
 		$('#p_du_min').val(min).prop("selected",true);
 		
-	}else if(plant==="001"){
+	/* }else if(plant==="001"){
 		//alert("울산");
 		var usHour = $('#us_delivery_hour').val();
 		var uHour = $('#p_delivery_hour').val();
@@ -337,7 +337,7 @@ function fnDeliveryTimeSet(){
 		$('#p_du_hour').val(hour).prop("selected",true);
 		$('#p_du_min').val(min).prop("selected",true);
 		
-	}
+	} */
 	
 }
 	

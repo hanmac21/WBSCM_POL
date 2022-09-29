@@ -31,7 +31,7 @@
 								
 							<div class="input-group input-group-sm"	>
 								<input type="text" class="form-control" name="p_cno" id="p_cno"	placeholder="Partner number" 	value=""  style="width: 25%" readonly="readonly" > 
-								<input type="text" class="form-control" name="p_cu_sangho" id="p_cu_sangho"	placeholder="Name of partner"	value=""  style="width: 45%" readonly="readonly">
+								<input type="text" class="form-control" name="p_cu_sangho" id="p_cu_sang"	placeholder="Name of partner"	value=""  style="width: 45%" readonly="readonly">
 								
 								<img alt="Search" src="resources/img/icon_search.png" style="width: auto; height: 26px;" onclick="fnSearch()">
 							</div>
@@ -141,7 +141,7 @@
         	
         	<div class="div-ad-srds-modal" style="margin-top: 15px;">
 				
-				<input type="text" id="pp_cu_sangho"> 
+				<input type="text" id="pp_cu_sangho" onkeypress="javascript:if(event.keyCode==13) {fnSearch()}"> 
 				<img alt="Search" src="resources/img/icon_search.png" style="width: auto; height: 26px;" onclick="fnSearch()">				
         	</div>
         	
@@ -257,7 +257,7 @@
 			return;
 		}else if(j==1){
 			$('#p_cno').val(cno);
-			$('#p_cu_sangho').val(cu_sangho);
+			$('#p_cu_sang').val(cu_sangho);
 			//$('#h_name').val(name);
 			private_yn="Y";
 		}

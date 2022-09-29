@@ -392,9 +392,11 @@ System.out.println("220926 dtime확인 "+board.get(0));
     // cu_sano.substring(0,3)+"-"+cu_sano.substring(3,6)+"-"+cu_sano.substring(5,cu_sano.length()));
 
     // 상호 번호 자르는 갯수 수정 3-2-5
+    if(info.getCu_sano().length()>7) {
     model.addAttribute("cu_sano",
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
+    }
     String sangho = info.getCustname();
     sangho = sangho.replace("<br>", "");
     model.addAttribute("cu_sangho", sangho);
@@ -2928,7 +2930,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         session.setAttribute("cu_code", "master");
         session.setMaxInactiveInterval(-1);
 
-      } else if (checkSum == 2) {
+      } else if (checkSum == 2||checkSum ==3) {
         MngDTO mm = mngLoginService.selectMngDTO(loginId);
         logger.info("[mng_login_user] getCu_code:"+mm.getCu_code()+", loginPW:"+loginPw);
 

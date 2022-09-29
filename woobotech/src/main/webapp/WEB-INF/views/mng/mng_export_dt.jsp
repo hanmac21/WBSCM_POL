@@ -23,12 +23,12 @@ table{
 				</button>
 				
 				<div style="float:left;">
-					<h4 class="modal-title">반출증</h4>
+					<h4 class="modal-title">carry-out certificate</h4>
 				</div>
 				
 				<div style="width: 100%" style="float: right;">
 								<button type="button" class="btn btn-success pull-right modal-close"
-									style="margin-left: 10px" onclick="fnClCon()">닫기</button>
+									style="margin-left: 10px" onclick="fnClCon()">Close</button>
 				
 								<%-- <c:choose> --%>
 								
@@ -40,15 +40,15 @@ table{
 									</c:when>	
 									<c:otherwise> --%>
 										<button type="button" class="btn btn-info pull-right print_btn" id="print1"  
-											style="margin-left: 15px" onclick="exportprint('${barcode}','${indate }','${cname}')">인쇄</button>
+											style="margin-left: 15px" onclick="exportprint('${barcode}','${indate }','${cname}')">Print</button>
 									<%-- </c:otherwise> --%>
 									
 								<%-- </c:choose>	 --%>
 								<%-- <button type="button" class="btn btn-info pull-right print_btn" 
 									style="margin-left: 10px" onclick="fnTrnsPop('${barcode}','${prdate}')">Report</button> --%>
 									
-								<button type="button" class="btn btn-warning pull-right"
-									style="margin-right: 10px" onclick="fnMemoSet('')" id="ok">적용</button>
+								<!-- <button type="button" class="btn btn-warning pull-right"
+									style="margin-right: 10px" onclick="fnMemoSet('')" id="ok">적용</button> -->
 								<!-- <input type="text" class="pull-right"
 									placeholder="비고에 들어갈 내용을 작성하세요" value=""  
 									style="width: 300px; height: 30px; margin-right: 10px"
@@ -99,8 +99,8 @@ table{
 											
 											<div class="row"
 												style="width: 100%; margin-bottom: 10px; text-align: center">
-												<span style="font-size: 20px"><U><B>반출증</B></U></span><br>
-												(공급자용)
+												<span style="font-size: 20px"><U><B>carry-out certificate</B></U></span><br>
+												(For suppliers)
 												<input type="hidden"  value="${board.size() }" id="all"/>
 											</div>
 											<div>
@@ -117,10 +117,10 @@ table{
 													 onKeypress="javascript:if(event.keyCode==13){$('#ok2').click(); $('#s_memo2').val('');}"/>
 													<button type="button" class="btn" onclick="fnMemoSet2('')" style="font-size: 12px;" id="ok2">적용</button> <br> --%>
 													<!-- <span style="font-size: 12px">작성일자 : ${outdate}</span> -->
-													<span style="font-size: 12px">작성일자 :</span> &nbsp; <input
+													<span style="font-size: 12px">Date :</span> &nbsp; <input
 														type="text" id="outdate" name="outdate", autocomplete='off', 
 														style="width: 100px" value="${prdate}" onchange="changed(this)"/>
-														<button type="button" class="btn" onclick="fnMemoSet3('')" style="font-size: 12px;" id="ok2">적용</button> <br>
+														<button type="button" class="btn" onclick="fnMemoSet3('')" style="font-size: 12px;" id="ok2">Apply</button> <br>
 													<!-- <input type="text" id="outdate" name="outdate" value="${outdate} ">  -->
 													
 												</div>
@@ -146,20 +146,20 @@ table{
 																
 															</colgroup>
 															<tr>
-																<th colspan="2" style="font-size: 13px; text-align: center;">반출부서</th>
-																<th style="font-size: 13px; text-align: center;">구매관리팀</th>
-																<th style="font-size: 13px; text-align: center;">담당구역</th>														
+																<th colspan="2" style="font-size: 13px; text-align: center;">department</th>
+																<th style="font-size: 13px; text-align: center;">Purchasing Management Team</th>
+																<th style="font-size: 13px; text-align: center;">Area of responsibility</th>														
 																<th style="font-size: 13px; text-align: center;">H/rest A/rest</th>
-																<th colspan="2" style="font-size: 13px; text-align: center;">관리번호</th>
+																<th colspan="2" style="font-size: 13px; text-align: center;">Management number</th>
 																<th style="font-size: 13px; text-align: center;">${barcode}</th>
 															</tr>
 															<tr>
-																<th style="font-size: 13px; text-align: center;">번호</th>
-																<th style="font-size: 13px; text-align: center;">차종</th>
-																<th colspan="3" style="font-size: 13px; text-align: center;">품명</th>
-																<th style="font-size: 13px; text-align: center;">단위</th>
-																<th style="font-size: 13px; text-align: center;">수량</th>
-																<th style="font-size: 13px; text-align: center;">반출사유</th>
+																<th style="font-size: 13px; text-align: center;">No.</th>
+																<th style="font-size: 13px; text-align: center;">Car</th>
+																<th colspan="3" style="font-size: 13px; text-align: center;">Item name</th>
+																<th style="font-size: 13px; text-align: center;">Unit</th>
+																<th style="font-size: 13px; text-align: center;">Qty</th>
+																<th style="font-size: 13px; text-align: center;">Reason</th>
 															</tr>
 															<tr>
 																
@@ -250,17 +250,17 @@ table{
 																
 															</colgroup>
 																<tr>
-																	<td rowspan="2" style="text-align: center; font-size: 11px;">업체명</td>
+																	<td rowspan="2" style="text-align: center; font-size: 11px;">Company name</td>
 																	<td rowspan="2" style="text-align: center; font-size: 11px;">${cname}</td>
-																	<td style="text-align: center; font-size: 11px; ">발송자</td>
+																	<td style="text-align: center; font-size: 11px; ">Name</td>
 																	<td colspan="2" style="text-align: center; font-size: 11px;"><input type="text" style="border:none; width:200px;"></td>
-																	<td style="text-align: center; font-size: 11px; ">확인</td>
+																	<td style="text-align: center; font-size: 11px; ">Check</td>
 																	<td style="text-align: center; font-size: 11px; "></td>
 																</tr>
 																<tr>
-																	<td style="text-align: center; font-size: 11px; ">수령자</td>
+																	<td style="text-align: center; font-size: 11px; ">Recipient name</td>
 																	<td colspan="2" style="text-align: center; font-size: 11px;"><input type="text" style="border:none;  width:200px;"></td>
-																	<td style="text-align: center; font-size: 11px; ">확인</td>
+																	<td style="text-align: center; font-size: 11px; ">Check</td>
 																	<td style="text-align: center; font-size: 11px; "></td>
 																</tr>
 															</thead>

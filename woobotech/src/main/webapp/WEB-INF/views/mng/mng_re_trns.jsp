@@ -1005,10 +1005,7 @@ function currentTime(){
 		}else if(dstate==="배송완료"){
 			dstate="Delivery completed"
 		}
-		if(!confirm("Do you want to change to ["+dstate +"]state?")){
-			
-			return;
-		}
+		
 		
 		var delivery_date = $("#p_delivery_date").val();
 		var delivery_hour = $("#p_delivery_hour").val();
@@ -1017,28 +1014,39 @@ function currentTime(){
 		var du_hour = $("#p_du_hour").val();
 		var du_min = $("#p_du_min").val();
 		
-		if("" == delivery_date){
+		console.log("도착분확인"+du_min);
+		//console.log("도착분길이 확인"+du_min.length)
+		if(du_min==null){
+		console.log("도착분 값 에러일때");
+		du_min = "00";
+		} 
+		console.log("도착분확인"+du_min);
+		if(delivery_date ==''){
 			alert("Please check the date.");
 			return;
 		}
 		
-		if("" == delivery_hour){
+		if(delivery_hour == ""){
 			alert("Check the departure time");
 			return;
 		}
 		
-		if("" == delivery_min){
+		if(delivery_min == ""){
 			alert("Please check the departure date");
 			return;
 		}
 		
-		if("" == du_hour){
+		if(du_hour == ""){
 			alert("Please check the estimated arrival time");
 			return;
 		}
 		
-		if("" == du_min){
+		if(du_min == ""){
 			alert("Please check the estimated arrival date");
+			return;
+		}
+		if(!confirm("Do you want to change to ["+dstate +"]state?")){
+			
 			return;
 		}
 		

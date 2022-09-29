@@ -899,7 +899,7 @@ public class WooboTechDao {
     // sql.append(" from T_SCM_TRADE t1, c_cust t2 , T_MI_ITEM t3 , c_cust_bak t4
     // \n");
     sql.append(
-        "  from T_SCM_TRADE t1 LEFT OUTER JOIN c_cust t2 ON t1.cno = t2.cu_code LEFT OUTER JOIN T_MI_ITEM t3 ON t1.pno= t3.ITEMCODE1  LEFT OUTER JOIN c_cust_bak t4 ON t2.cu_code = t4.cu_code LEFT OUTER JOIN t_mi_typesub t5 ON t3.carno= t5.subcode and t5.typecode =   'MI041'                      \n");
+        "  from T_SCM_TRADE t1 LEFT OUTER JOIN c_cust t2 ON t1.cno = t2.cu_code LEFT OUTER JOIN T_MI_ITEM t3 ON t1.pno= t3.ITEMCODE1  LEFT OUTER JOIN c_cust t4 ON t2.cu_code = t4.cu_code LEFT OUTER JOIN t_mi_typesub t5 ON t3.carno= t5.subcode and t5.typecode =   'MI041'                      \n");
     sql.append("  where t1.barcode ='");
     sql.append(barcode);
     sql.append("'");
@@ -9620,9 +9620,9 @@ public class WooboTechDao {
     sql.append("       cu_code   as cno            \n");
     sql.append("      ,cu_sangho               \n");
     sql.append("    from c_cust             \n");
-    sql.append("  where cu_sangho like '%");
+    sql.append("  where upper(cu_sangho) like upper('%");
     sql.append(cu_sangho);
-    sql.append("%'");
+    sql.append("%')");
 
     sql.append("  order by cu_sangho desc        \n");
 
@@ -16189,9 +16189,9 @@ public class WooboTechDao {
     sql.append("AND		cno = '");
     sql.append(cno);
     sql.append("' \n");
-    sql.append("AND		branch = '");
-    sql.append(branch);
-    sql.append("'");
+    /*
+     * sql.append("AND		branch = '"); sql.append(branch); sql.append("'");
+     */
 
     System.out.println(sql.toString());
 
@@ -16296,9 +16296,9 @@ public class WooboTechDao {
     sql.append("AND		cno = '");
     sql.append(cno);
     sql.append("' \n");
-    sql.append("AND		branch = '");
-    sql.append(branch);
-    sql.append("'");
+    /*
+     * sql.append("AND		branch = '"); sql.append(branch); sql.append("'");
+     */
 
     System.out.println(sql.toString());
 

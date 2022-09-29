@@ -103,7 +103,7 @@
 					<c:when test="${ board.size() > 0 and board.size() < 5 }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
-								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.cname }1111</td>
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">-</td>
 								
@@ -139,7 +139,7 @@
 					<c:when test="${ board.size() eq 5 }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
-								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.cname }2222</td>
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">-</td>
 								
@@ -175,7 +175,7 @@
 					<c:when test="${ board.size() eq 6 }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
-								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.cname }3333</td>
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">-</td>
 								
@@ -211,7 +211,7 @@
 					<c:when test="${ board.size() eq 7 }">
 						<c:forEach var="vo" items="${board }">
 							<tr class="line" id="line+${vo.row_num }">
-								<td style="font-size: 22px; text-align: center;">${vo.cname }</td>
+								<td style="font-size: 22px; text-align: center;">${vo.cname }4444</td>
 								<td style="font-size: 22px; text-align: center;" id="test">${vo.pname }</td>
 								<td style="font-size: 22px; text-align: center;">-</td>
 								

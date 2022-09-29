@@ -75,10 +75,10 @@
 			<li class="<%=menu[3]%>"><a href="mng_stock_plan?menu=3" style="font-size:17px;">Inventory view</a></li>
 			<!-- li class="<%=menu[5]%>"><a href="mng_delivery?menu=5">배송관리</a></li-->
 			
-			 <%-- <li class="<%=menu[11]%>"><a href="mng_export_master?menu=11">반출증 관리</a></li> --%>
+			<li class="<%=menu[11]%>"><a href="mng_export_master?menu=11" style="font-size:17px;"><!-- 반출증 관리 -->Carry-out</a></li> 
 			
-			<li class="<%=menu[4]%>"><a href="mng_noti?menu=4" style="font-size:17px;">Notice - Bulletin Board</a></li>
-			<li class="<%=menu[6]%>"><a href="mng_cw_noti?menu=6" style="font-size:17px;">Partner - Bulletin Board</a></li>
+			<li class="<%=menu[4]%>"><a href="mng_noti?menu=4" style="font-size:17px;">Notice Board</a></li>
+			<li class="<%=menu[6]%>"><a href="mng_cw_noti?menu=6" style="font-size:17px;">Partner Board</a></li>
 			<li class="<%=menu[7]%>"><a href="mng_data_file?menu=7" style="font-size:17px;">library</a></li>
 			
 			<!-- 메일 발송용 협력사 관리자 관리용 관리자 관리 탭 --> 
