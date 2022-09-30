@@ -166,9 +166,9 @@ table{
 																	<th
 																		style="text-align: center; font-size: 13px; width: 5%"">No.</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 20%">Part Name</th>
+																		style="text-align: center; font-size: 13px; width: 30%">Part Number</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 45%">Part Number</th>
+																		style="text-align: center; font-size: 13px; width: 35%">Part Name</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%"">Qty</th>
 																	<th
@@ -190,7 +190,7 @@ table{
 																			<tr style="height: 30px;">
 																				<td style="text-align: center; font-size: 13px">${status.count}</td>
 																				<!-- <td style="text-align: center; visibility:hidden; font-size: 13px">${vo.itemcode1}</td> -->
-																				<td style="text-align: center; font-size: 13px">${vo.itemqty}</td>
+																				<td style="text-align: center; font-size: 13px">${vo.itemcode1}</td>
 																				<td style="text-align: center; font-size: 13px; line-height: 115%;">
 																					${fn:replace(vo.itemname,replaceChar,"<br/>")}
 																				</td>

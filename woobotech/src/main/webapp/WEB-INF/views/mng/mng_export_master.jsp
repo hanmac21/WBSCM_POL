@@ -249,11 +249,11 @@ function currentTime(){
 							
 							<input type="text" id="startdate" name="startdate" value="${startdate }" style="width:125px"/>
 							
-						&nbsp; <span>Factory : </span> &nbsp;<select id="branch" name="branch" style="height:27px;">
+						&nbsp; <%-- <span>Factory : </span> &nbsp;<select id="branch" name="branch" style="height:27px;">
 							<option value="007" ${branch =='007' ? 'selected' :'' }>All</option>
 							<option value="000" ${branch =='000' ? 'selected' :'' }>POLAND</option>
-							<%-- <option value="001" ${branch =='001' ? 'selected' :'' }>울산</option> --%>
-						</select>	
+							<option value="001" ${branch =='001' ? 'selected' :'' }>울산</option>
+						</select>	 --%>
 							
 							<input
 							type="button" class="btn btn-warning" onclick="getUserList('1')"
@@ -328,7 +328,8 @@ function currentTime(){
 															<td style="text-align: center;">${vo.row_num}</td>
 															<td style="text-align: center;">${vo.barcode}</td>
 															<td style="text-align: center;" id="${vo.row_num }">${vo.plant }</td>
-															<td style="text-align: center;">${vo.indate}</td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyyMMdd'/>
+															<td style="text-align: center;"><fmt:formatDate pattern='ddMMyyyy' value='${indate}' /></td>
 															<td style="text-align: center;">${vo.cno}</td>
 															<td style="text-align: center;">${vo.cname}</td>
 															<td class="number"
@@ -337,7 +338,8 @@ function currentTime(){
 																 <input type="button" class="btn bg-maroon"
 																onclick="exportJ('${vo.barcode}','${vo.indate }')"
 																style="font-size: 18px" value="Issuance of export certificate" /></td>
-															<td style="text-align: center;">${vo.prdate}</td>	
+															<fmt:parseDate value='${vo.prdate}' var='prdate' pattern='yyyy-MM-dd'/>
+															<td style="text-align: center;"><fmt:formatDate pattern='dd-MM-yyyy' value='${prdate}' /></td>	
 															<td style="text-align: center;">
 																<input type="checkbox" name="del" id="${vo.barcode }" data-chkBar="${vo.barcode }" class="chkbox">&nbsp;&nbsp;&nbsp;
 																<button type="button" onclick="fnDel('${vo.barcode}')">Delete</button>

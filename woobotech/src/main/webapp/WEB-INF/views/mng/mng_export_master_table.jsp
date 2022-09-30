@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
@@ -22,18 +23,18 @@
 				<table id="tablebody" width="100%" class="stripe row-border order-column" cellspacing="0" >
 										<thead>
 											<tr>
-												<th width="3%" style="text-align: center;">번호</th>
-												<th width="7%" style="text-align: center;">바코드번호</th>
-												<th width="3%" style="text-align: center;">지역</th>
-												<th width="6%" style="text-align: center;">입고일자</th>
-												<th width="6%" style="text-align: center;">협력사코드</th>
-												<th width="11%" style="text-align: center;">협력사명</th>
-												<th width="5%" style="text-align: center;">수량</th>
-												<th width="14%" style="text-align: center;">반출증</th>
-												<th width="8%" style="text-align: center;">작성일</th>
+												<th width="3%" style="text-align: center;">Sequence</th>
+												<th width="7%" style="text-align: center;">Barcode number</th>
+												<th width="3%" style="text-align: center;">Area</th>
+												<th width="6%" style="text-align: center;">Date</th>
+												<th width="6%" style="text-align: center;">Partner code</th>
+												<th width="11%" style="text-align: center;">Partner name</th>
+												<th width="5%" style="text-align: center;">Qty</th>
+												<th width="14%" style="text-align: center;">Carry-out certificate</th>
+												<th width="8%" style="text-align: center;">Date created</th>
 												<th width="7%" style="text-align: center;">
 													<input type="checkbox" name="chk_del" id="del_all" value="del_all" class="chkall">&nbsp;&nbsp;&nbsp;
-													<button type="button" id="all_del" onclick="fnAllDel()">삭제</button>
+													<button type="button" id="all_del" onclick="fnAllDel()">Delete</button>
 												</th>
 											</tr>
 										</thead>
@@ -48,19 +49,21 @@
 															<td style="text-align: center;">${vo.row_num}</td>
 															<td style="text-align: center;">${vo.barcode}</td>
 															<td style="text-align: center;" id="${vo.row_num }">${vo.plant }</td>
-															<td style="text-align: center;">${vo.indate}</td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyyMMdd'/>
+															<td style="text-align: center;"><fmt:formatDate pattern='ddMMyyyy' value='${indate}' /></td>
 															<td style="text-align: center;">${vo.cno}</td>
 															<td style="text-align: center;">${vo.cname}</td>
 															<td class="number" style="font-size: 18px;text-align: center;">${vo.t_qty}</td>													
 															<td style="text-align: center;">
 																 <input type="button" class="btn bg-maroon"
 																onclick="exportJ('${vo.barcode}','${vo.indate }')"
-																style="font-size: 18px" value="반출증발행" /></td>
+																style="font-size: 18px" value="Issuance of export certificate" /></td>
 															</td>
-															<td style="text-align: center;">${vo.prdate}</td>
+															<fmt:parseDate value='${vo.prdate}' var='prdate' pattern='yyyy-MM-dd'/>
+															<td style="text-align: center;"><fmt:formatDate pattern='dd-MM-yyyy' value='${prdate}' /></td>
 															<td style="text-align: center;">
 																<input type="checkbox" name="del" id="${vo.barcode }" data-chkBar="${vo.barcode }" class="chkbox">&nbsp;&nbsp;&nbsp;
-																<button type="button" onclick="fnDel('${vo.barcode}')">삭제</button>
+																<button type="button" onclick="fnDel('${vo.barcode}')">Delete</button>
 															</td>
 													
 														</tr>
@@ -70,8 +73,7 @@
 												<c:otherwise>
 													
 													<tr>
-														<td colspan="11" style="height: 100px; text-align: center;">검색된
-															자료가 없습니다.</td>
+														<td colspan="11" style="height: 100px; text-align: center;">No data found.</td>
 													</tr>
 												</c:otherwise>
 	
@@ -167,12 +169,12 @@
 		
 		<c:forEach items="${board}" var="vo">
 			var region = document.getElementById("${vo.row_num}").innerText;
-			
-			if(region==="000"){
-				document.getElementById("${vo.row_num}").innerText = "평택";
+			document.getElementById("${vo.row_num}").innerText = "POLAND";
+			/* if(region==="000"){
+				document.getElementById("${vo.row_num}").innerText = "POLAND";
 			}else if(region==="001"){
 				document.getElementById("${vo.row_num}").innerText = "울산";
-			}
+			} */
 		</c:forEach>
 		
 	});
