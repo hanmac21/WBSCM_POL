@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <style>
 tr.space {
@@ -135,7 +135,7 @@ tr.space {
 														<tr>
 															
 															<td class="td" style="text-align: center;">Qty</td>
-															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
+															<td class="td number" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Date</span></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${indate}</span></td>
 															
@@ -218,6 +218,8 @@ tr.space {
 														<tr>
 															
 															<td class="td" style="text-align: center;">Qty</td>
+															<c:set var = "qty" value = "${fn:split(vo.qty, '.')}" />
+															<c:if test="${ qty}"></c:if>
 															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Date</span></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${indate}</span></td>

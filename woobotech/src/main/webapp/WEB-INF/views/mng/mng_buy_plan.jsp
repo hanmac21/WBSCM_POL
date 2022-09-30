@@ -390,9 +390,9 @@ vertical-align:top; !important
 						&nbsp;&nbsp;&nbsp;<span>Per page</span>
 							<select id="itemCountPerPage" class="selectpicker"
 								style="width: 60px; height: 27px" onchange="getUserList('1')">
-								<option value="30" ${itemCountPerPage =='30'  ? 'selected' :'' }>30</option>
+								<option value="300" ${itemCountPerPage =='300'  ? 'selected' :'' }>300</option>
 								<option value="100" ${itemCountPerPage =='100' ? 'selected' :'' }>100</option>
-								<option value="300" ${itemCountPerPage =='300' ? 'selected' :'' }>300</option>
+								<option value="30" ${itemCountPerPage =='30' ? 'selected' :'' }>30</option>
 							</select>
 						<span>Display</span>	
 					</div>
@@ -2522,18 +2522,19 @@ vertical-align:top; !important
 			}
 			
 			var numCheck = /^[0-9]+$/;
-			if(!numCheck.test(box_qty)){
-				alert("Only numbers can be entered for the number of items received per box.");
+			var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
+			if(!numCheck2.test(box_qty)){
+				alert("You can enter up to two decimal places.");
 				$('#p_box_qty').focus();
 				return false;
 			}
-			if(!numCheck.test(box_qty2)){
-				alert("Only numbers can be entered for the number of items received per box.");
+			if(!numCheck2.test(box_qty2)){
+				alert("You can enter up to two decimal places.");
 				$('#p_box_qty2').focus();
 				return false;
 			}
-			if(!numCheck.test(box_qty3)){
-				alert("Only numbers can be entered for the number of items received per box.");
+			if(!numCheck2.test(box_qty3)){
+				alert("You can enter up to two decimal places.");
 				$('#p_box_qty3').focus();
 				return false;
 			}

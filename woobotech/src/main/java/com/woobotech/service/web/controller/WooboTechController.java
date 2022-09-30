@@ -518,10 +518,10 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
 
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
     try {           //★★★★★삭제예정220725★★★★★   try-catch문만 삭제
       page = Integer.parseInt(request.getParameter("page"));
-
+System.out.println("300확인"+itemCountPerPage);
     } catch (Exception e) {
       // TODO Auto-generated catch block
       // e.printStackTrace();
@@ -712,7 +712,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_data_file");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
 
     try {       //★★★★★삭제예정220725★★★★★ try-catch문
       page = Integer.parseInt(request.getParameter("page"));
@@ -880,7 +880,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
 
     HttpSession session = request.getSession();
 
@@ -1173,7 +1173,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_cw_noti");
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
 
     /*
      * try {page = Integer.parseInt(request.getParameter("page"));
@@ -1393,7 +1393,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_noti");System.out.println("@@@@@@@@@@@@@@@@@@@@@"+request.getParameter("pageView"));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
 
     try {
       page = Integer.parseInt(request.getParameter("page"));
@@ -1445,7 +1445,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
 
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
     HttpSession session = request.getSession();
 
     String session_cu_code = (String) session.getAttribute("cu_code");
@@ -1520,7 +1520,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
 
     HttpSession session = request.getSession();
 
@@ -2010,9 +2010,9 @@ System.out.println("날짜확인220919"+str_day1);
     String car_type = param.get("car_type");
     
     int qty = Integer.parseInt(param.get("qty"));
-    int box_qty = Integer.parseInt(param.get("box_qty"));
-    int box_qty2 = Integer.parseInt(param.get("box_qty2")); //20220614
-    int box_qty3 = Integer.parseInt(param.get("box_qty3"));
+    double box_qty = Double.parseDouble(param.get("box_qty"));
+    double box_qty2 = Double.parseDouble(param.get("box_qty2")); //20220614
+    double box_qty3 = Double.parseDouble(param.get("box_qty3"));
     String lotno = param.get("lotno");
     String indate = param.get("indate");
     String madate = DateUtil.getConvertDate2(param.get("madate"));
@@ -2265,7 +2265,7 @@ System.out.println("날짜확인220919"+str_day1);
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
     String incomeChk = F.nullCheck(request.getParameter("income"), "");
     String item2 =  F.nullCheck(request.getParameter("item2"), "");
     String custname = F.nullCheck(request.getParameter("custname"),"");
@@ -3815,7 +3815,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
 
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
     try {
       page = Integer.parseInt(request.getParameter("page"));
 
@@ -3951,7 +3951,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
   @RequestMapping(value = "/mng_export_master")
   public String mng_export_master(HttpServletRequest request, Locale locale, Model model,
       @RequestParam Map<String, String> param) {
-    logger.info("▷▶▷▶▷▶mng_re_trns start");
+    logger.info("▷▶▷▶▷▶mng_export_master start");
 
     HttpSession session = request.getSession();
 
@@ -3974,7 +3974,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int itemCountPerPage =
-        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
     try {
       page = Integer.parseInt(request.getParameter("page"));
 
@@ -4012,7 +4012,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
     model.addAttribute("startdate", DateUtil.addFormat(startdate));
     model.addAttribute("itemCountPerPage", itemCountPerPage);
     model.addAttribute("prdate", board);
-    logger.info("◁◀◁◀◁◀ mng_re_trns end");
+    logger.info("◁◀◁◀◁◀ mng_export_master end");
     return "mng/" + pageView;
   }
 

@@ -172,9 +172,9 @@
 							<span>Per page</span>
 								<select id="itemCountPerPage" class="selectpicker"
 									style="width: 60px; height: 27px" onchange="getUserList('1')">
-									<option value="30" ${itemCountPerPage =='30'  ? 'selected' :'' }>30</option>
+									<option value="300" ${itemCountPerPage =='300'  ? 'selected' :'' }>300</option>
 									<option value="100" ${itemCountPerPage =='100' ? 'selected' :'' }>100</option>
-									<option value="300" ${itemCountPerPage =='300' ? 'selected' :'' }>300</option>
+									<option value="30" ${itemCountPerPage =='30' ? 'selected' :'' }>30</option>
 								</select>
 							<span>Display</span>	
 						</div>

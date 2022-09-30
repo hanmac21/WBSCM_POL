@@ -11116,9 +11116,9 @@ public class WooboTechDao {
       conx = dataSource.getConnection();
       conx.setAutoCommit(false);
       int totalqty = Integer.parseInt(param.get("qty"));
-      int box_qty = Integer.parseInt(param.get("box_qty"));
-      int box_qty2 = Integer.parseInt(param.get("box_qty2"));
-      int box_qty3 = Integer.parseInt(param.get("box_qty3"));
+      double box_qty = Double.parseDouble(param.get("box_qty"));
+      double box_qty2 = Double.parseDouble(param.get("box_qty2"));
+      double box_qty3 = Double.parseDouble(param.get("box_qty3"));
 
       String itemname = param.get("itemname");
       String itemcode1 = param.get("itemcode1");
@@ -11144,35 +11144,37 @@ public class WooboTechDao {
       int lCnt1 = 0;
       int lCnt2 = 0;
       int lCnt3 = 0;
-      int remainQty1 = 0;
-      int remainQty2 = 0;
-      int remainQty3 = 0;
+      double remainQty1 = 0;
+      double remainQty2 = 0;
+      double remainQty3 = 0;
+      
       if (box_qty != 0) {
         lCnt1 = (int) (production / box_qty);
-        remainQty1 = production % box_qty;
+        remainQty1 = Math.round((production % box_qty)*100)/100.0;//(double)production % box_qty;
       }
+     
       if (remainQty1 >= 1) { // 라벨 발행수1
         lCnt1++;
       }
 
       if (box_qty2 != 0) {
         lCnt2 = (int) (production2 / box_qty2); // 라벨 발행수2
-        remainQty2 = production2 % box_qty2;
+        remainQty2 = Math.round((production2 % box_qty2)*100)/100.0;
         if (remainQty2 >= 1) {
           lCnt2++;
         }
       }
       if (box_qty3 != 0) {
         lCnt3 = (int) (production3 / box_qty3); // 라벨 발행수3
-        remainQty3 = production3 % box_qty3;
+        remainQty3 = Math.round((production3 % box_qty3)*100)/100.0;
       }
       if (remainQty3 >= 1) {
         lCnt3++;
       }
       int label_cnt = lCnt1 + lCnt2 + lCnt3; // 라벨 발행수
 
-      int remain_qty = totalqty % box_qty; // 남은 갯수
-      int qty = totalqty / box_qty; // 박스에 들어가는 수량
+      double remain_qty = totalqty % box_qty; // 남은 갯수
+      int qty = (int) (totalqty / box_qty); // 박스에 들어가는 수량
 
       /*
        * if (remain_qty >= 1) { label_cnt++; }
@@ -11246,32 +11248,32 @@ public class WooboTechDao {
               // ----------수정해야함---------------------------------
               if (cnt <= lCnt1) {
                 if (remainQty1 == 0) {
-                  ps4.setInt(index++, box_qty);
+                  ps4.setDouble(index++, box_qty);
                 } else {
                   if (cnt < lCnt1) {
-                    ps4.setInt(index++, box_qty);
+                    ps4.setDouble(index++, box_qty);
                   } else {
-                    ps4.setInt(index++, remainQty1);
+                    ps4.setDouble(index++, remainQty1);
                   }
                 }
               } else if (cnt <= lCnt2 + lCnt1) {
                 if (remainQty2 == 0) {
-                  ps4.setInt(index++, box_qty2);
+                  ps4.setDouble(index++, box_qty2);
                 } else {
                   if (cnt < lCnt2 + lCnt1) {
-                    ps4.setInt(index++, box_qty2);
+                    ps4.setDouble(index++, box_qty2);
                   } else {
-                    ps4.setInt(index++, remainQty2);
+                    ps4.setDouble(index++, remainQty2);
                   }
                 }
               } else {
                 if (remainQty3 == 0) {
-                  ps4.setInt(index++, box_qty3);
+                  ps4.setDouble(index++, box_qty3);
                 } else {
                   if (cnt < lCnt2 + lCnt1 + lCnt3) {
-                    ps4.setInt(index++, box_qty3);
+                    ps4.setDouble(index++, box_qty3);
                   } else {
-                    ps4.setInt(index++, remainQty3);
+                    ps4.setDouble(index++, remainQty3);
                   }
                 }
               }
@@ -11301,6 +11303,7 @@ public class WooboTechDao {
               }
               info.setBarcode(sbBarcode.toString());
               // ---------------------------------------수정해야함
+              
               if (cnt <= lCnt1) {
                 System.out.println("1번째 박스 " + box_qty);
                 if (remainQty1 == 0) {
@@ -11395,36 +11398,38 @@ public class WooboTechDao {
                * else { ps4.setInt(index++, remain_qty); // } } else { ps4.setInt(index++, box_qty);
                * // }
                */
+              
+             
               if (cnt <= lCnt1) {
                 System.out.println("1번째 박스 220711" + box_qty);
                 if (remainQty1 == 0) {
-                  ps4.setInt(index++, box_qty);
+                  ps4.setDouble(index++, box_qty);
                 } else {
                   if (cnt < lCnt1) {
-                    ps4.setInt(index++, box_qty);
+                    ps4.setString(index++, Double.toString(box_qty));
                   } else {
-                    ps4.setInt(index++, remainQty1);
+                    ps4.setString(index++, Double.toString(remainQty1));
                   }
                 }
               } else if (cnt <= lCnt2 + lCnt1) {
                 System.out.println("2번째 박스 " + box_qty2);
                 if (remainQty2 == 0) {
-                  ps4.setInt(index++, box_qty2);
+                  ps4.setDouble(index++, box_qty2);
                 } else {
                   if (cnt < lCnt2 + lCnt1) {
-                    ps4.setInt(index++, box_qty2);
+                    ps4.setDouble(index++, box_qty2);
                   } else {
-                    ps4.setInt(index++, remainQty2);
+                    ps4.setDouble(index++, remainQty2);
                   }
                 }
               } else {
                 if (remainQty3 == 0) {
-                  ps4.setInt(index++, box_qty3);
+                  ps4.setDouble(index++, box_qty3);
                 } else {
                   if (cnt < lCnt2 + lCnt1 + lCnt3) {
-                    ps4.setInt(index++, box_qty3);
+                    ps4.setDouble(index++, box_qty3);
                   } else {
-                    ps4.setInt(index++, remainQty3);
+                    ps4.setDouble(index++, remainQty3);
                   }
                 }
               }
@@ -11530,40 +11535,53 @@ public class WooboTechDao {
               info.setBarcode(sbBarcode.toString());
               if (cnt <= lCnt1) {
                 if (remainQty1 == 0) {
-                  info.setQty(String.valueOf(box_qty));
+                  info.setQty(param.get("box_qty"));
                   info.setMadate(madate);
                 } else {
                   if (cnt < lCnt1) {
-                    info.setQty(String.valueOf(box_qty));
+                    info.setQty(param.get("box_qty"));
                     info.setMadate(madate);
                   } else {
-                    info.setQty(String.valueOf(remainQty1));
+                    if(isInteger(String.valueOf(remainQty1))) {
+                      info.setQty(String.valueOf((int)remainQty1));
+                    }else {
+                      info.setQty(String.valueOf(remainQty1));
+                    }
+                    
                     info.setMadate(madate);
                   }
                 }
               } else if (cnt <= lCnt2 + lCnt1) {
                 if (remainQty2 == 0) {
-                  info.setQty(String.valueOf(box_qty2));
+                  info.setQty(param.get("box_qty2"));
                   info.setMadate(madate2);
                 } else {
                   if (cnt < lCnt2 + lCnt1) {
-                    info.setQty(String.valueOf(box_qty2));
+                    info.setQty(param.get("box_qty2"));
                     info.setMadate(madate2);
                   } else {
-                    info.setQty(String.valueOf(remainQty2));
+                    if(isInteger(String.valueOf(remainQty2))) {
+                      info.setQty(String.valueOf((int)remainQty2));
+                    }else {
+                      info.setQty(String.valueOf(remainQty2));
+                    }
                     info.setMadate(madate2);
                   }
                 }
               } else {
                 if (remainQty3 == 0) {
-                  info.setQty(String.valueOf(box_qty3));
+                  info.setQty(param.get("box_qty3"));
                   info.setMadate(madate3);
                 } else {
                   if (cnt < lCnt2 + lCnt1 + lCnt3) {
-                    info.setQty(String.valueOf(box_qty3));
+                    info.setQty(param.get("box_qty3"));
                     info.setMadate(madate3);
                   } else {
-                    info.setQty(String.valueOf(remainQty3));
+                    if(isInteger(String.valueOf(remainQty3))) {
+                      info.setQty(String.valueOf((int)remainQty3));
+                    }else {
+                      info.setQty(String.valueOf(remainQty3));
+                    }
                     info.setMadate(madate3);
                   }
                 }
@@ -16206,7 +16224,9 @@ public class WooboTechDao {
     StringBuffer sql = new StringBuffer();
     String pno = param.get("itemcode1");
     String cno = param.get("custcode");
-    int box_qty = Integer.parseInt(param.get("box_qty"));
+    String box = param.get("box_qty");
+    String[] boxarr = box.split("\\.");
+    
     String branch = param.get("branch");
 
     conn = dataSource.getConnection();
@@ -16222,9 +16242,23 @@ public class WooboTechDao {
     pstmt.setString(1, branch);
     pstmt.setString(2, pno);
     pstmt.setString(3, cno);
-    pstmt.setInt(4, box_qty);
+    System.out.println(box);
+    System.out.println("길이확인"+boxarr.length);
+    System.out.println("길이확인"+boxarr[0]);
+    
+    if(boxarr.length<2) {
+      int box_qty = Integer.parseInt(param.get("box_qty"));
+      pstmt.setInt(4, box_qty);
+      System.out.println("boxqty11");
+      pstmt.executeUpdate();
+    }else {
+      double box_qty = Double.parseDouble(param.get("box_qty"));
+      pstmt.setDouble(4, box_qty);
+      System.out.println("boxqty");
+      pstmt.executeUpdate();
+    }
 
-    pstmt.executeUpdate();
+    
 
     conn.commit();
 
@@ -16243,7 +16277,7 @@ public class WooboTechDao {
     StringBuffer sql = new StringBuffer();
     String pno = param.get("itemcode1");
     String cno = param.get("custcode");
-    int box_qty = Integer.parseInt(param.get("box_qty"));
+    double box_qty = Double.parseDouble(param.get("box_qty"));
     String branch = param.get("branch");
 
     conn = dataSource.getConnection();
@@ -17047,6 +17081,19 @@ public class WooboTechDao {
     }
 
     return result;
+  }
+  
+  public static boolean isInteger(String num){
+    double d = Double.parseDouble(num);
+    if(d==(int)d) {
+      return true;
+    }else {
+      return false;
+    }
+    /*
+     * try{ Integer.parseInt(num); // int 형으로 변환해보고 return true; // 이상없으면 true를 리턴 }catch
+     * (NumberFormatException e){ return false; // 이상 있으면 false를 리턴 }
+     */
   }
 
 }
