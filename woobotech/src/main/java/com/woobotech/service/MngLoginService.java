@@ -12,42 +12,42 @@ import com.woobotech.service.web.dto.MngDTO;
 
 @Service
 public class MngLoginService {
-  
+
   private static final Logger logger = LoggerFactory.getLogger(MngLoginService.class);
 
   @Autowired
   private MngLoginDAO mngLoginDAO;
-  
+
   public int checkCuSano(String loginId) {
     int rtn = 0;
     try {
       rtn = mngLoginDAO.checkCuSano(loginId);
     } catch (Exception e) {
-      logger.error("checkCuSano error:{}",e);
+      logger.error("checkCuSano error:{}", e);
     }
     return rtn;
   }
-  
+
   public int checkTscmCuSano(String loginId) {
     int rtn = 0;
     try {
       rtn = mngLoginDAO.checkTscmCuSano(loginId);
     } catch (Exception e) {
-      logger.error("checkTscmCuSano error:{}",e);
+      logger.error("checkTscmCuSano error:{}", e);
     }
     return rtn;
   }
-  
+
   public MngDTO selectMngDTO(String loginId) {
     MngDTO mngDTO = null;
     try {
       mngDTO = mngLoginDAO.selectMngDTO(loginId);
     } catch (Exception e) {
-      logger.error("selectMngDTO error:{}",e);
+      logger.error("selectMngDTO error:{}", e);
     }
     return mngDTO;
   }
-  
+
   public boolean checkLoginMng(String id, String password) {
     boolean retValue = false;
     if ("master".equals(id) && ("woo#*".equals(password) || "woobo2330".equals(password))) { // 마스터로그인
@@ -55,7 +55,7 @@ public class MngLoginService {
     }
     return retValue;
   }
-  
+
   public boolean checkPWD(String custcode, String custpw) {
     boolean retValue = false;
     int rtn = 0;
@@ -64,51 +64,51 @@ public class MngLoginService {
     reqMap.put("custpw", custpw);
     try {
       rtn = mngLoginDAO.checkPWD(reqMap);
-      if(rtn > 0) {
+      if (rtn > 0) {
         retValue = true;;
       }
     } catch (Exception e) {
-      logger.error("checkPWD error:{}",e);
-    }    
+      logger.error("checkPWD error:{}", e);
+    }
     return retValue;
   }
-  
+
   public String getCuCode(String loginId) {
-    String retValue = "";    
+    String retValue = "";
     try {
       retValue = mngLoginDAO.getCuCode(loginId);
     } catch (Exception e) {
-      logger.error("getCuCode error:{}",e);
+      logger.error("getCuCode error:{}", e);
     }
     return retValue;
   }
-  
+
   public int insertScmCust(String custcode) {
-    int rtn = 0;    
+    int rtn = 0;
     try {
       rtn = mngLoginDAO.insertScmCust(custcode);
     } catch (Exception e) {
-      logger.error("insertScmCust error:{}",e);
+      logger.error("insertScmCust error:{}", e);
     }
     return rtn;
   }
-  
+
   public MemberDTO getMemberById(String id) {
     MemberDTO memberDTO = null;
     try {
       memberDTO = mngLoginDAO.getMemberById(id);
     } catch (Exception e) {
-      logger.error("getMemberById error:{}",e);
+      logger.error("getMemberById error:{}", e);
     }
     return memberDTO;
   }
-  
+
   public int getCountById(String id) {
     int rtn = 0;
     try {
       rtn = mngLoginDAO.getCountById(id);
     } catch (Exception e) {
-      logger.error("getCountById error:{}",e);
+      logger.error("getCountById error:{}", e);
     }
     return rtn;
   }

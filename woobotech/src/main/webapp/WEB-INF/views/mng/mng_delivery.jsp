@@ -308,7 +308,7 @@
 			<div class="pull-right hidden-xs">
 				<b></b>
 			</div>
-			<strong>Copyright &copy; 2021 <a href="#">우보테크</a>.
+			<strong>Copyright &copy; 2022 <a href="#">우보테크</a>.
 			</strong> All rights reserved.
 		</footer>
 

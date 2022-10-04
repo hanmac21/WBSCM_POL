@@ -39,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.RedirectView;
 import com.woobotech.service.MngLoginService;
+import com.woobotech.service.WooboService;
 import com.woobotech.service.jutil.DateUtil;
 import com.woobotech.service.jutil.Script;
 import com.woobotech.service.web.dao.WooboTechDao;
@@ -73,6 +74,8 @@ public class WooboTechController {
 
   @Autowired
   MngLoginService mngLoginService;
+  @Autowired
+  WooboService wooboService;
 
   @Resource(name = "uploadPath")
   private String uploadPath;
@@ -1484,7 +1487,7 @@ System.out.println("300확인"+itemCountPerPage);
       List board = null;
       WooboTechDao dao = new WooboTechDao();
       if (!"mng_stock_plan".equals(pageView)) {
-        itemCount = dao.mng_stock_plan_count(arrayDay, param);
+        //itemCount = dao.mng_stock_plan_count(arrayDay, param);
         logger.info("◁◀◁◀◁◀ mng_biz_plan end2");
         board = dao.mng_stock_plan(arrayDay, param, page, itemCountPerPage);
        
@@ -1801,6 +1804,8 @@ System.out.println("날짜확인220919"+str_day1);
     String check_date = param.get("check_date"); // 입고일자
     System.out.println("거래명세서 버튼 클릭해서 값 보내는 check_date==> " + check_date);
     String prdate = param.get("prdate");
+    String prdate2 = prdate.substring(0, 4)+"-"+prdate.substring(4, 6)+"-"+prdate.substring(6,8);
+    prdate = prdate2;
     String branch = "000";//param.get("branch");
     System.out.println("들어가는 공장 ==>" + branch);
     String tqty2 = param.get("tqty2");
@@ -2024,9 +2029,24 @@ System.out.println("날짜확인220919"+str_day1);
     String production = param.get("production");
     String production2 = param.get("production2");
     String production3 = param.get("production3");
+    String batchMode = param.get("batchMode"); //nomal, batch
+    String batchDate = DateUtil.getConvertDate2(param.get("batch_date"));
+    String batchContent = param.get("batch_content");
     System.out.println(branch);
-
-
+    System.out.println("[mng_label_print] batchMode["+batchMode+"] batchDate["+batchDate+"] batchContent["+batchContent+"]");
+    String[] batchContentArr = null;
+    Map<String, Object> splitMap = null;
+    List<Map<String, Object>> splitMapList = new ArrayList<Map<String, Object>>();
+    if(batchContent != null && !"".equals(batchContent) && "batch".equals(batchMode)) {
+      batchContentArr = batchContent.split("<br>");
+      for (int i = 0; i < batchContentArr.length; i++) {
+        String[] splitArr = batchContentArr[i].split("/");
+        splitMap = new HashMap<String, Object>();
+        splitMap.put("qty", splitArr[0]);
+        splitMap.put("date", splitArr[1]); 
+        splitMapList.add(splitMap);
+      }
+    }
     // 주문수량 /박스수량
     WooboTechDao dao = new WooboTechDao();
     
@@ -2043,7 +2063,13 @@ System.out.println("날짜확인220919"+str_day1);
       dao.mng_insert_qty(param);
     }
 
-    ArrayList<LabelDTO> arrList_Label = dao.get_Label_list(param);
+    ArrayList<LabelDTO> arrList_Label = null;
+    
+    if("batch".equals(batchMode)) {
+      arrList_Label = wooboService.get_Label_list(param, splitMapList);      
+    }else {
+      arrList_Label = dao.get_Label_list(param);
+    }
     
     for (int i = 0; i < arrList_Label.size(); i++) {
       String barcodeString = arrList_Label.get(i).getBarcode();
@@ -2263,6 +2289,7 @@ System.out.println("날짜확인220919"+str_day1);
     logger.info("▷▶▷▶▷▶mng_buy_plan start");
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan");
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
+    int addDate = Integer.parseInt(F.nullCheck(request.getParameter("addDate"), "15"));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
@@ -2286,41 +2313,9 @@ System.out.println("날짜확인220919"+str_day1);
     }
     param.put("session_cu_code", session_cu_code);
     
-    String str_dayWeek1 = "";
-    String str_dayWeek2 = "";
-    String str_dayWeek3 = "";
-    String str_dayWeek4 = "";
-    String str_dayWeek5 = "";
-    String str_dayWeek6 = "";
-    String str_dayWeek7 = "";
-    String str_dayWeek8 = "";
-    String str_dayWeek9 = "";
-    String str_dayWeek10 = "";
-    String str_dayWeek11 = "";
-    String str_dayWeek12 = "";
-    String str_dayWeek13 = "";
-    String str_dayWeek14 = "";
-
-    String str_day1 = "";
-    String str_day2 = "";
-    String str_day3 = "";
-    String str_day4 = "";
-    String str_day5 = "";
-    String str_day6 = "";
-    String str_day7 = "";
-    String str_day8 = "";
-    String str_day9 = "";
-    String str_day10 = "";
-    String str_day11 = "";
-    String str_day12 = "";
-    String str_day13 = "";
-    String str_day14 = "";
-
     String temp_dayWeek = "";
-    String[] arrayDay = new String[14];
-    String[] arrayDay2 = new String[14];
-    // String[] arrayDay = new String[7];
-
+    String[] arrayDay = new String[addDate];
+ 
     if (!"".equals(startdate)) {
       startdate = startdate.replaceAll("-", "");
     } else {
@@ -2328,178 +2323,30 @@ System.out.println("날짜확인220919"+str_day1);
     }
 
     try {
-      for (int i = 0; i < 14; i++) {
-        // for(int i=0; i<7; i++) {
-        String temp_date = DateUtil.addDays(startdate, i);
-        // System.out.println("temp_Date==>"+temp_date);
-        int dayWeek = DateUtil.getDayOfWeek(temp_date);
-        temp_date = DateUtil.addFormat(temp_date);
-
-        if (dayWeek == 0) {
-          temp_dayWeek = "일";
-        } else if (dayWeek == 1) {
-          temp_dayWeek = "월";
-        } else if (dayWeek == 2) {
-          temp_dayWeek = "화";
-        } else if (dayWeek == 3) {
-          temp_dayWeek = "수";
-        } else if (dayWeek == 4) {
-          temp_dayWeek = "목";
-        } else if (dayWeek == 5) {
-          temp_dayWeek = "금";
-        } else if (dayWeek == 6) {
-          temp_dayWeek = "토";
+      
+      String strTempDate = DateUtil.addDays(startdate,-1);  //임시저장 날짜
+      int idate = 0;                                        //서머타임으로 중복된 날짜 일수
+      
+      for (int i = 0; i < addDate; i++) {   
+        String temp_date = DateUtil.addDays(startdate, i+idate);
+         
+        if(temp_date.toString().equals(strTempDate.toString())) {   //일자를 더했는데 기존일자랑 같으면
+          idate = idate+1;      //중복된 날짜 1일 추가
+          temp_date = DateUtil.addDays(startdate, i+idate);     // temp_date + 1일 추가된 일자로 변경
         }
-
-        if (i == 0) {
-          str_day1 = temp_date;
-          str_dayWeek1 = temp_dayWeek;
-        } else if (i == 1) {
-          str_day2 = temp_date;
-          str_dayWeek2 = temp_dayWeek;
-        } else if (i == 2) {
-          str_day3 = temp_date;
-          str_dayWeek3 = temp_dayWeek;
-        } else if (i == 3) {
-          str_day4 = temp_date;
-          str_dayWeek4 = temp_dayWeek;
-        } else if (i == 4) {
-          str_day5 = temp_date;
-          str_dayWeek5 = temp_dayWeek;
-        } else if (i == 5) {
-          str_day6 = temp_date;
-          str_dayWeek6 = temp_dayWeek;
-        } else if (i == 6) {
-          str_day7 = temp_date;
-          str_dayWeek7 = temp_dayWeek;
-        } else if (i == 7) {
-          str_day8 = temp_date;
-          str_dayWeek8 = temp_dayWeek;
-        } else if (i == 8) {
-          str_day9 = temp_date;
-          str_dayWeek9 = temp_dayWeek;
-        } else if (i == 9) {
-          str_day10 = temp_date;
-          str_dayWeek10 = temp_dayWeek;
-        } else if (i == 10) {
-          str_day11 = temp_date;
-          str_dayWeek11 = temp_dayWeek;
-        } else if (i == 11) {
-          str_day12 = temp_date;
-          str_dayWeek12 = temp_dayWeek;
-        } else if (i == 12) {
-          str_day13 = temp_date;
-          str_dayWeek13 = temp_dayWeek;
-        } else if (i == 13) {
-          str_day14 = temp_date;
-          str_dayWeek14 = temp_dayWeek;
-        }
-        // System.out.println("i==>"+i);
-        arrayDay[i] = temp_date.replaceAll("-", "");
-        // 0~6 : 일~월
+        strTempDate = temp_date.replaceAll("-", "").toString();     //현재 날짜 저장
+        arrayDay[i] = temp_date.replaceAll("-", "");                //배열에 저장
+        
+        System.out.println("날짜확인 : temp_date ->" + temp_date +" 날짜확인 : strTempDate ->" + strTempDate );
+        System.out.println("날짜확인 : arrayDay["+i+"] ->" + arrayDay[i] );
       }
 
-      for (int i = 0; i < 14; i++) {
-        // for(int i=0; i<7; i++) {
-        String temp_date = DateUtil.addDays(startdate, i);
-        // System.out.println("temp_Date==>"+temp_date);
-        int dayWeek = DateUtil.getDayOfWeek(temp_date);
-        temp_date = DateUtil.addFormat(temp_date);
-
-        if (dayWeek == 0) {
-          temp_dayWeek = "일";
-        } else if (dayWeek == 1) {
-          temp_dayWeek = "월";
-        } else if (dayWeek == 2) {
-          temp_dayWeek = "화";
-        } else if (dayWeek == 3) {
-          temp_dayWeek = "수";
-        } else if (dayWeek == 4) {
-          temp_dayWeek = "목";
-        } else if (dayWeek == 5) {
-          temp_dayWeek = "금";
-        } else if (dayWeek == 6) {
-          temp_dayWeek = "토";
-        }
-
-        if (i == 0) {
-          str_day1 = temp_date;
-          str_dayWeek1 = temp_dayWeek;
-        } else if (i == 1) {
-          str_day2 = temp_date;
-          str_dayWeek2 = temp_dayWeek;
-        } else if (i == 2) {
-          str_day3 = temp_date;
-          str_dayWeek3 = temp_dayWeek;
-        } else if (i == 3) {
-          str_day4 = temp_date;
-          str_dayWeek4 = temp_dayWeek;
-        } else if (i == 4) {
-          str_day5 = temp_date;
-          str_dayWeek5 = temp_dayWeek;
-        } else if (i == 5) {
-          str_day6 = temp_date;
-          str_dayWeek6 = temp_dayWeek;
-        } else if (i == 6) {
-          str_day7 = temp_date;
-          str_dayWeek7 = temp_dayWeek;
-        } else if (i == 7) {
-          str_day8 = temp_date;
-          str_dayWeek8 = temp_dayWeek;
-        } else if (i == 8) {
-          str_day9 = temp_date;
-          str_dayWeek9 = temp_dayWeek;
-        } else if (i == 9) {
-          str_day10 = temp_date;
-          str_dayWeek10 = temp_dayWeek;
-        } else if (i == 10) {
-          str_day11 = temp_date;
-          str_dayWeek11 = temp_dayWeek;
-        } else if (i == 11) {
-          str_day12 = temp_date;
-          str_dayWeek12 = temp_dayWeek;
-        } else if (i == 12) {
-          str_day13 = temp_date;
-          str_dayWeek13 = temp_dayWeek;
-        } else if (i == 13) {
-          str_day14 = temp_date;
-          str_dayWeek14 = temp_dayWeek;
-        }
-
-        arrayDay2[i] = temp_date;
-        // System.out.println("i==>"+i);
-        // 0~6 : 일~월
-      }
-      System.out.println("날짜확인220919"+str_day1);
-      model.addAttribute("str_day1", str_day1);
-      model.addAttribute("str_day2", str_day2);
-      model.addAttribute("str_day3", str_day3);
-      model.addAttribute("str_day4", str_day4);
-      model.addAttribute("str_day5", str_day5);
-      model.addAttribute("str_day6", str_day6);
-      model.addAttribute("str_day7", str_day7);
-      model.addAttribute("str_day8", str_day8);
-      model.addAttribute("str_day9", str_day9);
-      model.addAttribute("str_day10", str_day10);
-      model.addAttribute("str_day11", str_day11);
-      model.addAttribute("str_day12", str_day12);
-      model.addAttribute("str_day13", str_day13);
-      model.addAttribute("str_day14", str_day14);
-
-      model.addAttribute("str_dayWeek1", str_dayWeek1);
-      model.addAttribute("str_dayWeek2", str_dayWeek2);
-      model.addAttribute("str_dayWeek3", str_dayWeek3);
-      model.addAttribute("str_dayWeek4", str_dayWeek4);
-      model.addAttribute("str_dayWeek5", str_dayWeek5);
-      model.addAttribute("str_dayWeek6", str_dayWeek6);
-      model.addAttribute("str_dayWeek7", str_dayWeek7);
-      model.addAttribute("str_dayWeek8", str_dayWeek8);
-      model.addAttribute("str_dayWeek9", str_dayWeek9);
-      model.addAttribute("str_dayWeek10", str_dayWeek10);
-      model.addAttribute("str_dayWeek11", str_dayWeek11);
-      model.addAttribute("str_dayWeek12", str_dayWeek12);
-      model.addAttribute("str_dayWeek13", str_dayWeek13);
-      model.addAttribute("str_dayWeek14", str_dayWeek14);
+      
+//      for (int i = 0; i < addDate; i++) {   
+//        String temp_date = DateUtil.addDays(startdate, i);       
+//        arrayDay[i] = temp_date.replaceAll("-", "");     
+//        System.out.println("arrayDay["+i+"] ->" + arrayDay[i] );
+//      }
 
       try {
         page = Integer.parseInt(request.getParameter("page"));
@@ -2529,7 +2376,7 @@ System.out.println("날짜확인220919"+str_day1);
         if (!"mng_buy_plan".equals(pageView)) {
           //2022-06-13
           itemCount = dao.mng_buy_plan_count(arrayDay, param);
-          board = dao.mng_buy_plan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+          board = dao.mng_buy_plan(arrayDay, param, page, itemCountPerPage);
           income = dao.mng_buy_income(param);//★★★★★삭제예정220726★★★★★  해도 될거 같은데 잘 모르겟음
           //item = dao.itemList();
           // colist = dao.mng_co_list(param);
@@ -2539,7 +2386,7 @@ System.out.println("날짜확인220919"+str_day1);
         if (!"mng_buy_plan".equals(pageView)) {
           System.out.println("미발행분@@@@@@@@@@@@@@@@@");
           itemCount = dao.mng_buy_plan_incomecount(arrayDay, param);
-          board = dao.mng_buy_incomeplan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+          board = dao.mng_buy_incomeplan(arrayDay, param, page, itemCountPerPage);
           income = dao.mng_buy_income(param);//★★★★★삭제예정220726★★★★★ 
           
          // item = dao.itemList();
@@ -2561,7 +2408,10 @@ System.out.println("날짜확인220919"+str_day1);
       model.addAttribute("paging", paging);
       model.addAttribute("startdate", DateUtil.addFormat(startdate));
       model.addAttribute("itemCountPerPage", itemCountPerPage);
-
+      model.addAttribute("addDate", addDate);
+      model.addAttribute("arrayDay", arrayDay);
+      model.addAttribute("arrayCnt", arrayDay.length);
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -2601,7 +2451,6 @@ System.out.println("페이지 뷰 확인 "+pageView);
 
     }
     param.put("session_cu_code", session_cu_code);
-
     String str_dayWeek1 = "";
     String str_dayWeek2 = "";
     String str_dayWeek3 = "";
@@ -2636,12 +2485,13 @@ System.out.println("페이지 뷰 확인 "+pageView);
     String[] arrayDay = new String[14];
     String[] arrayDay2 = new String[14];
     // String[] arrayDay = new String[7];
+
     if (!"".equals(startdate)) {
       startdate = startdate.replaceAll("-", "");
     } else {
       startdate = DateUtil.getCurrentDate();
     }
-    System.out.println("mng_buy_plan_controller" + startdate);
+
     try {
       for (int i = 0; i < 14; i++) {
         // for(int i=0; i<7; i++) {
@@ -2785,6 +2635,321 @@ System.out.println("페이지 뷰 확인 "+pageView);
         // System.out.println("i==>"+i);
         // 0~6 : 일~월
       }
+//      System.out.println("날짜확인220919"+str_day1);
+//      model.addAttribute("str_day1", str_day1);
+//      model.addAttribute("str_day2", str_day2);
+//      model.addAttribute("str_day3", str_day3);
+//      model.addAttribute("str_day4", str_day4);
+//      model.addAttribute("str_day5", str_day5);
+//      model.addAttribute("str_day6", str_day6);
+//      model.addAttribute("str_day7", str_day7);
+//      model.addAttribute("str_day8", str_day8);
+//      model.addAttribute("str_day9", str_day9);
+//      model.addAttribute("str_day10", str_day10);
+//      model.addAttribute("str_day11", str_day11);
+//      model.addAttribute("str_day12", str_day12);
+//      model.addAttribute("str_day13", str_day13);
+//      model.addAttribute("str_day14", str_day14);
+//
+//      model.addAttribute("str_dayWeek1", str_dayWeek1);
+//      model.addAttribute("str_dayWeek2", str_dayWeek2);
+//      model.addAttribute("str_dayWeek3", str_dayWeek3);
+//      model.addAttribute("str_dayWeek4", str_dayWeek4);
+//      model.addAttribute("str_dayWeek5", str_dayWeek5);
+//      model.addAttribute("str_dayWeek6", str_dayWeek6);
+//      model.addAttribute("str_dayWeek7", str_dayWeek7);
+//      model.addAttribute("str_dayWeek8", str_dayWeek8);
+//      model.addAttribute("str_dayWeek9", str_dayWeek9);
+//      model.addAttribute("str_dayWeek10", str_dayWeek10);
+//      model.addAttribute("str_dayWeek11", str_dayWeek11);
+//      model.addAttribute("str_dayWeek12", str_dayWeek12);
+//      model.addAttribute("str_dayWeek13", str_dayWeek13);
+//      model.addAttribute("str_dayWeek14", str_dayWeek14);
+//
+//      try {
+//        page = Integer.parseInt(request.getParameter("page"));
+//
+//      } catch (Exception e) {
+//        // TODO Auto-generated catch block
+//        // e.printStackTrace();
+//      }
+//
+//      int itemCount = 0;
+//      // int itemCountPerPage = 30;
+//      int pageCountPerPaging = 10;
+//      List board = null;
+//      int income = 0;
+//      // List colist = null;
+//      List item = null;
+//      WooboTechDao dao = new WooboTechDao();
+//     
+//      /*
+//       * if(!"mng_buy_plan".equals(pageView)) { itemCount = dao.mng_buy_plan_count(arrayDay,param);
+//       * board = dao.mng_buy_plan(arrayDay,arrayDay2,param,page,itemCountPerPage); income =
+//       * dao.mng_buy_income(param); //colist = dao.mng_co_list(param); }
+//       */
+//     // item = dao.itemList();          구매계획관리 조회조건 220726주석
+//      if (incomeChk.equals("0")) {
+//
+//        if (!"mng_buy_plan".equals(pageView)) {
+//          //2022-06-13
+//          itemCount = dao.mng_buy_plan_count(arrayDay, param);
+//          board = dao.mng_buy_plan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+//          income = dao.mng_buy_income(param);//★★★★★삭제예정220726★★★★★  해도 될거 같은데 잘 모르겟음
+//          //item = dao.itemList();
+//          // colist = dao.mng_co_list(param);
+//        }
+//
+//      } else {
+//        if (!"mng_buy_plan".equals(pageView)) {
+//          System.out.println("미발행분@@@@@@@@@@@@@@@@@");
+//          itemCount = dao.mng_buy_plan_incomecount(arrayDay, param);
+//          board = dao.mng_buy_incomeplan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+//          income = dao.mng_buy_income(param);//★★★★★삭제예정220726★★★★★ 
+//          
+//         // item = dao.itemList();
+//          
+//          // colist = dao.mng_co_list(param);
+//        }
+//      }
+//
+//      // colist = dao.mng_co_list(param);
+//      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+//      List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+//      model.addAttribute("board", board);
+//      model.addAttribute("income", income);     //★★★★★삭제예정220726★★★★★ 
+//      model.addAttribute("item", item);
+//      // model.addAttribute("colist", colist);
+//      model.addAttribute("itemCount", itemCount);
+//      model.addAttribute("currentPage", page);
+//      model.addAttribute("maxPage", maxPage);
+//      model.addAttribute("paging", paging);
+//      model.addAttribute("startdate", DateUtil.addFormat(startdate));
+//      model.addAttribute("itemCountPerPage", itemCountPerPage);
+//
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//System.out.println("페이지 뷰 확인 "+pageView);
+//    // DateUtil.getDayOfWeek("");
+//    logger.info("◁◀◁◀◁◀ mng_buy_plan end");
+//    return new ModelAndView("mng/" + pageView);
+//  }
+//
+//  // 미발행분만 가져오기 2022-04-25 정인우
+//  // 구매계획관리
+//  @RequestMapping(value = "/mng_buy_incomeplan")
+//  public ModelAndView mng_buy_incomeplan(HttpServletRequest request, Locale locale, Model model,
+//      @RequestParam Map<String, String> param) {
+//    logger.info("▷▶▷▶▷▶mng_buy_incomeplan start");
+//    String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan");
+//    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
+//    int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
+//    int itemCountPerPage =
+//        Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
+//    String incomeChk = F.nullCheck(request.getParameter("income"), "");
+//
+//    System.out.println("incomeChk : " + incomeChk);
+//
+//    HttpSession session = request.getSession();
+//
+//    String text = (String) session.getAttribute("cu_sangho");
+//    System.out.print("세션에서 받아오는 값 ->" + text);
+//    String session_cu_code = (String) session.getAttribute("cu_code");
+//
+//    if (session_cu_code == null) {
+//      RedirectView redirectView = new RedirectView("mng_login?menu=0");
+//      // redirectView.set
+//      redirectView.setExposeModelAttributes(false);
+//      logger.info("◁◀◁◀◁◀  mng_login_user end");
+//      return new ModelAndView(redirectView);
+//
+//    }
+//    param.put("session_cu_code", session_cu_code);
+//
+//    String str_dayWeek1 = "";
+//    String str_dayWeek2 = "";
+//    String str_dayWeek3 = "";
+//    String str_dayWeek4 = "";
+//    String str_dayWeek5 = "";
+//    String str_dayWeek6 = "";
+//    String str_dayWeek7 = "";
+//    String str_dayWeek8 = "";
+//    String str_dayWeek9 = "";
+//    String str_dayWeek10 = "";
+//    String str_dayWeek11 = "";
+//    String str_dayWeek12 = "";
+//    String str_dayWeek13 = "";
+//    String str_dayWeek14 = "";
+//
+//    String str_day1 = "";
+//    String str_day2 = "";
+//    String str_day3 = "";
+//    String str_day4 = "";
+//    String str_day5 = "";
+//    String str_day6 = "";
+//    String str_day7 = "";
+//    String str_day8 = "";
+//    String str_day9 = "";
+//    String str_day10 = "";
+//    String str_day11 = "";
+//    String str_day12 = "";
+//    String str_day13 = "";
+//    String str_day14 = "";
+//
+//    String temp_dayWeek = "";
+//    String[] arrayDay = new String[14];
+//    String[] arrayDay2 = new String[14];
+//    // String[] arrayDay = new String[7];
+//    if (!"".equals(startdate)) {
+//      startdate = startdate.replaceAll("-", "");
+//    } else {
+//      startdate = DateUtil.getCurrentDate();
+//    }
+//    System.out.println("mng_buy_plan_controller" + startdate);
+//    try {
+//      for (int i = 0; i < 14; i++) {
+//        // for(int i=0; i<7; i++) {
+//        String temp_date = DateUtil.addDays(startdate, i);
+//        // System.out.println("temp_Date==>"+temp_date);
+//        int dayWeek = DateUtil.getDayOfWeek(temp_date);
+//        temp_date = DateUtil.addFormat(temp_date);
+//
+//        if (dayWeek == 0) {
+//          temp_dayWeek = "일";
+//        } else if (dayWeek == 1) {
+//          temp_dayWeek = "월";
+//        } else if (dayWeek == 2) {
+//          temp_dayWeek = "화";
+//        } else if (dayWeek == 3) {
+//          temp_dayWeek = "수";
+//        } else if (dayWeek == 4) {
+//          temp_dayWeek = "목";
+//        } else if (dayWeek == 5) {
+//          temp_dayWeek = "금";
+//        } else if (dayWeek == 6) {
+//          temp_dayWeek = "토";
+//        }
+//
+//        if (i == 0) {
+//          str_day1 = temp_date;
+//          str_dayWeek1 = temp_dayWeek;
+//        } else if (i == 1) {
+//          str_day2 = temp_date;
+//          str_dayWeek2 = temp_dayWeek;
+//        } else if (i == 2) {
+//          str_day3 = temp_date;
+//          str_dayWeek3 = temp_dayWeek;
+//        } else if (i == 3) {
+//          str_day4 = temp_date;
+//          str_dayWeek4 = temp_dayWeek;
+//        } else if (i == 4) {
+//          str_day5 = temp_date;
+//          str_dayWeek5 = temp_dayWeek;
+//        } else if (i == 5) {
+//          str_day6 = temp_date;
+//          str_dayWeek6 = temp_dayWeek;
+//        } else if (i == 6) {
+//          str_day7 = temp_date;
+//          str_dayWeek7 = temp_dayWeek;
+//        } else if (i == 7) {
+//          str_day8 = temp_date;
+//          str_dayWeek8 = temp_dayWeek;
+//        } else if (i == 8) {
+//          str_day9 = temp_date;
+//          str_dayWeek9 = temp_dayWeek;
+//        } else if (i == 9) {
+//          str_day10 = temp_date;
+//          str_dayWeek10 = temp_dayWeek;
+//        } else if (i == 10) {
+//          str_day11 = temp_date;
+//          str_dayWeek11 = temp_dayWeek;
+//        } else if (i == 11) {
+//          str_day12 = temp_date;
+//          str_dayWeek12 = temp_dayWeek;
+//        } else if (i == 12) {
+//          str_day13 = temp_date;
+//          str_dayWeek13 = temp_dayWeek;
+//        } else if (i == 13) {
+//          str_day14 = temp_date;
+//          str_dayWeek14 = temp_dayWeek;
+//        }
+//        // System.out.println("i==>"+i);
+//        arrayDay[i] = temp_date.replaceAll("-", "");
+//        // 0~6 : 일~월
+//      }
+//
+//      for (int i = 0; i < 14; i++) {
+//        // for(int i=0; i<7; i++) {
+//        String temp_date = DateUtil.addDays(startdate, i);
+//        // System.out.println("temp_Date==>"+temp_date);
+//        int dayWeek = DateUtil.getDayOfWeek(temp_date);
+//        temp_date = DateUtil.addFormat(temp_date);
+//
+//        if (dayWeek == 0) {
+//          temp_dayWeek = "일";
+//        } else if (dayWeek == 1) {
+//          temp_dayWeek = "월";
+//        } else if (dayWeek == 2) {
+//          temp_dayWeek = "화";
+//        } else if (dayWeek == 3) {
+//          temp_dayWeek = "수";
+//        } else if (dayWeek == 4) {
+//          temp_dayWeek = "목";
+//        } else if (dayWeek == 5) {
+//          temp_dayWeek = "금";
+//        } else if (dayWeek == 6) {
+//          temp_dayWeek = "토";
+//        }
+//
+//        if (i == 0) {
+//          str_day1 = temp_date;
+//          str_dayWeek1 = temp_dayWeek;
+//        } else if (i == 1) {
+//          str_day2 = temp_date;
+//          str_dayWeek2 = temp_dayWeek;
+//        } else if (i == 2) {
+//          str_day3 = temp_date;
+//          str_dayWeek3 = temp_dayWeek;
+//        } else if (i == 3) {
+//          str_day4 = temp_date;
+//          str_dayWeek4 = temp_dayWeek;
+//        } else if (i == 4) {
+//          str_day5 = temp_date;
+//          str_dayWeek5 = temp_dayWeek;
+//        } else if (i == 5) {
+//          str_day6 = temp_date;
+//          str_dayWeek6 = temp_dayWeek;
+//        } else if (i == 6) {
+//          str_day7 = temp_date;
+//          str_dayWeek7 = temp_dayWeek;
+//        } else if (i == 7) {
+//          str_day8 = temp_date;
+//          str_dayWeek8 = temp_dayWeek;
+//        } else if (i == 8) {
+//          str_day9 = temp_date;
+//          str_dayWeek9 = temp_dayWeek;
+//        } else if (i == 9) {
+//          str_day10 = temp_date;
+//          str_dayWeek10 = temp_dayWeek;
+//        } else if (i == 10) {
+//          str_day11 = temp_date;
+//          str_dayWeek11 = temp_dayWeek;
+//        } else if (i == 11) {
+//          str_day12 = temp_date;
+//          str_dayWeek12 = temp_dayWeek;
+//        } else if (i == 12) {
+//          str_day13 = temp_date;
+//          str_dayWeek13 = temp_dayWeek;
+//        } else if (i == 13) {
+//          str_day14 = temp_date;
+//          str_dayWeek14 = temp_dayWeek;
+//        }
+//
+//        arrayDay2[i] = temp_date;
+//        // System.out.println("i==>"+i);
+//        // 0~6 : 일~월
+//      }
 
       model.addAttribute("str_day1", str_day1);
       model.addAttribute("str_day2", str_day2);
@@ -2845,7 +3010,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         if (!"mng_buy_plan".equals(pageView)) {
           System.out.println("전체@@@@@@@@@@@@@@@@@@@");
           itemCount = dao.mng_buy_plan_count(arrayDay, param);
-          board = dao.mng_buy_plan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+          board = dao.mng_buy_plan(arrayDay,  param, page, itemCountPerPage);
           income = dao.mng_buy_income(param);//★★★★★삭제예정220726★★★★★  해도될거같음
           // colist = dao.mng_co_list(param);
         }
@@ -2854,7 +3019,7 @@ System.out.println("페이지 뷰 확인 "+pageView);
         if (!"mng_buy_plan".equals(pageView)) {
           System.out.println("미발행분@@@@@@@@@@@@@@@@@");
           itemCount = dao.mng_buy_plan_incomecount(arrayDay, param);
-          board = dao.mng_buy_incomeplan(arrayDay, arrayDay2, param, page, itemCountPerPage);
+          board = dao.mng_buy_incomeplan(arrayDay,  param, page, itemCountPerPage);
           income = dao.mng_buy_income(param);       //★★★★★삭제예정220726★★★★★
           // colist = dao.mng_co_list(param);
         }

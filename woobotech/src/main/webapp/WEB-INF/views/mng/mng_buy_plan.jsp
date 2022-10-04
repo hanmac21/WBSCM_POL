@@ -273,7 +273,15 @@ vertical-align:top; !important
 						<%-- <input type="text" id="startdate"
 							name="startdate" style="margin-right: 10px; width: 100px"
 							autocomplete="off" value="${startdate}" /> --%>
-						<input type="text" id="startdate" name="startdate" value="${startdate }" style="width:125px; margin-right: 10px;" onchange="dateset(this)" readonly='true'/>	
+						<input type="text" id="startdate" name="startdate" value="${startdate }" style="width:125px; margin-right: 10px;" onchange="dateset(this)" readonly='true'/>
+						 &nbsp;<span>add date  : </span> &nbsp;<select
+							id="addDate" name="addDate" style="height:27px;">
+							<option value="15" ${addDate =='15' ? 'selected' :'' }>15 day</option>
+							<option value="30" ${addDate =='30' ? 'selected' :'' }>30 day</option>
+							<option value="60" ${addDate =='60' ? 'selected' :'' }>60 day</option>
+							<option value="90" ${addDate =='90' ? 'selected' :'' }>90 day</option>
+							<option value="120" ${addDate =='120' ? 'selected' :'' }>120 day</option>
+						</select>	
 						<%
 						if ("master".equals(admin)) {
 						%>
@@ -283,7 +291,7 @@ vertical-align:top; !important
 						<!-- <input type="text" class="" name="p_cu_sangho"
 							id="p_cu_sangho" placeholder="" value=""
 							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}"> -->
-						<input type="text" list="sangholist" id="p_cu_sangho" onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}" />	
+						<input type="text" list="sangholist" id="p_cu_sangho" style="width:100px;" onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}" />	
 							
 						<%-- <datalist id="sangholist">
 							<option value="" selected>전체</option>
@@ -355,7 +363,7 @@ vertical-align:top; !important
 							<option value="2" ${aligndata =='2' ? 'selected' :'' }>Descending</option>
 						</select>
 						 
-						&nbsp;<input type="button" class="btn btn-warning" id="search" 
+						<input type="button" class="btn btn-warning" id="search" 
 							onclick="getUserList('1')" value="Refresh"
 							style="margin-right: 25px; margin-left: 25px;" />
 							
@@ -366,14 +374,14 @@ vertical-align:top; !important
 						<!-- input type="button"	class="btn bg-maroon" onclick="fnTrnsMove()" value="거래명세서 재발행" style="margin-left: 10x" /-->
 						<br>
 						<!-- <br><br> -->
-						<span>Production date : </span> &nbsp;
-						<!-- <input type="text" id="ma_date"
+						<!-- <span>Production date : </span> &nbsp;
+						<input type="text" id="ma_date"
 							autocomplete="off" name="ma_date" style="width: 100px" value="" /> -->
-						<input type="text" id="ma_date" name="ma_date" style="width:125px;" readonly='true'/>
+						<input type="hidden" id="ma_date" name="ma_date" style="width:125px;" readonly='true'/>
 	
-						&nbsp;&nbsp;&nbsp; <input type="button" class="btn btn-success"
+						&nbsp;&nbsp;&nbsp; <!-- <input type="button" class="btn btn-success"
 							onclick="fnMaDateSet()" value="Production date"
-							style="margin-left: 10x;" />
+							style="margin-left: 10x;" /> -->
 						<input type="button"
 							class="btn btn-info" onclick="fnTranViewSet()" value="Issuance of transaction statement"
 							style="margin-right: 10px; margin-left: 10px;" />
@@ -394,7 +402,7 @@ vertical-align:top; !important
 								<option value="100" ${itemCountPerPage =='100' ? 'selected' :'' }>100</option>
 								<option value="30" ${itemCountPerPage =='30' ? 'selected' :'' }>30</option>
 							</select>
-						<span>Display</span>	
+						<span></span>	
 					</div>
 					<!-- </header> -->
 					</div>
@@ -1027,7 +1035,7 @@ vertical-align:top; !important
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>
@@ -1661,7 +1669,7 @@ vertical-align:top; !important
 			for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
 				// table 중 tr이 i번째 있는 자식중에 체크박스가 체크중이면
 				var chk = $('#tablebody').find('tr').eq(i).children().find('input[type="checkbox"]').is(':checked');
-					
+					console.log("포문확인"+i);
 				if (chk == true) {
 					
 					$('#tablebody').find('tr').eq(i).find('.' +check_day+'_lot').val(ma_date);
@@ -1936,7 +1944,10 @@ vertical-align:top; !important
 		var check_count =0;
 		
 		function checkValue(id,box,lot_id,day_id){
-		
+		console.log("check id"+id);
+		console.log("box"+box);
+		console.log("lot_id"+lot_id);
+		console.log("day_id"+day_id);
 			
 		//alert(check_box);
 			
@@ -2057,7 +2068,7 @@ vertical-align:top; !important
 				alert("There are no items selected.");
 				return;
 			}
-			
+			FunLoadingBarStart();
 			//와드
 			var qty = new Array();//수량
 			var custname = new Array();//거래처명
@@ -2183,6 +2194,7 @@ vertical-align:top; !important
 				$("#modalPop3").html("");
 				$("#modalPop3").html(data);
 				$('#modalPop3').modal({backdrop:'static'});
+				FunLoadingBarEnd();
 				//	$('span.number').number( true, 0 );
 			});
 			
@@ -2502,6 +2514,45 @@ vertical-align:top; !important
 			var production2 = $("#p_production2").val();
 			var production3 = $("#p_production3").val();
 			
+			//textarea
+			var batchMode = $('input[name="batchMode"]:checked').val();
+			var batch_date = $("#p_date").val();
+			var batch_content = "";
+			var regex = / /gi;
+			var content = $("#p_content").val().replace(regex, '');	//blank delete
+			if(content != null && content != "" && batchMode == "batch" ){
+				var lines = content.split("\n");
+				console.log("마지막 배열 확인"+lines[lines.length-1]+"마지막");
+				if(lines[lines.length-1]==null || lines[lines.length-1]=="" || lines[lines.length-1]==" "){
+					console.log("if문 확인");
+					lines.pop();
+				}
+				var sumCheck = 0;
+				for (var i = 0; i < lines.length; i++) {
+					var temp = lines[i].split("/");
+					console.log("데이터 확인"+temp);
+					if(temp.length == 2){
+						if(temp[1] == null || temp[1] == ""){
+							lines[i] = temp + batch_date;
+						} 					
+						if(i == 0){
+							batch_content += lines[i];
+						}else {
+							batch_content += "<br>" + lines[i];
+						}							
+						sumCheck = sumCheck + parseInt(temp[0]);
+					}else{
+						alert("The slash is missing.");
+						return;
+					}
+				}	
+				if(sumCheck > qty){
+					alert("Order Qty exceeded. Please check. Current Qty["+sumCheck+"]");
+					return;
+				}
+			}			
+			
+			console.log("체크확인"+batchMode);
 			if(box_qty==""){
 				box_qty="0";
 			}
@@ -2560,84 +2611,90 @@ vertical-align:top; !important
 				return false;
 			}
 			//alert ("메모내용=>"+memo);
-			if((Number(box_qty)+Number(box_qty2)+Number(box_qty3))==0){
-				alert("Please enter the number of receipts per box.");
-			$('#p_box_qty').focus();
-				return false;
-			}
-			if(production!=0){
-				if(box_qty==0){
+			
+			
+			if(batchMode =="nomal"){
+				if((Number(box_qty)+Number(box_qty2)+Number(box_qty3))==0){
 					alert("Please enter the number of receipts per box.");
-					$('#p_box_qty').focus();
+				$('#p_box_qty').focus();
 					return false;
 				}
-			}
-			
-			if(box_qty!=0){
-				if(madate==0){
-					alert("Please enter the production date");
-					$('#p_madate').focus();
-					return false;
+				console.log("if문 확인1"+batchMode)
+				if(production!=0){
+					if(box_qty==0){
+						console.log("if문 확인2"+batchMode)
+						alert("Please enter the number of receipts per box.");
+						$('#p_box_qty').focus();
+						return false;
+					}
 				}
-			}
-			if(production2!=0){
-				if(box_qty2==0){
-					alert("Please enter the number of receipts per box.");
-					$('#p_box_qty2').focus();
-					return false;
-				}
-			}
-			
-			if(box_qty2!=0){
-				if(madate2==0){
-					alert("Please enter the production date");
-					$('#p_madate2').focus();
-					return false;
-				}
-			}
-			if(production3!=0){
-				if(box_qty3==0){
-					alert("Please enter the number of receipts per box.");
-					$('#p_box_qty3').focus();
-					return false;
-				}
-			}
-			
-			if(box_qty3!=0){
-				if(madate3==0){
-					alert("Please enter the production date");
-					$('#p_madate3').focus();
-					return false;
-				}
-			}
-			
-			if(madate!=""){
-				if(madate>indate){
-					alert("Production date is later than warehousing date.");
-					$('#p_madate').focus();
-					return false;
-				}
-			}
-	
-			if(custname==''){
-				alert("Enter company name.");
 				
-				//promise_function().then(firstAjax).catch(errorFunction);
-				promise_function().catch(errorFunction);
-				document.getElementById('cnl').click();
-				//firstAjax()
+				if(box_qty!=0){
+					if(madate==0){
+						alert("Please enter the production date");
+						$('#p_madate').focus();
+						return false;
+					}
+				}
+				if(production2!=0){
+					if(box_qty2==0){
+						alert("Please enter the number of receipts per box.");
+						$('#p_box_qty2').focus();
+						return false;
+					}
+				}
 				
-				return;
-			}
-			
-			if(itemname==''){
-				alert("No Product Name");
-				return;
-			}
-			
-			if(madate==''){
-				alert("Please enter the production date");
-				return;
+				if(box_qty2!=0){
+					if(madate2==0){
+						alert("Please enter the production date");
+						$('#p_madate2').focus();
+						return false;
+					}
+				}
+				if(production3!=0){
+					if(box_qty3==0){
+						alert("Please enter the number of receipts per box.");
+						$('#p_box_qty3').focus();
+						return false;
+					}
+				}
+				
+				if(box_qty3!=0){
+					if(madate3==0){
+						alert("Please enter the production date");
+						$('#p_madate3').focus();
+						return false;
+					}
+				}
+				
+				if(madate!=""){
+					if(madate>indate){
+						alert("Production date is later than warehousing date.");
+						$('#p_madate').focus();
+						return false;
+					}
+				}
+		
+				if(custname==''){
+					alert("Enter company name.");
+					
+					//promise_function().then(firstAjax).catch(errorFunction);
+					promise_function().catch(errorFunction);
+					document.getElementById('cnl').click();
+					//firstAjax()
+					
+					return;
+				}
+				
+				if(itemname==''){
+					alert("No Product Name");
+					return;
+				}
+				
+				if(madate==''){
+					alert("Please enter the production date");
+					return;
+				}
 			}
 			$("#modalPop").html("");
 			$("#modalPop").modal('hide');
@@ -2667,6 +2724,9 @@ vertical-align:top; !important
 					production:production,
 					production2:production2,
 					production3:production3,
+					batch_date:batch_date,
+					batchMode:batchMode,
+					batch_content,
 				}
 			}).done(function(data) {
 				
@@ -2957,7 +3017,7 @@ vertical-align:top; !important
 			var align = $('#aligndata').val();
 			var income = $('#income').val();
 			//var item = $('#p_item').val(); //220614
-			
+			var addDate = $('#addDate').val();			
 			//alert(income);
 			//alert(typeof(income));
 			
@@ -3020,6 +3080,7 @@ vertical-align:top; !important
 						branch:branch,
 						align : align,
 						income : income,
+						addDate : addDate,
 						//item2 : item  //220614
 					}
 				}).done(function(data) {

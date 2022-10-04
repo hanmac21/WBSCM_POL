@@ -238,7 +238,7 @@
 							<!-- <input type="button" class="btn btn-success" id="btexe" onclick="export()" value="엑셀저장"	 style="margin-left: 25px;" />  -->
 							<input type="button" class="btn btn-success" value="Save excel" onclick="showExcel();" style="margin-left: 50px;"/>
 							
-				<%-- <div id="page" style="float:right;">
+				<div id="page" style="float:right;">
 						<span>Per page</span>
 							<select id="itemCountPerPage" class="selectpicker"
 								style="width: 60px; height: 27px" onchange="getUserList('1')">
@@ -246,8 +246,8 @@
 								<option value="100" ${itemCountPerPage =='100' ? 'selected' :'' }>100</option>
 								<option value="30" ${itemCountPerPage =='30' ? 'selected' :'' }>30</option>
 							</select>
-						<span></span>	
-					</div> --%>
+						<span>Display</span>	
+					</div>
 					</div>
 				</div>
 				<div  id="tabledata">
@@ -262,32 +262,26 @@
 										<thead>
 											<tr>
 												<th rowspan="3"style="text-align: center;">Sequence</th>
-												<th rowspan="3"style="text-align: center;">Workplace</th>
-												<th rowspan="3"style="text-align: center;">Car</th>
-												<th rowspan="3"style="text-align: center;">Part Number</th>
 												<th rowspan="3" style="text-align: center;">Item name</th>
-												<th rowspan="3"style="text-align: center;">Spec</th>
-												<th rowspan="3"style="text-align: center;">Unit</th>
-												<!-- <th rowspan="3" style="text-align: center;">Standard</th>
+												<th rowspan="3" style="text-align: center;">Standard</th>
 												<th rowspan="3" style="text-align: center;">Item classification</th>
-												<th rowspan="3" style="text-align: center;">Unit</th> -->
-												<th colspan="4" style="text-align: center;">Warehouse inventory</th>
-												<th colspan="2" style="text-align: center;">WIP inventory</th>
-												<th rowspan="2" colspan="2" style="text-align: center;">Total Qty</th>
-												<th rowspan="3" colspan="2" style="text-align: center;">Total Qty</th>
+												<th rowspan="3" style="text-align: center;">Unit</th>
+												<th colspan="8" style="text-align: center;">Warehouse inventory</th>
+												<th colspan="6" style="text-align: center;">WIP inventory</th>
+												<th colspan="2" style="text-align: center;">Total Qty</th>
 												
 												
 											</tr>
 											<tr>
-												<th colspan="2" style="text-align: center;">Material Warehouse </th>
-												<!-- <th colspan="2" style="text-align: center;">Outside Warehouse</th> -->
-												<th colspan="2" style="text-align: center;">Products Warehouse</th>
-												<!-- <th colspan="2" style="text-align: center;">폐기</th> -->
-												<th colspan="2" style="text-align: center;">Poland Workshop</th>
-												<!-- <th colspan="2" style="text-align: center;">Porm</th>
-												<th colspan="2" style="text-align: center;">A/REST</th> -->
-												<!-- <th colspan="2" style="text-align: center;">Total Qty</th> -->
-											</tr>		
+												<th colspan="2" style="text-align: center;">Product </th>
+												<th colspan="2" style="text-align: center;">Porm</th>
+												<th colspan="2" style="text-align: center;">material</th>
+												<th colspan="2" style="text-align: center;">abroad</th>
+												<th colspan="2" style="text-align: center;">Blow</th>
+												<th colspan="2" style="text-align: center;">Porm</th>
+												<th colspan="2" style="text-align: center;">A/REST</th>
+												<th colspan="2" style="text-align: center;">Total Qty</th>
+											</tr>	
 											<tr>
 												<th style="text-align: center;">OK</th>
 												<th style="text-align: center;">NG</th>
@@ -297,15 +291,15 @@
 												<th style="text-align: center;">NG</th>
 												<th style="text-align: center;">OK</th>
 												<th style="text-align: center;">NG</th>
-												<!-- <th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th> -->
-												<!-- <th style="text-align: center;">OK</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
 												<th style="text-align: center;">NG</th>
 												<th style="text-align: center;">OK</th>
 												<th style="text-align: center;">NG</th>
 												<th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th> -->
-											</tr>			
+												<th style="text-align: center;">NG</th>
+											</tr>		
 										</thead>
 										<tbody>
 												<c:choose>
@@ -360,7 +354,7 @@
 	<div class="row" style="display:flex;">
 
 	<div class="" style="padding-top: 0px; width: 33%; float: left;">
-		<%-- <span style="margin-left: 10px;">number : ${ itemCount }</span> --%>
+		<span style="margin-left: 10px;">number : ${ itemCount }</span>
 	</div>
 	
 	<div class="" style="width: 33%; text-align: center; float: left; padding-top: -10px; margin-top: -10px;">
@@ -405,7 +399,7 @@
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>

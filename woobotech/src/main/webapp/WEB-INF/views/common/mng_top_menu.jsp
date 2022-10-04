@@ -75,7 +75,7 @@
 			<li class="<%=menu[3]%>"><a href="mng_stock_plan?menu=3" style="font-size:17px;">Inventory view</a></li>
 			<!-- li class="<%=menu[5]%>"><a href="mng_delivery?menu=5">배송관리</a></li-->
 			
-			<li class="<%=menu[11]%>"><a href="mng_export_master?menu=11" style="font-size:17px;"><!-- 반출증 관리 -->Carry-out</a></li> 
+			<%-- <li class="<%=menu[11]%>"><a href="mng_export_master?menu=11" style="font-size:17px;"><!-- 반출증 관리 -->Carry-out</a></li>  --%>
 			
 			<li class="<%=menu[4]%>"><a href="mng_noti?menu=4" style="font-size:17px;">Notice Board</a></li>
 			<li class="<%=menu[6]%>"><a href="mng_cw_noti?menu=6" style="font-size:17px;">Partner Board</a></li>

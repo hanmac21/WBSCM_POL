@@ -8,25 +8,30 @@ public class StockDTO {
   private String itemcode1;
   private String itemname;
   private String spec;
+  private String colorname;
   private String unit;
   private String carname;
-  private String cmb_itemtype;
+  private String re_jegoqty;
+  private String re_jegoqty1;
   private String f001qty;
   private String f003qty;
   private String m001qty;
-  private String p001qty;
+  //private String p001qty;
   private String g001qty;
   private String f001qty1;
   private String f003qty1;
   private String m001qty1;
-  private String p001qty1;
+  //private String p001qty1;
   private String g001qty1;
   private String a0001qty;
-  private String b0001qty;
-  private String k0001qty;
+  private String c0001qty;
+  private String j0001qty;
   private String a0001qty1;
-  private String b0001qty1;
-  private String k0001qty1;
+  private String c0001qty1;
+  private String j0001qty1;
+  private String e001qty;
+  private String e001qty1;
+  private String seq;
 
   public String getBranch() {
     return branch;
@@ -100,13 +105,11 @@ public class StockDTO {
     this.carname = carname;
   }
 
-  public String getCmb_itemtype() {
-    return cmb_itemtype;
-  }
-
-  public void setCmb_itemtype(String cmb_itemtype) {
-    this.cmb_itemtype = cmb_itemtype;
-  }
+  /*
+   * public String getCmb_itemtype() { return cmb_itemtype; }
+   * 
+   * public void setCmb_itemtype(String cmb_itemtype) { this.cmb_itemtype = cmb_itemtype; }
+   */
 
   public String getF001qty() {
     return f001qty;
@@ -132,13 +135,11 @@ public class StockDTO {
     this.m001qty = m001qty;
   }
 
-  public String getP001qty() {
-    return p001qty;
-  }
-
-  public void setP001qty(String p001qty) {
-    this.p001qty = p001qty;
-  }
+  /*
+   * public String getP001qty() { return p001qty; }
+   * 
+   * public void setP001qty(String p001qty) { this.p001qty = p001qty; }
+   */
 
   public String getG001qty() {
     return g001qty;
@@ -172,13 +173,11 @@ public class StockDTO {
     this.m001qty1 = m001qty1;
   }
 
-  public String getP001qty1() {
-    return p001qty1;
-  }
-
-  public void setP001qty1(String p001qty1) {
-    this.p001qty1 = p001qty1;
-  }
+  /*
+   * public String getP001qty1() { return p001qty1; }
+   * 
+   * public void setP001qty1(String p001qty1) { this.p001qty1 = p001qty1; }
+   */
 
   public String getG001qty1() {
     return g001qty1;
@@ -196,21 +195,15 @@ public class StockDTO {
     this.a0001qty = a0001qty;
   }
 
-  public String getB0001qty() {
-    return b0001qty;
-  }
-
-  public void setB0001qty(String b0001qty) {
-    this.b0001qty = b0001qty;
-  }
-
-  public String getK0001qty() {
-    return k0001qty;
-  }
-
-  public void setK0001qty(String k0001qty) {
-    this.k0001qty = k0001qty;
-  }
+  /*
+   * public String getB0001qty() { return b0001qty; }
+   * 
+   * public void setB0001qty(String b0001qty) { this.b0001qty = b0001qty; }
+   * 
+   * public String getK0001qty() { return k0001qty; }
+   * 
+   * public void setK0001qty(String k0001qty) { this.k0001qty = k0001qty; }
+   */
 
   public String getA0001qty1() {
     return a0001qty1;
@@ -220,21 +213,95 @@ public class StockDTO {
     this.a0001qty1 = a0001qty1;
   }
 
-  public String getB0001qty1() {
-    return b0001qty1;
+  public String getRe_jegoqty() {
+    return re_jegoqty;
   }
 
-  public void setB0001qty1(String b0001qty1) {
-    this.b0001qty1 = b0001qty1;
+  public void setRe_jegoqty(String re_jegoqty) {
+    this.re_jegoqty = re_jegoqty;
   }
 
-  public String getK0001qty1() {
-    return k0001qty1;
+  public String getRe_jegoqty1() {
+    return re_jegoqty1;
   }
 
-  public void setK0001qty1(String k0001qty1) {
-    this.k0001qty1 = k0001qty1;
+  public void setRe_jegoqty1(String re_jegoqty1) {
+    this.re_jegoqty1 = re_jegoqty1;
   }
+
+  public String getC0001qty() {
+    return c0001qty;
+  }
+
+  public void setC0001qty(String c0001qty) {
+    this.c0001qty = c0001qty;
+  }
+
+  public String getJ0001qty() {
+    return j0001qty;
+  }
+
+  public void setJ0001qty(String j0001qty) {
+    this.j0001qty = j0001qty;
+  }
+
+  public String getC0001qty1() {
+    return c0001qty1;
+  }
+
+  public void setC0001qty1(String c0001qty1) {
+    this.c0001qty1 = c0001qty1;
+  }
+
+  public String getJ0001qty1() {
+    return j0001qty1;
+  }
+
+  public void setJ0001qty1(String j0001qty1) {
+    this.j0001qty1 = j0001qty1;
+  }
+
+  public String getE001qty() {
+    return e001qty;
+  }
+
+  public void setE001qty(String e001qty) {
+    this.e001qty = e001qty;
+  }
+
+  public String getE001qty1() {
+    return e001qty1;
+  }
+
+  public void setE001qty1(String e001qty1) {
+    this.e001qty1 = e001qty1;
+  }
+
+  public String getSeq() {
+    return seq;
+  }
+
+  public void setSeq(String seq) {
+    this.seq = seq;
+  }
+
+  public String getColorname() {
+    return colorname;
+  }
+
+  public void setColorname(String colorname) {
+    this.colorname = colorname;
+  }
+
+  /*
+   * public String getB0001qty1() { return b0001qty1; }
+   * 
+   * public void setB0001qty1(String b0001qty1) { this.b0001qty1 = b0001qty1; }
+   * 
+   * public String getK0001qty1() { return k0001qty1; }
+   * 
+   * public void setK0001qty1(String k0001qty1) { this.k0001qty1 = k0001qty1; }
+   */
 
 
 

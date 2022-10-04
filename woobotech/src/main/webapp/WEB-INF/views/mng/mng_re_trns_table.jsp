@@ -160,7 +160,7 @@
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>

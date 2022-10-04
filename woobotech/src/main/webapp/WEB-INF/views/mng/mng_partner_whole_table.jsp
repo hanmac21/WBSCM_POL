@@ -13,7 +13,7 @@
 											<tr>
 												<th style="text-align: center; font-size: 18x;">Sequence</th>
 												<th style="text-align: center; font-size: 18x;">Partner</th>
-												<th style="text-align: center; font-size: 18x;">Type of business</th>
+												<!-- <th style="text-align: center; font-size: 18x;">Type of business</th> -->
 												<th style="text-align: center; font-size: 18x;">Business number</th>
 												<th style="text-align: center; font-size: 18x;">Representative</th>
 												<th style="text-align: center; font-size: 18x;">Address</th>
@@ -39,7 +39,7 @@
 																<c:set var="no" value="${itemCount - ((currentPage - 1) * itemCountPerPage ) - i + 1}"/>
 																${no }</td>
 															<td style="text-align: center;">${vo.cu_sangho}</td>
-															<td style="text-align: center;">${vo.cu_upjong }</td>
+															<%-- <td style="text-align: center;">${vo.cu_upjong }</td> --%>
 															<td style="text-align: center;">${vo.cu_uptae }</td>
 															<td style="text-align: center;">${vo.cu_master }</td>
 															<td style="text-align: center;">${vo.cu_juso }</td>
@@ -119,7 +119,7 @@
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>

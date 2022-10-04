@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="woobo">
+	<select id="getTScmBarcodeMax" resultType="String">
+		select nvl2(max(barcode),max(barcode)+1,'1') as barcode_seq
+     	from T_SCM_BARCODE_MAX
+      	where indate = #{indate}		
+	</select>
+
+	<insert id="insertTScmBarcodeMax" parameterType="string">
+		insert into T_SCM_BARCODE_MAX (indate, kind,barcode) 
+		values(#{indate},#{kind},#{barcode})		
+	</insert>
+
+	<update id="updateTScmBarcodeMax" parameterType="string">
+		update T_SCM_BARCODE_MAX
+		set barcode = barcode +1	
+		where indate = #{indate}	
+	</update>
+
+	<insert id="insertTScmBarcode" parameterType="com.woobotech.service.web.dto.TscmBarcodePayload">
+		insert into t_scm_barcode (
+		barcode
+		, kind
+		,indate
+		,madate
+		,lotno
+		,cno
+		,cname
+		,pno
+		,pname
+		,qty
+		,tradebarcode
+		,totalqty
+		,mktime
+		,lotqty
+		)values(
+		#{barcode}
+		,#{kind}
+		,#{indate}
+		,#{madate}
+		,#{lotno}
+		,#{cno}
+		,#{cname}
+		,#{pno}
+		,#{pname}
+		,#{qty}
+		,#{tradebarcode}
+		,#{totalqty}
+		,to_char(sysdate,'YYYYMMDDHH24MISS')
+		,#{lotqty}
+		)
+	</insert>
+	
+
+
+
+</mapper>

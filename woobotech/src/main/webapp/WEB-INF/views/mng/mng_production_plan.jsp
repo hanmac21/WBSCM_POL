@@ -239,7 +239,7 @@ th, td {
 								<option value="300" ${itemCountPerPage =='300'  ? 'selected' :'' }>300</option>
 								<option value="100" ${itemCountPerPage =='100' ? 'selected' :'' }>100</option>
 								<option value="30" ${itemCountPerPage =='30' ? 'selected' :'' }>30</option>
-							</select> <span>Display</span>
+							</select> <span></span>
 						</div>
 					</div>
 				</div>
@@ -379,7 +379,7 @@ th, td {
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>

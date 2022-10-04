@@ -41,7 +41,7 @@ table{
 				</button>
 				
 				<div style="float:left;">
-					<h4 class="modal-title">Transaction statement</h4>
+					<h4 class="modal-title">Delivery Note</h4>
 					<%-- <h4 class="modal-title" style="text-align: center;" id="sp_p_biz_nm"></h4>
 					현재 적용된 순번 : <span id = "p_memo3"> ${memo2 }</span> --%>
 				</div>
@@ -116,7 +116,7 @@ table{
 											
 											<div class="row"
 												style="width: 100%; margin-bottom: 10px; text-align: center">
-												<span style="font-size: 24px"><U><B>Transaction statement</B></U></span><br>
+												<span style="font-size: 24px"><U><B>Delivery Note</B></U></span><br>
 												
 												<input type="hidden" value="${board.size() }" id="all"/>
 												<input type="hidden" id="p_sumqty" style="height:26px;" <fmt:formatNumber value="${sumqty}" pattern="#,##0" />>

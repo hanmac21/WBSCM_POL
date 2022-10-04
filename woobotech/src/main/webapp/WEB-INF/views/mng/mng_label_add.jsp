@@ -5,7 +5,7 @@
 
 
 <div class="modal-dialog"  style="width:620px;">
-	<div class="modal-content">
+	<div class="modal-content" style="overflow-y:scroll; width:650px; height:700px;">
 		<div class="modal-header">
 			<!-- <button type="button" class="close" data-dismiss="modal"
 				aria-label="Close">
@@ -83,6 +83,7 @@
 						</div>
 						
 						<div class="form-group">
+							<input type="radio" id="nomal" name="batchMode" value="nomal" checked><label for="rdPink">nomal</label>
 							<label for="name" class="col-sm-2 control-label"
 								style="font-size: 14px">Production date</label>
 
@@ -123,7 +124,21 @@
 									id="p_production3" value="${production3}" placeholder=""  style="margin-left: 16px; width: 145px; float:left">
 							</div>
 						</div>
-						
+						<div class="form-group">
+							<input type="radio" id="Batch" name="batchMode" value="batch" ><label for="rdRed">Batch</label>
+							<label for="name" class="col-sm-2 control-label" style="font-size: 14px">Batch date</label>
+							<div class="col-sm-10">
+								<input type="text" placeholder="dd-mm-yyyy"  class="form-control" name="p_date"
+									id="p_date"  value="${madate}" placeholder="dd-mm-yyyy"  style="margin-left: 3px; width:145px; float:left; background-color:#ffffff" readonly='true'>								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-2 control-label" style="font-size: 14px">Batch QTY</label>
+							<div class="col-sm-10">
+								<textarea name="p_content" id="p_content" cols="100" rows="10" class="form-control" 
+								style="overflow-y: scroll;" placeholder="ex) 22.51/10092022"></textarea>
+							</div>
+						</div>
 						<!-- 
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label"
@@ -193,6 +208,16 @@
 	});
 	$(function() {
 		$("#p_madate3").datepicker ({ 
+			  format: 'dd-mm-yyyy',
+			  todayBtn:true,
+			  todayBtn:'linked'
+			  
+		  }).on('change',function(){
+				$('.datepicker').hide();
+		  });
+	});
+	$(function() {
+		$("#p_date").datepicker ({ 
 			  format: 'dd-mm-yyyy',
 			  todayBtn:true,
 			  todayBtn:'linked'

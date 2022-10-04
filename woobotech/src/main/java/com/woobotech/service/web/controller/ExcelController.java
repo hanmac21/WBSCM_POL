@@ -590,7 +590,7 @@ public class ExcelController {
       List board = null;
       WooboTechDao dao = new WooboTechDao();
       if (!"mng_stock_plan".equals(pageView)) {
-        itemCount = dao.mng_stock_plan_count(arrayDay, param);
+        //itemCount = dao.mng_stock_plan_count(arrayDay, param);
         logger.info("◁◀◁◀◁◀ mng_biz_plan end2");
         board = dao.mng_stock_plan_excel(arrayDay, param, page, itemCountPerPage);
       }

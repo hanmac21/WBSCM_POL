@@ -11,44 +11,50 @@
 									
 										<thead>
 											<tr>
-												<th class="sticky-th" rowspan="3"style="text-align: center;">Sequence</th>
-												<th class="sticky-th" rowspan="3" style="text-align: center;">Item name</th>
-												<th class="sticky-th" rowspan="3" style="text-align: center;">Standard</th>
-												<th class="sticky-th" rowspan="3" style="text-align: center;">Item classification</th>
-												<th class="sticky-th" rowspan="3" style="text-align: center;">Unit</th>
-												<th class="sticky-th" colspan="8" style="text-align: center;">Warehouse inventory</th>
-												<th class="sticky-th" colspan="6" style="text-align: center;">WIP inventory</th>
-												<th class="sticky-th" colspan="2" style="text-align: center;">Total Qty</th>
+												<th rowspan="3"style="text-align: center;">Sequence</th>
+												<th rowspan="3"style="text-align: center;">Workplace</th>
+												<th rowspan="3"style="text-align: center;">Car</th>
+												<th rowspan="3"style="text-align: center;">Part Number</th>
+												<th rowspan="3" style="text-align: center;">Item name</th>
+												<th rowspan="3"style="text-align: center;">Spec</th>
+												<th rowspan="3"style="text-align: center;">Unit</th>
+												<!-- <th rowspan="3" style="text-align: center;">Standard</th>
+												<th rowspan="3" style="text-align: center;">Item classification</th>
+												<th rowspan="3" style="text-align: center;">Unit</th> -->
+												<th colspan="4" style="text-align: center;">Warehouse inventory</th>
+												<th colspan="2" style="text-align: center;">WIP inventory</th>
+												<th rowspan="2" colspan="2" style="text-align: center;">Total Qty</th>
+												<th rowspan="3" colspan="2" style="text-align: center;">Total Qty</th>
 												
 												
 											</tr>
 											<tr>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Product </th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Porm</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Material</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Abroad</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Blow</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Porm</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">A/REST</th>
-												<th class="sticky-th-2nd" colspan="2" style="text-align: center;">Total Qty</th>
+												<th colspan="2" style="text-align: center;">Material Warehouse </th>
+												<!-- <th colspan="2" style="text-align: center;">Outside Warehouse</th> -->
+												<th colspan="2" style="text-align: center;">Products Warehouse</th>
+												<!-- <th colspan="2" style="text-align: center;">폐기</th> -->
+												<th colspan="2" style="text-align: center;">Poland Workshop</th>
+												<!-- <th colspan="2" style="text-align: center;">Porm</th>
+												<th colspan="2" style="text-align: center;">A/REST</th> -->
+												<!-- <th colspan="2" style="text-align: center;">Total Qty</th> -->
 											</tr>	
 											<tr>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
-												<th class="sticky-th-3rd" style="text-align: center;">OK</th>
-												<th class="sticky-th-3rd" style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<!-- <th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th> -->
+												<!-- <th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th>
+												<th style="text-align: center;">OK</th>
+												<th style="text-align: center;">NG</th> -->
 											</tr>		
 										</thead>
 										<tbody>
@@ -59,27 +65,32 @@
 														<c:set var="i" value="${i+1 }" />
 														<tr>
 															<td style="text-align: center;">${i }</td>
+															<td>${vo.co_saname}</td>
+															<td>${vo.carname}</td>
+															<td>${vo.itemcode}</td>
 															<td>${vo.itemname}</td>
 															<td>${vo.spec}</td>
-															<td></td>
 															<td>${vo.unit}</td>
 															<td>${vo.f001qty ne "0" ? vo.f001qty : ""}</td>
-															<td>${vo.f003qty ne "0" ? vo.f003qty : ""}</td>
-															<td>${vo.m001qty ne "0" ? vo.m001qty : ""}</td>
-															<td>${vo.p001qty ne "0" ? vo.p001qty : ""}</td>
-															<td>${vo.g001qty ne "0" ? vo.g001qty : ""}</td>
 															<td>${vo.f001qty1 ne "0" ? vo.f001qty1 : ""}</td>
-															<td>${vo.f003qty1 ne "0" ? vo.f003qty1 : ""}</td>
 															<td>${vo.m001qty ne "0" ? vo.m001qty : ""}</td>
-															<td>${vo.p001qty1 ne "0" ? vo.p001qty1 : ""}</td>
-															<td>${vo.g001qty1 ne "0" ? vo.g001qty1 : ""}</td>
-															<td>${vo.a0001qty ne "0" ? vo.a0001qty : ""}</td>
-															<td>${vo.b0001qty ne "0" ? vo.b0001qty : ""}</td>
-															<td>${vo.k0001qty ne "0" ? vo.k0001qty : ""}</td>
-															<td>${vo.a0001qty1 ne "0" ? vo.a0001qty1 : ""}</td>
-															<td>${vo.f001qty + vo.m001qty+vo.g001qty +vo.f003qty1+vo.p001qty1+vo.a0001qty+vo.k0001qty ne "0" ? vo.f001qty + vo.m001qty+vo.g001qty +vo.f003qty1+vo.p001qty1+vo.a0001qty+vo.k0001qty : ""}</td>
-															<td>${vo.f003qty + vo.p001qty+vo.f001qty1+vo.m001qty +vo.g001qty1+vo.b0001qty+vo.a0001qty1 ne "0" ? vo.f003qty + vo.p001qty+vo.f001qty1+vo.m001qty +vo.g001qty1+vo.b0001qty+vo.a0001qty1 : ""}</td>
+															<td>${vo.m001qty1 ne "0" ? vo.m001qty1 : ""}</td>
+															<td>${vo.j0001qty ne "0" ? vo.j0001qty : ""}</td>
+															<td>${vo.j0001qty1 ne "0" ? vo.j0001qty1 : ""}</td>
+															<%-- <td>${vo.p001qty ne "0" ? vo.p001qty : ""}</td> --%>
+															<%-- <td>${vo.g001qty ne "0" ? vo.g001qty : ""}</td>
+															<td>${vo.f001qty1 ne "0" ? vo.f001qty1 : ""}</td>
+															<td>${vo.f003qty1 ne "0" ? vo.f003qty1 : ""}</td> --%>
 															
+															<%-- <td>${vo.p001qty1 ne "0" ? vo.p001qty1 : ""}</td> --%>
+															<%-- <td>${vo.g001qty1 ne "0" ? vo.g001qty1 : ""}</td>
+															<td>${vo.a0001qty ne "0" ? vo.a0001qty : ""}</td>
+															<td>${vo.c0001qty ne "0" ? vo.c0001qty : ""}</td>
+															<td>${vo.j0001qty ne "0" ? vo.j0001qty : ""}</td>
+															<td>${vo.a0001qty1 ne "0" ? vo.a0001qty1 : ""}</td> --%>
+															<td>${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty : ""}</td>
+															<td>${vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : ""}</td>
+															<td>${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty+vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : ""}</td>
 														</tr>
 										
 													</c:forEach>
@@ -105,7 +116,7 @@
 <div class="row" style="display:flex;">
 
 	<div class="" style="padding-top: 0px; width: 33%; float: left;">
-		<span style="margin-left: 10px;">number : ${ itemCount }</span>
+		<%-- <span style="margin-left: 10px;">number : ${ itemCount }</span> --%>
 	</div>
 	
 	<div class="" style="width: 33%; text-align: center; float: left; padding-top: -10px; margin-top: -10px;">
@@ -150,7 +161,7 @@
 	<div style="float:right; width: 33%;">
 		<div class="pull-right hidden-xs">
 				<b></b>
-		<strong>Copyright &copy; 2021 <a href="#">WOOBOTECH</a>.
+		<strong>Copyright &copy; 2022 <a href="#">WOOBOTECH</a>.
 		</strong> All rights reserved.
 		</div>
 	</div>
