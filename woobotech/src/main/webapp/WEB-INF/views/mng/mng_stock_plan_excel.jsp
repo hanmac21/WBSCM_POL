@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -217,42 +218,42 @@
 									
 										<thead>
 											<tr>
-												<th rowspan="3"style="text-align: center;">Sequence</th>
-												<th rowspan="3"style="text-align: center;">Workplace</th>
-												<th rowspan="3"style="text-align: center;">Car</th>
-												<th rowspan="3"style="text-align: center;">Part Number</th>
-												<th rowspan="3" style="text-align: center;">Item name</th>
-												<th rowspan="3"style="text-align: center;">Spec</th>
-												<th rowspan="3"style="text-align: center;">Unit</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Sequence</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Workplace</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Car</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Part Number</th>
+												<th class="sticky-th" rowspan="3" style="text-align: center;">Item name</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Spec</th>
+												<th class="sticky-th" rowspan="3"style="text-align: center;">Unit</th>
 												<!-- <th rowspan="3" style="text-align: center;">Standard</th>
 												<th rowspan="3" style="text-align: center;">Item classification</th>
 												<th rowspan="3" style="text-align: center;">Unit</th> -->
-												<th colspan="4" style="text-align: center;">Warehouse inventory</th>
-												<th colspan="2" style="text-align: center;">WIP inventory</th>
-												<th rowspan="2" colspan="2" style="text-align: center;">Total Qty</th>
-												<th rowspan="3" colspan="2" style="text-align: center;">Total Qty</th>
+												<th class="sticky-th" colspan="4" style="text-align: center;">Warehouse inventory</th>
+												<th class="sticky-th" colspan="2" style="text-align: center;">WIP inventory</th>
+												<th class="sticky-th" rowspan="2" colspan="2" style="text-align: center;">Total Qty</th>
+												<th class="sticky-th" rowspan="3" colspan="2" style="text-align: center;">Total Qty</th>
 												
 												
 											</tr>
 											<tr>
-												<th colspan="2" style="text-align: center;">Material Warehouse </th>
+												<th class="sticky-th-2nd" colspan="2" style="text-align: center; ">Material Warehouse </th>
 												<!-- <th colspan="2" style="text-align: center;">Outside Warehouse</th> -->
-												<th colspan="2" style="text-align: center;">Products Warehouse</th>
+												<th class="sticky-th-2nd" colspan="2" style="text-align: center; ">Products Warehouse</th>
 												<!-- <th colspan="2" style="text-align: center;">폐기</th> -->
-												<th colspan="2" style="text-align: center;">Poland Workshop</th>
+												<th class="sticky-th-2nd" colspan="2" style="text-align: center; ">Poland Workshop</th>
 												<!-- <th colspan="2" style="text-align: center;">Porm</th>
 												<th colspan="2" style="text-align: center;">A/REST</th> -->
 												<!-- <th colspan="2" style="text-align: center;">Total Qty</th> -->
 											</tr>	
 											<tr>
-												<th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th>
-												<th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th>
-												<th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th>
-												<th style="text-align: center;">OK</th>
-												<th style="text-align: center;">NG</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">OK</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">NG</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">OK</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">NG</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">OK</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">NG</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">OK</th>
+												<th class="sticky-th-3rd" style="text-align: center; ">NG</th>
 												<!-- <th style="text-align: center;">OK</th>
 												<th style="text-align: center;">NG</th> -->
 												<!-- <th style="text-align: center;">OK</th>
@@ -277,12 +278,13 @@
 															<td>${vo.itemname}</td>
 															<td>${vo.spec}</td>
 															<td>${vo.unit}</td>
-															<td>${vo.f001qty ne "0" ? vo.f001qty : ""}</td>
-															<td>${vo.f001qty1 ne "0" ? vo.f001qty1 : ""}</td>
-															<td>${vo.m001qty ne "0" ? vo.m001qty : ""}</td>
-															<td>${vo.m001qty1 ne "0" ? vo.m001qty1 : ""}</td>
-															<td>${vo.j0001qty ne "0" ? vo.j0001qty : ""}</td>
-															<td>${vo.j0001qty1 ne "0" ? vo.j0001qty1 : ""}</td>
+															<td style="text-align:right;">${vo.m001qty ne "0" ? vo.m001qty : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															<td style="text-align:right;">${vo.m001qty1 ne "0" ? vo.m001qty1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															<td style="text-align:right;">${vo.f001qty ne "0" ? vo.f001qty : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															<td style="text-align:right;">${vo.f001qty1 ne "0" ? vo.f001qty1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															
+															<td style="text-align:right;">${vo.j0001qty ne "0" ? vo.j0001qty : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															<td style="text-align:right;">${vo.j0001qty1 ne "0" ? vo.j0001qty1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
 															<%-- <td>${vo.p001qty ne "0" ? vo.p001qty : ""}</td> --%>
 															<%-- <td>${vo.g001qty ne "0" ? vo.g001qty : ""}</td>
 															<td>${vo.f001qty1 ne "0" ? vo.f001qty1 : ""}</td>
@@ -294,9 +296,22 @@
 															<td>${vo.c0001qty ne "0" ? vo.c0001qty : ""}</td>
 															<td>${vo.j0001qty ne "0" ? vo.j0001qty : ""}</td>
 															<td>${vo.a0001qty1 ne "0" ? vo.a0001qty1 : ""}</td> --%>
-															<td>${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty : ""}</td>
-															<td>${vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : ""}</td>
-															<td>${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty+vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : ""}</td>
+															<c:set var="row_sum1" value="${vo.f001qty + vo.f003qty+vo.m001qty+vo.g001qty+vo.e001qty+vo.a0001qty+vo.c0001qty+vo.j0001qty}" />
+				                                            <c:set var="row_sum2" value="${vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1}" />
+				                                            <c:set var="row_sum3" value="${(row_sum1+row_sum2)}" />
+				                                            <fmt:formatNumber var="number3" type="number"  maxFractionDigits="2" value="${ (((vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1)*100) - (((vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1)*100)%1)) * (1/100)   } " />
+				                                             
+				                                             
+				                                             <%-- <fmt:formatNumber var="number3" type="number"  maxFractionDigits="2" value="${row_sum3} " /> --%>
+				
+				                                              
+				                                             <td style="text-align:right;">${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty ne "0" ? row_sum1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+				                                             <td style="text-align:right;">${vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? row_sum2 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+				                                             <td style="text-align:right;">${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? number3 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</td>
+															
+															<%-- <td style="text-align:right;"><span id="ok${i}">${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</span></td>
+															<td style="text-align:right;"><span id="ng${i}">${vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</span></td>
+															<td style="text-align:right;"><span id="tot${i}">${vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty +vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty1+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 ne "0" ? vo.f001qty + vo.f003qty+vo.m001qty +vo.g001qty+vo.e001qty + vo.a0001qty +vo.c0001qty + vo.j0001qty+vo.f001qty1+vo.f003qty1+vo.m001qty1 +vo.g001qty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty1+ vo.j0001qty1 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}</span></td> --%>
 														</tr>
 										
 													</c:forEach>

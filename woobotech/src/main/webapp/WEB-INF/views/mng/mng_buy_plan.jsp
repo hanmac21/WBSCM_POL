@@ -374,14 +374,14 @@ vertical-align:top; !important
 						<!-- input type="button"	class="btn bg-maroon" onclick="fnTrnsMove()" value="거래명세서 재발행" style="margin-left: 10x" /-->
 						<br>
 						<!-- <br><br> -->
-						<!-- <span>Production date : </span> &nbsp;
+						<span>Production date : </span> &nbsp;
 						<input type="text" id="ma_date"
-							autocomplete="off" name="ma_date" style="width: 100px" value="" /> -->
-						<input type="hidden" id="ma_date" name="ma_date" style="width:125px;" readonly='true'/>
+							autocomplete="off" name="ma_date" style="width: 100px" value="" /> 
+						<!-- <input type="hidden" id="ma_date" name="ma_date" style="width:125px;" readonly='true'/> -->
 	
-						&nbsp;&nbsp;&nbsp; <!-- <input type="button" class="btn btn-success"
+						&nbsp;&nbsp;&nbsp; <input type="button" class="btn btn-success"
 							onclick="fnMaDateSet()" value="Production date"
-							style="margin-left: 10x;" /> -->
+							style="margin-left: 10x;" />
 						<input type="button"
 							class="btn btn-info" onclick="fnTranViewSet()" value="Issuance of transaction statement"
 							style="margin-right: 10px; margin-left: 10px;" />
@@ -2068,7 +2068,7 @@ vertical-align:top; !important
 				alert("There are no items selected.");
 				return;
 			}
-			FunLoadingBarStart();
+			//FunLoadingBarStart();
 			//와드
 			var qty = new Array();//수량
 			var custname = new Array();//거래처명
@@ -2128,7 +2128,7 @@ vertical-align:top; !important
 				//alert("값은 받어왔습니다.7  i=" + i  +"/chk=" + chk + " /tqy=" +tqty);
 				var tqty = $('#tablebody').find('tr').eq(i).find('.'+check_day).val();
 				console.log(chk);
-				if (chk == true && tqty>0) { //chk == true
+				if (chk == true ) { //chk == true && tqty>0
 					custcode[j] = $('#tablebody').find('tr').eq(i).find('.custcode').text();
 					custname[j] = $('#tablebody').find('tr').eq(i).find('.custname').text();
 					itemcode1[j]= $('#tablebody').find('tr').eq(i).find('.itemcode1').text();
@@ -2146,16 +2146,24 @@ vertical-align:top; !important
 						//alert("생산일자 날짜 형식을 지켜주세요");
 						//return;
 					//}
-					if(check_date<lotno[j]){
+					/* if(check_date<lotno[j]){
 						var cf = confirm("Production date is later than warehousing date. Click OK to proceed.")
 						if(!cf){
 							return;
 						}
-					}	
+					}	 */
 					
+					console.log("수량확인"+i_qty[j]);	
+					var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
 					if(lotno[j]===''){
 						alert("Select production date");
-						return;
+						FunLoadingBarEnd();
+						return false;
+					}
+					if(i_qty[j]==null || i_qty[j]==""||i_qty[j]==0 || !numCheck2.test(i_qty[j])){
+						alert("You can enter up to two decimal places." );
+						//FunLoadingBarEnd();
+						return false;
 					}
 					
 					j++;
@@ -2176,6 +2184,8 @@ vertical-align:top; !important
 						custcodeTemp = custcodeChk[i];
 					}else if(custcodeTemp != custcodeChk[i]){
 						alert("Only one supplier can be selected for one transaction statement.");
+						//$("input:checkbox[id="+id+"]").prop("checked", false);
+							
 						return;
 					}
 				}
@@ -2410,7 +2420,7 @@ vertical-align:top; !important
 				alert("Please check the creation date");
 				return;
 			}
-			FunLoadingBarStart();
+			
 			$.ajax({
 				type : "post",
 				url : "mng_label_add",
@@ -2432,7 +2442,7 @@ vertical-align:top; !important
 				$("#modalPop").html("");
 				$("#modalPop").html(data);
 				$('#modalPop').modal({backdrop:'static'});
-				FunLoadingBarEnd();
+				
 				//	$('span.number').number( true, 0 );
 			});
 			
@@ -2514,41 +2524,50 @@ vertical-align:top; !important
 			var production2 = $("#p_production2").val();
 			var production3 = $("#p_production3").val();
 			
+			var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
 			//textarea
 			var batchMode = $('input[name="batchMode"]:checked').val();
 			var batch_date = $("#p_date").val();
 			var batch_content = "";
 			var regex = / /gi;
 			var content = $("#p_content").val().replace(regex, '');	//blank delete
+			var batchqty = 0;
 			if(content != null && content != "" && batchMode == "batch" ){
 				var lines = content.split("\n");
-				console.log("마지막 배열 확인"+lines[lines.length-1]+"마지막");
 				if(lines[lines.length-1]==null || lines[lines.length-1]=="" || lines[lines.length-1]==" "){
-					console.log("if문 확인");
 					lines.pop();
 				}
 				var sumCheck = 0;
 				for (var i = 0; i < lines.length; i++) {
-					var temp = lines[i].split("/");
+					var temp = lines[i].split("/");  // 
+					batchqty = batchqty+temp[0];
 					console.log("데이터 확인"+temp);
 					if(temp.length == 2){
+						if(!numCheck2.test(temp[0])){
+							alert("You can enter up to two decimal places.");
+							return;
+						}
 						if(temp[1] == null || temp[1] == ""){
-							lines[i] = temp + batch_date;
+							//lines[i] = temp + batch_date;
 						} 					
 						if(i == 0){
 							batch_content += lines[i];
 						}else {
 							batch_content += "<br>" + lines[i];
 						}							
-						sumCheck = sumCheck + parseInt(temp[0]);
+						sumCheck = sumCheck + parseFloat(temp[0]);
 					}else{
 						alert("The slash is missing.");
 						return;
 					}
-				}	
-				if(sumCheck > qty){
-					alert("Order Qty exceeded. Please check. Current Qty["+sumCheck+"]");
-					return;
+				}
+				sumCheck = Math.round(sumCheck*100)/100;
+				
+				if(Math.round(sumCheck*100)/100 != qty){
+					alert("Order Qty : ["+qty+"]\nBatch Qty : ["+sumCheck+"] \nRequired quantity : ["+Math.round((qty-sumCheck)*100)/100+"] \nUnable to proceed!");
+					//if(!cn){
+						return;
+					//}
 				}
 			}			
 			
@@ -2573,7 +2592,7 @@ vertical-align:top; !important
 			}
 			
 			var numCheck = /^[0-9]+$/;
-			var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
+			
 			if(!numCheck2.test(box_qty)){
 				alert("You can enter up to two decimal places.");
 				$('#p_box_qty').focus();
@@ -2589,22 +2608,22 @@ vertical-align:top; !important
 				$('#p_box_qty3').focus();
 				return false;
 			}
-			if(!numCheck.test(production)){
+			if(!numCheck2.test(production)){
 				alert("Only numbers can be entered for the LOT quantity.");
 				$('#p_production').focus();
 				return false;
 			}
-			if(!numCheck.test(production2)){
+			if(!numCheck2.test(production2)){
 				alert("Only numbers can be entered for the LOT quantity.");
 				$('#p_production2').focus();
 				return false;
 			}
-			if(!numCheck.test(production3)){
+			if(!numCheck2.test(production3)){
 				alert("Only numbers can be entered for the LOT quantity.");
 				$('#p_production3').focus();
 				return false;
 			}
-			if(qty!=Number(production)+Number(production2)+Number(production3)){
+			if(qty!=Math.round((Number(production)+Number(production2)+Number(production3))*100)/100){
 				console.log(qty+"aa"+production+production2+production3)
 				alert("Order quantity and LOT quantity do not match.");
 				$('#p_production').focus();
@@ -2668,7 +2687,12 @@ vertical-align:top; !important
 				}
 				
 				if(madate!=""){
-					if(madate>indate){
+					var ma = madate.split("-");
+					var ind = indate.split("-");
+					var mdate = ma[2]+ma[1]+ma[0];
+					var idate = ind[2]+ind[1]+ind[0];
+					console.log("madate확인"+mdate+"indate확인"+idate);
+					if(mdate>idate){
 						alert("Production date is later than warehousing date.");
 						$('#p_madate').focus();
 						return false;
@@ -2783,7 +2807,7 @@ vertical-align:top; !important
 		function showExcel(){
 			var startdate = $('#startdate').val();
 			var branch =$('#branch').val();
-			window.open("mng_buy_plan_excel?startdate="+startdate+"&branch="+branch,"Buy Plan Excel",'height=125,width=750');
+			window.open("mng_buy_plan_excel?startdate="+startdate+"&branch="+branch,"Buy Plan Excel",'height=625,width=750');
 		}
 		
 		//라벨 정보 셋팅
@@ -2989,6 +3013,7 @@ vertical-align:top; !important
 		
 		//income table = 납품 없는 있는 것들 제외
 		function getUserList(page, keyword) {
+			
 			check_count=0;
 			check_date='';
 			var form = document.formdata;
@@ -3022,7 +3047,7 @@ vertical-align:top; !important
 			//alert(typeof(income));
 			
 			if(income === "1"){
-				
+				FunLoadingBarStart();
 				//미발행분에 대한 뷰 jsp는 따로 불러옵니다. 2022-04-25 정인우
 				var pageView = "mng_buy_incomeplan_table";
 				console.log(pageView);
@@ -3054,11 +3079,12 @@ vertical-align:top; !important
 					$('td.number').number(true, 0);
 					$('span.number').number(true, 0);
 					//alert("end");
+					FunLoadingBarEnd();
 					//	$('span.number').number( true, 0 );
 				});
 				
 			}else{
-				
+				FunLoadingBarStart();
 				var pageView = "mng_buy_plan_table";
 				console.log(pageView);
 				$.ajax({
@@ -3088,6 +3114,7 @@ vertical-align:top; !important
 					$("#tabledata").html(data);
 					$('td.number').number(true, 0);
 					$('span.number').number(true, 0);
+					FunLoadingBarEnd();
 					//alert("end");
 					//	$('span.number').number( true, 0 );
 				});

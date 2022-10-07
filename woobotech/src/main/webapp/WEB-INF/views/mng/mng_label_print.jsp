@@ -82,7 +82,7 @@ tr.space {
 						<c:when test="${ board.size() > 0 }">
 							<c:forEach var="vo" items="${ board }" varStatus="status">
 									<c:choose>
-									<c:when test="${ board.size() >1 }">
+									<c:when test="${ board.size() >=1 }">
 									<input type="hidden" value="${board.size() }" id="boardSize">
 									<c:if test="${(status.count) %2 ==1}">
 										<tr>

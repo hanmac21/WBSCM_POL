@@ -55,7 +55,7 @@
 															<td style="text-align: center;">${vo.cno}</td>
 															<td style="text-align: center;">${vo.cname}</td>
 															<td style="text-align: center;">${vo.carkind}</td>
-															<td class="number" style="font-size: 18px;text-align: center;">${vo.t_qty}</td>
+															<td  style="font-size: 18px;text-align: center;">${vo.t_qty}</td>
 															<td style="text-align: center;">
 															
 															<c:choose>

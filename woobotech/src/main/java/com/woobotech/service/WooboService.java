@@ -26,7 +26,7 @@ public class WooboService {
 
     ArrayList<LabelDTO> arrList = new ArrayList<LabelDTO>();
 
-    int totalqty = Integer.parseInt(param.get("qty"));
+    double totalqty = Double.parseDouble(param.get("qty"));
     String itemname = param.get("itemname");
     String itemcode1 = param.get("itemcode1");
     String custname = param.get("custname");
@@ -58,7 +58,9 @@ public class WooboService {
 
           try {
             // 최초 발행일 경우 INSERT
-            if ("1".equals(temp_barcode_seq)) {
+            System.out.println("최초발행확인@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+temp_barcode_seq);
+            if ("00001".equals(temp_barcode_seq)) {
+              System.out.println("if문확인 221007@@@@@@@@@@@@@@@@@@@@@@@@@@");
               wooboDAO.insertTScmBarcodeMax(indate, "1", temp_barcode_seq);
             } else {
               wooboDAO.updateTScmBarcodeMax(indate);

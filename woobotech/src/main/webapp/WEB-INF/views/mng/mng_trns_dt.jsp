@@ -166,15 +166,17 @@ table{
 																	<th
 																		style="text-align: center; font-size: 13px; width: 5%"">No.</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 30%">Part Number</th>
+																		style="text-align: center; font-size: 13px; width: 20%">Part Number</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 35%">Part Name</th>
+																		style="text-align: center; font-size: 13px; width: 30%">Part Name</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%"">Qty</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%">Printing status</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 10%">incoming shipment</th>
+																		style="text-align: center; font-size: 13px; width: 10%">Incoming shipment</th>
+																	<th
+																		style="text-align: center; font-size: 13px; width: 15%">Remarks</th>
 
 
 																</tr>
@@ -194,7 +196,7 @@ table{
 																				<td style="text-align: center; font-size: 13px; line-height: 115%;">
 																					${fn:replace(vo.itemname,replaceChar,"<br/>")}
 																				</td>
-																				<td class="number"
+																				<td 
 																					style="text-align: center; font-size: 13px">${vo.i_qty}</td>
 																				
 																				<c:choose>
@@ -221,7 +223,8 @@ table{
 																								class="btn btn-success"
 																								onclick="fnLabelViewSet(${vo.label_idx})"
 																								value="Printing labels" style="font-size:12px; margin: 0px; border: 0px;" />
-																								</td>
+																						</td>
+																						<td><input></td>
 																					</c:when>
 																					
 																					<c:when test="${pageview eq 'mng_re_trns_data'}">

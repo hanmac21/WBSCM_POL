@@ -6946,6 +6946,7 @@ private RowMapper mapperP15 = new RowMapper() {
     String cu_code = param.get("session_cu_code");
     String align = F.nullCheck(param.get("align"), "");
     String result = F.nullCheck(param.get("result"), "");
+    String month3 = arrDay[0].substring(0, 6);
     sql.setLength(0);
     try {
       conx = dataSource.getConnection();
@@ -6967,6 +6968,10 @@ private RowMapper mapperP15 = new RowMapper() {
     }   
     System.out.println(sql.toString());
     
+    System.out.println("arrDay[0]"+arrDay[0]);
+    
+    arrDay[0] = month.toString()+"01";
+    System.out.println("확인"+month+"01");
     
     sql.setLength(0);
     sql.append("    create or replace view t_view_stockr_SUPER as                                                                                           \n");
@@ -7009,7 +7014,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("    ,gQty as InQty,bQty as bInQty, 0 as OutQty, 0 as bOutQty                                                                                            \n");
     sql.append("     from T_MM_EnterSub                                                                                         \n");
     sql.append("     where  Gubun='01'                                                                                          \n");
-    sql.append("     and Condate between '20220901' and '20220930'                                                                                          \n");
+    sql.append("     and Condate between '"+arrDay[0]+"' and '"+arrDay[1]+"'                                                                                          \n");
     sql.append("                                                                                                \n");
     sql.append("     union all                                                                                          \n");
     sql.append("                                                                                                \n");
@@ -7163,7 +7168,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("    ,0 as InQty,0 as bInQty,-1*gQty as OutQty, -1*bQty as bOutQty                                                                                           \n");
     sql.append("     from t_pm_deliverybacksub                                                                                          \n");
     sql.append("     where  Gubun='01'                                                                                          \n");
-    sql.append("     and Condate between 'n");
+    sql.append("     and Condate between '");
     sql.append(arrDay[0]      );   
     sql.append("' and '");
     sql.append(arrDay[1]      );   
@@ -7244,8 +7249,8 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("     from T_MM_Close                                                                                            \n");
     sql.append("     where Gubun='01'                                                                                           \n");
     sql.append("     and branch = '000'                                                                                         \n");
-    sql.append("     and Chmonth2 <= '                                                                                       \n");
-    sql.append(arrDay[0].substring(0, 6));
+    sql.append("     and Chmonth2 <= '");
+    sql.append(month3);
     sql.append("'     \n");
     sql.append("     order by chmonth2 desc                                                                                         \n");
     ps.close();
@@ -7578,7 +7583,7 @@ private RowMapper mapperP15 = new RowMapper() {
     // sql.append(
     // " select a.branch, a.co_saname, a.cu_code,a.cu_sangho , a.gubun, a.subname, a.itemcode,
     // a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname \n");
-    sql.append("     select a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname                                                                                                   \n");
+    sql.append("     select a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname,c.custcode,cc.cu_sangho                                                                                                   \n");
     sql.append("      , sum(a.re_jegoqty) as re_jegoqty, sum(a.re_jegoqty1) as re_jegoqty1                                                                                                  \n");
     sql.append("      , sum(a.F001Qty) as F001Qty, sum(a.F003Qty) as F003Qty, sum(a.M001Qty) as M001Qty, sum(a.G001Qty) as G001Qty                                                                                                  \n");
     sql.append("      , sum(a.F001Qty1) as F001Qty1, sum(a.F003Qty1) as F003Qty1, sum(a.M001Qty1) as M001Qty1, sum(a.G001Qty1) as G001Qty1                                                                                                  \n");
@@ -7899,9 +7904,10 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("'   ))   \n ");
     sql.append("     group by car.subname, pre.subname, i.itemcode, i.itemcode1, i.itemname, i.spec, i.colorname, n.unit                                                                                                    \n");
     sql.append("    , i.branch, br.co_saname                                                                                                    \n");
-    sql.append("       ) a         WHERE CO_SANAME LIKE '%'                                                                                          \n");
+    sql.append("       ) a                                                                                                 \n");
                                                             
-
+    sql.append("left outer join T_MI_Item_Custinfo c on c.gubun='01' and a.itemcode=c.itemcode and c.gmain = 1  \n"
+        + "left outer join c_cust cc on cc.cu_gubun='01' and c.custcode=cc.cu_code  WHERE CO_SANAME LIKE '%' ");
 
     
     if (!"".equals(carname)) {
@@ -7954,7 +7960,7 @@ private RowMapper mapperP15 = new RowMapper() {
 //    sql.append(" , a.cmb_itemtype   \n");
 //    sql.append(" order by branch, itemcode1 \n");
 //    sql.append(")x         \n");                   221004주석
-    sql.append("      group by a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname   \n");
+    sql.append("      group by a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname,c.custcode,cc.cu_sangho   \n");
     sql.append("     order by branch, itemcode1                                                                                                  \n");
     sql.append("                  ) x)t                                                                            \n");
       
@@ -9589,6 +9595,7 @@ private RowMapper mapperP15 = new RowMapper() {
     String cu_code = param.get("session_cu_code");
     String align = F.nullCheck(param.get("align"), "");
     String result = F.nullCheck(param.get("result"), "");
+    String month3 = arrDay[0].substring(0, 6);
     sql.setLength(0);
     try {
       conx = dataSource.getConnection();
@@ -9610,6 +9617,10 @@ private RowMapper mapperP15 = new RowMapper() {
     }   
     System.out.println(sql.toString());
     
+    System.out.println("arrDay[0]"+arrDay[0]);
+    
+    arrDay[0] = month.toString()+"01";
+    System.out.println("확인"+month+"01");
     
     sql.setLength(0);
     sql.append("    create or replace view t_view_stockr_SUPER as                                                                                           \n");
@@ -9652,7 +9663,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("    ,gQty as InQty,bQty as bInQty, 0 as OutQty, 0 as bOutQty                                                                                            \n");
     sql.append("     from T_MM_EnterSub                                                                                         \n");
     sql.append("     where  Gubun='01'                                                                                          \n");
-    sql.append("     and Condate between '20220901' and '20220930'                                                                                          \n");
+    sql.append("     and Condate between '"+arrDay[0]+"' and '"+arrDay[1]+"'                                                                                          \n");
     sql.append("                                                                                                \n");
     sql.append("     union all                                                                                          \n");
     sql.append("                                                                                                \n");
@@ -9806,7 +9817,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("    ,0 as InQty,0 as bInQty,-1*gQty as OutQty, -1*bQty as bOutQty                                                                                           \n");
     sql.append("     from t_pm_deliverybacksub                                                                                          \n");
     sql.append("     where  Gubun='01'                                                                                          \n");
-    sql.append("     and Condate between 'n");
+    sql.append("     and Condate between '");
     sql.append(arrDay[0]      );   
     sql.append("' and '");
     sql.append(arrDay[1]      );   
@@ -9887,8 +9898,8 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("     from T_MM_Close                                                                                            \n");
     sql.append("     where Gubun='01'                                                                                           \n");
     sql.append("     and branch = '000'                                                                                         \n");
-    sql.append("     and Chmonth2 <= '                                                                                       \n");
-    sql.append(arrDay[0].substring(0, 6));
+    sql.append("     and Chmonth2 <= '");
+    sql.append(month3);
     sql.append("'     \n");
     sql.append("     order by chmonth2 desc                                                                                         \n");
     ps.close();
@@ -10221,7 +10232,7 @@ private RowMapper mapperP15 = new RowMapper() {
     // sql.append(
     // " select a.branch, a.co_saname, a.cu_code,a.cu_sangho , a.gubun, a.subname, a.itemcode,
     // a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname \n");
-    sql.append("     select a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname                                                                                                   \n");
+    sql.append("     select a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname,c.custcode,cc.cu_sangho                                                                                                   \n");
     sql.append("      , sum(a.re_jegoqty) as re_jegoqty, sum(a.re_jegoqty1) as re_jegoqty1                                                                                                  \n");
     sql.append("      , sum(a.F001Qty) as F001Qty, sum(a.F003Qty) as F003Qty, sum(a.M001Qty) as M001Qty, sum(a.G001Qty) as G001Qty                                                                                                  \n");
     sql.append("      , sum(a.F001Qty1) as F001Qty1, sum(a.F003Qty1) as F003Qty1, sum(a.M001Qty1) as M001Qty1, sum(a.G001Qty1) as G001Qty1                                                                                                  \n");
@@ -10542,9 +10553,10 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("'   ))   \n ");
     sql.append("     group by car.subname, pre.subname, i.itemcode, i.itemcode1, i.itemname, i.spec, i.colorname, n.unit                                                                                                    \n");
     sql.append("    , i.branch, br.co_saname                                                                                                    \n");
-    sql.append("       ) a         WHERE CO_SANAME LIKE '%'                                                                                          \n");
+    sql.append("       ) a                                                                                                 \n");
                                                             
-
+    sql.append("left outer join T_MI_Item_Custinfo c on c.gubun='01' and a.itemcode=c.itemcode and c.gmain = 1  \n"
+        + "left outer join c_cust cc on cc.cu_gubun='01' and c.custcode=cc.cu_code  WHERE CO_SANAME LIKE '%' ");
 
     
     if (!"".equals(carname)) {
@@ -10597,7 +10609,7 @@ private RowMapper mapperP15 = new RowMapper() {
 //    sql.append(" , a.cmb_itemtype   \n");
 //    sql.append(" order by branch, itemcode1 \n");
 //    sql.append(")x         \n");                   221004주석
-    sql.append("      group by a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname   \n");
+    sql.append("      group by a.branch, a.co_saname, a.subname, a.itemcode, a.itemcode1, a.itemname, a.spec, a.colorname, a.unit, a.carname,c.custcode,cc.cu_sangho   \n");
     sql.append("     order by branch, itemcode1                                                                                                  \n");
     sql.append("                  ) x)t                                                                            \n");
       
@@ -14169,7 +14181,7 @@ private RowMapper mapperP15 = new RowMapper() {
     try {
       conx = dataSource.getConnection();
       conx.setAutoCommit(false);
-      int totalqty = Integer.parseInt(param.get("qty"));
+      double totalqty = Double.parseDouble(param.get("qty"));
       double box_qty = Double.parseDouble(param.get("box_qty"));
       double box_qty2 = Double.parseDouble(param.get("box_qty2"));
       double box_qty3 = Double.parseDouble(param.get("box_qty3"));
@@ -14191,9 +14203,9 @@ private RowMapper mapperP15 = new RowMapper() {
       System.out.println("220919 ghkrdls " + madate);
 
 
-      int production = Integer.parseInt(param.get("production"));
-      int production2 = Integer.parseInt(param.get("production2"));
-      int production3 = Integer.parseInt(param.get("production3"));
+      double production = Double.parseDouble(param.get("production"));
+      double production2 = Double.parseDouble(param.get("production2"));
+      double production3 = Double.parseDouble(param.get("production3"));
       String tradebarcode = param.get("tradebarcode");
       int lCnt1 = 0;
       int lCnt2 = 0;
@@ -14204,17 +14216,22 @@ private RowMapper mapperP15 = new RowMapper() {
       
       if (box_qty != 0) {
         lCnt1 = (int) (production / box_qty);
+        System.out.println("박스수량 확인"+lCnt1);
+//        if(production%box_qty!=0) {
+//          lCnt1=+1;
+//        }
+        
         remainQty1 = Math.round((production % box_qty)*100)/100.0;//(double)production % box_qty;
       }
      
-      if (remainQty1 >= 1) { // 라벨 발행수1
+      if (remainQty1 >0) { // 라벨 발행수1
         lCnt1++;
       }
-
+      System.out.println("박스수량 확인"+lCnt1);
       if (box_qty2 != 0) {
         lCnt2 = (int) (production2 / box_qty2); // 라벨 발행수2
         remainQty2 = Math.round((production2 % box_qty2)*100)/100.0;
-        if (remainQty2 >= 1) {
+        if (remainQty2 >0) {
           lCnt2++;
         }
       }
@@ -14222,7 +14239,7 @@ private RowMapper mapperP15 = new RowMapper() {
         lCnt3 = (int) (production3 / box_qty3); // 라벨 발행수3
         remainQty3 = Math.round((production3 % box_qty3)*100)/100.0;
       }
-      if (remainQty3 >= 1) {
+      if (remainQty3 > 0) {
         lCnt3++;
       }
       int label_cnt = lCnt1 + lCnt2 + lCnt3; // 라벨 발행수
@@ -14341,13 +14358,13 @@ private RowMapper mapperP15 = new RowMapper() {
               // ---------------------------------------------
 
               ps4.setString(index++, tradebarcode);
-              ps4.setInt(index++, totalqty); //
+              ps4.setDouble(index++, totalqty); //
               if (cnt <= lCnt1) {
-                ps4.setInt(index++, production);
+                ps4.setDouble(index++, production);
               } else if (cnt <= lCnt2 + lCnt1) {
-                ps4.setInt(index++, production2);
+                ps4.setDouble(index++, production2);
               } else {
-                ps4.setInt(index++, production3);
+                ps4.setDouble(index++, production3);
               }
 
 
@@ -14490,14 +14507,14 @@ private RowMapper mapperP15 = new RowMapper() {
 
               // ----------------------------------------------------
               ps4.setString(index++, tradebarcode);
-              ps4.setInt(index++, totalqty); //
+              ps4.setDouble(index++, totalqty); //
               // ps4.setString(index++, "to_char(sysdate,'YYYYMMDDHH24MISS')");
               if (cnt <= lCnt1) {
-                ps4.setInt(index++, production);
+                ps4.setDouble(index++, production);
               } else if (cnt <= lCnt1 + lCnt2) {
-                ps4.setInt(index++, production2);
+                ps4.setDouble(index++, production2);
               } else {
-                ps4.setInt(index++, production3);
+                ps4.setDouble(index++, production3);
               }
               if (ps4.executeUpdate() <= 0) {
                 logger.info("▷▶▷▶▷▶ 바코드 저장 실패");

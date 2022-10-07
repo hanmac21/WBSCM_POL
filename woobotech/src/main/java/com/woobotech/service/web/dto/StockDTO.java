@@ -112,11 +112,17 @@ public class StockDTO {
    */
 
   public String getF001qty() {
+    
     return f001qty;
   }
 
   public void setF001qty(String f001qty) {
-    this.f001qty = f001qty;
+    if(isInteger(f001qty)) {
+      this.f001qty = f001qty;
+    }else {
+      double db = Double.parseDouble(f001qty);
+      this.f001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getF003qty() {
@@ -124,7 +130,12 @@ public class StockDTO {
   }
 
   public void setF003qty(String f003qty) {
-    this.f003qty = f003qty;
+    if(isInteger(f003qty)) {
+      this.f003qty = f003qty;
+    }else {
+      double db = Double.parseDouble(f003qty);
+      this.f003qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getM001qty() {
@@ -132,7 +143,12 @@ public class StockDTO {
   }
 
   public void setM001qty(String m001qty) {
-    this.m001qty = m001qty;
+    if(isInteger(m001qty)) {
+      this.m001qty = m001qty;
+    }else {
+      double db = Double.parseDouble(m001qty);
+      this.m001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   /*
@@ -146,7 +162,12 @@ public class StockDTO {
   }
 
   public void setG001qty(String g001qty) {
-    this.g001qty = g001qty;
+    if(isInteger(g001qty)) {
+      this.g001qty = g001qty;
+    }else {
+      double db = Double.parseDouble(g001qty);
+      this.g001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getF001qty1() {
@@ -154,7 +175,12 @@ public class StockDTO {
   }
 
   public void setF001qty1(String f001qty1) {
-    this.f001qty1 = f001qty1;
+    if(isInteger(f001qty1)) {
+      this.f001qty1 = f001qty1;
+    }else {
+      double db = Double.parseDouble(f001qty1);
+      this.f001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getF003qty1() {
@@ -162,7 +188,12 @@ public class StockDTO {
   }
 
   public void setF003qty1(String f003qty1) {
-    this.f003qty1 = f003qty1;
+    if(isInteger(f003qty1)) {
+      this.f003qty1 = f003qty1;
+    }else {
+      double db = Double.parseDouble(f003qty1);
+      this.f003qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getM001qty1() {
@@ -170,7 +201,12 @@ public class StockDTO {
   }
 
   public void setM001qty1(String m001qty1) {
-    this.m001qty1 = m001qty1;
+    if(isInteger(m001qty1)) {
+      this.m001qty1 = m001qty1;
+    }else {
+      double db = Double.parseDouble(m001qty1);
+      this.m001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   /*
@@ -184,7 +220,12 @@ public class StockDTO {
   }
 
   public void setG001qty1(String g001qty1) {
-    this.g001qty1 = g001qty1;
+    if(isInteger(g001qty1)) {
+      this.g001qty1 = g001qty1;
+    }else {
+      double db = Double.parseDouble(g001qty1);
+      this.g001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getA0001qty() {
@@ -192,7 +233,12 @@ public class StockDTO {
   }
 
   public void setA0001qty(String a0001qty) {
-    this.a0001qty = a0001qty;
+    if(isInteger(a0001qty)) {
+      this.a0001qty = a0001qty;
+    }else {
+      double db = Double.parseDouble(a0001qty);
+      this.a0001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   /*
@@ -210,7 +256,12 @@ public class StockDTO {
   }
 
   public void setA0001qty1(String a0001qty1) {
-    this.a0001qty1 = a0001qty1;
+    if(isInteger(a0001qty1)) {
+      this.a0001qty1 = a0001qty1;
+    }else {
+      double db = Double.parseDouble(a0001qty1);
+      this.a0001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getRe_jegoqty() {
@@ -234,7 +285,12 @@ public class StockDTO {
   }
 
   public void setC0001qty(String c0001qty) {
-    this.c0001qty = c0001qty;
+    if(isInteger(c0001qty)) {
+      this.c0001qty = c0001qty;
+    }else {
+      double db = Double.parseDouble(c0001qty);
+      this.c0001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getJ0001qty() {
@@ -242,7 +298,13 @@ public class StockDTO {
   }
 
   public void setJ0001qty(String j0001qty) {
-    this.j0001qty = j0001qty;
+    if(isInteger(j0001qty)) {
+      this.j0001qty = j0001qty;
+    }else {
+      double db = Double.parseDouble(j0001qty);
+      this.j0001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
+  
   }
 
   public String getC0001qty1() {
@@ -250,7 +312,12 @@ public class StockDTO {
   }
 
   public void setC0001qty1(String c0001qty1) {
-    this.c0001qty1 = c0001qty1;
+    if(isInteger(c0001qty1)) {
+      this.c0001qty1 = c0001qty1;
+    }else {
+      double db = Double.parseDouble(c0001qty1);
+      this.c0001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getJ0001qty1() {
@@ -258,7 +325,12 @@ public class StockDTO {
   }
 
   public void setJ0001qty1(String j0001qty1) {
-    this.j0001qty1 = j0001qty1;
+    if(isInteger(j0001qty1)) {
+      this.j0001qty1 = j0001qty1;
+    }else {
+      double db = Double.parseDouble(j0001qty1);
+      this.j0001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getE001qty() {
@@ -266,7 +338,12 @@ public class StockDTO {
   }
 
   public void setE001qty(String e001qty) {
-    this.e001qty = e001qty;
+    if(isInteger(e001qty)) {
+      this.e001qty = e001qty;
+    }else {
+      double db = Double.parseDouble(e001qty);
+      this.e001qty = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getE001qty1() {
@@ -274,7 +351,12 @@ public class StockDTO {
   }
 
   public void setE001qty1(String e001qty1) {
-    this.e001qty1 = e001qty1;
+    if(isInteger(e001qty1)) {
+      this.e001qty1 = e001qty1;
+    }else {
+      double db = Double.parseDouble(e001qty1);
+      this.e001qty1 = String.valueOf(Math.round(db*10000)/10000.0);
+    }
   }
 
   public String getSeq() {
@@ -291,6 +373,14 @@ public class StockDTO {
 
   public void setColorname(String colorname) {
     this.colorname = colorname;
+  }
+  public static boolean isInteger(String num){
+    double d = Double.parseDouble(num);
+    if(d==(int)d) {
+      return true;
+    }else {
+      return false;
+    }
   }
 
   /*

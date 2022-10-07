@@ -196,7 +196,7 @@ table{
 																					${fn:replace(vo.itemname,replaceChar,"<br/>")}
 																				</td>
 																				
-																				<td class="number"
+																				<td 
 																					style="text-align: center; font-size: 13px">${vo.i_qty}</td>
 																				
 																				<c:choose>

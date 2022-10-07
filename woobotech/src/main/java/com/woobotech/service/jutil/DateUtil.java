@@ -61,7 +61,7 @@ public class DateUtil {
    * @param date
    * @return
    */
-  public static String getConvertDate(String strDate) {
+  public static String getConvertDate(String strDate) { //dd-mm-yyyy --> yyyymmdd
     String rtn = "";
     if(strDate != null && strDate != "") {
       strDate = strDate.replaceAll("-", "");
@@ -74,7 +74,7 @@ public class DateUtil {
     }
     return rtn;
   }
-  public static String getConvertDate2(String strDate) {
+  public static String getConvertDate2(String strDate) {  //ddmmyyyy --> yyyy-mm-dd
     String rtn = "";
     if(strDate != null && strDate != "") {
       strDate = strDate.replaceAll("-", "");
@@ -82,6 +82,20 @@ public class DateUtil {
       String month = strDate.substring(2, 4);
       String year = strDate.substring(4, 8);
       rtn = year+"-" + month +"-"+ day;
+    }else {
+      //rtn = DateUtil.getCurrentDate(); gmt +2 current time
+    }
+    return rtn;
+  }
+  
+  public static String getConvertDate3(String strDate) {  //yyyy-mm-dd --> ddmmyyyy
+    String rtn = "";
+    if(strDate != null && strDate != "") {
+      strDate = strDate.replaceAll("-", "");        //yyyymmdd
+      String day = strDate.substring(6, 8);
+      String month = strDate.substring(4, 6);
+      String year = strDate.substring(0, 4);
+      rtn = day + month + year;
     }else {
       //rtn = DateUtil.getCurrentDate(); gmt +2 current time
     }

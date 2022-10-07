@@ -87,7 +87,7 @@
     border: 1px solid #bbc6d3;
     padding: 10px;
   }
-  
+ 
   /* #Progress_Loading {
 	position: absolute;
 	left: 50%;

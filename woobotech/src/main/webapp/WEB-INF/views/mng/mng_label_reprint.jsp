@@ -139,7 +139,7 @@ tr.space {
 															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">date</span></td>
 															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd.MM.yyyy' value='${indate}' /></span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${indate}' /></span></td>
 															
 														</tr>
 														<tr>
@@ -149,7 +149,8 @@ tr.space {
 															<!--<td class="td" style="font-size: 12px;text-align: center;"><input type="text" style="border: none; background: transparent;" value="">${memo}</td> -->
 															<td class="td" style="font-size: 12px;text-align: center;">${memo}</td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><!-- 생산일자 -->production date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.madate}</span></td>
+															<fmt:parseDate value='${vo.madate}' var='madate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${madate}' /></span></td>
 															
 														</tr>
 														

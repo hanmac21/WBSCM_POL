@@ -384,10 +384,10 @@ System.out.println("220926 dtime확인 "+board.get(0));
     String cu_juso = (String) session.getAttribute("cu_juso");
     String cu_master = (String) session.getAttribute("cu_master");
 
-    int sumqty = 0;
+    double sumqty = 0;
     for (int i = 0; i < arrList.size(); i++) {
       String temp_itemcode = arrList.get(i).getItemcode1();
-      sumqty = sumqty + Integer.parseInt(arrList.get(i).getI_qty());
+      sumqty = sumqty + Double.parseDouble(arrList.get(i).getI_qty());
     }
     System.out.println("info확인"+info);
     // System.out.println("cu_juso:"+cu_juso);
@@ -1952,11 +1952,11 @@ System.out.println("날짜확인220919"+str_day1);
     // model.addAttribute("memo", "" );
     //
     param.put("barcode", result_barcode);
-    int sumqty = 0;
+    double sumqty = 0;
     List<TrnsDTO> arrList = dao.mng_re_trns_data(param);
     for (int i = 0; i < arrList.size(); i++) {
       String temp_itemcode = arrList.get(i).getItemcode1();
-      sumqty = sumqty + Integer.parseInt(arrList.get(i).getI_qty());
+      sumqty = sumqty + Double.parseDouble(arrList.get(i).getI_qty());
       System.out.println(temp_itemcode);
       for (int j = 0; j < arrlist.size(); j++) {
         if (temp_itemcode.equals(arrlist.get(j).getItemcode1())) {
@@ -2014,7 +2014,7 @@ System.out.println("날짜확인220919"+str_day1);
     String custcode = param.get("custcode");
     String car_type = param.get("car_type");
     
-    int qty = Integer.parseInt(param.get("qty"));
+    double qty = Double.parseDouble(param.get("qty"));
     double box_qty = Double.parseDouble(param.get("box_qty"));
     double box_qty2 = Double.parseDouble(param.get("box_qty2")); //20220614
     double box_qty3 = Double.parseDouble(param.get("box_qty3"));
@@ -2042,12 +2042,27 @@ System.out.println("날짜확인220919"+str_day1);
       for (int i = 0; i < batchContentArr.length; i++) {
         String[] splitArr = batchContentArr[i].split("/");
         splitMap = new HashMap<String, Object>();
-        splitMap.put("qty", splitArr[0]);
-        splitMap.put("date", splitArr[1]); 
-        splitMapList.add(splitMap);
+        
+        if(!splitArr[0].equals("") || !splitArr[0].isEmpty()) {     //빈칸확인
+          splitMap.put("qty", splitArr[0]);     //숫자만있는지 확인
+           if(splitArr.length>1) {
+              if(splitArr[1].equals("") || splitArr[1].isEmpty()) {
+                splitMap.put("date", DateUtil.getConvertDate3(batchDate));
+              }else {
+                splitMap.put("date", splitArr[1]);
+              }
+           }else {
+             splitMap.put("date", DateUtil.getConvertDate3(batchDate));
+           }
+          splitMapList.add(splitMap);
+          
+        }
+        
+        
       }
     }
     // 주문수량 /박스수량
+    System.out.println("리스트확인"+splitMapList);
     WooboTechDao dao = new WooboTechDao();
     
     dao.mng_label_del(param); 

@@ -4135,146 +4135,21 @@
 </div>
 
 <script type="text/javascript">
-$(function() {
-	$(".day1_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day2_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day3_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day4_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day5_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day6_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day7_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day8_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day9_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day10_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day11_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day12_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day13_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
-$(function() {
-	$(".day14_lot").datepicker ({ 
-		  format: 'dd-mm-yyyy',
-		  todayBtn:true,
-		  todayBtn:'linked'
-		  
-	  }).on('change',function(){
-			$('.datepicker').hide();
-	  });
-});
+
+for(var i =1; i<121; i++){
+	var dId = ".day"+i+"_lot";
+	$(function() {
+		$(dId).datepicker ({ 
+			  format: 'dd-mm-yyyy',
+			  todayBtn:true,
+			  todayBtn:'linked'
+			  
+		  }).on('change',function(){
+				$('.datepicker').hide();
+		  });
+	});
+}
+
 $('span.number').number(true, 0);
 	$(function() {
 		/* $('input[name="day1_lot"]').datepicker({
