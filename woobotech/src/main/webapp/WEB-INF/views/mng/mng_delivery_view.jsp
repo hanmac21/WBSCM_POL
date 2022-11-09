@@ -87,7 +87,19 @@
 								</div>
 							</div>
 						</div>
-						
+						<div class="form-group">
+							<!-- <label for="name" class="col-sm-2 control-label"
+								style="font-size: 10px">출발일자</label> -->
+							<div class="col-sm-10">
+								<div style="float:left; margin-top:8px;">
+									<span>Arrival date</span>
+								</div>
+								<div style="float:left; margin-left:48px;">
+								<input type="text"  name="p_du_delivery_date" readonly placeholder="dd-mm-yyyy"
+									id="p_du_delivery_date" value="">
+								</div>	
+							</div>
+						</div>
 						
 						<div class="form-group">
 							<!-- <label for="password" class="col-sm-2 control-label"
@@ -255,7 +267,15 @@ $(function() {
 			$('.datepicker').hide();
 	  });
 	
-	//$("#p_delivery_date").datepicker().datepicker("setDate", new Date());
+	$("#p_delivery_date").datepicker().datepicker("setDate", new Date());
+});
+
+$(function() {
+	/* $('#p_delivery_date').datepicker({
+		format : 'dd-mm-yyyy'
+	}); */
+	
+	
 });
 
 //alert(plant);
@@ -279,7 +299,12 @@ function fnDeliveryTimeSet(){
 		
 		var hour  = Number(psHour)+Number(pHour);
 		var min  = Number(psMin)+Number(pMin);
-		
+		console.log(min);
+		if(Number(min)>60){
+			hour = hour+1;
+			min = min-60;
+		}
+		console.log(min);
 		if(pHour==''){
 			alert('Please select delivery time (hour)');
 			return;
@@ -292,6 +317,8 @@ function fnDeliveryTimeSet(){
 		if(hour<10){
 			hour = "0"+hour;
 		}
+		var day = parseInt(hour/24);
+		hour = hour%24;
 		if(hour>23){
 			hour=23;
 		}
@@ -299,8 +326,20 @@ function fnDeliveryTimeSet(){
 		if(min>50){
 			min=50;
 		}
+		$("#p_du_delivery_date").datepicker ({ 
+			  format: 'dd-mm-yyyy',
+			  todayBtn:true,
+			  todayBtn:'linked'
+			  
+		  }).on('change',function(){
+				$('.datepicker').hide();
+		  });
+		var date = new Date();
+		var ddate = new Date(date);
+		ddate.setDate(date.getDate()+day)
+		$("#p_du_delivery_date").datepicker().datepicker("setDate", ddate);			//도착날짜 세팅
 		
-		$('#p_du_hour').val(hour).prop("selected",true);
+		$('#p_du_hour').val(hour).prop("selected",true);							//도착시간 세팅
 		$('#p_du_min').val(min).prop("selected",true);
 		
 	/* }else if(plant==="001"){

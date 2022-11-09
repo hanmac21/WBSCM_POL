@@ -71,18 +71,25 @@
 					</tr>
 					<tr>
 						<th style="width:50%; text-align:center" class="mng3 manageV">Average delivery time</th>
-						<td  class="mng4 manageV"><select id="p_deliveryhour" name="p_deliveryhour">
-							<option value="00" ${board.p_deliveryhour =='00' ? 'selected' :'' }>00</option>
-							<option value="01" ${board.p_deliveryhour =='01' ? 'selected' :'' }>01</option>
-							<option value="02" ${board.p_deliveryhour =='02' ? 'selected' :'' }>02</option>
-							<option value="03" ${board.p_deliveryhour =='03' ? 'selected' :'' }>03</option>
-							<option value="04" ${board.p_deliveryhour =='04' ? 'selected' :'' }>04</option>
-							<option value="05" ${board.p_deliveryhour =='05' ? 'selected' :'' }>05</option>
-							<option value="06" ${board.p_deliveryhour =='06' ? 'selected' :'' }>06</option>
-							<option value="07" ${board.p_deliveryhour =='07' ? 'selected' :'' }>07</option>
-							<option value="08" ${board.p_deliveryhour =='08' ? 'selected' :'' }>08</option>
-							<option value="09" ${board.p_deliveryhour =='09' ? 'selected' :'' }>09</option>
-							<option value="10" ${board.p_deliveryhour =='10' ? 'selected' :'' }>10</option>
+						<td  class="mng4 manageV">
+						<select id="p_deliveryday" name="p_deliveryday">
+						<%for(int i=0; i<100; i++){
+							if(i<10){%>
+							<option value = "0<%=i%>" >0<%=i%></option>
+							<% }else{%>
+								<option value = "<%=i%>" ><%=i%></option>
+							<% }%>
+						<% }%>
+						</select>
+						Day
+						<select id="p_deliveryhour" name="p_deliveryhour">
+						<%for(int i = 0 ; i<24; i++){ 
+							if(i<10){%>
+							<option value = "0<%=i%>" >0<%=i%></option>
+							<% }else{%>
+								<option value = "<%=i%>" ><%=i%></option>
+							<% }%>
+						<% }%>
 						</select>
 						Hour
 						<select id="p_deliverymin" name="p_deliverymin">
@@ -178,6 +185,27 @@ if (msg!= "") {
 	alert(msg);
 	callP();
 }	 
+$(document).ready(function() {
+	var selectId = document.getElementById('p_deliveryday');
+	var optionArr = selectId.options;
+	var selectId2 = document.getElementById('p_deliveryhour');
+	var optionArr2 = selectId2.options;
+	var hour = parseInt(${board.p_deliveryhour});
+	day = parseInt(hour/24);
+	console.log(day);
+	for(var i =0; i<100; i++){
+		if(day==selectId.options[i].value){
+			selectId.options[i].selected =true;
+		}
+	}
+	hour = hour%24;
+	for(var i =0; i<24; i++){
+		if(hour==selectId2.options[i].value){
+			selectId2.options[i].selected =true;
+		}
+	}
+})
+
  $(function () {
     
     var loginId = getCookie("loginId");

@@ -69,46 +69,74 @@
 		<form action="/mail/send" id="send" method="POST">
 		
 			<div class="form-group" style="position: absolute;left: 100px;top: 530px;">
-                <label for="gender">
-                  
+                <label for="gender" style="width:100%">
+                  <input type="hidden" value="${cuCode}" id = "cuCode">
                   <span class="align-middle" style="font-size: 25px;">Select Email</span>
+                  <input type="button" class="btn btn-success" style="float:right;"value="Save" onclick="emailSave()"/>
+                  <button type="button" class="btn btn-info" style="float:right; margin-right:5px;" 
+								onclick="emailDel()">Delete</button>
                 </label>
-               <table>
+               <table id ="emailtable" style="border-collapse: separate; border-spacing:0 10px;">
                		
 	               	<c:forEach items="${list }" var="list">
-			            <tr>	
+			            <tr style="margin-battom: 20px;">	
 		               		<c:if test="${list.email1 ne ' '}">
-		               			<td><input type="checkbox"  value="${list.email1}" name="email1" class="checkbox"></td>
-		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.email1}</b></td>
-		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.user1}</b></td>
+		               			<td><input type="checkbox"  value="${list.email1}" name="email1" id="user1" class="checkbox"></td>
+		               			<td><b style="margin-left: 10px;font-size: 18px;" id = "email1">${list.email1}</b></td>
+		               			<td><b style="margin-left: 10px;font-size: 18px;" id = "name1">${list.user1}</b></td>
+		               		</c:if>
+		               		<c:if test="${list.email1 eq ' '}">
+		               			<td></td>
+		               			<td><input id="email1" placeholder="E-Mail"></td>
+		               			<td style="padding-left:10px;"> <input id ="name1" placeholder="Name"></td>
 		               		</c:if>
 		                </tr>	
-		               	<tr>
+		               	<tr >
 		               		<c:if test="${list.email2 ne ' '}">
-		               			<td><input type="checkbox" value="${list.email2}" name="email2" class="checkbox"></td>
-		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.email2}</b></td>
-		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.user2}</b></td>
+		               			<td><input type="checkbox" value="${list.email2}" name="email2" id="user2"class="checkbox"></td>
+		               			<td><b style="margin-left: 10px;font-size: 18px;" id = "email2">${list.email2}</b></td>
+		               			<td><b style="margin-left: 10px;font-size: 18px;" id = "name2">${list.user2}</b></td>
+		               		</c:if>
+		               		<c:if test="${list.email2 eq ' '}">
+		               			<td></td>
+		               			<td><input id="email2" placeholder="E-Mail"></td>
+		               			<td style="padding-left:10px;"><input id ="name2" placeholder="Name"></td>
 		               		</c:if>
 		               	</tr>
 		               	<tr>	
 		               		<c:if test="${list.email3 ne ' '}">
-		               			<td><input type="checkbox" value="${list.email3}" name="email3" class="checkbox"></td>
+		               			<td><input type="checkbox" value="${list.email3}" name="email3" id="user3"class="checkbox"></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.email3}</b></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.user3}</b></td>
+		               		</c:if>
+		               		<c:if test="${list.email3 eq ' '}">
+		               			<td></td>
+		               			<td><input id="email3" placeholder="E-Mail"></td>
+		               			<td style="padding-left:10px;"><input id ="name3" placeholder="Name"></td>
 		               		</c:if>
 		               	</tr>
 		               	<tr>	
 		               		<c:if test="${list.email4 ne ' '}">
-		               			<td><input type="checkbox" value="${list.email4}" name="email4" class="checkbox"></td>
+		               			<td><input type="checkbox" value="${list.email4}" name="email4"id="user4" class="checkbox"></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.email4}</b></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.user4}</b></td>
+		               		</c:if>
+		               		<c:if test="${list.email4 eq ' '}">
+		               			<td></td>
+		               			<td><input id="email4" placeholder="E-Mail"></td>
+		               			<td style="padding-left:10px;"><input id ="name4" placeholder="Name"></td>
 		               		</c:if>
 		               	</tr>
 		               	<tr>	
 		               		<c:if test="${list.email5 ne ' '}">
-								<td><input type="checkbox" value="${list.email5}" name="email5" class="checkbox"></td>
+								<td><input type="checkbox" value="${list.email5}" name="email5"id="user5" class="checkbox"></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.email5}</b></td>
 		               			<td><b style="margin-left: 10px;font-size: 18px;">${list.user5}</b></td>
+		               		</c:if>
+		               		<c:if test="${list.email5 eq ' '}">
+		               			<td></td>
+		               			<td><input id="email5" placeholder="E-Mail"></td>
+		               			<td style="padding-left:10px;"><input id ="name5" placeholder="Name"></td>
 		               		</c:if>
 		               	</tr>	
 	               </c:forEach>
@@ -174,6 +202,7 @@
             
             <div class="my-3 text-center" style="position: absolute;left: 410px;top: 30px;">
                 <button type="button" id="btnadd" class="btn btn-primary" onclick="javascript:MailSend();" style="width: 140px;height: 40px;">Send E-Mail</button>
+                
                <!--  <button type="button" class="btn btn-primary ml-3" onclick="javascript:popupClose();">취소</button> -->
             </div>
               	
@@ -227,14 +256,16 @@
 	<script type="text/javascript">
 		
 		var msg = "${msg}";
-		if (msg!= "") {
-			alert(msg);
-			window.close(); 
-		}
+		/* if (msg!= "") {
+			var p = document.getElementById("emailtable");
+			var newtd = document.createElement("td");
+			newtd.innerHTML="E-Mail : <input type='text'> &nbsp;&nbsp; User : <input type='text'>";
+			p.append(newtd);
+		} */
 		
 		/* function popupClose() {
 			window.close(); 
-		}  */
+		}  */ 
 		
 		function MailSend() {
 			console.log("클릭");
@@ -259,6 +290,159 @@
 				$('#send').submit();
 			}
 			
+		}
+		
+		function emailDel(){
+			var cf = confirm("Are you sure you want to delete the selected mail?");
+			if(!cf){
+				return;
+			}
+			var emailArr = new Array();
+			var userArr = new Array();
+			for(var i = 0; i<5; i++){
+				if($('#user'+(i+1)).is(':checked')){
+					emailArr.push('email'+(i+1));
+					userArr.push('user'+(i+1));
+				}
+			}
+			
+			if(emailArr.length<1){
+				alert("No email selected.");
+				return;
+			}
+			var cucode = $('#cuCode').val();
+			console.log(emailArr);
+			$.ajax({
+				type : "POST",
+				url : "mng_partner_email_delete",
+				dataType : "html",
+				data : "emailA="+emailArr+"&userA="+userArr+"&cucode="+cucode
+			}).done(function(data) {
+				var result = data.result;
+				
+				/* if(result==1){
+					alert('Successfully processed.');
+				}else{ */
+					location.reload();
+				//}
+				
+			});
+		}
+		function emailSave(){
+			var email1 = "";
+			var user1 ="";
+			var email2 = "";
+			var user2 ="";
+			var email3 = "";
+			var user3 ="";
+			var email4 = "";
+			var user4 ="";
+			var email5 = "";
+			var user5 ="";
+			
+			<c:forEach items="${list }" var="list">
+				<c:if test="${list.email1 ne ' '}">
+					email1 = $('#email1').text();
+					user1 = $('#name1').text();
+				</c:if>
+				<c:if test="${list.email1 eq ' '}">
+				console.log("if문 확인");
+					email1 = $('#email1').val();
+					console.log("if문 확인"+email1);
+					user1 = $('#name1').val();
+				</c:if> 
+				<c:if test="${list.email2 ne ' '}">
+					email2 = $('#email2').text();
+					user2 = $('#name2').text();
+				</c:if>
+				<c:if test="${list.email2 eq ' '}">
+					email2 = $('#email2').val();
+					user2 = $('#name2').val();
+				</c:if> 
+				<c:if test="${list.email3 ne ' '}">
+					email3 = $('#email3').text();
+					user3 = $('#name3').text();
+				</c:if>
+				<c:if test="${list.email3 eq ' '}">
+					email3 = $('#email3').val();
+					user3 = $('#name3').val();
+				</c:if> 
+				<c:if test="${list.email4 ne ' '}">
+					email4 = $('#email4').text();
+					user4 = $('#name4').text();
+				</c:if>
+				<c:if test="${list.email4 eq ' '}">
+					email4 = $('#email4').val();
+					user4 = $('#name4').val();
+				</c:if>
+				<c:if test="${list.email5 ne ' '}">
+					email5 = $('#email5').text();
+					user5 = $('#name5').text();
+				</c:if>
+				<c:if test="${list.email5 eq ' '}">
+					email5 = $('#email5').val();
+					user5  = $('#name5').val();
+				</c:if> 
+			</c:forEach>
+			let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');		//이메일 정규식
+		
+			for(var i = 0; i<5; i++){
+				if($('#email'+(i+1)).val().trim()!=""){
+					if(!regex.test($('#email'+(i+1)).val().trim())){
+						alert("Email format is incorrect.");
+						return 
+					}
+				}
+				if($('#email'+(i+1)).val().trim()!=""){
+					if($('#name'+(i+1)).val().trim()==""){
+						$('#name'+(i+1)).focus();
+						alert("Please enter the name.");
+						return false;
+					}
+				}
+				if($('#name'+(i+1)).val().trim()!=""){
+					if($('#email'+(i+1)).val().trim()==""){
+						$('#email'+(i+1)).focus();
+						alert("Please enter the email.");
+						return false;
+					}
+				}
+			}
+			var cf = confirm("Would you like to register your email?");
+			if(!cf){
+				return;
+			}
+			var cucode = $('#cuCode').val();
+			console.log("cucode확인"+cucode);
+			console.log("email1확인"+email1);
+			
+			$.ajax({
+				type : "POST",
+				url : "mng_partner_email_save",
+				dataType : "html",
+				data : {
+					email1 : email1,
+					email2 : email2,
+					email3 : email3,
+					email4 : email4,
+					email5 : email5,
+					user1 : user1,
+					user2 : user2,
+					user3 : user3,
+					user4 : user4,
+					user5 : user5,
+					cucode : cucode
+				}
+			}).done(function(data) {
+				var result = data.result;
+				
+				/* if(result==1){
+					alert('Successfully processed.');
+				}else{ */
+					location.reload();
+				//}
+				
+			});
 		}
 		//★★★★★삭제예정220721★★★★★
 		/* $('input[type=radio]').click(function() {

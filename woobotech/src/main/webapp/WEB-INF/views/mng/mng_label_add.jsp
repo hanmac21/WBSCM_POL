@@ -23,7 +23,7 @@
 					<div class="box-body">
 							
 						<input type="hidden" id="p_custcode" name="p_custcode" value="${custcode}">
-						
+						<input type="text" id="p_color" name="p_color" value="${color}">
 						
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label"
@@ -137,7 +137,7 @@
 							<label for="name" class="col-sm-2 control-label" style="font-size: 14px">Batch QTY</label>
 							<div class="col-sm-10">
 								<textarea name="p_content" id="p_content" cols="100" rows="10" class="form-control" 
-								style="overflow-y: scroll;" placeholder="ex) 22.51/10092022"></textarea>
+								style="overflow-y: scroll;" placeholder="ex) 22.51/10092022" readonly></textarea>
 							</div>
 						</div>
 						<!-- 
@@ -167,7 +167,7 @@
 						
 						<div class="box-footer" style="text-align: center;">
 							<div>
-							<button type="button" class="btn btn-info"
+							<button type="button" class="btn btn-info" id ="printBtn"
 									onclick="fnLabelPrint()" style="margin-right: 20px; height: 50px;width:100px;">Printing</button>
 							<button type="button" class="btn btn-success"
 									onclick="fnclose()" style="width:100px; height: 50px" id="cnl">Cancel</button>
@@ -236,6 +236,62 @@
 	    //alert("!");
 	    //alert(payment);
 	    $('input[name=p_custname]').attr('value',payment);
+	});
+	
+	var printBtn = document.querySelector("#printBtn");
+	printBtn.addEventListener("click", function (e) {
+	    this.setAttribute("disabled", "disabled");
+	    //폼 서밋
+	});
+	
+	$(document).ready(function() {
+		var batchM = $('input[name="batchMode"]:checked').val();
+		
+		$("#nomal").change(function() {
+			if(batchM =="batch"){
+				console.log("배치");
+			}else if(batchM =="nomal"){
+				document.getElementById('p_content').readOnly=true;
+				document.getElementById('p_date').readOnly=true;
+				document.getElementById('p_madate').readOnly=false;
+				document.getElementById('p_madate2').readOnly=false;
+				document.getElementById('p_madate3').readOnly=false;
+				document.getElementById('p_box_qty').readOnly=false;
+				document.getElementById('p_box_qty2').readOnly=false;
+				document.getElementById('p_box_qty3').readOnly=false;
+				document.getElementById('p_production').readOnly=false;
+				document.getElementById('p_production2').readOnly=false;
+				document.getElementById('p_production3').readOnly=false;
+				console.log("노말");
+				
+			}
+		});
+		
+		
+		/* $('#p_content').on("focus",function(){
+			var focusElement = document.activeElement.name;
+			console.log(focusElement);
+		}); */
+	});
+	$("#Batch").change(function() {
+		var batchM = $('input[name="batchMode"]:checked').val();
+		if(batchM =="batch"){
+			console.log("배치");
+			document.getElementById('p_content').readOnly=false;
+			document.getElementById('p_date').readOnly=false;
+			document.getElementById('p_madate').readOnly=true;
+			document.getElementById('p_madate2').readOnly=true;
+			document.getElementById('p_madate3').readOnly=true;
+			document.getElementById('p_box_qty').readOnly=true;
+			document.getElementById('p_box_qty2').readOnly=true;
+			document.getElementById('p_box_qty3').readOnly=true;
+			document.getElementById('p_production').readOnly=true;
+			document.getElementById('p_production2').readOnly=true;
+			document.getElementById('p_production3').readOnly=true;
+		}else if(batchM =="nomal"){
+			
+			console.log("노말");
+		}
 	});
 	
 	$(function () {

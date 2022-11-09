@@ -93,8 +93,21 @@ tr.space {
 												<table class="table2" width="100%" height="250px"  border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
 													<tbody>
 													
+														
 														<tr>
-															<td class="td"   width="20%" style="text-align: center;">Item name</td>
+															<td class="td"  width="20%" style="text-align: center;"> Supplier</td>
+															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
+															<td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td>
+														</tr>
+														
+														<tr>
+															<td class="td" width="20%" style="text-align: center;">Part No.</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${itemcode1}</span></td>
+															<td class="td" width="20%" style="text-align: center;">Color</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${color}</span></td>
+														</tr>
+														<tr>
+															<td class="td"   width="20%" style="text-align: center;">Part Name</td>
 															
 															
 															<c:choose>
@@ -108,16 +121,7 @@ tr.space {
 															
 															
 														</tr>
-														<tr>
-															<td class="td"  width="20%" style="text-align: center;"> Supplier</td>
-															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
-															<td class="td" colspan="2" width="40%" style="text-align: center;" >${custname}</td><td class="td"  colspan="2"  width="10%" style="font-size: 12px;text-align: center;" >Inspection: <input type="text" style="width:40px;border: none; background: transparent;" value="finish"> </td>
-														</tr>
-														
-														<tr>
-															<td class="td" width="20%" style="text-align: center;">Item code</td>
-															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${itemcode1}</span></td>
-															<td class="td" width="20%" style="text-align: center;">Car</td>
+														<td class="td" width="20%" style="text-align: center;">Program</td>
 															
 															<c:choose>
 																<c:when test="${fn:length( car_type )> 10}">
@@ -129,25 +133,21 @@ tr.space {
 																	<td class="td"  width="30%" style="text-align: center;"><strong>${car_type}</strong></td>
 																</c:otherwise>
 															</c:choose>
-															
-														</tr>
-														
-														<tr>
-															
 															<td class="td" style="text-align: center;">Qty</td>
 															<td class="td number" style="text-align: center;"><strong>${vo.qty}</strong></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Date</span></td>
+														<tr>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Delivery<br>Date</span></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${indate}</span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Lot No.</span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.madate}</span></td>
 															
 														</tr>
 														<tr>
 															<!-- <td class="td" style="font-size: 12px;text-align: center;">바코드번호</td>
 															<td class="td" style="font-size: 12px;text-align: center;">${vo.barcode}</td> -->
-															<td class="td" style="font-size: 12px;text-align: center;">ETC</td>
+															<td class="td" style="font-size: 12px;text-align: center;">Remarks</td>
 															<!--<td class="td" style="font-size: 12px;text-align: center;"><input type="text" style="border: none; background: transparent;" value="">${memo}</td> -->
-															<td class="td" style="font-size: 12px;text-align: center;">${memo}</td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Production date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.madate}</span></td>
+															<td class="td" style="font-size: 12px;text-align: center;" colspan="3">${memo}</td>
 															
 														</tr>
 														

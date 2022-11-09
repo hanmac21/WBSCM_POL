@@ -774,6 +774,61 @@ function currentTime(){
 		$('#back, #loadingBar').hide();
 		$('#back, #loadingBar').remove();
 	}
+	
+	// 221024 비고모두적용 테스트
+	function fnMemoSubSet2(boardSize, barcode){
+		var memoA = new Array(); //$("#item_memo_"+idx).val();		
+		var boardSize = boardSize;
+		var memo="";
+		var itemcode = "";
+		console.log("크기확인"+boardSize);
+		console.log("아이템코드확인"+$("#itemcode_5").text());
+		console.log("아이템코드확인"+$("#itemcode_6").text());
+		for(var i = 0; i<boardSize; i++){
+			memoA[i] = $("#item_memo_"+(i+1)).val();
+			if(i==0){
+				memo = $("#item_memo_"+(i+1)).val();
+				itemcode = $("#itemcode_"+(i+1)).text();
+			}else{
+				console.log((i+1)+"번째"+$("#itemcode_"+(i+1)).text());
+				memo =memo+","+$("#item_memo_"+(i+1)).val();
+				itemcode = itemcode+","+$("#itemcode_"+(i+1)).text();
+			}
+			/* var len= memoA[i].length;
+			if(len>10){
+				alert("Please enter no more than 10 characters.")
+				return;
+			} */
+		}
+		console.log("메모확인"+memo);
+		console.log("메모확인"+itemcode);
+		
+		/* if(memo==null || memo==""){
+			alert('There are no values entered for the comments.');
+			return false;
+		} */
+		
+		$.ajax({
+			type : "post",
+			url : "mng_trns_memo_sub_u2",
+			dataType : "html",
+			data : {
+				memo : memo,
+				size: boardSize,
+				itemcode : itemcode,
+				barcode : barcode 
+				
+			}
+		}).done(function(data) {
+			var isOk = data;
+			if (isOk == 1) {
+				alert('Applied to the comment column.');
+				
+			}else{
+				alert('Remark column application failed');
+			}
+		}); 
+	}
 
 	//메모적용
 	function fnMemoSet(barcode){
@@ -1010,7 +1065,7 @@ function currentTime(){
 		var delivery_date = $("#p_delivery_date").val();
 		var delivery_hour = $("#p_delivery_hour").val();
 		var delivery_min = $("#p_delivery_min").val();
-		
+		var du_date = $("#p_du_delivery_date").val();
 		var du_hour = $("#p_du_hour").val();
 		var du_min = $("#p_du_min").val();
 		
@@ -1060,6 +1115,7 @@ function currentTime(){
 				delivery_date:delivery_date,
 				delivery_hour:delivery_hour,
 				delivery_min:delivery_min,
+				du_date:du_date,
 				du_hour:du_hour,
 				du_min:du_min
 				

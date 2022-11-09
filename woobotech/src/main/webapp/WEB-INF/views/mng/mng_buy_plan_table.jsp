@@ -49,7 +49,13 @@
 											<span class="itemname">${vo.itemname}</span></td>
 										<td class="buyPlan"><span class="car_type">${vo.car_type}</span> <span
 											class="unit" style="display: none;">${vo.unit}</span></td>
-											
+										<input type="hidden" id="custcode_${status.count}" value="${vo.custcode}">
+										<input type="hidden" id="custname_${status.count}" value="${vo.custname}">
+										<input type="hidden" id="itemcode1_${status.count}" value="${vo.itemcode1}">
+										<input type="hidden" id="itemname_${status.count}" value="${vo.itemname}">
+										<input type="hidden" id="car_type_${status.count}" value="${vo.car_type}">
+										<input type="hidden" id="unit_${status.count}" value="${vo.unit}">
+																
 										<c:if test="${arrayCnt >= 15}">
 											<td <c:if test="${vo.day1c == 1}">bgcolor="#ec971f"</c:if> style="padding: 0 0 0 0;" class="top buyPlan">
 												<c:set var="dayTotal" value="${dayTotal + vo.day1}" />
@@ -60,7 +66,7 @@
 														<td width="60%" 
 															style="border: hidden; padding: 2px; font-size: 15pt;" >
 															<input type="checkbox" name="box1"
-															id="box1${status.count}" value="${vo.day1}"
+															id="box1_${status.count}" value="${vo.day1}"
 															onclick="checkValue(this.id,'box1','lot1_${status.count}','day1_${status.count}')">&nbsp;<span
 															class="number tqty ">${vo.day1}</span>
 															(<span id="${vo.day1 }" class="number">${vo.income1 }</span>)
@@ -94,7 +100,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box2"
-														id="box2${status.count}" value="${vo.day2}"
+														id="box2_${status.count}" value="${vo.day2}"
 														onclick="checkValue(this.id,'box2','lot2_${status.count}','day2_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day2}</span>														
 														(<span id="${vo.day2 }" class="number">${vo.income2 }</span>)
@@ -113,7 +119,7 @@
 														id="text_lot2_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day2_lot" id="lot2_${status.count}" name="day2_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -128,7 +134,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box3"
-														id="box3${status.count}" value="${vo.day3}"
+														id="box3_${status.count}" value="${vo.day3}"
 														onclick="checkValue(this.id,'box3','lot3_${status.count}','day3_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day3}</span>
 														<%-- (<span id="${vo.day3 }">${-vo.day3 + vo.income3 }</span>) --%>
@@ -148,7 +154,7 @@
 														id="text_lot3_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day3_lot" id="lot3_${status.count}" name="day3_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -164,7 +170,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box4"
-														id="box4${status.count}" value="${vo.day4}"
+														id="box4_${status.count}" value="${vo.day4}"
 														onclick="checkValue(this.id,'box4','lot4_${status.count}','day4_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day4}</span>
 														<%-- (<span id="${vo.day4 }">${-vo.day4 + vo.income4 }</span>) --%>
@@ -184,7 +190,7 @@
 														id="text_lot4_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day4_lot" id="lot4_${status.count}" name="day4_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -199,7 +205,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box5"
-														id="box5${status.count}" value="${vo.day5}"
+														id="box5_${status.count}" value="${vo.day5}"
 														onclick="checkValue(this.id,'box5','lot5_${status.count}','day5_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day5}</span>
 														<%-- (<span id="${vo.day5 }">${-vo.day5 + vo.income5 }</span>) --%>
@@ -219,7 +225,7 @@
 														id="text_lot5_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day5_lot" id="lot5_${status.count}" name="day5_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -235,7 +241,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box6"
-														id="box6${status.count}" value="${vo.day6}"
+														id="box6_${status.count}" value="${vo.day6}"
 														onclick="checkValue(this.id,'box6','lot6_${status.count}','day6_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day6}</span>
 														<%-- (<span id="${vo.day6 }">${-vo.day6 + vo.income6 }</span>) --%>
@@ -255,7 +261,7 @@
 														id="text_lot6_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day6_lot" id="lot6_${status.count}" name="day6_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -271,7 +277,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box7"
-														id="box7${status.count}" value="${vo.day7}"
+														id="box7_${status.count}" value="${vo.day7}"
 														onclick="checkValue(this.id,'box7','lot7_${status.count}','day7_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day7}</span>
 														<%-- (<span id="${vo.day7 }">${-vo.day7 + vo.income7 }</span>) --%>
@@ -291,7 +297,7 @@
 														id="text_lot7_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day7_lot" id="lot7_${status.count}" name="day7_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -307,7 +313,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box8"
-														id="box8${status.count}" value="${vo.day8}"
+														id="box8_${status.count}" value="${vo.day8}"
 														onclick="checkValue(this.id,'box8','lot8_${status.count}','day8_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day8}</span>
 														<%-- (<span id="${vo.day8 }">${-vo.day8 + vo.income8 }</span>) --%>
@@ -327,7 +333,7 @@
 														id="text_lot8_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day8_lot" id="lot8_${status.count}" name="day8_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -343,7 +349,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box9"
-														id="box9${status.count}" value="${vo.day9}"
+														id="box9_${status.count}" value="${vo.day9}"
 														onclick="checkValue(this.id,'box9','lot9_${status.count}','day9_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day9}</span>
 														<%-- (<span id="${vo.day9 }">${-vo.day9 + vo.income9 }</span>) --%>
@@ -363,7 +369,7 @@
 														id="text_lot9_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day9_lot" id="lot9_${status.count}" name="day9_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -379,7 +385,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box10"
-														id="box10${status.count}" value="${vo.day10}"
+														id="box10_${status.count}" value="${vo.day10}"
 														onclick="checkValue(this.id,'box10','lot10_${status.count}','day10_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day10}</span>
 														<%-- (<span id="${vo.day10 }">${-vo.day10 + vo.income10 }</span>) --%>
@@ -399,7 +405,7 @@
 														id="text_lot10_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day10_lot" id="lot10_${status.count}" name="day10_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -415,7 +421,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box11"
-														id="box11${status.count}" value="${vo.day11}"
+														id="box11_${status.count}" value="${vo.day11}"
 														onclick="checkValue(this.id,'box11','lot11_${status.count}','day11_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day11}</span>
 														<%-- (<span id="${vo.day11 }">${-vo.day11 + vo.income11 }</span>) --%>
@@ -435,7 +441,7 @@
 														id="text_lot11_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day11_lot" id="lot11_${status.count}" name="day11_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -451,7 +457,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box12"
-														id="box12${status.count}" value="${vo.day12}"
+														id="box12_${status.count}" value="${vo.day12}"
 														onclick="checkValue(this.id,'box12','lot12_${status.count}','day12_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day12}</span>
 														<%-- (<span id="${vo.day12 }">${-vo.day12 + vo.income12 }</span>) --%>
@@ -471,7 +477,7 @@
 														id="text_lot12_${status.count}">Production date[${status.count}]&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day12_lot" id="lot12_${status.count}" name="day12_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -487,7 +493,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box13"
-														id="box13${status.count}" value="${vo.day13}"
+														id="box13_${status.count}" value="${vo.day13}"
 														onclick="checkValue(this.id,'box13','lot13_${status.count}','day13_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day13}</span>
 														<%-- (<span id="${vo.day13 }">${-vo.day13 + vo.income13 }</span>) --%>
@@ -507,7 +513,7 @@
 														id="text_lot13_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day13_lot" id="lot13_${status.count}" name="day13_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -523,7 +529,7 @@
 													<td width="60%"
 														style="border: hidden; padding: 2px; font-size: 15pt">
 														<input type="checkbox" name="box14"
-														id="box14${status.count}" value="${vo.day14}"
+														id="box14_${status.count}" value="${vo.day14}"
 														onclick="checkValue(this.id,'box14','lot14_${status.count}','day14_${status.count}')">&nbsp;<span
 														class="number tqty">${vo.day14}</span>
 														(<span id="${vo.day14 }" class="number">${vo.income14 }</span>)
@@ -542,7 +548,7 @@
 														id="text_lot14_${status.count}">Production date&nbsp; :</span>
 													</td>
 													<td width="60%" style="border: hidden; padding: 2px;">														
-														<input type="text" placeholder="dd-mm-yyyy" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly='true'
+														<input type="text" placeholder="dd-mm-yyyy" class="day14_lot" id="lot14_${status.count}" name="day14_lot" readonly
 																value="" size="10" style="width:120px; display:none;"/>
 													</td>
 												</tr>
@@ -557,7 +563,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box15"
-															id="box15${status.count}" value="${vo.day15}"
+															id="box15_${status.count}" value="${vo.day15}"
 															onclick="checkValue(this.id,'box15','lot15_${status.count}','day15_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day15}</span>
 															(<span id="${vo.day15 }" class="number">${vo.income15 }</span>)
@@ -576,7 +582,7 @@
 															id="text_lot15_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day15_lot" id="lot15_${status.count}" name="day15_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day15_lot" id="lot15_${status.count}" name="day15_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -592,7 +598,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box16"
-															id="box16${status.count}" value="${vo.day16}"
+															id="box16_${status.count}" value="${vo.day16}"
 															onclick="checkValue(this.id,'box16','lot16_${status.count}','day16_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day16}</span>
 															(<span id="${vo.day16 }" class="number">${vo.income16 }</span>)
@@ -611,7 +617,7 @@
 															id="text_lot16_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day16_lot" id="lot16_${status.count}" name="day16_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day16_lot" id="lot16_${status.count}" name="day16_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -625,7 +631,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box17"
-															id="box17${status.count}" value="${vo.day17}"
+															id="box17_${status.count}" value="${vo.day17}"
 															onclick="checkValue(this.id,'box17','lot17_${status.count}','day17_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day17}</span>
 															(<span id="${vo.day17 }" class="number">${vo.income17 }</span>)
@@ -644,7 +650,7 @@
 															id="text_lot17_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day17_lot" id="lot17_${status.count}" name="day17_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day17_lot" id="lot17_${status.count}" name="day17_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -658,7 +664,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box18"
-															id="box18${status.count}" value="${vo.day18}"
+															id="box18_${status.count}" value="${vo.day18}"
 															onclick="checkValue(this.id,'box18','lot18_${status.count}','day18_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day18}</span>
 															(<span id="${vo.day18 }" class="number">${vo.income18 }</span>)
@@ -677,7 +683,7 @@
 															id="text_lot18_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day18_lot" id="lot18_${status.count}" name="day18_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day18_lot" id="lot18_${status.count}" name="day18_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -691,7 +697,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box19"
-															id="box19${status.count}" value="${vo.day19}"
+															id="box19_${status.count}" value="${vo.day19}"
 															onclick="checkValue(this.id,'box19','lot19_${status.count}','day19_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day19}</span>
 															(<span id="${vo.day19 }" class="number">${vo.income19 }</span>)
@@ -710,7 +716,7 @@
 															id="text_lot19_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day19_lot" id="lot19_${status.count}" name="day19_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day19_lot" id="lot19_${status.count}" name="day19_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -724,7 +730,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box20"
-															id="box20${status.count}" value="${vo.day20}"
+															id="box20_${status.count}" value="${vo.day20}"
 															onclick="checkValue(this.id,'box20','lot20_${status.count}','day20_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day20}</span>
 															(<span id="${vo.day20 }" class="number">${vo.income20 }</span>)
@@ -743,7 +749,7 @@
 															id="text_lot20_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day20_lot" id="lot20_${status.count}" name="day20_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day20_lot" id="lot20_${status.count}" name="day20_lot" readonly
 																	value="" size="10" style="width:120px; display:none;"/>
 														</td>
 													</tr>
@@ -757,7 +763,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box21"
-															id="box21${status.count}" value="${vo.day21}"
+															id="box21_${status.count}" value="${vo.day21}"
 															onclick="checkValue(this.id,'box21','lot21_${status.count}','day21_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day21}</span>
 															(<span id="${vo.day21 }" class="number">${vo.income21 }</span>)
@@ -776,7 +782,7 @@
 															id="text_lot21_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day21_lot" id="lot21_${status.count}" name="day21_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day21_lot" id="lot21_${status.count}" name="day21_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -790,7 +796,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box22"
-															id="box22${status.count}" value="${vo.day22}"
+															id="box22_${status.count}" value="${vo.day22}"
 															onclick="checkValue(this.id,'box22','lot22_${status.count}','day22_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day22}</span>
 															(<span id="${vo.day22 }" class="number">${vo.income22 }</span>)
@@ -809,7 +815,7 @@
 															id="text_lot22_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day22_lot" id="lot22_${status.count}" name="day22_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day22_lot" id="lot22_${status.count}" name="day22_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -823,7 +829,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box23"
-															id="box23${status.count}" value="${vo.day23}"
+															id="box23_${status.count}" value="${vo.day23}"
 															onclick="checkValue(this.id,'box23','lot23_${status.count}','day23_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day23}</span>
 															(<span id="${vo.day23 }" class="number">${vo.income23 }</span>)
@@ -842,7 +848,7 @@
 															id="text_lot23_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day23_lot" id="lot23_${status.count}" name="day23_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day23_lot" id="lot23_${status.count}" name="day23_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -856,7 +862,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box24"
-															id="box24${status.count}" value="${vo.day24}"
+															id="box24_${status.count}" value="${vo.day24}"
 															onclick="checkValue(this.id,'box24','lot24_${status.count}','day24_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day24}</span>
 															(<span id="${vo.day24 }" class="number">${vo.income24 }</span>)
@@ -875,7 +881,7 @@
 															id="text_lot24_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day24_lot" id="lot24_${status.count}" name="day24_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day24_lot" id="lot24_${status.count}" name="day24_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -889,7 +895,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box25"
-															id="box25${status.count}" value="${vo.day25}"
+															id="box25_${status.count}" value="${vo.day25}"
 															onclick="checkValue(this.id,'box25','lot25_${status.count}','day25_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day25}</span>
 															(<span id="${vo.day25 }" class="number">${vo.income25 }</span>)
@@ -908,7 +914,7 @@
 															id="text_lot25_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day25_lot" id="lot25_${status.count}" name="day25_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day25_lot" id="lot25_${status.count}" name="day25_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -922,7 +928,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box26"
-															id="box26${status.count}" value="${vo.day26}"
+															id="box26_${status.count}" value="${vo.day26}"
 															onclick="checkValue(this.id,'box26','lot26_${status.count}','day26_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day26}</span>
 															(<span id="${vo.day26 }" class="number">${vo.income26 }</span>)
@@ -941,7 +947,7 @@
 															id="text_lot26_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day26_lot" id="lot26_${status.count}" name="day26_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day26_lot" id="lot26_${status.count}" name="day26_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -955,7 +961,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box27"
-															id="box27${status.count}" value="${vo.day27}"
+															id="box27_${status.count}" value="${vo.day27}"
 															onclick="checkValue(this.id,'box27','lot27_${status.count}','day27_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day27}</span>
 															(<span id="${vo.day27 }" class="number">${vo.income27 }</span>)
@@ -974,7 +980,7 @@
 															id="text_lot27_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day27_lot" id="lot27_${status.count}" name="day27_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day27_lot" id="lot27_${status.count}" name="day27_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -988,7 +994,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box28"
-															id="box28${status.count}" value="${vo.day28}"
+															id="box28_${status.count}" value="${vo.day28}"
 															onclick="checkValue(this.id,'box28','lot28_${status.count}','day28_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day28}</span>
 															(<span id="${vo.day28 }" class="number">${vo.income28 }</span>)
@@ -1007,7 +1013,7 @@
 															id="text_lot28_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day28_lot" id="lot28_${status.count}" name="day28_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day28_lot" id="lot28_${status.count}" name="day28_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1021,7 +1027,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box29"
-															id="box29${status.count}" value="${vo.day29}"
+															id="box29_${status.count}" value="${vo.day29}"
 															onclick="checkValue(this.id,'box29','lot29_${status.count}','day29_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day29}</span>
 															(<span id="${vo.day29 }" class="number">${vo.income29 }</span>)
@@ -1040,7 +1046,7 @@
 															id="text_lot29_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day29_lot" id="lot29_${status.count}" name="day29_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day29_lot" id="lot29_${status.count}" name="day29_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1054,7 +1060,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box30"
-															id="box30${status.count}" value="${vo.day30}"
+															id="box30_${status.count}" value="${vo.day30}"
 															onclick="checkValue(this.id,'box30','lot30_${status.count}','day30_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day30}</span>
 															(<span id="${vo.day30 }" class="number">${vo.income30 }</span>)
@@ -1073,7 +1079,7 @@
 															id="text_lot30_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day30_lot" id="lot30_${status.count}" name="day30_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day30_lot" id="lot30_${status.count}" name="day30_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1089,7 +1095,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box31"
-															id="box31${status.count}" value="${vo.day31}"
+															id="box31_${status.count}" value="${vo.day31}"
 															onclick="checkValue(this.id,'box31','lot31_${status.count}','day31_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day31}</span>
 															(<span id="${vo.day31 }" class="number">${vo.income31 }</span>)
@@ -1108,7 +1114,7 @@
 															id="text_lot31_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day31_lot" id="lot31_${status.count}" name="day31_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day31_lot" id="lot31_${status.count}" name="day31_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1122,7 +1128,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box32"
-															id="box32${status.count}" value="${vo.day32}"
+															id="box32_${status.count}" value="${vo.day32}"
 															onclick="checkValue(this.id,'box32','lot32_${status.count}','day32_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day32}</span>
 															(<span id="${vo.day32 }" class="number">${vo.income32 }</span>)
@@ -1141,7 +1147,7 @@
 															id="text_lot32_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day32_lot" id="lot32_${status.count}" name="day32_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day32_lot" id="lot32_${status.count}" name="day32_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1155,7 +1161,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box33"
-															id="box33${status.count}" value="${vo.day33}"
+															id="box33_${status.count}" value="${vo.day33}"
 															onclick="checkValue(this.id,'box33','lot33_${status.count}','day33_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day33}</span>
 															(<span id="${vo.day33 }" class="number">${vo.income33 }</span>)
@@ -1174,7 +1180,7 @@
 															id="text_lot33_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day33_lot" id="lot33_${status.count}" name="day33_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day33_lot" id="lot33_${status.count}" name="day33_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1188,7 +1194,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box34"
-															id="box34${status.count}" value="${vo.day34}"
+															id="box34_${status.count}" value="${vo.day34}"
 															onclick="checkValue(this.id,'box34','lot34_${status.count}','day34_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day34}</span>
 															(<span id="${vo.day34 }" class="number">${vo.income34 }</span>)
@@ -1207,7 +1213,7 @@
 															id="text_lot34_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day34_lot" id="lot34_${status.count}" name="day34_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day34_lot" id="lot34_${status.count}" name="day34_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1221,7 +1227,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box35"
-															id="box35${status.count}" value="${vo.day35}"
+															id="box35_${status.count}" value="${vo.day35}"
 															onclick="checkValue(this.id,'box35','lot35_${status.count}','day35_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day35}</span>
 															(<span id="${vo.day35 }" class="number">${vo.income35 }</span>)
@@ -1240,7 +1246,7 @@
 															id="text_lot35_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day35_lot" id="lot35_${status.count}" name="day35_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day35_lot" id="lot35_${status.count}" name="day35_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1254,7 +1260,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box36"
-															id="box36${status.count}" value="${vo.day36}"
+															id="box36_${status.count}" value="${vo.day36}"
 															onclick="checkValue(this.id,'box36','lot36_${status.count}','day36_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day36}</span>
 															(<span id="${vo.day36 }" class="number">${vo.income36 }</span>)
@@ -1273,7 +1279,7 @@
 															id="text_lot36_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day36_lot" id="lot36_${status.count}" name="day36_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day36_lot" id="lot36_${status.count}" name="day36_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1287,7 +1293,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box37"
-															id="box37${status.count}" value="${vo.day37}"
+															id="box37_${status.count}" value="${vo.day37}"
 															onclick="checkValue(this.id,'box37','lot37_${status.count}','day37_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day37}</span>
 															(<span id="${vo.day37 }" class="number">${vo.income37 }</span>)
@@ -1306,7 +1312,7 @@
 															id="text_lot37_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day37_lot" id="lot37_${status.count}" name="day37_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day37_lot" id="lot37_${status.count}" name="day37_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1320,7 +1326,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box38"
-															id="box38${status.count}" value="${vo.day38}"
+															id="box38_${status.count}" value="${vo.day38}"
 															onclick="checkValue(this.id,'box38','lot38_${status.count}','day38_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day38}</span>
 															(<span id="${vo.day38 }" class="number">${vo.income38 }</span>)
@@ -1339,7 +1345,7 @@
 															id="text_lot38_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day38_lot" id="lot38_${status.count}" name="day38_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day38_lot" id="lot38_${status.count}" name="day38_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1353,7 +1359,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box39"
-															id="box39${status.count}" value="${vo.day39}"
+															id="box39_${status.count}" value="${vo.day39}"
 															onclick="checkValue(this.id,'box39','lot39_${status.count}','day39_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day39}</span>
 															(<span id="${vo.day39 }" class="number">${vo.income39 }</span>)
@@ -1372,7 +1378,7 @@
 															id="text_lot39_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day39_lot" id="lot39_${status.count}" name="day39_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day39_lot" id="lot39_${status.count}" name="day39_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1386,7 +1392,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box40"
-															id="box40${status.count}" value="${vo.day40}"
+															id="box40_${status.count}" value="${vo.day40}"
 															onclick="checkValue(this.id,'box40','lot40_${status.count}','day40_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day40}</span>
 															(<span id="${vo.day40 }" class="number">${vo.income40 }</span>)
@@ -1405,7 +1411,7 @@
 															id="text_lot40_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day40_lot" id="lot40_${status.count}" name="day40_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day40_lot" id="lot40_${status.count}" name="day40_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1419,7 +1425,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box41"
-															id="box41${status.count}" value="${vo.day41}"
+															id="box41_${status.count}" value="${vo.day41}"
 															onclick="checkValue(this.id,'box41','lot41_${status.count}','day41_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day41}</span>
 															(<span id="${vo.day41 }" class="number">${vo.income41 }</span>)
@@ -1438,7 +1444,7 @@
 															id="text_lot41_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day41_lot" id="lot41_${status.count}" name="day41_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day41_lot" id="lot41_${status.count}" name="day41_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1452,7 +1458,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box42"
-															id="box42${status.count}" value="${vo.day42}"
+															id="box42_${status.count}" value="${vo.day42}"
 															onclick="checkValue(this.id,'box42','lot42_${status.count}','day42_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day42}</span>
 															(<span id="${vo.day42 }" class="number">${vo.income42 }</span>)
@@ -1471,7 +1477,7 @@
 															id="text_lot42_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day42_lot" id="lot42_${status.count}" name="day42_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day42_lot" id="lot42_${status.count}" name="day42_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1485,7 +1491,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box43"
-															id="box43${status.count}" value="${vo.day43}"
+															id="box43_${status.count}" value="${vo.day43}"
 															onclick="checkValue(this.id,'box43','lot43_${status.count}','day43_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day43}</span>
 															(<span id="${vo.day43 }" class="number">${vo.income43 }</span>)
@@ -1504,7 +1510,7 @@
 															id="text_lot43_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day43_lot" id="lot43_${status.count}" name="day43_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day43_lot" id="lot43_${status.count}" name="day43_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1518,7 +1524,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box44"
-															id="box44${status.count}" value="${vo.day44}"
+															id="box44_${status.count}" value="${vo.day44}"
 															onclick="checkValue(this.id,'box44','lot44_${status.count}','day44_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day44}</span>
 															(<span id="${vo.day44 }" class="number">${vo.income44 }</span>)
@@ -1537,7 +1543,7 @@
 															id="text_lot44_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day44_lot" id="lot44_${status.count}" name="day44_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day44_lot" id="lot44_${status.count}" name="day44_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1551,7 +1557,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box45"
-															id="box45${status.count}" value="${vo.day45}"
+															id="box45_${status.count}" value="${vo.day45}"
 															onclick="checkValue(this.id,'box45','lot45_${status.count}','day45_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day45}</span>
 															(<span id="${vo.day45 }" class="number">${vo.income45 }</span>)
@@ -1570,7 +1576,7 @@
 															id="text_lot45_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day45_lot" id="lot45_${status.count}" name="day45_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day45_lot" id="lot45_${status.count}" name="day45_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1584,7 +1590,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box46"
-															id="box46${status.count}" value="${vo.day46}"
+															id="box46_${status.count}" value="${vo.day46}"
 															onclick="checkValue(this.id,'box46','lot46_${status.count}','day46_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day46}</span>
 															(<span id="${vo.day46 }" class="number">${vo.income46 }</span>)
@@ -1603,7 +1609,7 @@
 															id="text_lot46_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day46_lot" id="lot46_${status.count}" name="day46_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day46_lot" id="lot46_${status.count}" name="day46_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1617,7 +1623,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box47"
-															id="box47${status.count}" value="${vo.day47}"
+															id="box47_${status.count}" value="${vo.day47}"
 															onclick="checkValue(this.id,'box47','lot47_${status.count}','day47_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day47}</span>
 															(<span id="${vo.day47 }" class="number">${vo.income47 }</span>)
@@ -1636,7 +1642,7 @@
 															id="text_lot47_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day47_lot" id="lot47_${status.count}" name="day47_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day47_lot" id="lot47_${status.count}" name="day47_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1650,7 +1656,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box48"
-															id="box48${status.count}" value="${vo.day48}"
+															id="box48_${status.count}" value="${vo.day48}"
 															onclick="checkValue(this.id,'box48','lot48_${status.count}','day48_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day48}</span>
 															(<span id="${vo.day48 }" class="number">${vo.income48 }</span>)
@@ -1669,7 +1675,7 @@
 															id="text_lot48_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day48_lot" id="lot48_${status.count}" name="day48_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day48_lot" id="lot48_${status.count}" name="day48_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1683,7 +1689,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box49"
-															id="box49${status.count}" value="${vo.day49}"
+															id="box49_${status.count}" value="${vo.day49}"
 															onclick="checkValue(this.id,'box49','lot49_${status.count}','day49_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day49}</span>
 															(<span id="${vo.day49 }" class="number">${vo.income49 }</span>)
@@ -1702,7 +1708,7 @@
 															id="text_lot49_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day49_lot" id="lot49_${status.count}" name="day49_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day49_lot" id="lot49_${status.count}" name="day49_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1716,7 +1722,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box50"
-															id="box50${status.count}" value="${vo.day50}"
+															id="box50_${status.count}" value="${vo.day50}"
 															onclick="checkValue(this.id,'box50','lot50_${status.count}','day50_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day50}</span>
 															(<span id="${vo.day50 }" class="number">${vo.income50 }</span>)
@@ -1735,7 +1741,7 @@
 															id="text_lot50_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day50_lot" id="lot50_${status.count}" name="day50_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day50_lot" id="lot50_${status.count}" name="day50_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1749,7 +1755,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box51"
-															id="box51${status.count}" value="${vo.day51}"
+															id="box51_${status.count}" value="${vo.day51}"
 															onclick="checkValue(this.id,'box51','lot51_${status.count}','day51_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day51}</span>
 															(<span id="${vo.day51 }" class="number">${vo.income51 }</span>)
@@ -1768,7 +1774,7 @@
 															id="text_lot51_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day51_lot" id="lot51_${status.count}" name="day51_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day51_lot" id="lot51_${status.count}" name="day51_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1782,7 +1788,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box52"
-															id="box52${status.count}" value="${vo.day52}"
+															id="box52_${status.count}" value="${vo.day52}"
 															onclick="checkValue(this.id,'box52','lot52_${status.count}','day52_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day52}</span>
 															(<span id="${vo.day52 }" class="number">${vo.income52 }</span>)
@@ -1801,7 +1807,7 @@
 															id="text_lot52_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day52_lot" id="lot52_${status.count}" name="day52_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day52_lot" id="lot52_${status.count}" name="day52_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1815,7 +1821,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box53"
-															id="box53${status.count}" value="${vo.day53}"
+															id="box53_${status.count}" value="${vo.day53}"
 															onclick="checkValue(this.id,'box53','lot53_${status.count}','day53_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day53}</span>
 															(<span id="${vo.day53 }" class="number">${vo.income53 }</span>)
@@ -1834,7 +1840,7 @@
 															id="text_lot53_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day53_lot" id="lot53_${status.count}" name="day53_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day53_lot" id="lot53_${status.count}" name="day53_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1848,7 +1854,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box54"
-															id="box54${status.count}" value="${vo.day54}"
+															id="box54_${status.count}" value="${vo.day54}"
 															onclick="checkValue(this.id,'box54','lot54_${status.count}','day54_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day54}</span>
 															(<span id="${vo.day54 }" class="number">${vo.income54 }</span>)
@@ -1867,7 +1873,7 @@
 															id="text_lot54_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day54_lot" id="lot54_${status.count}" name="day54_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day54_lot" id="lot54_${status.count}" name="day54_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1881,7 +1887,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box55"
-															id="box55${status.count}" value="${vo.day55}"
+															id="box55_${status.count}" value="${vo.day55}"
 															onclick="checkValue(this.id,'box55','lot55_${status.count}','day55_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day55}</span>
 															(<span id="${vo.day55 }" class="number">${vo.income55 }</span>)
@@ -1900,7 +1906,7 @@
 															id="text_lot55_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day55_lot" id="lot55_${status.count}" name="day55_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day55_lot" id="lot55_${status.count}" name="day55_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1914,7 +1920,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box56"
-															id="box56${status.count}" value="${vo.day56}"
+															id="box56_${status.count}" value="${vo.day56}"
 															onclick="checkValue(this.id,'box56','lot56_${status.count}','day56_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day56}</span>
 															(<span id="${vo.day56 }" class="number">${vo.income56 }</span>)
@@ -1933,7 +1939,7 @@
 															id="text_lot56_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day56_lot" id="lot56_${status.count}" name="day56_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day56_lot" id="lot56_${status.count}" name="day56_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1947,7 +1953,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box57"
-															id="box57${status.count}" value="${vo.day57}"
+															id="box57_${status.count}" value="${vo.day57}"
 															onclick="checkValue(this.id,'box57','lot57_${status.count}','day57_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day57}</span>
 															(<span id="${vo.day57 }" class="number">${vo.income57 }</span>)
@@ -1966,7 +1972,7 @@
 															id="text_lot57_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day57_lot" id="lot57_${status.count}" name="day57_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day57_lot" id="lot57_${status.count}" name="day57_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -1980,7 +1986,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box58"
-															id="box58${status.count}" value="${vo.day58}"
+															id="box58_${status.count}" value="${vo.day58}"
 															onclick="checkValue(this.id,'box58','lot58_${status.count}','day58_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day58}</span>
 															(<span id="${vo.day58 }" class="number">${vo.income58 }</span>)
@@ -1999,7 +2005,7 @@
 															id="text_lot58_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day58_lot" id="lot58_${status.count}" name="day58_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day58_lot" id="lot58_${status.count}" name="day58_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2013,7 +2019,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box59"
-															id="box59${status.count}" value="${vo.day59}"
+															id="box59_${status.count}" value="${vo.day59}"
 															onclick="checkValue(this.id,'box59','lot59_${status.count}','day59_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day59}</span>
 															(<span id="${vo.day59 }" class="number">${vo.income59 }</span>)
@@ -2032,7 +2038,7 @@
 															id="text_lot59_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day59_lot" id="lot59_${status.count}" name="day59_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day59_lot" id="lot59_${status.count}" name="day59_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2046,7 +2052,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box60"
-															id="box60${status.count}" value="${vo.day60}"
+															id="box60_${status.count}" value="${vo.day60}"
 															onclick="checkValue(this.id,'box60','lot60_${status.count}','day60_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day60}</span>
 															(<span id="${vo.day60 }" class="number">${vo.income60 }</span>)
@@ -2065,7 +2071,7 @@
 															id="text_lot60_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day60_lot" id="lot60_${status.count}" name="day60_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day60_lot" id="lot60_${status.count}" name="day60_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2081,7 +2087,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box61"
-															id="box61${status.count}" value="${vo.day61}"
+															id="box61_${status.count}" value="${vo.day61}"
 															onclick="checkValue(this.id,'box61','lot61_${status.count}','day61_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day61}</span>
 															(<span id="${vo.day61 }" class="number">${vo.income61 }</span>)
@@ -2100,7 +2106,7 @@
 															id="text_lot61_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day61_lot" id="lot61_${status.count}" name="day61_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day61_lot" id="lot61_${status.count}" name="day61_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2114,7 +2120,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box62"
-															id="box62${status.count}" value="${vo.day62}"
+															id="box62_${status.count}" value="${vo.day62}"
 															onclick="checkValue(this.id,'box62','lot62_${status.count}','day62_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day62}</span>
 															(<span id="${vo.day62 }" class="number">${vo.income62 }</span>)
@@ -2133,7 +2139,7 @@
 															id="text_lot62_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day62_lot" id="lot62_${status.count}" name="day62_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day62_lot" id="lot62_${status.count}" name="day62_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2147,7 +2153,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box63"
-															id="box63${status.count}" value="${vo.day63}"
+															id="box63_${status.count}" value="${vo.day63}"
 															onclick="checkValue(this.id,'box63','lot63_${status.count}','day63_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day63}</span>
 															(<span id="${vo.day63 }" class="number">${vo.income63 }</span>)
@@ -2166,7 +2172,7 @@
 															id="text_lot63_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day63_lot" id="lot63_${status.count}" name="day63_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day63_lot" id="lot63_${status.count}" name="day63_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2180,7 +2186,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box64"
-															id="box64${status.count}" value="${vo.day64}"
+															id="box64_${status.count}" value="${vo.day64}"
 															onclick="checkValue(this.id,'box64','lot64_${status.count}','day64_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day64}</span>
 															(<span id="${vo.day64 }" class="number">${vo.income64 }</span>)
@@ -2199,7 +2205,7 @@
 															id="text_lot64_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day64_lot" id="lot64_${status.count}" name="day64_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day64_lot" id="lot64_${status.count}" name="day64_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2213,7 +2219,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box65"
-															id="box65${status.count}" value="${vo.day65}"
+															id="box65_${status.count}" value="${vo.day65}"
 															onclick="checkValue(this.id,'box65','lot65_${status.count}','day65_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day65}</span>
 															(<span id="${vo.day65 }" class="number">${vo.income65 }</span>)
@@ -2232,7 +2238,7 @@
 															id="text_lot65_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day65_lot" id="lot65_${status.count}" name="day65_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day65_lot" id="lot65_${status.count}" name="day65_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2246,7 +2252,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box66"
-															id="box66${status.count}" value="${vo.day66}"
+															id="box66_${status.count}" value="${vo.day66}"
 															onclick="checkValue(this.id,'box66','lot66_${status.count}','day66_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day66}</span>
 															(<span id="${vo.day66 }" class="number">${vo.income66 }</span>)
@@ -2265,7 +2271,7 @@
 															id="text_lot66_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day66_lot" id="lot66_${status.count}" name="day66_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day66_lot" id="lot66_${status.count}" name="day66_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2279,7 +2285,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box67"
-															id="box67${status.count}" value="${vo.day67}"
+															id="box67_${status.count}" value="${vo.day67}"
 															onclick="checkValue(this.id,'box67','lot67_${status.count}','day67_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day67}</span>
 															(<span id="${vo.day67 }" class="number">${vo.income67 }</span>)
@@ -2298,7 +2304,7 @@
 															id="text_lot67_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day67_lot" id="lot67_${status.count}" name="day67_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day67_lot" id="lot67_${status.count}" name="day67_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2312,7 +2318,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box68"
-															id="box68${status.count}" value="${vo.day68}"
+															id="box68_${status.count}" value="${vo.day68}"
 															onclick="checkValue(this.id,'box68','lot68_${status.count}','day68_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day68}</span>
 															(<span id="${vo.day68 }" class="number">${vo.income68 }</span>)
@@ -2331,7 +2337,7 @@
 															id="text_lot68_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day68_lot" id="lot68_${status.count}" name="day68_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day68_lot" id="lot68_${status.count}" name="day68_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2345,7 +2351,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box69"
-															id="box69${status.count}" value="${vo.day69}"
+															id="box69_${status.count}" value="${vo.day69}"
 															onclick="checkValue(this.id,'box69','lot69_${status.count}','day69_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day69}</span>
 															(<span id="${vo.day69 }" class="number">${vo.income69 }</span>)
@@ -2364,7 +2370,7 @@
 															id="text_lot69_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day69_lot" id="lot69_${status.count}" name="day69_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day69_lot" id="lot69_${status.count}" name="day69_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2378,7 +2384,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box70"
-															id="box70${status.count}" value="${vo.day70}"
+															id="box70_${status.count}" value="${vo.day70}"
 															onclick="checkValue(this.id,'box70','lot70_${status.count}','day70_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day70}</span>
 															(<span id="${vo.day70 }" class="number">${vo.income70 }</span>)
@@ -2397,7 +2403,7 @@
 															id="text_lot70_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day70_lot" id="lot70_${status.count}" name="day70_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day70_lot" id="lot70_${status.count}" name="day70_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2411,7 +2417,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box71"
-															id="box71${status.count}" value="${vo.day71}"
+															id="box71_${status.count}" value="${vo.day71}"
 															onclick="checkValue(this.id,'box71','lot71_${status.count}','day71_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day71}</span>
 															(<span id="${vo.day71 }" class="number">${vo.income71 }</span>)
@@ -2430,7 +2436,7 @@
 															id="text_lot71_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day71_lot" id="lot71_${status.count}" name="day71_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day71_lot" id="lot71_${status.count}" name="day71_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2444,7 +2450,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box72"
-															id="box72${status.count}" value="${vo.day72}"
+															id="box72_${status.count}" value="${vo.day72}"
 															onclick="checkValue(this.id,'box72','lot72_${status.count}','day72_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day72}</span>
 															(<span id="${vo.day72 }" class="number">${vo.income72 }</span>)
@@ -2463,7 +2469,7 @@
 															id="text_lot72_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day72_lot" id="lot72_${status.count}" name="day72_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day72_lot" id="lot72_${status.count}" name="day72_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2477,7 +2483,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box73"
-															id="box73${status.count}" value="${vo.day73}"
+															id="box73_${status.count}" value="${vo.day73}"
 															onclick="checkValue(this.id,'box73','lot73_${status.count}','day73_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day73}</span>
 															(<span id="${vo.day73 }" class="number">${vo.income73 }</span>)
@@ -2496,7 +2502,7 @@
 															id="text_lot73_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day73_lot" id="lot73_${status.count}" name="day73_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day73_lot" id="lot73_${status.count}" name="day73_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2510,7 +2516,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box74"
-															id="box74${status.count}" value="${vo.day74}"
+															id="box74_${status.count}" value="${vo.day74}"
 															onclick="checkValue(this.id,'box74','lot74_${status.count}','day74_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day74}</span>
 															(<span id="${vo.day74 }" class="number">${vo.income74 }</span>)
@@ -2529,7 +2535,7 @@
 															id="text_lot74_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day74_lot" id="lot74_${status.count}" name="day74_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day74_lot" id="lot74_${status.count}" name="day74_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2543,7 +2549,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box75"
-															id="box75${status.count}" value="${vo.day75}"
+															id="box75_${status.count}" value="${vo.day75}"
 															onclick="checkValue(this.id,'box75','lot75_${status.count}','day75_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day75}</span>
 															(<span id="${vo.day75 }" class="number">${vo.income75 }</span>)
@@ -2562,7 +2568,7 @@
 															id="text_lot75_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day75_lot" id="lot75_${status.count}" name="day75_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day75_lot" id="lot75_${status.count}" name="day75_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2576,7 +2582,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box76"
-															id="box76${status.count}" value="${vo.day76}"
+															id="box76_${status.count}" value="${vo.day76}"
 															onclick="checkValue(this.id,'box76','lot76_${status.count}','day76_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day76}</span>
 															(<span id="${vo.day76 }" class="number">${vo.income76 }</span>)
@@ -2595,7 +2601,7 @@
 															id="text_lot76_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day76_lot" id="lot76_${status.count}" name="day76_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day76_lot" id="lot76_${status.count}" name="day76_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2609,7 +2615,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box77"
-															id="box77${status.count}" value="${vo.day77}"
+															id="box77_${status.count}" value="${vo.day77}"
 															onclick="checkValue(this.id,'box77','lot77_${status.count}','day77_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day77}</span>
 															(<span id="${vo.day77 }" class="number">${vo.income77 }</span>)
@@ -2628,7 +2634,7 @@
 															id="text_lot77_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day77_lot" id="lot77_${status.count}" name="day77_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day77_lot" id="lot77_${status.count}" name="day77_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2642,7 +2648,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box78"
-															id="box78${status.count}" value="${vo.day78}"
+															id="box78_${status.count}" value="${vo.day78}"
 															onclick="checkValue(this.id,'box78','lot78_${status.count}','day78_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day78}</span>
 															(<span id="${vo.day78 }" class="number">${vo.income78 }</span>)
@@ -2661,7 +2667,7 @@
 															id="text_lot78_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day78_lot" id="lot78_${status.count}" name="day78_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day78_lot" id="lot78_${status.count}" name="day78_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2675,7 +2681,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box79"
-															id="box79${status.count}" value="${vo.day79}"
+															id="box79_${status.count}" value="${vo.day79}"
 															onclick="checkValue(this.id,'box79','lot79_${status.count}','day79_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day79}</span>
 															(<span id="${vo.day79 }" class="number">${vo.income79 }</span>)
@@ -2694,7 +2700,7 @@
 															id="text_lot79_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day79_lot" id="lot79_${status.count}" name="day79_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day79_lot" id="lot79_${status.count}" name="day79_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2708,7 +2714,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box80"
-															id="box80${status.count}" value="${vo.day80}"
+															id="box80_${status.count}" value="${vo.day80}"
 															onclick="checkValue(this.id,'box80','lot80_${status.count}','day80_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day80}</span>
 															(<span id="${vo.day80 }" class="number">${vo.income80 }</span>)
@@ -2727,7 +2733,7 @@
 															id="text_lot80_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day80_lot" id="lot80_${status.count}" name="day80_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day80_lot" id="lot80_${status.count}" name="day80_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2741,7 +2747,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box81"
-															id="box81${status.count}" value="${vo.day81}"
+															id="box81_${status.count}" value="${vo.day81}"
 															onclick="checkValue(this.id,'box81','lot81_${status.count}','day81_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day81}</span>
 															(<span id="${vo.day81 }" class="number">${vo.income81 }</span>)
@@ -2760,7 +2766,7 @@
 															id="text_lot81_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day81_lot" id="lot81_${status.count}" name="day81_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day81_lot" id="lot81_${status.count}" name="day81_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2774,7 +2780,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box82"
-															id="box82${status.count}" value="${vo.day82}"
+															id="box82_${status.count}" value="${vo.day82}"
 															onclick="checkValue(this.id,'box82','lot82_${status.count}','day82_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day82}</span>
 															(<span id="${vo.day82 }" class="number">${vo.income82 }</span>)
@@ -2793,7 +2799,7 @@
 															id="text_lot82_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day82_lot" id="lot82_${status.count}" name="day82_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day82_lot" id="lot82_${status.count}" name="day82_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2807,7 +2813,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box83"
-															id="box83${status.count}" value="${vo.day83}"
+															id="box83_${status.count}" value="${vo.day83}"
 															onclick="checkValue(this.id,'box83','lot83_${status.count}','day83_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day83}</span>
 															(<span id="${vo.day83 }" class="number">${vo.income83 }</span>)
@@ -2826,7 +2832,7 @@
 															id="text_lot83_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day83_lot" id="lot83_${status.count}" name="day83_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day83_lot" id="lot83_${status.count}" name="day83_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2840,7 +2846,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box84"
-															id="box84${status.count}" value="${vo.day84}"
+															id="box84_${status.count}" value="${vo.day84}"
 															onclick="checkValue(this.id,'box84','lot84_${status.count}','day84_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day84}</span>
 															(<span id="${vo.day84 }" class="number">${vo.income84 }</span>)
@@ -2859,7 +2865,7 @@
 															id="text_lot84_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day84_lot" id="lot84_${status.count}" name="day84_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day84_lot" id="lot84_${status.count}" name="day84_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2873,7 +2879,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box85"
-															id="box85${status.count}" value="${vo.day85}"
+															id="box85_${status.count}" value="${vo.day85}"
 															onclick="checkValue(this.id,'box85','lot85_${status.count}','day85_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day85}</span>
 															(<span id="${vo.day85 }" class="number">${vo.income85 }</span>)
@@ -2892,7 +2898,7 @@
 															id="text_lot85_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day85_lot" id="lot85_${status.count}" name="day85_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day85_lot" id="lot85_${status.count}" name="day85_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2906,7 +2912,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box86"
-															id="box86${status.count}" value="${vo.day86}"
+															id="box86_${status.count}" value="${vo.day86}"
 															onclick="checkValue(this.id,'box86','lot86_${status.count}','day86_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day86}</span>
 															(<span id="${vo.day86 }" class="number">${vo.income86 }</span>)
@@ -2925,7 +2931,7 @@
 															id="text_lot86_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day86_lot" id="lot86_${status.count}" name="day86_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day86_lot" id="lot86_${status.count}" name="day86_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2939,7 +2945,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box87"
-															id="box87${status.count}" value="${vo.day87}"
+															id="box87_${status.count}" value="${vo.day87}"
 															onclick="checkValue(this.id,'box87','lot87_${status.count}','day87_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day87}</span>
 															(<span id="${vo.day87 }" class="number">${vo.income87 }</span>)
@@ -2958,7 +2964,7 @@
 															id="text_lot87_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day87_lot" id="lot87_${status.count}" name="day87_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day87_lot" id="lot87_${status.count}" name="day87_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -2972,7 +2978,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box88"
-															id="box88${status.count}" value="${vo.day88}"
+															id="box88_${status.count}" value="${vo.day88}"
 															onclick="checkValue(this.id,'box88','lot88_${status.count}','day88_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day88}</span>
 															(<span id="${vo.day88 }" class="number">${vo.income88 }</span>)
@@ -2991,7 +2997,7 @@
 															id="text_lot88_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day88_lot" id="lot88_${status.count}" name="day88_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day88_lot" id="lot88_${status.count}" name="day88_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3005,7 +3011,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box89"
-															id="box89${status.count}" value="${vo.day89}"
+															id="box89_${status.count}" value="${vo.day89}"
 															onclick="checkValue(this.id,'box89','lot89_${status.count}','day89_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day89}</span>
 															(<span id="${vo.day89 }" class="number">${vo.income89 }</span>)
@@ -3024,7 +3030,7 @@
 															id="text_lot89_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day89_lot" id="lot89_${status.count}" name="day89_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day89_lot" id="lot89_${status.count}" name="day89_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3038,7 +3044,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box90"
-															id="box90${status.count}" value="${vo.day90}"
+															id="box90_${status.count}" value="${vo.day90}"
 															onclick="checkValue(this.id,'box90','lot90_${status.count}','day90_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day90}</span>
 															(<span id="${vo.day90 }" class="number">${vo.income90 }</span>)
@@ -3057,7 +3063,7 @@
 															id="text_lot90_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day90_lot" id="lot90_${status.count}" name="day90_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day90_lot" id="lot90_${status.count}" name="day90_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3073,7 +3079,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box91"
-															id="box91${status.count}" value="${vo.day91}"
+															id="box91_${status.count}" value="${vo.day91}"
 															onclick="checkValue(this.id,'box91','lot91_${status.count}','day91_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day91}</span>
 															(<span id="${vo.day91 }" class="number">${vo.income91 }</span>)
@@ -3092,7 +3098,7 @@
 															id="text_lot91_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day91_lot" id="lot91_${status.count}" name="day91_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day91_lot" id="lot91_${status.count}" name="day91_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3106,7 +3112,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box92"
-															id="box92${status.count}" value="${vo.day92}"
+															id="box92_${status.count}" value="${vo.day92}"
 															onclick="checkValue(this.id,'box92','lot92_${status.count}','day92_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day92}</span>
 															(<span id="${vo.day92 }" class="number">${vo.income92 }</span>)
@@ -3125,7 +3131,7 @@
 															id="text_lot92_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day92_lot" id="lot92_${status.count}" name="day92_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day92_lot" id="lot92_${status.count}" name="day92_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3139,7 +3145,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box93"
-															id="box93${status.count}" value="${vo.day93}"
+															id="box93_${status.count}" value="${vo.day93}"
 															onclick="checkValue(this.id,'box93','lot93_${status.count}','day93_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day93}</span>
 															(<span id="${vo.day93 }" class="number">${vo.income93 }</span>)
@@ -3158,7 +3164,7 @@
 															id="text_lot93_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day93_lot" id="lot93_${status.count}" name="day93_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day93_lot" id="lot93_${status.count}" name="day93_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3172,7 +3178,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box94"
-															id="box94${status.count}" value="${vo.day94}"
+															id="box94_${status.count}" value="${vo.day94}"
 															onclick="checkValue(this.id,'box94','lot94_${status.count}','day94_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day94}</span>
 															(<span id="${vo.day94 }" class="number">${vo.income94 }</span>)
@@ -3191,7 +3197,7 @@
 															id="text_lot94_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day94_lot" id="lot94_${status.count}" name="day94_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day94_lot" id="lot94_${status.count}" name="day94_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3205,7 +3211,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box95"
-															id="box95${status.count}" value="${vo.day95}"
+															id="box95_${status.count}" value="${vo.day95}"
 															onclick="checkValue(this.id,'box95','lot95_${status.count}','day95_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day95}</span>
 															(<span id="${vo.day95 }" class="number">${vo.income95 }</span>)
@@ -3224,7 +3230,7 @@
 															id="text_lot95_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day95_lot" id="lot95_${status.count}" name="day95_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day95_lot" id="lot95_${status.count}" name="day95_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3238,7 +3244,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box96"
-															id="box96${status.count}" value="${vo.day96}"
+															id="box96_${status.count}" value="${vo.day96}"
 															onclick="checkValue(this.id,'box96','lot96_${status.count}','day96_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day96}</span>
 															(<span id="${vo.day96 }" class="number">${vo.income96 }</span>)
@@ -3257,7 +3263,7 @@
 															id="text_lot96_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day96_lot" id="lot96_${status.count}" name="day96_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day96_lot" id="lot96_${status.count}" name="day96_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3271,7 +3277,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box97"
-															id="box97${status.count}" value="${vo.day97}"
+															id="box97_${status.count}" value="${vo.day97}"
 															onclick="checkValue(this.id,'box97','lot97_${status.count}','day97_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day97}</span>
 															(<span id="${vo.day97 }" class="number">${vo.income97 }</span>)
@@ -3290,7 +3296,7 @@
 															id="text_lot97_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day97_lot" id="lot97_${status.count}" name="day97_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day97_lot" id="lot97_${status.count}" name="day97_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3304,7 +3310,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box98"
-															id="box98${status.count}" value="${vo.day98}"
+															id="box98_${status.count}" value="${vo.day98}"
 															onclick="checkValue(this.id,'box98','lot98_${status.count}','day98_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day98}</span>
 															(<span id="${vo.day98 }" class="number">${vo.income98 }</span>)
@@ -3323,7 +3329,7 @@
 															id="text_lot98_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day98_lot" id="lot98_${status.count}" name="day98_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day98_lot" id="lot98_${status.count}" name="day98_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3337,7 +3343,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box99"
-															id="box99${status.count}" value="${vo.day99}"
+															id="box99_${status.count}" value="${vo.day99}"
 															onclick="checkValue(this.id,'box99','lot99_${status.count}','day99_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day99}</span>
 															(<span id="${vo.day99 }" class="number">${vo.income99 }</span>)
@@ -3356,7 +3362,7 @@
 															id="text_lot99_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day99_lot" id="lot99_${status.count}" name="day99_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day99_lot" id="lot99_${status.count}" name="day99_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3370,7 +3376,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box100"
-															id="box100${status.count}" value="${vo.day100}"
+															id="box100_${status.count}" value="${vo.day100}"
 															onclick="checkValue(this.id,'box100','lot100_${status.count}','day100_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day100}</span>
 															(<span id="${vo.day100 }" class="number">${vo.income100 }</span>)
@@ -3389,7 +3395,7 @@
 															id="text_lot100_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day100_lot" id="lot100_${status.count}" name="day100_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day100_lot" id="lot100_${status.count}" name="day100_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3403,7 +3409,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box101"
-															id="box101${status.count}" value="${vo.day101}"
+															id="box101_${status.count}" value="${vo.day101}"
 															onclick="checkValue(this.id,'box101','lot101_${status.count}','day101_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day101}</span>
 															(<span id="${vo.day101 }" class="number">${vo.income101 }</span>)
@@ -3422,7 +3428,7 @@
 															id="text_lot101_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day101_lot" id="lot101_${status.count}" name="day101_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day101_lot" id="lot101_${status.count}" name="day101_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3436,7 +3442,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box102"
-															id="box102${status.count}" value="${vo.day102}"
+															id="box102_${status.count}" value="${vo.day102}"
 															onclick="checkValue(this.id,'box102','lot102_${status.count}','day102_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day102}</span>
 															(<span id="${vo.day102 }" class="number">${vo.income102 }</span>)
@@ -3455,7 +3461,7 @@
 															id="text_lot102_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day102_lot" id="lot102_${status.count}" name="day102_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day102_lot" id="lot102_${status.count}" name="day102_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3469,7 +3475,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box103"
-															id="box103${status.count}" value="${vo.day103}"
+															id="box103_${status.count}" value="${vo.day103}"
 															onclick="checkValue(this.id,'box103','lot103_${status.count}','day103_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day103}</span>
 															(<span id="${vo.day103 }" class="number">${vo.income103 }</span>)
@@ -3488,7 +3494,7 @@
 															id="text_lot103_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day103_lot" id="lot103_${status.count}" name="day103_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day103_lot" id="lot103_${status.count}" name="day103_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3502,7 +3508,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box104"
-															id="box104${status.count}" value="${vo.day104}"
+															id="box104_${status.count}" value="${vo.day104}"
 															onclick="checkValue(this.id,'box104','lot104_${status.count}','day104_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day104}</span>
 															(<span id="${vo.day104 }" class="number">${vo.income104 }</span>)
@@ -3521,7 +3527,7 @@
 															id="text_lot104_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day104_lot" id="lot104_${status.count}" name="day104_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day104_lot" id="lot104_${status.count}" name="day104_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3535,7 +3541,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box105"
-															id="box105${status.count}" value="${vo.day105}"
+															id="box105_${status.count}" value="${vo.day105}"
 															onclick="checkValue(this.id,'box105','lot105_${status.count}','day105_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day105}</span>
 															(<span id="${vo.day105 }" class="number">${vo.income105 }</span>)
@@ -3554,7 +3560,7 @@
 															id="text_lot105_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day105_lot" id="lot105_${status.count}" name="day105_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day105_lot" id="lot105_${status.count}" name="day105_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3568,7 +3574,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box106"
-															id="box106${status.count}" value="${vo.day106}"
+															id="box106_${status.count}" value="${vo.day106}"
 															onclick="checkValue(this.id,'box106','lot106_${status.count}','day106_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day106}</span>
 															(<span id="${vo.day106 }" class="number">${vo.income106 }</span>)
@@ -3587,7 +3593,7 @@
 															id="text_lot106_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day106_lot" id="lot106_${status.count}" name="day106_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day106_lot" id="lot106_${status.count}" name="day106_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3601,7 +3607,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box107"
-															id="box107${status.count}" value="${vo.day107}"
+															id="box107_${status.count}" value="${vo.day107}"
 															onclick="checkValue(this.id,'box107','lot107_${status.count}','day107_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day107}</span>
 															(<span id="${vo.day107 }" class="number">${vo.income107 }</span>)
@@ -3620,7 +3626,7 @@
 															id="text_lot107_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day107_lot" id="lot107_${status.count}" name="day107_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day107_lot" id="lot107_${status.count}" name="day107_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3634,7 +3640,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box108"
-															id="box108${status.count}" value="${vo.day108}"
+															id="box108_${status.count}" value="${vo.day108}"
 															onclick="checkValue(this.id,'box108','lot108_${status.count}','day108_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day108}</span>
 															(<span id="${vo.day108 }" class="number">${vo.income108 }</span>)
@@ -3653,7 +3659,7 @@
 															id="text_lot108_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day108_lot" id="lot108_${status.count}" name="day108_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day108_lot" id="lot108_${status.count}" name="day108_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3667,7 +3673,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box109"
-															id="box109${status.count}" value="${vo.day109}"
+															id="box109_${status.count}" value="${vo.day109}"
 															onclick="checkValue(this.id,'box109','lot109_${status.count}','day109_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day109}</span>
 															(<span id="${vo.day109 }" class="number">${vo.income109 }</span>)
@@ -3686,7 +3692,7 @@
 															id="text_lot109_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day109_lot" id="lot109_${status.count}" name="day109_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day109_lot" id="lot109_${status.count}" name="day109_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3700,7 +3706,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box110"
-															id="box110${status.count}" value="${vo.day110}"
+															id="box110_${status.count}" value="${vo.day110}"
 															onclick="checkValue(this.id,'box110','lot110_${status.count}','day110_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day110}</span>
 															(<span id="${vo.day110 }" class="number">${vo.income110 }</span>)
@@ -3719,7 +3725,7 @@
 															id="text_lot110_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day110_lot" id="lot110_${status.count}" name="day110_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day110_lot" id="lot110_${status.count}" name="day110_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3733,7 +3739,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box111"
-															id="box111${status.count}" value="${vo.day111}"
+															id="box111_${status.count}" value="${vo.day111}"
 															onclick="checkValue(this.id,'box111','lot111_${status.count}','day111_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day111}</span>
 															(<span id="${vo.day111 }" class="number">${vo.income111 }</span>)
@@ -3752,7 +3758,7 @@
 															id="text_lot111_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day111_lot" id="lot111_${status.count}" name="day111_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day111_lot" id="lot111_${status.count}" name="day111_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3766,7 +3772,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box112"
-															id="box112${status.count}" value="${vo.day112}"
+															id="box112_${status.count}" value="${vo.day112}"
 															onclick="checkValue(this.id,'box112','lot112_${status.count}','day112_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day112}</span>
 															(<span id="${vo.day112 }" class="number">${vo.income112 }</span>)
@@ -3785,7 +3791,7 @@
 															id="text_lot112_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day112_lot" id="lot112_${status.count}" name="day112_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day112_lot" id="lot112_${status.count}" name="day112_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3799,7 +3805,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box113"
-															id="box113${status.count}" value="${vo.day113}"
+															id="box113_${status.count}" value="${vo.day113}"
 															onclick="checkValue(this.id,'box113','lot113_${status.count}','day113_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day113}</span>
 															(<span id="${vo.day113 }" class="number">${vo.income113 }</span>)
@@ -3818,7 +3824,7 @@
 															id="text_lot113_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day113_lot" id="lot113_${status.count}" name="day113_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day113_lot" id="lot113_${status.count}" name="day113_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3832,7 +3838,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box114"
-															id="box114${status.count}" value="${vo.day114}"
+															id="box114_${status.count}" value="${vo.day114}"
 															onclick="checkValue(this.id,'box114','lot114_${status.count}','day114_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day114}</span>
 															(<span id="${vo.day114 }" class="number">${vo.income114 }</span>)
@@ -3851,7 +3857,7 @@
 															id="text_lot114_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day114_lot" id="lot114_${status.count}" name="day114_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day114_lot" id="lot114_${status.count}" name="day114_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3865,7 +3871,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box115"
-															id="box115${status.count}" value="${vo.day115}"
+															id="box115_${status.count}" value="${vo.day115}"
 															onclick="checkValue(this.id,'box115','lot115_${status.count}','day115_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day115}</span>
 															(<span id="${vo.day115 }" class="number">${vo.income115 }</span>)
@@ -3884,7 +3890,7 @@
 															id="text_lot115_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day115_lot" id="lot115_${status.count}" name="day115_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day115_lot" id="lot115_${status.count}" name="day115_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3898,7 +3904,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box116"
-															id="box116${status.count}" value="${vo.day116}"
+															id="box116_${status.count}" value="${vo.day116}"
 															onclick="checkValue(this.id,'box116','lot116_${status.count}','day116_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day116}</span>
 															(<span id="${vo.day116 }" class="number">${vo.income116 }</span>)
@@ -3917,7 +3923,7 @@
 															id="text_lot116_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day116_lot" id="lot116_${status.count}" name="day116_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day116_lot" id="lot116_${status.count}" name="day116_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3931,7 +3937,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box117"
-															id="box117${status.count}" value="${vo.day117}"
+															id="box117_${status.count}" value="${vo.day117}"
 															onclick="checkValue(this.id,'box117','lot117_${status.count}','day117_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day117}</span>
 															(<span id="${vo.day117 }" class="number">${vo.income117 }</span>)
@@ -3950,7 +3956,7 @@
 															id="text_lot117_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day117_lot" id="lot117_${status.count}" name="day117_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day117_lot" id="lot117_${status.count}" name="day117_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3964,7 +3970,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box118"
-															id="box118${status.count}" value="${vo.day118}"
+															id="box118_${status.count}" value="${vo.day118}"
 															onclick="checkValue(this.id,'box118','lot118_${status.count}','day118_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day118}</span>
 															(<span id="${vo.day118 }" class="number">${vo.income118 }</span>)
@@ -3983,7 +3989,7 @@
 															id="text_lot118_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day118_lot" id="lot118_${status.count}" name="day118_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day118_lot" id="lot118_${status.count}" name="day118_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -3997,7 +4003,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box119"
-															id="box119${status.count}" value="${vo.day119}"
+															id="box119_${status.count}" value="${vo.day119}"
 															onclick="checkValue(this.id,'box119','lot119_${status.count}','day119_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day119}</span>
 															(<span id="${vo.day119 }" class="number">${vo.income119 }</span>)
@@ -4016,7 +4022,7 @@
 															id="text_lot119_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day119_lot" id="lot119_${status.count}" name="day119_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day119_lot" id="lot119_${status.count}" name="day119_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -4030,7 +4036,7 @@
 														<td width="60%"
 															style="border: hidden; padding: 2px; font-size: 15pt">
 															<input type="checkbox" name="box120"
-															id="box120${status.count}" value="${vo.day120}"
+															id="box120_${status.count}" value="${vo.day120}"
 															onclick="checkValue(this.id,'box120','lot120_${status.count}','day120_${status.count}')">&nbsp;<span
 															class="number tqty">${vo.day120}</span>
 															(<span id="${vo.day120 }" class="number">${vo.income120 }</span>)
@@ -4049,7 +4055,7 @@
 															id="text_lot120_${status.count}">Production date&nbsp; :</span>
 														</td>
 														<td width="60%" style="border: hidden; padding: 2px;">														
-															<input type="text" placeholder="dd-mm-yyyy" class="day120_lot" id="lot120_${status.count}" name="day120_lot" readonly='true'
+															<input type="text" placeholder="dd-mm-yyyy" class="day120_lot" id="lot120_${status.count}" name="day120_lot" readonly
 																	value="" size="10" style="width:121px; display:none;"/>
 														</td>
 													</tr>
@@ -4065,7 +4071,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="20" style="height: 100px; text-align: center;">No data found.</td>
+									<td colspan="21" style="height: 100px; text-align: center;">No data found.</td>
 								</tr>
 							</c:otherwise>
 

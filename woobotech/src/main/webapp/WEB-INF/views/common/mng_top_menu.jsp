@@ -83,6 +83,7 @@
 			
 			<!-- 메일 발송용 협력사 관리자 관리용 관리자 관리 탭 --> 
 			<%if("master".equals(admin_id)){ %>
+				<%-- <li class="<%=menu[10]%>"><a href="mng_shortage?menu=10" style="font-size:17px;">Shortage</a></li> --%>
 				<li class="<%=menu[9]%>"><a href="mng_partner_whole?menu=9"  style="font-size:17px;">Partner management</a></li>
 			<%} %>
 			<%-- <%if("master".equals(admin_id)){ %>
@@ -160,7 +161,8 @@ function fnMangerView(){
  	}
 
 function fnMangerSave(){
-	var p_deliveryhour =$('#p_deliveryhour').val(); 
+	var p_deliveryday =Number($('#p_deliveryday').val());
+	var p_deliveryhour =Number($('#p_deliveryhour').val()); 
 	var p_deliverymin = $('#p_deliverymin').val();
 	var u_deliveryhour = $('#u_deliveryhour').val();
 	var u_deliverymin = $('#u_deliverymin').val();
@@ -170,6 +172,7 @@ function fnMangerSave(){
 	var area = $('#area').val();
 	var payment =$('#ment').val();
 	
+	p_deliveryhour = p_deliveryhour+p_deliveryday*24;
 	//이메일 5개 추가 20220422 정인우
 	var email1 = $('#email1').val();
 	var email2 = $('#email2').val();
@@ -209,13 +212,13 @@ function fnMangerSave(){
   	setCookie("branch",branch,365);
   	var payment =$("#ment").val();
   	setCookie("payment",payment,365); */
-
+console.log(p_deliveryhour);
 	$.ajax({
 		type : "post",
 		url : "mng_manger_view_u",
 		dataType : "html",
 		data : {
-			p_deliveryhour : p_deliveryhour,
+			p_deliveryhour : String(p_deliveryhour),
 			p_deliverymin : p_deliverymin,
 			u_deliveryhour : u_deliveryhour,
 			u_deliverymin : u_deliverymin,

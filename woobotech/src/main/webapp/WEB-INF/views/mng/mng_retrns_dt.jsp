@@ -67,13 +67,13 @@ table{
 								<%-- <button type="button" class="btn btn-info pull-right print_btn" 
 									style="margin-left: 10px" onclick="fnTrnsPop('${barcode}','${prdate}')">Report</button> --%>
 									
-								<button type="button" class="btn btn-warning pull-right"
+								<%-- <button type="button" class="btn btn-warning pull-right"
 									style="margin-right: 10px" onclick="fnMemoSet('${barcode}')" id="ok2">Apply</button>
 								<input type="text" class="pull-right"
 									placeholder="Write down" value=""  
 									style="width: 300px; height: 30px; margin-right: 10px"
 									id="s_memo1" onKeypress="javascript:if(event.keyCode==13){$('#ok2').click(); $('#s_memo1').val('');}">
-								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">Remarks :  </span>	
+								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">Remarks :  </span>	 --%>
 								<!--  <button type="button" class="btn btn-info pull-right print_btn" id="labelPrintAll"  
 											style="margin-right: 20px" onclick="fnAllLabel('${barcode }')" disabled>전체 재발행(라벨프린터)</button>-->
 								<c:forEach var="vo" items="${ text }" varStatus="status">
@@ -140,6 +140,7 @@ table{
 														<button type="button" class="btn" onclick="fnMemoSet3('${barcode}')" style="font-size: 12px;  margin-top:-1px;  height:29px;" id="ok2">apply</button><br>
 													<br>
 													<br><span style="font-size: 12px">Supplier </span><br>
+													<span style="font-size: 12px">${cu_code}</span><br>
 													<span style="font-size: 14px">${cu_sangho}</span><br>
 													<%-- <c:choose>
 																	<c:when test="${null ne cu_juso }">
@@ -166,15 +167,17 @@ table{
 																	<th
 																		style="text-align: center; font-size: 13px; width: 5%"">No.</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 30%">Part Number</th>
+																		style="text-align: center; font-size: 13px; width: 20%">Part Number</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 35%">Part Name</th>
+																		style="text-align: center; font-size: 13px; width: 30%">Part Name</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%"">Qty</th>
 																	<th
 																		style="text-align: center; font-size: 13px; width: 10%">Printing status</th>
 																	<th
-																		style="text-align: center; font-size: 13px; width: 10%">incoming shipment</th>
+																		style="text-align: center; font-size: 13px; width: 10%">Incoming shipment</th>
+																	<th
+																		style="text-align: center; font-size: 13px; width: 15%">Remarks <button type="button" class="btn btn-warning" onclick="fnMemoSubSet2('${board.size()}','${barcode}')" >Apply</button></th>
 
 
 																</tr>
@@ -191,7 +194,8 @@ table{
 																				<td style="text-align: center; font-size: 13px">${status.count}</td>
 																				<!-- <td style="text-align: center; visibility:hidden; font-size: 13px">${vo.itemcode1}</td> -->
 																				<%-- <td style="text-align: center; font-size: 13px">${vo.itemqty}</td> --%>
-																				<td style="text-align: center; font-size: 13px">${vo.itemcode1}</td>
+																				<input type= "hidden" id = "pcolor_${vo.itemcode1}"value = "${vo.color}">
+																				<td style="text-align: center; font-size: 13px"><span id="itemcode_${status.count}">${vo.itemcode1}</span></td>
 																				<td style="text-align: center; font-size: 13px; line-height: 115%;">
 																					${fn:replace(vo.itemname,replaceChar,"<br/>")}
 																				</td>
@@ -224,6 +228,10 @@ table{
 																								onclick="fnLabelViewSet(${vo.label_idx})"
 																								value="Printing labels" style="font-size:12px; margin: 0px; border: 0px;" />
 																								</td>
+																								<td>
+																							<input type="text" value="${vo.memo2}"	style="width: 200px; height: 30px; margin-right: 10px" id="item_memo_${status.count}" >
+																							<%-- <button type="button" class="btn btn-warning" onclick="fnMemoSubSet('${vo.label_idx}','${vo.itemcode1}','${barcode}')" >Apply</button> --%>	
+																						</td>
 																					</c:when>
 																					
 																					<c:when test="${pageview eq 'mng_re_trns_data'}">
@@ -235,6 +243,10 @@ table{
 																								onclick="fnReLabel('${vo.itemcode1}')"
 																								value="Label reprinting" style="font-size:12px; margin: 0px; border: 0px;"
 																								disabled />
+																						</td>
+																						<td>
+																							<input type="text" value="${vo.memo2}"	style="width: 200px; height: 30px; margin-right: 10px" id="item_memo_${status.count}" >
+																							<%-- <button type="button" class="btn btn-warning" onclick="fnMemoSubSet('${vo.label_idx}','${vo.itemcode1}','${barcode}')" >Apply</button> --%>	
 																						</td>
 																					</c:when>
 
@@ -263,7 +275,7 @@ table{
 											<table>
 												<tr>
 													<td style="width: 55%; border: hidden;">
-														<table>
+														<%-- <table>
 															<tr >
 																<td style=" text-align: center;">
 																	Remarks
@@ -274,7 +286,7 @@ table{
 																	style="width: 80%; text-align: center; padding-left: 10px"
 																	rowspan="2"><span id="p_memo"> ${memo}</span></td>
 															</tr>
-														</table>
+														</table> --%>
 													</td>
 
 												</tr>
@@ -465,7 +477,7 @@ $(function() {
 	});
 	
 	function jtrnsprint(barcode, memo){
-		var memo = document.getElementById('p_memo').innerText;
+		//var memo = document.getElementById('p_memo').innerText;
 			
 		//var amount = ((({board.size()} / 10) + 1) * 10);
 		
@@ -483,7 +495,7 @@ $(function() {
 				
 		//alert("인쇄");
 				
-		window.open("mng_trns_jprint?barcode="+barcode+"&amount="+amount+"&memo="+memo+"&sumqty="+sumqty,"Report Print",'height=900, width=1500');
+		window.open("mng_trns_jprint?barcode="+barcode+"&amount="+amount+"&sumqty="+sumqty,"Report Print",'height=900, width=1500');
 				
 	}
 	
@@ -505,7 +517,8 @@ $(function() {
 	function fnReLabel(pno) {
 		  
 		  var trbarcode = ${barcode}
-		
+		  var color = $('#pcolor_'+pno).val();
+		  console.log(color);
 		  //alert("!");
 		  //var pno = $('#${vo.itemcode1 }').val();
 		  
@@ -530,6 +543,7 @@ $(function() {
 				data : {
 					pno:pno,
 					trbarcode:trbarcode,
+					color:color
 				}
 			}).done(function(data) {
 				//$("#modalPop3").html("");

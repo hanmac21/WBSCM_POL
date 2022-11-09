@@ -973,7 +973,7 @@ vertical-align:top; !important
 												</c:when>
 												<c:otherwise>
 													<tr>
-														<td colspan="20" style="height: 100px; text-align: center;">No data found.</td>
+														<td colspan="21" style="height: 100px; text-align: center;">No data found.</td>
 													</tr>
 												</c:otherwise>
 
@@ -1122,7 +1122,7 @@ vertical-align:top; !important
 			<div class="pull-right hidden-xs">
 				<b></b>
 			</div>
-			<strong>Copyright &copy; 2021 <a href="#">우보테크</a>.
+			<strong>Copyright &copy; 2021 <a href="#">WooboTech</a>.
 			</strong> All rights reserved.
 		</footer> -->
 
@@ -1452,6 +1452,93 @@ vertical-align:top; !important
 			return unescape(cValue);
 		}
 		
+		function fnMemoSubSet(idx, itemcode, barcode){
+			var memo = $("#item_memo_"+idx).val();			
+			var len= memo.length;
+			if(len>20){
+				alert("Please enter no more than 20 characters.")
+				return;
+			}
+			if(memo==null || memo==""){
+				alert('There are no values entered for the comments.');
+				return false;
+			}
+			
+			$.ajax({
+				type : "post",
+				url : "mng_trns_memo_sub_u",
+				dataType : "html",
+				data : {
+					memo : memo,
+					itemcode : itemcode,
+					barcode : barcode
+					
+				}
+			}).done(function(data) {
+				var isOk = data;
+				if (isOk == 1) {
+					alert('Applied to the comment column.');
+					
+				}else{
+					alert('Remark column application failed');
+				}
+			});
+		}
+		// 221024 비고모두적용 테스트
+		function fnMemoSubSet2(boardSize, barcode){
+			var memoA = new Array(); //$("#item_memo_"+idx).val();		
+			var boardSize = boardSize;
+			var memo="";
+			var itemcode = "";
+			console.log("크기확인"+boardSize);
+			console.log("아이템코드확인"+$("#itemcode_5").text());
+			console.log("아이템코드확인"+$("#itemcode_6").text());
+			for(var i = 0; i<boardSize; i++){
+				memoA[i] = $("#item_memo_"+(i+1)).val();
+				if(i==0){
+					memo = $("#item_memo_"+(i+1)).val();
+					itemcode = $("#itemcode_"+(i+1)).text();
+				}else{
+					console.log((i+1)+"번째"+$("#itemcode_"+(i+1)).text());
+					memo =memo+","+$("#item_memo_"+(i+1)).val();
+					itemcode = itemcode+","+$("#itemcode_"+(i+1)).text();
+				}
+				/* var len= memoA[i].length;
+				if(len>10){
+					alert("Please enter no more than 10 characters.")
+					return;
+				} */
+			}
+			console.log("메모확인"+memo);
+			console.log("메모확인"+itemcode);
+			
+			/* if(memo==null || memo==""){
+				alert('There are no values entered for the comments.');
+				return false;
+			} */
+			
+			$.ajax({
+				type : "post",
+				url : "mng_trns_memo_sub_u2",
+				dataType : "html",
+				data : {
+					memo : memo,
+					size: boardSize,
+					itemcode : itemcode,
+					barcode : barcode 
+					
+				}
+			}).done(function(data) {
+				var isOk = data;
+				if (isOk == 1) {
+					alert('Applied to the comment column.');
+					
+				}else{
+					alert('Remark column application failed');
+				}
+			}); 
+		}
+		
 		//메모적용
 		function fnMemoSet(barcode){
 			var memo = $("#s_memo1").val();
@@ -1664,9 +1751,18 @@ vertical-align:top; !important
 		}   
 		
 		function fnMaDateSet(){
-			
+			//221021 생산일자 일괄적용
 			var ma_date = $("#ma_date").val();
-			for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
+			var check_num_day = check_day.substring(3,check_day.length)
+			var check_find= check_num_day -1;			
+			var check_cnt = $("input:checkbox[name=box"+check_num_day+"]").length;
+				console.log(check_cnt);
+			for (var i = 1; i <= check_cnt; i++) {				console.log("check num day확인"+check_num_day);
+				if($('#box'+check_num_day+'_'+i).is(':checked')){
+					$('#lot'+check_num_day+'_'+i).val(ma_date);
+				}
+			}
+			/* for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
 				// table 중 tr이 i번째 있는 자식중에 체크박스가 체크중이면
 				var chk = $('#tablebody').find('tr').eq(i).children().find('input[type="checkbox"]').is(':checked');
 					console.log("포문확인"+i);
@@ -1674,7 +1770,7 @@ vertical-align:top; !important
 					
 					$('#tablebody').find('tr').eq(i).find('.' +check_day+'_lot').val(ma_date);
 				}
-			}
+			} */
 			
 		}
 		
@@ -1944,10 +2040,10 @@ vertical-align:top; !important
 		var check_count =0;
 		
 		function checkValue(id,box,lot_id,day_id){
-		console.log("check id"+id);
-		console.log("box"+box);
-		console.log("lot_id"+lot_id);
-		console.log("day_id"+day_id);
+		console.log("★check_id:"+id);
+		console.log("★box:"+box);
+		console.log("★lot_id:"+lot_id);
+		console.log("★day_id:"+day_id);
 			
 		//alert(check_box);
 			
@@ -2088,72 +2184,35 @@ vertical-align:top; !important
 			//alert("값은 받어왔습니다.1");
 			let pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
 			//alert("값은 받어왔습니다.2");
-			var indate = check_date;
-			var check_find=0;
-			//alert("값은 받어왔습니다.3");
-			for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
-				// table 중 tr이 i번째 있는 자식중에 체크박스가 체크중이면
-				//alert($('#tablebody').find('tr').size());
-				if(check_day=="day1"){
-					check_find =0;
-				}else if(check_day=="day2"){
-					check_find =1;
-				}else if(check_day=="day3"){
-					check_find =2;	
-				}else if(check_day=="day4"){
-					check_find =3;	
-				}else if(check_day=="day5"){
-					check_find =4;
-				}else if(check_day=="day6"){
-					check_find =5;
-				}else if(check_day=="day7"){
-					check_find =6;
-				}else if(check_day=="day8"){
-					check_find =7;
-				}else if(check_day=="day9"){
-					check_find =8;
-				}else if(check_day=="day10"){
-					check_find =9;
-				}else if(check_day=="day11"){
-					check_find =10;
-				}else if(check_day=="day12"){
-					check_find =11;
-				}else if(check_day=="day13"){
-					check_find =12;
-				}else if(check_day=="day14"){
-					check_find =13;
-				}
-				//var chk = $('#tablebody').find('tr').eq(i).children().find('table').children().find('tr').eq(0).find('input[type="checkbox"]').is(':checked');
-				var chk = $('#tablebody').find('tr').eq(i).children().find('table').children().find('.tr').eq(check_find).find('input[type="checkbox"]').is(':checked');
-				//alert("값은 받어왔습니다.7  i=" + i  +"/chk=" + chk + " /tqy=" +tqty);
-				var tqty = $('#tablebody').find('tr').eq(i).find('.'+check_day).val();
-				console.log(chk);
-				if (chk == true ) { //chk == true && tqty>0
-					custcode[j] = $('#tablebody').find('tr').eq(i).find('.custcode').text();
-					custname[j] = $('#tablebody').find('tr').eq(i).find('.custname').text();
-					itemcode1[j]= $('#tablebody').find('tr').eq(i).find('.itemcode1').text();
-					itemname[j] = $('#tablebody').find('tr').eq(i).find('.itemname').text().replace(/,/gi, "|");
-					car_type[j] = $('#tablebody').find('tr').eq(i).find('.car_type').text();
-					unit[j] = $('#tablebody').find('tr').eq(i).find('.unit').text();
-					tqty2[j] = $('#tablebody').find('tr').eq(i).children().find('table').children().find('.tr').eq(check_find).find('input[type="checkbox"]').val();
-					i_qty[j]    = $('#tablebody').find('tr').eq(i).find('.'+check_day).val();
-					lotno[j]    = $('#tablebody').find('tr').eq(i).find('.' +check_day+'_lot').val();
-					label_idx[j]= i;
-					//alert(unit[j]);
-					//alert(i_qty[j]);
-					//alert("값은 받어왔습니다.8");
-					//if(!pattern.test(lotno[j])){
-						//alert("생산일자 날짜 형식을 지켜주세요");
-						//return;
-					//}
-					/* if(check_date<lotno[j]){
-						var cf = confirm("Production date is later than warehousing date. Click OK to proceed.")
-						if(!cf){
-							return;
-						}
-					}	 */
+			var indate = check_date;						
+			
+			//new logic
+			var custcodeTemp = "";
+			var check_num_day = check_day.substring(3,check_day.length)
+			var check_find= check_num_day -1;			
+			var check_cnt = $("input:checkbox[name=box"+check_num_day+"]").length;
+				
+			for (var i = 1; i <= check_cnt; i++) {				
+				if($('#box'+check_num_day+'_'+i).is(':checked')){					
+					custcode[j] = $('#custcode_'+i).val();
+					custname[j] = $('#custname_'+i).val();
+					itemcode1[j]= $('#itemcode1_'+i).val();
+					itemname[j] = $('#itemname_'+i).val().replace(/,/gi, "|");
+					car_type[j] = $('#car_type_'+i).val();
+					unit[j] = $('#unit_'+i).val();
+					tqty2[j] = $('#box'+check_num_day+'_'+i).val();
+					i_qty[j]    =$('#day'+check_num_day+'_'+i).val();
+					lotno[j]    = $('#lot'+check_num_day+'_'+i).val();
+					label_idx[j]= i;	
 					
-					console.log("수량확인"+i_qty[j]);	
+					// 협력사 한곳만 선택가능
+					if(custcodeTemp == ""){
+						custcodeTemp = custcode[i];
+					}else if(custcodeTemp != custcode[i]){
+						alert("Only one supplier can be selected for one transaction statement.");
+						return;
+					}
+					
 					var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
 					if(lotno[j]===''){
 						alert("Select production date");
@@ -2162,38 +2221,18 @@ vertical-align:top; !important
 					}
 					if(i_qty[j]==null || i_qty[j]==""||i_qty[j]==0 || !numCheck2.test(i_qty[j])){
 						alert("You can enter up to two decimal places." );
-						//FunLoadingBarEnd();
 						return false;
-					}
-					
-					j++;
-				}				
+					}					
+					j++;					
+				}
 			}
 			
 			prdate   = $("#outdate").val();
 			branch = getCookie("branch");
-			
-			// 협력사 한곳만 선택가능
-			var custcodeChk = new Array();//납품처코드
-			var custcodeTemp = "";
-			for (var i = 1; i < $('#tablebody').find('tr').size(); i++) {
-				var chk = $('#tablebody').find('tr').eq(i).children().find('table').children().find('.tr').eq(check_find).find('input[type="checkbox"]').is(':checked');
-				if (chk == true) {
-					custcodeChk[i] = $('#tablebody').find('tr').eq(i).find('.custcode').text();
-					if(custcodeTemp == ""){
-						custcodeTemp = custcodeChk[i];
-					}else if(custcodeTemp != custcodeChk[i]){
-						alert("Only one supplier can be selected for one transaction statement.");
-						//$("input:checkbox[id="+id+"]").prop("checked", false);
-							
-						return;
-					}
-				}
-			}
-			
-			//alert(tqty2);
-			//alert(i_qty);
-			console.log(prdate +"aa"+indate);
+						
+			var dataAll = "custcode=" + custcode + "&custname=" + encodeURIComponent(custname)+ "&itemname=" + encodeURIComponent(itemname)+"&car_type=" + car_type+"&i_qty=" + i_qty +"&lotno=" + lotno
+			+ "&itemcode1=" + itemcode1+ "&label_idx=" + label_idx+ "&check_date=" + check_date+"&unit=" + unit+"&indate=" + indate +"&prdate="+indate+"&branch="+branch+"&tqty2="+tqty2;
+			//console.log(dataAll);
 			$.ajax({
 				type : "POST",
 				url : "mng_trns_data",
@@ -2205,9 +2244,7 @@ vertical-align:top; !important
 				$("#modalPop3").html(data);
 				$('#modalPop3').modal({backdrop:'static'});
 				FunLoadingBarEnd();
-				//	$('span.number').number( true, 0 );
-			});
-			
+			});			
 		}
 		
 		var check_ct=0;
@@ -2402,18 +2439,21 @@ vertical-align:top; !important
 			var j = 0;
 			var indate="";
 			var prdate="";
+			var color = "";
 			var branch = getCookie("branch");
-				
-			custcode = $('#tablebody').find('tr').eq(idx).find('.custcode').text();
+			var check_num_day = check_day.substring(3,check_day.length)
+			
+			custcode = $('#custcode_'+idx).val();
 			//custname = $('#tablebody').find('tr').eq(idx).find('.custname').text();
 			custname = getCookie("payment");
-			itemcode1 = $('#tablebody').find('tr').eq(idx).find('.itemcode1').text();
-			itemname = $('#tablebody').find('tr').eq(idx).find('.itemname').text();
-			car_type = $('#tablebody').find('tr').eq(idx).find('.car_type').text();
-			i_qty    = $('#tablebody').find('tr').eq(idx).find('.'+check_day).val();
-			lotno    = $('#tablebody').find('tr').eq(idx).find('.' +check_day+'_lot').val();
-			console.log("날짜확인"+lotno);
+			itemcode1 = $('#itemcode1_'+idx).val();
+			itemname = $('#itemname_'+idx).val();
+			car_type = $('#car_type_'+idx).val();
+			i_qty    = $('#day'+check_num_day+'_'+idx).val();
+			lotno    = $('#lot'+check_num_day+'_'+idx).val();
 			prdate   = $("#outdate").val();
+			color   = $("#color"+'_'+idx).val();
+			console.log("날짜확인"+color);
 			indate = check_date;
 			
 			if(prdate==''){
@@ -2436,7 +2476,8 @@ vertical-align:top; !important
 					car_type:car_type,
 					lotno:lotno,
 					prdate:prdate,
-					branch:branch
+					branch:branch,
+					color:color
 				}
 			}).done(function(data) {
 				$("#modalPop").html("");
@@ -2503,6 +2544,7 @@ vertical-align:top; !important
 		function fnLabelPrint() {
 			$('#label_text'+label_idx).text("Issuance completed");
 			//$('#label_2text'+label_idx).text("발행완료");
+			
 			var itemname = $("#p_itemname2").val();
 			var itemcode1 = $("#p_itemcode1").val();
 			var custname = $("#p_custname").val();
@@ -2523,6 +2565,7 @@ vertical-align:top; !important
 			var production = $("#p_production").val();		//LOT수량
 			var production2 = $("#p_production2").val();
 			var production3 = $("#p_production3").val();
+			var color = $("#p_color").val();
 			
 			var numCheck2 =/^[\d]*\.?[\d]{0,2}$/;
 			//textarea
@@ -2751,6 +2794,7 @@ vertical-align:top; !important
 					batch_date:batch_date,
 					batchMode:batchMode,
 					batch_content,
+					color: color
 				}
 			}).done(function(data) {
 				
@@ -2803,12 +2847,7 @@ vertical-align:top; !important
 			});
 		}
 		
-		//엑셀창 보여주기 20220422 정인우
-		function showExcel(){
-			var startdate = $('#startdate').val();
-			var branch =$('#branch').val();
-			window.open("mng_buy_plan_excel?startdate="+startdate+"&branch="+branch,"Buy Plan Excel",'height=625,width=750');
-		}
+		
 		
 		//라벨 정보 셋팅
 		function fnLabelViewSet_back() {
@@ -3122,6 +3161,14 @@ vertical-align:top; !important
 			
 		}
 		
+		//엑셀창 보여주기 20220422 정인우
+		function showExcel(){
+			var startdate = $('#startdate').val();
+			var branch =$('#branch').val();
+			var addDate = $('#addDate').val();
+			window.open("mng_buy_plan_excel?startdate="+startdate+"&branch="+branch+"&addDate="+addDate,"Buy Plan Excel",'height=625,width=750');
+		}
+		
 		function fnCancelPop() {
 			var checkedValue = getCheckedValue('box');
 			if (checkedValue == "") {
@@ -3208,6 +3255,7 @@ vertical-align:top; !important
 			var delivery_hour = $("#p_delivery_hour").val();
 			var delivery_min = $("#p_delivery_min").val();
 			
+			var du_date = $("#p_du_delivery_date").val();
 			var du_hour = $("#p_du_hour").val();
 			var du_min = $("#p_du_min").val();
 			
@@ -3251,6 +3299,7 @@ vertical-align:top; !important
 					delivery_date:delivery_date,
 					delivery_hour:delivery_hour,
 					delivery_min:delivery_min,
+					du_date:du_date,
 					du_hour:du_hour,
 					du_min:du_min
 					

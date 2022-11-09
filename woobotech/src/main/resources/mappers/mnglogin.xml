@@ -4,7 +4,7 @@
 	<select id="checkCuSano" resultType="int">
 		select count(*)
 		from c_cust
-		where cu_sano = #{loginid}
+		where cu_sano = UPPER(#{loginid})
 	</select>
 
 	<select id="checkTscmCuSano" resultType="int">
@@ -12,7 +12,7 @@
 		from c_cust a
 		join t_scm_cust b
 		on a.cu_code = b.custcode
-		where a.cu_sano = #{loginid}
+		where a.cu_sano = UPPER(#{loginid})
 	</select>
 
 	<select id="selectMngDTO" resultType="com.woobotech.service.web.dto.MngDTO">
@@ -22,7 +22,7 @@
 		, cu_sano
 		, cu_juso
 		from c_cust
-		where cu_sano = #{loginid}
+		where cu_sano = UPPER(#{loginid})
 	</select>
 	
 	<select id="checkPWD" parameterType="map" resultType="int">
@@ -35,7 +35,7 @@
 	<select id="getCuCode" resultType="string">
 		select cu_code
 		from c_cust
-		where cu_sano = #{loginid}
+		where cu_sano = UPPER(#{loginid})
 	</select>
 
 	<insert id="insertScmCust" parameterType="string">

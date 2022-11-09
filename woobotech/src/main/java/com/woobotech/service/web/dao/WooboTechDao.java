@@ -44,6 +44,7 @@ import com.woobotech.service.web.dto.PartnerDTO;
 import com.woobotech.service.web.dto.ProductionDTO;
 import com.woobotech.service.web.dto.QnADTO;
 import com.woobotech.service.web.dto.ReLabelDTO;
+import com.woobotech.service.web.dto.ShortageVO;
 import com.woobotech.service.web.dto.StockDTO;
 import com.woobotech.service.web.dto.TrnsDTO;
 import com.woobotech.tools.F;
@@ -1568,6 +1569,7 @@ private RowMapper mapperP15 = new RowMapper() {
       info.setItemcode1(rs.getString("itemcode"));
       info.setItemqty(rs.getString("itemqty"));
       String itemname = rs.getString("itemname");
+      info.setColor(rs.getString("color"));
 
       if (itemname.length() > 30) {
         itemname = itemname.substring(0, 30) + "<br>" + itemname.substring(30, itemname.length());
@@ -1593,6 +1595,7 @@ private RowMapper mapperP15 = new RowMapper() {
       info.setCu_juso(rs.getString("cu_juso"));
       info.setBak_juso(rs.getString("bake"));// 211101 백주소
       info.setDeliveryno(rs.getString("deliveryno"));// 211102 배송준비중 번호
+      info.setCuCode(rs.getString("cu_adcode"));
       String cu_uptae = rs.getString("cu_uptae");
       if (cu_uptae != null) {
         if (cu_uptae.length() > 7) {
@@ -1794,6 +1797,51 @@ private RowMapper mapperP15 = new RowMapper() {
       return info;
     }
   };
+  
+  private RowMapper mapper22 = new RowMapper() {
+    public ShortageVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+      ShortageVO info = new ShortageVO();
+
+      
+      info.setItemname(rs.getString("itemname"));
+      info.setItemcode1(rs.getString("itemcode1"));
+      info.setDay1p(StringUtil.nvl(rs.getString(4), "0"));
+      info.setDay2p(StringUtil.nvl(rs.getString(5), "0"));
+      info.setDay3p(StringUtil.nvl(rs.getString(6), "0"));
+      info.setDay4p(StringUtil.nvl(rs.getString(7), "0"));
+      info.setDay5p(StringUtil.nvl(rs.getString(8), "0"));
+      info.setDay6p(StringUtil.nvl(rs.getString(9), "0"));
+      info.setDay7p(StringUtil.nvl(rs.getString(10), "0"));
+      info.setDay8p(StringUtil.nvl(rs.getString(11), "0"));
+      info.setDay9p(StringUtil.nvl(rs.getString(12), "0"));
+      info.setDay10p(StringUtil.nvl(rs.getString(13), "0"));
+      info.setStockQty(StringUtil.nvl(rs.getString(20), "0"));
+      return info;
+    }
+  };
+  
+  private RowMapper mapper23 = new RowMapper() {
+    public ShortageVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+      ShortageVO info = new ShortageVO();
+
+      
+      info.setItemname(rs.getString("itemname"));
+      info.setItemcode1(rs.getString("itemcode1"));
+      info.setDay1b(StringUtil.nvl(rs.getString(4), "0"));
+      info.setDay2b(StringUtil.nvl(rs.getString(5), "0"));
+      info.setDay3b(StringUtil.nvl(rs.getString(6), "0"));
+      info.setDay4b(StringUtil.nvl(rs.getString(7), "0"));
+      info.setDay5b(StringUtil.nvl(rs.getString(8), "0"));
+      info.setDay6b(StringUtil.nvl(rs.getString(9), "0"));
+      info.setDay7b(StringUtil.nvl(rs.getString(10), "0"));
+      info.setDay8b(StringUtil.nvl(rs.getString(11), "0"));
+      info.setDay9b(StringUtil.nvl(rs.getString(12), "0"));
+      info.setDay10b(StringUtil.nvl(rs.getString(13), "0"));
+      
+      return info;
+    }
+  };
+
 
   // 거래명세저 재발행 데이터
   public void mng_re_trns_data_text(Map<String, String> param) {
@@ -1893,7 +1941,8 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("        ,t1.pno  as itemcode                  \n");
     sql.append("        ,t1.plant  as loc                  \n");
     sql.append("        ,t3.spec  as itemqty                  \n");
-    sql.append("        ,t1.pname as itemname                 \n");
+    sql.append("        ,case when t3.pitemname=' ' then t1.pname Else t3.pitemname end as itemname                   \n");
+    sql.append("        ,t3.label_color as color                \n");
     sql.append("        ,t1.qty                               \n");
     sql.append("        ,t2.cu_sangho as custname             \n");
     sql.append("        ,t2.cu_sano                           \n");
@@ -1903,6 +1952,8 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("        ,t1.memo                          \n");
     sql.append("        ,t1.memo2                           \n");
     sql.append("        ,t2.cu_juso                          \n");
+    sql.append("        ,t2.cu_adcode                          \n");
+    sql.append("        ,t3.label_color as color                \n");
     sql.append("        ,' '       as bake                   \n");
     sql.append("        ,nvl(t2.cu_uptae, '') as cu_uptae                          \n");
     sql.append("        ,nvl(t2.cu_upjong,'') as cu_upjong                         \n");
@@ -2308,25 +2359,7 @@ private RowMapper mapperP15 = new RowMapper() {
         if (stmtx.executeUpdate() > 0) {
           result = 1;
           logger.info("▷▶▷▶▷▶ 수정성공");
-          // ★★★★★삭제예정220725★★★★★ 울산 평택디비
-          /*
-           * Class.forName(DRIVER); try { conn = DriverManager.getConnection(URL, USER, PW);
-           * conn.setAutoCommit(false); pstmt = conn.prepareStatement(sql.toString()); index = 1;
-           * pstmt.setString(index++, memo); pstmt.setString(index++, barcode);
-           * 
-           * pstmt.executeUpdate(); pstmt.close(); conn.commit(); conn.close();
-           * 
-           * } catch (Exception e) { // TODO: handle exception e.printStackTrace(); }
-           * 
-           * Class.forName(DRIVER2); try { conn = DriverManager.getConnection(URL2, USER2, PW2);
-           * conn.setAutoCommit(false); pstmt = conn.prepareStatement(sql.toString()); index = 1;
-           * pstmt.setString(index++, memo); pstmt.setString(index++, barcode);
-           * 
-           * pstmt.executeUpdate(); pstmt.close(); conn.commit(); conn.close();
-           * 
-           * } catch (Exception e) { // TODO: handle exception e.printStackTrace(); }
-           */
-          // ★★★★★삭제예정220725★★★★★ 울산 평택디비
+          
         } else {
           result = -2;
           logger.info("▷▶▷▶▷▶수정 실패 :");
@@ -2358,6 +2391,162 @@ private RowMapper mapperP15 = new RowMapper() {
     return result;
 
   }
+  
+//구매계획관리 - 거래명세서 비고적용
+ public int mng_trns_memo_sub_u(Map<String, String> map) {
+
+   int result = -1;
+   PreparedStatement stmtx = null;
+   PreparedStatement pstmt = null;
+   Connection conx = null;
+   Connection conn = null;
+   StringBuffer sql = new StringBuffer();
+   ResultSet rs = null;
+   try {
+     conx = dataSource.getConnection();
+     conx.setAutoCommit(false);
+     String barcode = map.get("barcode");
+     String memo = map.get("memo");
+     String itemcode = map.get("itemcode");
+
+     System.out.println("barcode : " + barcode);
+     sql.append("select barcode from T_SCM_TRADE where barcode=? ");
+
+     stmtx = conx.prepareStatement(sql.toString());
+     stmtx.setString(1, barcode);
+     
+     rs = stmtx.executeQuery();
+
+     if (rs.next()) {
+       stmtx.close();
+       sql.setLength(0);
+       sql.append("update T_SCM_TRADE  \n");
+       sql.append("   set memo2=?      \n");
+       sql.append(" where barcode =?");
+       sql.append(" and pno =?");
+       stmtx = conx.prepareStatement(sql.toString());
+       int index = 1;
+       stmtx.setString(index++, memo);
+       stmtx.setString(index++, barcode);
+       stmtx.setString(index++, itemcode);
+       
+       rs.close();
+
+       if (stmtx.executeUpdate() > 0) {
+         result = 1;
+         logger.info("▷▶▷▶▷▶ 수정성공");
+       } else {
+         result = -2;
+         logger.info("▷▶▷▶▷▶수정 실패 :");
+         throw new Exception("▷▶▷▶▷▶ 수정 실패");
+       }
+
+     } else {
+       result = -1;// 바코드 번호가
+       logger.info("▷▶▷▶▷▶바코드 번호가 없는 경우");
+       throw new Exception("▷▶▷▶▷▶바코드 번호가 없는 경우");
+     }
+
+     conx.commit();
+   } catch (Exception e) {
+     try {
+       conx.rollback();
+     } catch (Exception e2) {
+       // TODO: handle exception
+     }
+
+     e.printStackTrace();
+   } finally {
+     jFunction.close(rs, stmtx, conx);
+   }
+
+   // Member m = getUserInfo(map.get("userid"));
+   // System.out.println(sql.toString());
+
+   return result;
+
+ }
+ 
+//구매계획관리 - 거래명세서 비고적용
+public int mng_trns_memo_sub_u2(Map<String, String> map) {
+
+  int result = -1;
+  PreparedStatement stmtx = null;
+  PreparedStatement pstmt = null;
+  Connection conx = null;
+  Connection conn = null;
+  StringBuffer sql = new StringBuffer();
+  ResultSet rs = null;
+  try {
+    conx = dataSource.getConnection();
+    conx.setAutoCommit(false);
+    String barcode = map.get("barcode");
+    String memo1 = map.get("memo1");
+    String itemcode = map.get("itemcode");
+    int size = Integer.parseInt(map.get("size"));
+    String memoArr[] = memo1.split(",");
+    String itemcodeArr[] = itemcode.split(",");
+    System.out.println("barcode : " + barcode);
+    sql.append("select barcode from T_SCM_TRADE where barcode=? ");
+
+    stmtx = conx.prepareStatement(sql.toString());
+    stmtx.setString(1, barcode);
+    
+    rs = stmtx.executeQuery();
+
+    if (rs.next()) {
+      stmtx.close();
+      for(int i = 0; i<size; i++) {
+        if(memoArr[i].equals("")) {
+          memoArr[i] = memoArr[i].replace("", " ");
+        }
+        sql.setLength(0);
+        sql.append("update T_SCM_TRADE  \n");
+        sql.append("   set memo2=?      \n");
+        sql.append(" where barcode =?");
+        sql.append(" and pno =?");
+        stmtx = conx.prepareStatement(sql.toString());
+        int index = 1;
+        stmtx.setString(index++, memoArr[i]);
+        stmtx.setString(index++, barcode);
+        stmtx.setString(index++, itemcodeArr[i]);
+      
+        rs.close();
+  
+        if (stmtx.executeUpdate() > 0) {
+          result = 1;
+          logger.info("▷▶▷▶▷▶ 수정성공");
+        } else {
+          result = -2;
+          logger.info("▷▶▷▶▷▶수정 실패 :");
+          throw new Exception("▷▶▷▶▷▶ 수정 실패");
+        }
+      }
+    } else {
+      result = -1;// 바코드 번호가
+      logger.info("▷▶▷▶▷▶바코드 번호가 없는 경우");
+      throw new Exception("▷▶▷▶▷▶바코드 번호가 없는 경우");
+    }
+
+    conx.commit();
+  } catch (Exception e) {
+    try {
+      conx.rollback();
+    } catch (Exception e2) {
+      // TODO: handle exception
+    }
+
+    e.printStackTrace();
+  } finally {
+    jFunction.close(rs, stmtx, conx);
+  }
+
+  // Member m = getUserInfo(map.get("userid"));
+  // System.out.println(sql.toString());
+
+  return result;
+
+}
 
   // 구매관리계획 - 거래명세서 - 발행 순번 용 메모
   public int mng_trns_memo2_u(Map<String, String> map) {
@@ -3298,9 +3487,10 @@ private RowMapper mapperP15 = new RowMapper() {
       System.out.println("du_hour==>" + du_hour);
       String du_min = map.get("du_min");
       System.out.println("du_min==>" + du_min);
+      String du_date = DateUtil.getConvertDate2(map.get("du_date"));
 
       String dtime = delivery_date + " " + delivery_hour + ":" + delivery_min;
-      String dtime2 = delivery_date + " " + du_hour + ":" + du_min;
+      String dtime2 = du_date + " " + du_hour + ":" + du_min;
       // String dtime = param.get("dtime"); //도착예정시간
       System.out.println("dtime2 : " + dtime2);
 
@@ -16565,7 +16755,8 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("                SELECT                                                      \n");
     sql.append("                        A.*                                                 \n");
     sql.append("                       ,i.itemcode1                                         \n");
-    sql.append("                       ,i.itemname                                          \n");
+    sql.append("                       ,case when i.pitemname=' ' then i.itemname Else i.pitemname end as itemname                                         \n");
+    sql.append("                       ,i.label_color as color                             \n");
     sql.append("                       ,i.cmb_itemtype                                      \n");
     sql.append("                       ,c.custcode                                          \n");
     sql.append("                       ,cc.cu_sangho as custname                            \n");
@@ -19703,6 +19894,7 @@ if(arrCnt == 30) {
         logger.info("dto값 확인:{}", dto.getEmail3());
         logger.info("dto값 확인:{}", dto.getEmail4());
         logger.info("dto값 확인:{}", dto.getEmail5());
+        System.out.println("메일1확인"+dto.getEmail1());
         list.add(dto);
 
       }
@@ -19716,6 +19908,157 @@ if(arrCnt == 30) {
 
     return list;
   }
+  
+  public int mng_email_u(Map<String, String> map) {
+
+    int result = -1;
+    PreparedStatement stmtx = null;
+    Connection conx = null;
+    StringBuffer sql = new StringBuffer();
+    ResultSet rs = null;
+    try {
+      conx = dataSource.getConnection();
+      conx.setAutoCommit(false);
+      String custcode = map.get("cucode");
+      String email1 = F.nullCheck(map.get("email1"), " ");
+      String email2 = F.nullCheck(map.get("email2"), " ");
+      String email3 = F.nullCheck(map.get("email3"), " ");
+      String email4 = F.nullCheck(map.get("email4"), " ");
+      String email5 = F.nullCheck(map.get("email5"), " ");
+      String user1 = F.nullCheck(map.get("user1"), " ");
+      String user2 = F.nullCheck(map.get("user2"), " ");
+      String user3 = F.nullCheck(map.get("user3"), " ");
+      String user4 = F.nullCheck(map.get("user4"), " ");
+      String user5 = F.nullCheck(map.get("user5"), " ");
+
+      sql.setLength(0);
+      sql.append("update T_SCM_CUST \n");
+      sql.append(
+          "  set email1=?, email2=?, email3=?, email4=?, email5=?,"
+              + "user1 = ?,user2 = ?,user3 = ?,user4 = ?,user5 = ?   \n");
+     
+      sql.append(" where custcode =?");
+
+      stmtx = conx.prepareStatement(sql.toString());
+      int index = 1;
+      
+      stmtx.setString(index++, email1);
+      stmtx.setString(index++, email2);
+      stmtx.setString(index++, email3);
+      stmtx.setString(index++, email4);
+      stmtx.setString(index++, email5);
+      stmtx.setString(index++, user1);
+      stmtx.setString(index++, user2);
+      stmtx.setString(index++, user3);
+      stmtx.setString(index++, user4);
+      stmtx.setString(index++, user5);
+      stmtx.setString(index++, custcode);
+
+      System.out.println(sql.toString());
+      if (stmtx.executeUpdate() > 0) {
+
+        result = 1;
+        logger.info("▷▶▷▶▷▶ 수정성공");
+      } else {
+        result = -2;
+        logger.info("▷▶▷▶▷▶수정 실패 :");
+        throw new Exception("▷▶▷▶▷▶ 수정 실패");
+      }
+
+      conx.commit();
+    } catch (Exception e) {
+      try {
+        conx.rollback();
+      } catch (Exception e2) {
+        // TODO: handle exception
+      }
+
+      e.printStackTrace();
+    } finally {
+      jFunction.close(rs, stmtx, conx);
+    }
+
+    // Member m = getUserInfo(map.get("userid"));
+    // System.out.println(sql.toString());
+
+    return result;
+
+  }
+  
+  public int mng_email_d(Map<String, String> map) {
+
+    int result = -1;
+    PreparedStatement stmtx = null;
+    Connection conx = null;
+    StringBuffer sql = new StringBuffer();
+    ResultSet rs = null;
+    try {
+      conx = dataSource.getConnection();
+      conx.setAutoCommit(false);
+      String custcode = map.get("cucode");
+      String emailA = F.nullCheck(map.get("emailA"), " ");
+      String userA = F.nullCheck(map.get("userA"), " ");
+      String emailArr[] = emailA.split(",");
+      String userArr[] = userA.split(",");
+      System.out.println("길이확인"+emailArr.length);
+      sql.setLength(0);
+      sql.append("update T_SCM_CUST \n");
+      sql.append("set    \n"); //email1=?, email2=?, email3=?, email4=?, email5=?, user1 = ?,user2 = ?,user3 = ?,user4 = ?,user5 = ?
+      for(int i = 0; i<emailArr.length; i++) {
+        if(i!=emailArr.length-1) {
+          sql.append(emailArr[i]);
+          sql.append("=?,");
+          sql.append(userArr[i]);
+          sql.append("=?,");
+        }else {
+          sql.append(emailArr[i]);
+          sql.append("=?,");
+          sql.append(userArr[i]);
+          sql.append("=?");
+        }
+      }
+      sql.append(" where custcode =?");
+
+      stmtx = conx.prepareStatement(sql.toString());
+      int index = 1;
+      for(int i =0; i<emailArr.length; i++) {
+        stmtx.setString(index++, " ");
+        stmtx.setString(index++, " ");
+      }
+     
+      stmtx.setString(index++, custcode);
+
+      System.out.println(sql.toString());
+      if (stmtx.executeUpdate() > 0) {
+
+        result = 1;
+        logger.info("▷▶▷▶▷▶ 수정성공");
+      } else {
+        result = -2;
+        logger.info("▷▶▷▶▷▶수정 실패 :");
+        throw new Exception("▷▶▷▶▷▶ 수정 실패");
+      }
+
+      conx.commit();
+    } catch (Exception e) {
+      try {
+        conx.rollback();
+      } catch (Exception e2) {
+        // TODO: handle exception
+      }
+
+      e.printStackTrace();
+    } finally {
+      jFunction.close(rs, stmtx, conx);
+    }
+
+    // Member m = getUserInfo(map.get("userid"));
+    // System.out.println(sql.toString());
+
+    return result;
+
+  }
+  
 
   // 구매계획관리 조회조건
   public ArrayList<String> itemList() {
@@ -19834,6 +20177,615 @@ if(arrCnt == 30) {
 
     return result;
   }
+  // shortage
+  public List<ShortageVO> mng_shortage1(String[] arrayDay, Map<String, String> param, int page,
+      int itemCountPerPage, String temp_date) throws SQLException {
+    System.out.println("check"+arrayDay[9]);
+    String pageView = param.get("pageView");
+    StringBuffer sql = new StringBuffer();
+    int end = page * itemCountPerPage;
+    int start = end - itemCountPerPage + 1;
+    String session_cu_code = param.get("session_cu_code");
+    String startdate = F.nullCheck(param.get("startdate"), "");
+    //String temp_date = F.nullCheck(param.get("temp_date"));             //startdate -1
+    String itemcode1 = F.nullCheck(param.get("itemcode1"), "");
+    String itemname = F.nullCheck(param.get("itemname"), "");
+    String branch = F.nullCheck(param.get("branch"), "000");
+    String alldate = param.get("result");
+    String month ="";
+    startdate = DateUtil.getConvertDate(startdate);
+    Connection conx = null;
+    PreparedStatement ps = null;
+    conx = dataSource.getConnection();
+    try {
+    sql.setLength(0);
+    sql.append("Select max(distinct chmonth2) as Chmonth \n");
+    sql.append("from T_ST_Close                         \n");
+    sql.append(" where  Gubun='01'                        \n");
+    sql.append("and Chmonth2 <= '"+startdate+"'                             \n");
+    sql.append("order by chmonth2 desc                        \n");
+    
+    
+      ps = conx.prepareStatement(sql.toString());
+    
+      ResultSet rs = ps.executeQuery();
+      while(rs.next()) {
+        month = rs.getString("Chmonth");
+      }  
+    String month2 = month+"01";
+    System.out.println(sql.toString());
+    
+    sql.setLength(0);
+    sql.append("create or replace view T_View_Stock_Tmp_SUPER as  \n");
+    sql.append("select '' as custcode, branch, gubun, '101' as ingubun, chmonth as Condate, 0 as unitprice  \n");
+    sql.append(",roomcode, Itemcode, Lotno, tEstate,gQty as InQty, bQty as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append(" from T_ST_Closesub  \n");
+    sql.append(" where  Gubun='01' and Chmonth2 = '"+month+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '102' as ingubun,Condate, unitprice \n");
+    sql.append(",Roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",Qty as InQty,0 as bInQty,0 as OutQty,0 as bOutQty \n");
+    sql.append("from T_PM_Entersub\n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '103' as ingubun,Condate, unitprice \n");
+    sql.append(",roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",-1*gQty as InQty,-1*bQty as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append("from T_PM_EnterBacksub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all    \n");
+    sql.append("select ' ' as custcode, branch, gubun, '104' as ingubun, condate, 0 as unitprice  \n");
+    sql.append(",Roomcode, Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",gQty as InQty,bQty as bInQty, 0 as OutQty, 0 as bOutQty  \n");
+    sql.append("from T_MM_EnterSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '105' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",Roomcode, Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",-1*gQty as InQty,-1*bQty as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append("from T_MM_EnterBackSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '106' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",Roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",gQty as InQty,bQty as bInQty, 0 as OutQty, 0 as bOutQty \n");
+    sql.append("from T_MM_MoveWIPtoRoomsub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '107' as ingubun, Condate, 0 as unitprice \n");
+    sql.append(",Roomcode, itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",Qty as InQty,0 as bInQty,0 as OutQty,0 as bOutQty \n");
+    sql.append("from T_ST_ExceptEntersub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '201' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, Childcode as Itemcode, Lotno, tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, Qty as OutQty,0 as bOutQty  \n");
+    sql.append("from T_MM_DeliverySub_Real \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '202' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, -1*gQty as OutQty,-1*bQty as bOutQty  \n");
+    sql.append("from T_MM_DeliveryBacksub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '201' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, Childcode as Itemcode, ' ' Lotno, tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, outQty as OutQty,0 as bOutQty  \n");
+    sql.append("from T_MM_OutRequestsub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '203' as ingubun,Condate, unitprice \n");
+    sql.append(",roomcode, CASE WHEN itemcode <> pitemcode THEN pitemcode ELSE itemcode END, Lotno, '001' as tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, Qty as OutQty,0 as bOutQty \n");
+    sql.append("from T_SM_DeliverySub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '206' as ingubun,cast(condate as varchar2(8 char)) condate, unitprice \n");
+    sql.append(",roomcode, CASE WHEN itemcode <> pcode THEN pcode ELSE itemcode END Itemcode, Lotno,'001' as tEstate \n");
+    sql.append(",qty as InQty, 0 as binQty, 0 as OutQty, 0 as bOutQty \n");
+    sql.append("from T_SM_DeliveryBackSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '207' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, CASE WHEN PCODE=' ' THEN itemcode WHEN itemcode <> pcode THEN pcode ELSE itemcode END Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, Qty as OutQty,0 as bOutQty \n");
+    sql.append("from T_ST_ExceptDeliverySub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '208' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, Qty as OutQty, bQty as bOutQty \n");
+    sql.append("from T_ST_DestroySub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '209' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty, gqty as OutQty, bQty as bOutQty  \n");
+    sql.append("from T_ST_ChangeSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '301' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",OutRoom as roomcode, Childcode as Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty,Qty as OutQty, 0 as bOutQty  \n");
+    sql.append("from T_PM_DeliverySub_Real \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select custcode, branch, gubun, '302' as ingubun,Condate, 0 as unitprice \n");
+    sql.append(",InRoom as roomcode, Itemcode, Lotno, '001' as tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty,-1*gQty as OutQty, -1*bQty as bOutQty \n");
+    sql.append("from t_pm_deliverybacksub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '304' as ingubun,Condate, unitprice \n");
+    sql.append(",InRoom as roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",gQty as InQty, bQty as bInQty,0 as OutQty, 0 as bOutQty \n");
+    sql.append("from t_st_movesub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '304' as ingubun,Condate, unitprice \n");
+    sql.append(",OutRoom as roomcode, Itemcode, Lotno, tEstate \n");
+    sql.append(",0 as InQty,0 as bInQty,gQty as OutQty, bQty as bOutQty \n");
+    sql.append("from t_st_movesub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '305' as ingubun, Condate, 0 as unitprice \n");
+    sql.append(",roomcode, itemcode, Lotno, tEstate \n");
+    sql.append(",0 as InQty, -1*Qty as bInQty, -1*Qty as OutQty, 0 as  bOutQty  \n");
+    sql.append("from T_ST_ConditionChangeSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("and AfterYangBul='001' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, branch, gubun, '305' as ingubun, Condate, 0 as unitprice \n");
+    sql.append(",roomcode, itemcode, Lotno, tEstate \n");
+    sql.append(",-1*Qty as InQty, 0 as bInQty, 0 as OutQty, -1*Qty as  bOutQty \n");
+    sql.append("from T_ST_ConditionChangeSub \n");
+    sql.append("where  Gubun='01' \n");
+    sql.append("and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append("and AfterYangBul='002' \n");
+    sql.append("union all \n");
+    sql.append("select '' as custcode, a.branch, a.gubun, '106' as ingubun, Condate, 0 as unitprice \n");
+    sql.append(",a.roomcode, a.itemcode, a.Lotno, a.tEstate \n");
+    sql.append(",a.Qty  as InQty, 0 as bInQty, 0 as OutQty, 0 as  bOutQty  \n");
+    sql.append(" from T_MM_ConditionChangeSub        a \n");
+    sql.append("     join t_mi_item       b   ON  a.gubun = b.gubun AND a.itemcode = b.itemcode AND b.cmb_itemtype = '001'  \n");
+    sql.append(" where a.gubun='01' \n");
+    sql.append(" and a.Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and a.tConditionAft='001' \n");
+    sql.append(" and length(a.ptno) <> 0   \n");
+    sql.append(" and length(a.roomcode) = 4  \n");
+    System.out.println(sql.toString());
+    ps = conx.prepareStatement(sql.toString());
+    rs = ps.executeQuery();
+    
+    sql.setLength(0);  
+    sql.append("Select max(distinct chmonth2) as Chmonth  \n");
+    sql.append(" from T_MM_Close \n");
+    sql.append(" where Gubun='01' \n");
+    sql.append(" and branch = '000' \n");
+    sql.append(" and Chmonth2 <= '"+startdate+"'    \n");
+    sql.append(" order by chmonth2 desc \n");
+    
+    ps = conx.prepareStatement(sql.toString());
+    rs = ps.executeQuery();
+    while(rs.next()) {
+      month = rs.getString("Chmonth");
+    } 
+    month2 = month+"01";
+    sql.setLength(0);
+    sql.append("create or replace view T_View_Stock_Tmp_SUPER_Raw as  \n");
+    sql.append(" select branch, gubun, '101' as ingubun, chmonth || '31' as Condate \n");
+    sql.append(",Wccode, Itemcode, Lotno, tEstate \n");
+    sql.append(",gQty as InQty, bQty as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append(" from T_MM_CloseSub  \n");
+    sql.append(" where Gubun='01' \n");
+    sql.append(" and Chmonth2 = '"+month+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '102' as ingubun,Condate \n");
+    sql.append(",Wccode, Childcode, Lotno, tEstate \n");
+    sql.append(",Qty as InQty,0 as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append(" from T_MM_DeliverySub_Real  \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '102' as ingubun,Condate \n");
+    sql.append(",Wccode, Childcode, ' ' Lotno, tEstate \n");
+    sql.append(",OutQty as InQty,0 as bInQty,0 as OutQty,0 as bOutQty  \n");
+    sql.append(" from T_MM_OutRequestsub \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '103' as ingubun,Condate             \n");
+    sql.append(",Wccode, Itemcode, Lotno, tEstate             \n");
+    sql.append(",-1*gQty as InQty,-1*bQty as bInQty,0 as OutQty,0 as bOutQty             \n");
+    sql.append(" from T_MM_DeliveryBacksub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, a.gubun, '104' as ingubun,Condate             \n");
+    sql.append(",Wccode, Itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",gQty as InQty,bQty as bInQty,0 as OutQty,0 as bOutQty              \n");
+    sql.append(" from T_MM_WorkSub a");
+    sql.append(" left outer join (select gubun, typecode, subcode, subname, TO_NCHAR(subname) as Work, Extra1  from t_mi_typesub) w on a.gubun=w.gubun and a.tWork=w.subcode And w.typecode='MM002'             \n");
+    sql.append(" where a.gubun='01'             \n");
+    sql.append(" and a.Condate between '"+month2+"' and '"+temp_date+"'             \n");
+    sql.append(" union all             \n");
+    sql.append(" select branch, gubun, '105' as ingubun,Condate             \n");
+    sql.append(",Wccode, Itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",-1*gQtyin as InQty,-1*bQtyin as bInQty,0 as OutQty,0 as bOutQty              \n");
+    sql.append(" from T_MM_DisAssemble             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select a.branch, a.gubun, '201' as ingubun, c.condate             \n");
+    sql.append(",a.Wccode, a.Childcode as Itemcode, a.Lotno, a.tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, a.inQty as OutQty,0 as bOutQty              \n");
+    sql.append(" from T_MM_Work_Input a             \n");
+    sql.append(" left outer join T_MM_Worksub c on a.gubun = c.gubun and a.mwno = c.mwno and a.mwsubno = c.mwsubno             \n");
+    sql.append(" where a.gubun='01'             \n");
+    sql.append(" AND ((c.Condate between '"+month2+"' and '"+temp_date+"' ))             \n");
+    sql.append(" union all             \n");
+    sql.append("  select branch, gubun, '202' as ingubun,Condate            \n");
+    sql.append(",Wccode, Itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, gQty as OutQty, bQty as bOutQty              \n");
+    sql.append(" from T_MM_Entersub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '203' as ingubun,Condate             \n");
+    sql.append(",Wccode, Itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, -1*gQty as OutQty,-1*bQty as bOutQty             \n");
+    sql.append(" from T_MM_EnterBacksub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '205' as ingubun6,Condate             \n");
+    sql.append(",Wccode, childcode as Itemcode, Lotno, tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, -1*gQtyout as OutQty, -1*bQtyout as bOutQty              \n");
+    sql.append(" from T_MM_DisAssemblesub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '206' as ingubun,Condate             \n");
+    sql.append(",Wccode,itemcode, Lotno, tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, gqty as OutQty, bqty as bOutQty             \n");
+    sql.append(" from T_MM_Changesub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '207' as ingubun,Condate             \n");
+    sql.append(",outWc, Itemcode, Lotno, tEstate            \n");
+    sql.append(",0 as InQty,0 as bInQty, gQty as OutQty, bQty as bOutQty             \n");
+    sql.append(" from T_MM_MoveWIPtoRoomsub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '208' as ingubun,Condate              \n");
+    sql.append(",WcCode, Itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, Qty as OutQty, bQty as bOutQty             \n");
+    sql.append(" from T_MM_DestroySub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '303' as ingubun,Condate             \n");
+    sql.append(",Wccode, MpsItem as itemcode, Lotno, '001' as tEstate             \n");
+    sql.append(",0 as InQty, pQty as bInQty, pQty as OutQty,0 as bOutQty              \n");
+    sql.append(" from T_QC_FinishTest             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '304' as ingubun,Condate             \n");
+    sql.append(",InWc as wccode, Itemcode, Lotno, tEstate             \n");
+    sql.append(",gQty as InQty,bqty as bInQty,0 as OutQty,0 as bOutQty             \n");
+    sql.append(" from T_MM_MoveSub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '304' as ingubun,Condate            \n");
+    sql.append(",OutWc as wccode, Itemcode, Lotno, tEstate             \n");
+    sql.append(",0 as InQty,0 as bInQty, gQty as OutQty, bqty as bOutQty              \n");
+    sql.append(" from T_MM_MoveSub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '305' as ingubun, Condate             \n");
+    sql.append(",Wccode, itemcode, Lotno, tEstate             \n");
+    sql.append(",0 as InQty, -1*Qty as bInQty, -1*Qty as OutQty, 0 as  bOutQty              \n");
+    sql.append(" from T_MM_ConditionChangeSub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and tConditionAft='001'             \n");
+    sql.append(" and length(ptno) = 0               \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '305' as ingubun, Condate             \n");
+    sql.append(",Wccode, itemcode, Lotno, tEstate             \n");
+    sql.append(",-1*Qty as InQty, 0 as bInQty, 0 as OutQty, -1*Qty as  bOutQty              \n");
+    sql.append(" from T_MM_ConditionChangeSub             \n");
+    sql.append(" where gubun='01' \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and tConditionAft='002'             \n");
+    sql.append(" and length(ptno) = 0               \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '306' as ingubun, Condate             \n");
+    sql.append(",Wccode, itemcode, Lotno,'001' as tEstate             \n");
+    sql.append(",0 as InQty, 0 as bInQty, gQty as OutQty, 0 as  bOutQty             \n");
+    sql.append(" from T_MM_WorkSub             \n");
+    sql.append(" where gubun='01'             \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and length(toWccode) = 5             \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '307' as ingubun, Condate             \n");
+    sql.append(",toWccode, itemcode, Lotno,'001' as tEstate             \n");
+    sql.append(",gQty as InQty, 0 as bInQty, 0 as OutQty, 0 as  bOutQty              \n");
+    sql.append(" from T_MM_WorkSub              \n");
+    sql.append(" where gubun='01'             \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and length(toWccode) = 5             \n");
+    sql.append(" union all \n");
+    sql.append(" select branch, gubun, '308' as ingubun, Condate             \n");
+    sql.append(",Wccode, itemcode, Lotno, tEstate             \n");
+    sql.append(",0 as InQty, -1*Qty as bInQty, -1*Qty as OutQty, 0 as  bOutQty             \n");
+    sql.append(" from T_MM_ConditionChangeSub             \n");
+    sql.append(" where gubun='01'             \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and tConditionAft='001'             \n");
+    sql.append(" and length(ptno) <> 0               \n");
+    sql.append(" union all             \n");
+    sql.append(" select branch, gubun, '308' as ingubun, Condate             \n");
+    sql.append(",Wccode, itemcode, Lotno, tEstate             \n");
+    sql.append(",-1*Qty as InQty, 0 as bInQty, 0 as OutQty, -1*Qty as  bOutQty              \n");
+    sql.append(" from T_MM_ConditionChangeSub             \n");
+    sql.append(" where gubun='01'             \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and tConditionAft='002'             \n");
+    sql.append(" and length(ptno) <> 0               \n");
+    sql.append(" union all             \n");
+    sql.append(" select a.branch, a.gubun, '304' as ingubun, a.Condate             \n");
+    sql.append(",a.Wccode, a.itemcode, a.Lotno, a.tEstate             \n");
+    sql.append(",0 as InQty, 0 as bInQty, a.Qty as OutQty, 0 as  bOutQty              \n");
+    sql.append(" from T_MM_ConditionChangeSub        a             \n");
+    sql.append("     join t_mi_item       b   ON  a.gubun = b.gubun AND a.itemcode = b.itemcode AND b.cmb_itemtype = '001'             \n");
+    sql.append(" where a.gubun='01'             \n");
+    sql.append(" and Condate between '"+month2+"' and '"+temp_date+"' \n");
+    sql.append(" and a.tConditionAft='001'             \n");
+    sql.append(" and length(a.ptno) <> 0               \n");
+    sql.append(" and length(a.roomcode) = 4              \n");
+    System.out.println(sql.toString());
+    ps = conx.prepareStatement(sql.toString());
+    rs = ps.executeQuery();
+    
+    sql.setLength(0);               
+    sql.append("create or replace view T_View_Stock_Tmp_SUPER_Total as               \n");
+    sql.append("SELECT x.gubun, x.branch, x.itemcode , sum(x.inqty) inqty, sum(x.binqty) binqty, sum(x.outqty) outqty, sum(x.boutqty) boutqty,              \n");
+    sql.append("       sum(x.inqty1) inqty1, sum(x.binqty1) binqty1, sum(x.outqty1) outqty1, sum(x.boutqty1) boutqty1                 \n");
+    sql.append("FROM    ( SELECT  gubun, branch, itemcode, condate, inqty, binqty, outqty, boutqty, 0 inqty1, 0 binqty1, 0 outqty1, 0 boutqty1              \n");
+    sql.append("            from    T_View_Stock_Tmp_SUPER                  \n");
+    sql.append("          UNION   ALL               \n");
+    sql.append("          select gubun, branch, itemcode, condate, 0 inqty, 0 binqty, 0 outqty, 0 boutqty, SUM(inqty) inqty1, SUM(binqty) binqty1,              \n");
+    sql.append("                 SUM(outqty) outqty1, SUM(boutqty) boutqty1               \n");
+    sql.append("            FROM T_View_Stock_Tmp_SUPER_Raw             \n");
+    sql.append("          GROUP   BY  gubun, branch, condate, itemcode ) X           \n");
+    sql.append(" GROUP   BY  x.gubun, x.branch, x.itemcode             \n");
+    
+    ps = conx.prepareStatement(sql.toString());
+    rs = ps.executeQuery();
+    
+    
+    sql.setLength(0);    // 재고뷰
+    sql.append("create or replace view t_View_Join_SUPER as             \n");
+    sql.append("select gubun, itemcode              \n");
+    sql.append("       , sum(inqty-outqty+binqty-boutqty  + (inqty1-outqty1+binqty1-boutqty1)) as onhand              \n");
+    sql.append(" from T_View_Stock_Tmp_SUPER_Total              \n");
+    sql.append(" where gubun='01'             \n");
+    sql.append("   and Branch = '000'             \n");
+    sql.append(" GROUP  BY  gubun, itemcode              \n");
+    
+    ps = conx.prepareStatement(sql.toString());
+    rs = ps.executeQuery();
+    
+    
+    
+    
+    //--FROMDATE = 20221102
+    //--TODATE = 20221102 + 9 -> 20221111
+    sql.setLength(0);
+    sql.append("select x.* from (");
+    sql.append("SELECT  A.*, rownum             \n");
+    sql.append("        ,   (  SELECT  SUM(onhand)             \n");
+    sql.append("                FROM    t_View_Join_SUPER  x             \n");
+    sql.append("                WHERE   a.gubun     =   x.gubun             \n");
+    sql.append("                AND     a.itemcode  =   x.itemcode             \n");
+    sql.append("                )           stock_qty             \n");
+    sql.append("FROM    (             \n");
+    sql.append("        SELECT  A.*, q.subname, i.itemcode1,   i.itemname, i.cmb_itemtype, i.cmb_product             \n");
+    sql.append("        FROM    (             \n");
+    sql.append("                SELECT  a.gubun,  a.branch, a.itemcode,   a.condate,    sum(planqty)    mrp_qty             \n");
+    sql.append("                FROM    T_MM_WorkPlanSub            a             \n");
+    sql.append("                WHERE   A.GUBUN     =   '01'             \n");
+    sql.append("                AND     A.BRANCH    =   '000'             \n");
+    sql.append("                AND     A.condate     >=  '"+startdate+"'             \n");
+    sql.append("                AND     A.condate     <=  '"+arrayDay[9]+"'             \n");
+    sql.append("                GROUP   BY  A.gubun,  A.branch, A.itemcode,   a.condate             \n");
+    sql.append("        )                 \n");
+    sql.append("        PIVOT            (                 \n");
+    sql.append("        SUM(mrp_qty)          FOR CONDATE IN  ( '"+arrayDay[0]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[1]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[2]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[3]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[4]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[5]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[6]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[7]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[8]+"'             \n");
+    sql.append("                                               ,'"+arrayDay[9]+"'             \n");
+    sql.append("                           ))   A            \n");
+    sql.append(" left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode             \n");
+    sql.append(" left outer join (select gubun, typecode, subcode, subname, TO_NCHAR(subname) as ItemType, Extra1  from t_mi_typesub) q on i.gubun=q.gubun and i.cmb_itemtype=q.subcode And q.typecode='MI002'             \n");
+    sql.append("        )       A       WHERE branch LIKE '%'      \n");
+    
+    
+  
+    if (!session_cu_code.equals("master")) {
+      sql.append("and a.custcode ='");
+      sql.append(session_cu_code);
+      sql.append("'");
+    }
+    /*
+     * sql.append(" ORDER   BY ");
+     * 
+     * 
+     * sql.append(" NVL(A.SEQ, 9999)    \n"); sql.append(")x\n"); sql.append("where 1=1 \n");
+     */
+    
+    if (!"".equals(itemcode1)) {
+      sql.append(" AND UPPER(itemcode1) LIKE '%'||");
+      sql.append("UPPER('");
+      sql.append(itemcode1);
+      sql.append("')");
+      sql.append("||'%'");
+    }
+
+    if (!"".equals(itemname)) {
+      sql.append(" AND UPPER(itemname) LIKE '%'||");
+      sql.append("UPPER('");
+      sql.append(itemname);
+      sql.append("')");
+      sql.append("||'%'");
+    }
+
+   
+
+    /*
+     * sql.append(")t \n"); sql.append(" where  row_seq>="); sql.append(start);
+     * sql.append("  and row_seq<="); sql.append(end);
+     */
+    sql.append("ORDER   BY  cmb_itemtype, itemcode             \n");
+    sql.append(") x ");
+    sql.append("WHERE   rownum >=");
+    sql.append(start);
+    sql.append("    AND rownum <=");
+    sql.append(end);
+    
+   // ps = conx.prepareStatement(sql.toString());
+    //rs = ps.executeQuery();
+    
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    
+    
+    System.out.println(sql.toString());
+    return (List<ShortageVO>) this.jdbcTemplate.query(sql.toString(), this.mapper22);
+
+  }
+  public List<ShortageVO> mng_shortage2(String[] arrayDay, Map<String, String> param, int page,
+      int itemCountPerPage, String temp_date) throws SQLException {
+    System.out.println("check"+arrayDay[9]);
+    String pageView = param.get("pageView");
+    StringBuffer sql = new StringBuffer();
+    int end = page * itemCountPerPage;
+    int start = end - itemCountPerPage + 1;
+    String session_cu_code = param.get("session_cu_code");
+    String startdate = F.nullCheck(param.get("startdate"), "");
+    //String temp_date = F.nullCheck(param.get("temp_date"));             //startdate -1
+    String itemcode1 = F.nullCheck(param.get("itemcode1"), "");
+    String itemname = F.nullCheck(param.get("itemname"), "");
+    String branch = F.nullCheck(param.get("branch"), "000");
+    String alldate = param.get("result");
+    String month ="";
+    startdate = DateUtil.getConvertDate(startdate);
+    Connection conx = null;
+    PreparedStatement ps = null;
+    conx = dataSource.getConnection();
+    sql.setLength(0);
+    sql.append("select x.* from (");
+    sql.append("SELECT  A.*, rownum           \n");
+    sql.append("FROM    (                        \n");
+    sql.append("        SELECT  A.*, i.itemcode1,   i.itemname, i.cmb_itemtype             \n");
+    sql.append("        FROM    (             \n");
+    sql.append("SELECT  a.gubun,  a.branch, a.itemcode,   A.condate,    sum(gQTY)    mrp_qty             \n");    
+    sql.append("                FROM    t_pp_mrp_requirement2           a             \n");
+    sql.append("                        Left Outer Join t_mi_item       c   ON  a.gubun =   c.gubun AND a.branch    =   c.branch    AND a.itemcode  =   c.itemcode  AND c.cmb_supply    =   '003'             \n");
+    sql.append("                WHERE   A.GUBUN     =   '01'             \n");
+    sql.append("                AND     A.BRANCH    =   '000'             \n");
+    sql.append("                AND     A.CONDATE   >=  '20221102'             \n");
+    sql.append("                AND     A.CONDATE   <=  '20221111'             \n");
+    sql.append("                GROUP   BY  A.gubun,  A.branch, A.itemcode,   A.condate             \n");
+    sql.append("        )              \n");
+    sql.append("        PIVOT            (             \n");
+    sql.append("        SUM(mrp_qty)          FOR CONDATE IN  ( '"+arrayDay[0]+"'             \n");
+    sql.append(",'"+arrayDay[1]+"'             \n");
+    sql.append(",'"+arrayDay[2]+"'             \n");
+    sql.append(",'"+arrayDay[3]+"'             \n");
+    sql.append(",'"+arrayDay[4]+"'             \n");
+    sql.append(",'"+arrayDay[5]+"'             \n");
+    sql.append(",'"+arrayDay[6]+"'             \n");
+    sql.append(",'"+arrayDay[7]+"'             \n");
+    sql.append(",'"+arrayDay[8]+"'             \n");
+    sql.append(",'"+arrayDay[9]+"'             \n");
+    sql.append("                                            ))   A             \n");
+    sql.append("left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode             \n");
+    sql.append("        )       A             \n");
+    
+    if (!session_cu_code.equals("master")) {
+      sql.append("and a.custcode ='");
+      sql.append(session_cu_code);
+      sql.append("'");
+    }
+    /*
+     * sql.append(" ORDER   BY ");
+     * 
+     * 
+     * sql.append(" NVL(A.SEQ, 9999)    \n"); sql.append(")x\n"); sql.append("where 1=1 \n");
+     */
+    
+    if (!"".equals(itemcode1)) {
+      sql.append(" AND UPPER(itemcode1) LIKE '%'||");
+      sql.append("UPPER('");
+      sql.append(itemcode1);
+      sql.append("')");
+      sql.append("||'%'");
+    }
+
+    if (!"".equals(itemname)) {
+      sql.append(" AND UPPER(itemname) LIKE '%'||");
+      sql.append("UPPER('");
+      sql.append(itemname);
+      sql.append("')");
+      sql.append("||'%'");
+    }
+    
+    sql.append("ORDER   BY  cmb_itemtype, itemcode             \n");
+    sql.append(") x ");
+    sql.append("WHERE   rownum >=");
+    sql.append(start);
+    sql.append("    AND rownum <=");
+    sql.append(end);
+    System.out.println(sql.toString());
+    return (List<ShortageVO>) this.jdbcTemplate.query(sql.toString(), this.mapper23);
+
+    }
   
   public static boolean isInteger(String num){
     double d = Double.parseDouble(num);

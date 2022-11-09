@@ -93,9 +93,19 @@ tr.space {
 											<div class="bar-wrap" style="margin-top: 5px;">
 												<table class="table2" width="100%" height="250px"  border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
 													<tbody>
-													
 														<tr>
-															<td class="td"   width="20%" style="text-align: center;"><!-- 품명 -->item name</td>
+															<td class="td"  width="20%" style="text-align: center;"><!-- 공급업체 -->supplier</td>
+															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
+															<td class="td" colspan="3" width="40%" style="text-align: center;" >${vo.cname}</td>
+														</tr>
+														<tr>
+															<td class="td" width="20%" style="text-align: center;"><!-- 품번 -->Part No.</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${vo.pno}</span></td>
+															<td class="td" width="20%" style="text-align: center;">Color</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${color }</span></td>
+														</tr>
+														<tr>
+															<td class="td"   width="20%" style="text-align: center;"><!-- 품명 -->Part Name</td>
 															
 															
 															<c:choose>
@@ -109,17 +119,11 @@ tr.space {
 															
 															
 														</tr>
-														<tr>
-															<td class="td"  width="20%" style="text-align: center;"><!-- 공급업체 -->supplier</td>
-															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
-															<td class="td" colspan="2" width="40%" style="text-align: center;" >${vo.cname}</td><td class="td"  colspan="2"  width="10%" style="font-size: 12px;text-align: center;" ><!-- 검사 -->inspection: 
-															<input type="text" style="width:40px;border: none; background: transparent;" value="completion"> </td>
-														</tr>
+														
 														
 														<tr>
-															<td class="td" width="20%" style="text-align: center;"><!-- 품번 -->item code</td>
-															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${vo.pno}</span></td>
-															<td class="td" width="20%" style="text-align: center;"><!-- 차종 -->car</td>
+															
+															<td class="td" width="20%" style="text-align: center;"><!-- 차종 -->Program</td>
 															<c:choose>
 																<c:when test="${fn:length( vo.carkind )> 10}">
 																	<td class="td"  width="30%" style="text-align: center;"><strong>
@@ -130,27 +134,28 @@ tr.space {
 																	<td class="td"  width="30%" style="text-align: center;"><strong>${vo.carkind}</strong></td>
 																</c:otherwise>
 															</c:choose>
+															<td class="td" style="text-align: center;">Qty</td>
+															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															
 														</tr>
 														
 														<tr>
 															
-															<td class="td" style="text-align: center;">Qty</td>
-															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">date</span></td>
+															
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Delivery<br>Date</span></td>
 															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${indate}' /></span></td>
-															
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><!-- 생산일자 -->Lot No.</span></td>
+															<fmt:parseDate value='${vo.madate}' var='madate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${madate}' /></span></td>
 														</tr>
 														<tr>
 															<!-- <td class="td" style="font-size: 12px;text-align: center;">바코드번호</td>
 															<td class="td" style="font-size: 12px;text-align: center;">${vo.barcode}</td> -->
 															<td class="td" style="font-size: 12px;text-align: center;">ETC<!-- 비고 --></td>
 															<!--<td class="td" style="font-size: 12px;text-align: center;"><input type="text" style="border: none; background: transparent;" value="">${memo}</td> -->
-															<td class="td" style="font-size: 12px;text-align: center;">${memo}</td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><!-- 생산일자 -->production date</span></td>
-															<fmt:parseDate value='${vo.madate}' var='madate' pattern='yyyy-MM-dd'/>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${madate}' /></span></td>
+															<td class="td" style="font-size: 12px;text-align: center;" colspan="3">${memo}</td>
+															
 															
 														</tr>
 														

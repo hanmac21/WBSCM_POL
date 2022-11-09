@@ -45,6 +45,7 @@ public class ExcelController {
     String pageView = F.nullCheck(request.getParameter("pageView"), "mng_buy_plan_excel");
     String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
     int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
+    int addDate = Integer.parseInt(F.nullCheck(request.getParameter("addDate"), "15"));
     int itemCountPerPage =
         Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "30"));
 
@@ -63,40 +64,8 @@ public class ExcelController {
 
     }
     param.put("session_cu_code", session_cu_code);
-
-    String str_dayWeek1 = "";
-    String str_dayWeek2 = "";
-    String str_dayWeek3 = "";
-    String str_dayWeek4 = "";
-    String str_dayWeek5 = "";
-    String str_dayWeek6 = "";
-    String str_dayWeek7 = "";
-    String str_dayWeek8 = "";
-    String str_dayWeek9 = "";
-    String str_dayWeek10 = "";
-    String str_dayWeek11 = "";
-    String str_dayWeek12 = "";
-    String str_dayWeek13 = "";
-    String str_dayWeek14 = "";
-
-    String str_day1 = "";
-    String str_day2 = "";
-    String str_day3 = "";
-    String str_day4 = "";
-    String str_day5 = "";
-    String str_day6 = "";
-    String str_day7 = "";
-    String str_day8 = "";
-    String str_day9 = "";
-    String str_day10 = "";
-    String str_day11 = "";
-    String str_day12 = "";
-    String str_day13 = "";
-    String str_day14 = "";
-
-    String temp_dayWeek = "";
-    String[] arrayDay = new String[14];
-    // String[] arrayDay = new String[7];
+    String[] arrayDay = new String[addDate];   
+   
     if (!"".equals(startdate)) {
       startdate = startdate.replaceAll("-", "");
     } else {
@@ -104,106 +73,24 @@ public class ExcelController {
     }
     System.out.println("mng_buy_plan_excel_controller" + startdate);
     try {
-      for (int i = 0; i < 14; i++) {
-        // for(int i=0; i<7; i++) {
-        String temp_date = DateUtil.addDays(startdate, i);
-        // System.out.println("temp_Date==>"+temp_date);
-        int dayWeek = DateUtil.getDayOfWeek(temp_date);
-        temp_date = DateUtil.addFormat(temp_date);
-
-        if (dayWeek == 0) {
-          temp_dayWeek = "일";
-        } else if (dayWeek == 1) {
-          temp_dayWeek = "월";
-        } else if (dayWeek == 2) {
-          temp_dayWeek = "화";
-        } else if (dayWeek == 3) {
-          temp_dayWeek = "수";
-        } else if (dayWeek == 4) {
-          temp_dayWeek = "목";
-        } else if (dayWeek == 5) {
-          temp_dayWeek = "금";
-        } else if (dayWeek == 6) {
-          temp_dayWeek = "토";
+      
+      String strTempDate = DateUtil.addDays(startdate,-1);  //임시저장 날짜
+      int idate = 0;                                        //서머타임으로 중복된 날짜 일수
+      
+      for (int i = 0; i < addDate; i++) {   
+        String temp_date = DateUtil.addDays(startdate, i+idate);
+         
+        if(temp_date.toString().equals(strTempDate.toString())) {   //일자를 더했는데 기존일자랑 같으면
+          idate = idate+1;      //중복된 날짜 1일 추가
+          temp_date = DateUtil.addDays(startdate, i+idate);     // temp_date + 1일 추가된 일자로 변경
         }
-
-        if (i == 0) {
-          str_day1 = temp_date;
-          str_dayWeek1 = temp_dayWeek;
-        } else if (i == 1) {
-          str_day2 = temp_date;
-          str_dayWeek2 = temp_dayWeek;
-        } else if (i == 2) {
-          str_day3 = temp_date;
-          str_dayWeek3 = temp_dayWeek;
-        } else if (i == 3) {
-          str_day4 = temp_date;
-          str_dayWeek4 = temp_dayWeek;
-        } else if (i == 4) {
-          str_day5 = temp_date;
-          str_dayWeek5 = temp_dayWeek;
-        } else if (i == 5) {
-          str_day6 = temp_date;
-          str_dayWeek6 = temp_dayWeek;
-        } else if (i == 6) {
-          str_day7 = temp_date;
-          str_dayWeek7 = temp_dayWeek;
-        } else if (i == 7) {
-          str_day8 = temp_date;
-          str_dayWeek8 = temp_dayWeek;
-        } else if (i == 8) {
-          str_day9 = temp_date;
-          str_dayWeek9 = temp_dayWeek;
-        } else if (i == 9) {
-          str_day10 = temp_date;
-          str_dayWeek10 = temp_dayWeek;
-        } else if (i == 10) {
-          str_day11 = temp_date;
-          str_dayWeek11 = temp_dayWeek;
-        } else if (i == 11) {
-          str_day12 = temp_date;
-          str_dayWeek12 = temp_dayWeek;
-        } else if (i == 12) {
-          str_day13 = temp_date;
-          str_dayWeek13 = temp_dayWeek;
-        } else if (i == 13) {
-          str_day14 = temp_date;
-          str_dayWeek14 = temp_dayWeek;
-        }
-        // System.out.println("i==>"+i);
-        arrayDay[i] = temp_date.replaceAll("-", "");
-        // 0~6 : 일~월
+        strTempDate = temp_date.replaceAll("-", "").toString();     //현재 날짜 저장
+        arrayDay[i] = temp_date.replaceAll("-", "");                //배열에 저장
+        
+        System.out.println("날짜확인 : temp_date ->" + temp_date +" 날짜확인 : strTempDate ->" + strTempDate );
+        System.out.println("날짜확인 : arrayDay["+i+"] ->" + arrayDay[i] );
       }
-
-      model.addAttribute("str_day1", str_day1);
-      model.addAttribute("str_day2", str_day2);
-      model.addAttribute("str_day3", str_day3);
-      model.addAttribute("str_day4", str_day4);
-      model.addAttribute("str_day5", str_day5);
-      model.addAttribute("str_day6", str_day6);
-      model.addAttribute("str_day7", str_day7);
-      model.addAttribute("str_day8", str_day8);
-      model.addAttribute("str_day9", str_day9);
-      model.addAttribute("str_day10", str_day10);
-      model.addAttribute("str_day11", str_day11);
-      model.addAttribute("str_day12", str_day12);
-      model.addAttribute("str_day13", str_day13);
-      model.addAttribute("str_day14", str_day14);
-
-      model.addAttribute("str_dayWeek1", str_dayWeek1);
-      model.addAttribute("str_dayWeek2", str_dayWeek2);
-      model.addAttribute("str_dayWeek3", str_dayWeek3);
-      model.addAttribute("str_dayWeek4", str_dayWeek4);
-      model.addAttribute("str_dayWeek5", str_dayWeek5);
-      model.addAttribute("str_dayWeek6", str_dayWeek6);
-      model.addAttribute("str_dayWeek7", str_dayWeek7);
-      model.addAttribute("str_dayWeek8", str_dayWeek8);
-      model.addAttribute("str_dayWeek9", str_dayWeek9);
-      model.addAttribute("str_dayWeek10", str_dayWeek10);
-      model.addAttribute("str_dayWeek11", str_dayWeek11);
-      model.addAttribute("str_dayWeek12", str_dayWeek12);
-      model.addAttribute("str_dayWeek13", str_dayWeek13);
-      model.addAttribute("str_dayWeek14", str_dayWeek14);
+      
 
       try {
         page = Integer.parseInt(request.getParameter("page"));
@@ -222,7 +109,7 @@ public class ExcelController {
 
       if (!"mng_buy_plan".equals(pageView)) {
         itemCount = dao.mng_buy_plan_count(arrayDay, param);
-        board = dao.mng_buy_plan_excel(arrayDay, param, page, itemCountPerPage);
+        board = dao.mng_buy_plan(arrayDay, param, page, itemCountPerPage);
       }
 
       int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
@@ -234,7 +121,9 @@ public class ExcelController {
       model.addAttribute("paging", paging);
       model.addAttribute("startdate", DateUtil.addFormat(startdate));
       model.addAttribute("itemCountPerPage", itemCountPerPage);
-
+      model.addAttribute("addDate", addDate);
+      model.addAttribute("arrayDay", arrayDay);
+      model.addAttribute("arrayCnt", arrayDay.length);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -258,34 +258,12 @@ th, td {
 												<th style="text-align: center; width: 25%;">Item code<br>(item name)
 												</th>
 												<th style="text-align: center; width: 5%;">Car</th>
-												<fmt:parseDate value='${str_day1}' var='strDay1' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day2}' var='strDay2' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day3}' var='strDay3' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day4}' var='strDay4' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day5}' var='strDay5' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day6}' var='strDay6' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day7}' var='strDay7' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day8}' var='strDay8' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day9}' var='strDay9' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day10}' var='strDay10' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day11}' var='strDay11' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day12}' var='strDay12' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day13}' var='strDay13' pattern='yyyy-MM-dd'/>
-												<fmt:parseDate value='${str_day14}' var='strDay14' pattern='yyyy-MM-dd'/>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay1}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay2}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay3}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay4}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay5}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay6}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay7}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay8}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay9}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay10}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay11}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay12}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay13}' /></th>
-												<th style="text-align: center;"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay14}' /></th>
+												<c:forEach var="ad" items="${ arrayDay }" varStatus="status">																					
+													<th style="text-align: center;">
+														<fmt:parseDate value='${ad}' var='tempDay' pattern='yyyyMMdd'/>													
+														<fmt:formatDate pattern='dd.MM.yyyy' value='${tempDay}' />
+													</th>
+												</c:forEach>	
 												<th style="text-align: center; width: 5%;">Total</th>
 											</tr>
 										</thead>
@@ -294,6 +272,7 @@ th, td {
 												<c:when test="${ board.size() > 0 }">
 													<c:forEach var="vo" items="${ board }" varStatus="status">
 														<c:set var="i" value="${i+1 }"/>
+														<c:set var="dayTotal" value="0" />
 														<tr style="height: 40px;">
 															<td style="text-align: center;">${i }</td>
 															<td><span class="custname">${vo.custname}</span><br>&lt;<span
@@ -302,90 +281,257 @@ th, td {
 																<span class="itemname">${vo.itemname}</span></td>
 															<td><span class="car_type">${vo.car_type}</span> <span
 																class="unit" style="display: none;">${vo.unit}</span></td>
-															<td>
-
-																<span class="number">${vo.day1}</span>
-																		
-															</td>
-															<td>
-
-																<span class="number">${vo.day2}</span>
-																		
-															</td>
-
-
-															<td>
-
-																<span class="number">${vo.day3}</span>
-																		
-															</td>
-
-															<td>
-
-																<span class="number">${vo.day4}</span>
-																		
-															</td>
-
-															<td>
-
-																<span class="number">${vo.day5}</span>
-																		
-															</td>
-															<td>
-
-																<span class="number">${vo.day6}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day7}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day8}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day9}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day10}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day11}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day12}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day13}</span>
-																		
-															</td>
-															
-															<td>
-
-																<span class="number">${vo.day14}</span>
-																		
-															</td>
-															
-															<td class="number">${vo.day1+vo.day2+vo.day3+vo.day4+vo.day5+vo.day6+vo.day7+vo.day8+vo.day9+vo.day10+vo.day11+vo.day12+vo.day13+vo.day14}</td>
+															<c:if test="${arrayCnt >= 15}">															
+																<td><span class="number">${vo.day1}</span></td>
+																<td><span class="number">${vo.day2}</span></td>
+																<td><span class="number">${vo.day3}</span></td>
+																<td><span class="number">${vo.day4}</span></td>
+																<td><span class="number">${vo.day5}</span></td>
+																<td><span class="number">${vo.day6}</span></td>															
+																<td><span class="number">${vo.day7}</span></td>															
+																<td><span class="number">${vo.day8}</span></td>															
+																<td><span class="number">${vo.day9}</span></td>															
+																<td><span class="number">${vo.day10}</span></td>															
+																<td><span class="number">${vo.day11}</span></td>															
+																<td><span class="number">${vo.day12}</span></td>															
+																<td><span class="number">${vo.day13}</span></td>															
+																<td><span class="number">${vo.day14}</span></td>
+																<td><span class="number">${vo.day15}</span></td>
+																<c:set var="dayTotal" value="${dayTotal + vo.day1}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day2}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day3}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day4}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day5}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day6}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day7}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day8}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day9}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day10}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day11}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day12}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day13}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day14}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day15}" />
+															</c:if>
+															<c:if test="${arrayCnt >= 30}">
+																<td><span class="number">${vo.day16}</span></td>
+																<td><span class="number">${vo.day17}</span></td>
+																<td><span class="number">${vo.day18}</span></td>
+																<td><span class="number">${vo.day19}</span></td>
+																<td><span class="number">${vo.day20}</span></td>
+																<td><span class="number">${vo.day21}</span></td>															
+																<td><span class="number">${vo.day22}</span></td>															
+																<td><span class="number">${vo.day23}</span></td>															
+																<td><span class="number">${vo.day24}</span></td>															
+																<td><span class="number">${vo.day25}</span></td>															
+																<td><span class="number">${vo.day26}</span></td>															
+																<td><span class="number">${vo.day27}</span></td>															
+																<td><span class="number">${vo.day28}</span></td>															
+																<td><span class="number">${vo.day29}</span></td>
+																<td><span class="number">${vo.day30}</span></td>
+																<c:set var="dayTotal" value="${dayTotal + vo.day16}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day17}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day18}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day19}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day20}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day21}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day22}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day23}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day24}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day25}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day26}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day27}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day28}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day29}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day30}" />
+															</c:if>
+															<c:if test="${arrayCnt >= 60}">
+																<td><span class="number">${vo.day31}</span></td>
+																<td><span class="number">${vo.day32}</span></td>
+																<td><span class="number">${vo.day33}</span></td>
+																<td><span class="number">${vo.day34}</span></td>
+																<td><span class="number">${vo.day35}</span></td>
+																<td><span class="number">${vo.day36}</span></td>															
+																<td><span class="number">${vo.day37}</span></td>															
+																<td><span class="number">${vo.day38}</span></td>															
+																<td><span class="number">${vo.day39}</span></td>															
+																<td><span class="number">${vo.day40}</span></td>															
+																<td><span class="number">${vo.day41}</span></td>															
+																<td><span class="number">${vo.day42}</span></td>															
+																<td><span class="number">${vo.day43}</span></td>															
+																<td><span class="number">${vo.day44}</span></td>
+																<td><span class="number">${vo.day45}</span></td>
+																<td><span class="number">${vo.day46}</span></td>
+																<td><span class="number">${vo.day47}</span></td>
+																<td><span class="number">${vo.day48}</span></td>
+																<td><span class="number">${vo.day49}</span></td>
+																<td><span class="number">${vo.day50}</span></td>
+																<td><span class="number">${vo.day51}</span></td>															
+																<td><span class="number">${vo.day52}</span></td>															
+																<td><span class="number">${vo.day53}</span></td>															
+																<td><span class="number">${vo.day54}</span></td>															
+																<td><span class="number">${vo.day55}</span></td>															
+																<td><span class="number">${vo.day56}</span></td>															
+																<td><span class="number">${vo.day57}</span></td>															
+																<td><span class="number">${vo.day58}</span></td>															
+																<td><span class="number">${vo.day59}</span></td>
+																<td><span class="number">${vo.day60}</span></td>
+																<c:set var="dayTotal" value="${dayTotal + vo.day31}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day32}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day33}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day34}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day35}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day36}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day37}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day38}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day39}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day40}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day41}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day42}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day43}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day44}" />																
+																<c:set var="dayTotal" value="${dayTotal + vo.day45}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day46}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day47}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day48}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day49}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day50}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day51}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day52}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day53}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day54}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day55}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day56}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day57}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day58}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day59}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day60}" />
+															</c:if>							
+															<c:if test="${arrayCnt >= 90}">
+																<td><span class="number">${vo.day61}</span></td>
+																<td><span class="number">${vo.day62}</span></td>
+																<td><span class="number">${vo.day63}</span></td>
+																<td><span class="number">${vo.day64}</span></td>
+																<td><span class="number">${vo.day65}</span></td>
+																<td><span class="number">${vo.day66}</span></td>															
+																<td><span class="number">${vo.day67}</span></td>															
+																<td><span class="number">${vo.day68}</span></td>															
+																<td><span class="number">${vo.day69}</span></td>															
+																<td><span class="number">${vo.day70}</span></td>															
+																<td><span class="number">${vo.day71}</span></td>															
+																<td><span class="number">${vo.day72}</span></td>															
+																<td><span class="number">${vo.day73}</span></td>															
+																<td><span class="number">${vo.day74}</span></td>
+																<td><span class="number">${vo.day75}</span></td>
+																<td><span class="number">${vo.day76}</span></td>
+																<td><span class="number">${vo.day77}</span></td>
+																<td><span class="number">${vo.day78}</span></td>
+																<td><span class="number">${vo.day79}</span></td>
+																<td><span class="number">${vo.day80}</span></td>
+																<td><span class="number">${vo.day81}</span></td>															
+																<td><span class="number">${vo.day82}</span></td>															
+																<td><span class="number">${vo.day83}</span></td>															
+																<td><span class="number">${vo.day84}</span></td>															
+																<td><span class="number">${vo.day85}</span></td>															
+																<td><span class="number">${vo.day86}</span></td>															
+																<td><span class="number">${vo.day87}</span></td>															
+																<td><span class="number">${vo.day88}</span></td>															
+																<td><span class="number">${vo.day89}</span></td>
+																<td><span class="number">${vo.day90}</span></td>
+																<c:set var="dayTotal" value="${dayTotal + vo.day61}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day62}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day63}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day64}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day65}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day66}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day67}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day68}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day69}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day70}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day71}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day72}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day73}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day74}" />																
+																<c:set var="dayTotal" value="${dayTotal + vo.day75}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day76}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day77}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day78}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day79}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day80}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day81}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day82}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day83}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day84}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day85}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day86}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day87}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day88}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day89}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day90}" />
+															</c:if>							
+															<c:if test="${arrayCnt >= 120}">
+																<td><span class="number">${vo.day91}</span></td>
+																<td><span class="number">${vo.day92}</span></td>
+																<td><span class="number">${vo.day93}</span></td>
+																<td><span class="number">${vo.day94}</span></td>
+																<td><span class="number">${vo.day95}</span></td>
+																<td><span class="number">${vo.day96}</span></td>															
+																<td><span class="number">${vo.day97}</span></td>															
+																<td><span class="number">${vo.day98}</span></td>															
+																<td><span class="number">${vo.day99}</span></td>															
+																<td><span class="number">${vo.day100}</span></td>															
+																<td><span class="number">${vo.day101}</span></td>															
+																<td><span class="number">${vo.day102}</span></td>															
+																<td><span class="number">${vo.day103}</span></td>															
+																<td><span class="number">${vo.day104}</span></td>
+																<td><span class="number">${vo.day105}</span></td>
+																<td><span class="number">${vo.day106}</span></td>
+																<td><span class="number">${vo.day107}</span></td>
+																<td><span class="number">${vo.day108}</span></td>
+																<td><span class="number">${vo.day109}</span></td>
+																<td><span class="number">${vo.day110}</span></td>
+																<td><span class="number">${vo.day111}</span></td>															
+																<td><span class="number">${vo.day112}</span></td>															
+																<td><span class="number">${vo.day113}</span></td>															
+																<td><span class="number">${vo.day114}</span></td>															
+																<td><span class="number">${vo.day115}</span></td>															
+																<td><span class="number">${vo.day116}</span></td>															
+																<td><span class="number">${vo.day117}</span></td>															
+																<td><span class="number">${vo.day118}</span></td>															
+																<td><span class="number">${vo.day119}</span></td>
+																<td><span class="number">${vo.day120}</span></td>
+																<c:set var="dayTotal" value="${dayTotal + vo.day91}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day92}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day93}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day94}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day95}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day96}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day97}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day98}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day99}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day100}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day101}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day102}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day103}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day104}" />																
+																<c:set var="dayTotal" value="${dayTotal + vo.day105}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day106}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day107}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day108}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day109}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day110}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day111}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day112}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day113}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day114}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day115}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day116}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day117}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day118}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day119}" />
+																<c:set var="dayTotal" value="${dayTotal + vo.day120}" />
+															</c:if>																		
+															<td class="number">${dayTotal}</td>
 
 														</tr>
 

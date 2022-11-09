@@ -26,13 +26,30 @@ public class TrnsDTO {
   private String uptae;
   private String upjong;
   private String itemqty;
-
+  private String cuCode;
   private String deliveryno;
   private String loc;
   private String lacnt;
   private String memo2;
   private String tqty2;
+  private String color;
+  
+  public String getColor() {
+    return color;
+  }
 
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public String getCuCode() {
+    return cuCode;
+  }
+
+  public void setCuCode(String cuCode) {
+    this.cuCode = cuCode;
+  }
+  
   public String getItemname() {
     return itemname;
   }

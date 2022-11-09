@@ -273,6 +273,49 @@ System.out.println("220926 dtime확인 "+board.get(0));
     logger.info("◁◀◁◀◁◀ mng_trns_memo_u end");
     return "ajaxResult";
   }
+  
+  // 구매계획관리 - 거래명세서  비고적용
+  @RequestMapping(value = "/mng_trns_memo_sub_u", method = {RequestMethod.POST})
+  public String mng_trns_memo_sub_u(HttpServletRequest request, Locale locale, Model model,
+      @RequestParam Map<String, String> param) {
+    logger.info("▷▶▷▶▷▶ mng_trns_memo_sub_u start");
+    int result = -1;
+    HttpSession session = request.getSession();
+
+    String session_cu_code = (String) session.getAttribute("cu_code");
+
+    param.put("session_cu_code", session_cu_code);
+
+    WooboTechDao dao = new WooboTechDao();
+    // MemberBizDTO board = dao.mng_biz_dt(param);
+    result = dao.mng_trns_memo_sub_u(param);
+    model.addAttribute("result", result);
+    logger.info("◁◀◁◀◁◀ mng_trns_memo_sub_u end");
+    return "ajaxResult";
+  }
+  
+//구매계획관리 - 거래명세서  비고적용   221024 테스트
+ @RequestMapping(value = "/mng_trns_memo_sub_u2", method = {RequestMethod.POST})
+ public String mng_trns_memo_sub_u2(HttpServletRequest request, Locale locale, Model model,
+     @RequestParam Map<String, String> param) {
+   logger.info("▷▶▷▶▷▶ mng_trns_memo_sub_u start");
+   int result = -1;
+   HttpSession session = request.getSession();
+
+   String session_cu_code = (String) session.getAttribute("cu_code");
+
+   param.put("session_cu_code", session_cu_code);
+   String memo1 = request.getParameter("memo");
+   System.out.println("memo배열확인"+memo1);
+   
+   param.put("memo1",memo1);
+   System.out.println("param확인"+param);
+   WooboTechDao dao = new WooboTechDao();
+   result = dao.mng_trns_memo_sub_u2(param);
+   model.addAttribute("result", result);
+   logger.info("◁◀◁◀◁◀ mng_trns_memo_sub_u end");
+   return "ajaxResult";
+ }
 
   // 발행 순번 용 메모 2022-04-25 정인우
   @RequestMapping(value = "/mng_trns_memo2_u", method = {RequestMethod.POST})
@@ -411,7 +454,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     System.out.println(" 재발행 월" + info.getPrdate().substring(4, 7));
     // model.addAttribute("outdate", info.getPrdate().substring(0,4)+"년"
     // +info.getPrdate().substring(5,7)+"월" +info.getPrdate().substring(8,10)+"일");//발행일자
-
+    model.addAttribute("cu_code", info.getCuCode());
     model.addAttribute("cu_master", info.getCu_master());
     // model.addAttribute("indate", info.get//입고일자
     model.addAttribute("cu_uptae", info.getUptae());// 업테
@@ -1659,6 +1702,147 @@ System.out.println("날짜확인220919"+str_day1);
     logger.info("◁◀◁◀◁◀ mng_biz_plan end");
     return new ModelAndView("mng/" + pageView);
   }
+  
+// shortage
+ @RequestMapping(value = "/mng_shortage")
+ public ModelAndView mng_shortage(HttpServletRequest request, Locale locale, Model model,
+     @RequestParam Map<String, String> param) {
+   logger.info("▷▶▷▶▷▶mng_shortage start");
+
+   String pageView = F.nullCheck(request.getParameter("pageView"), "mng_shortage");
+   String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
+   int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
+   int itemCountPerPage =
+       Integer.parseInt(F.nullCheck(request.getParameter("itemCountPerPage"), "300"));
+
+   HttpSession session = request.getSession();
+
+   String session_cu_code = (String) session.getAttribute("cu_code");
+
+   if (session_cu_code == null) {
+     RedirectView redirectView = new RedirectView("mng_login?menu=0");
+     // redirectView.set
+     redirectView.setExposeModelAttributes(false);
+     logger.info("◁◀◁◀◁◀  mng_login_user end");
+     return new ModelAndView(redirectView);
+
+   }
+   param.put("session_cu_code", session_cu_code);
+
+   String str_day1 = "";
+   String str_day2 = "";
+   String str_day3 = "";
+   String str_day4 = "";
+   String str_day5 = "";
+   String str_day6 = "";
+   String str_day7 = "";
+   String str_day8 = "";
+   String str_day9 = "";
+   String str_day10 = "";
+  
+
+   String temp_dayWeek = "";
+   String[] arrayDay = new String[10];
+   if (!"".equals(startdate)) {
+     startdate = startdate.replaceAll("-", "");
+   } else {
+     startdate = DateUtil.getCurrentDate();
+   }
+   try {
+     for (int i = 0; i < 10; i++) {
+
+       String temp_date = DateUtil.addDays(startdate, i);
+       //int dayWeek = DateUtil.getDayOfWeek(temp_date);
+       temp_date = DateUtil.addFormat(temp_date);
+
+       if (i == 0) {
+         str_day1 = temp_date;
+       } else if (i == 1) {
+         str_day2 = temp_date;
+       } else if (i == 2) {
+         str_day3 = temp_date;
+       } else if (i == 3) {
+         str_day4 = temp_date;
+       } else if (i == 4) {
+         str_day5 = temp_date;
+       } else if (i == 5) {
+         str_day6 = temp_date;
+       } else if (i == 6) {
+         str_day7 = temp_date;
+       } else if (i == 7) {
+         str_day8 = temp_date;
+       } else if (i == 8) {
+         str_day9 = temp_date;
+       } else if (i == 9) {
+         str_day10 = temp_date;
+       }
+
+       arrayDay[i] = temp_date.replaceAll("-", "");
+       System.out.println("날짜 배열 확인"+arrayDay[i]);
+       // 0~6 : 일~월
+     }
+     String temp_date = DateUtil.addDays(startdate, -1);
+     //int dayWeek = DateUtil.getDayOfWeek(temp_date);
+     temp_date = DateUtil.addFormat(temp_date);
+     temp_date = temp_date.replace("-","");
+System.out.println("날짜확인220919"+str_day1);
+System.out.println("날짜확인221103"+temp_date);
+     model.addAttribute("str_day1", str_day1);
+     model.addAttribute("str_day2", str_day2);
+     model.addAttribute("str_day3", str_day3);
+     model.addAttribute("str_day4", str_day4);
+     model.addAttribute("str_day5", str_day5);
+     model.addAttribute("str_day6", str_day6);
+     model.addAttribute("str_day7", str_day7);
+     model.addAttribute("str_day8", str_day8);
+     model.addAttribute("str_day9", str_day9);
+     model.addAttribute("str_day10", str_day10);
+     model.addAttribute("str_day10", str_day10);
+     try {
+       page = Integer.parseInt(request.getParameter("page"));
+
+     } catch (Exception e) {
+       // TODO Auto-generated catch block
+       // e.printStackTrace();
+     }
+
+     int itemCount = 0;
+     // int itemCountPerPage = 30;
+     int pageCountPerPaging = 10;
+     List board = null;
+     List board2 = null;
+     // List colist = null;
+
+     WooboTechDao dao = new WooboTechDao();
+
+     if (!"mng_shortage".equals(pageView)) {
+       //itemCount = dao.mng_biz_plan_count(arrayDay, param);
+     board = dao.mng_shortage1(arrayDay, param, page, itemCountPerPage, temp_date);
+     board2 = dao.mng_shortage2(arrayDay, param, page, itemCountPerPage, temp_date);
+       // colist = dao.mng_co_list(param);
+     }
+
+     int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
+     List paging = ListController.getPaging(page, maxPage, pageCountPerPaging);
+
+     // colist = dao.mng_co_list(param);
+
+     model.addAttribute("board", board);
+     model.addAttribute("board2", board2);
+     // model.addAttribute("colist",colist);
+     model.addAttribute("itemCount", itemCount);
+     model.addAttribute("currentPage", page);
+     model.addAttribute("maxPage", maxPage);
+     model.addAttribute("paging", paging);
+     model.addAttribute("startdate", DateUtil.addFormat(startdate));
+     model.addAttribute("itemCountPerPage", itemCountPerPage);
+   } catch (Exception e) {
+     e.printStackTrace();
+   }
+
+   logger.info("◁◀◁◀◁◀ mng_shortage end");
+   return new ModelAndView("mng/" + pageView);
+ }
 
   // 배송출발 시간 설정
   @RequestMapping(value = "/mng_delivery_view")
@@ -1977,6 +2161,7 @@ System.out.println("날짜확인220919"+str_day1);
         info.getCu_sano().substring(0, 3) + "-" + info.getCu_sano().substring(3, 5) + "-"
             + info.getCu_sano().substring(5, info.getCu_sano().length()));
     }
+    model.addAttribute("cu_code", info.getCuCode());
     model.addAttribute("cu_sangho", sangho);
     model.addAttribute("cu_master", info.getCu_master());
     model.addAttribute("cu_juso", info.getCu_juso());
@@ -2032,6 +2217,7 @@ System.out.println("날짜확인220919"+str_day1);
     String batchMode = param.get("batchMode"); //nomal, batch
     String batchDate = DateUtil.getConvertDate2(param.get("batch_date"));
     String batchContent = param.get("batch_content");
+    String color = F.nullCheck(param.get("color"),"");
     System.out.println(branch);
     System.out.println("[mng_label_print] batchMode["+batchMode+"] batchDate["+batchDate+"] batchContent["+batchContent+"]");
     String[] batchContentArr = null;
@@ -2135,6 +2321,7 @@ System.out.println("날짜확인220919"+str_day1);
     model.addAttribute("indate", indate);
     model.addAttribute("madate", madate);
     model.addAttribute("memo", memo);
+    model.addAttribute("color", color);
     logger.info("◁◀◁◀◁◀ mng_label_print end");
     return "mng/mng_label_print";
   }
@@ -2153,6 +2340,7 @@ System.out.println("날짜확인220919"+str_day1);
     // int box_qty = Integer.parseInt(param.get("box_qty"));
     // String lotno = param.get("lotno");
      String indate = param.get("indate");
+     String color = F.nullCheck(param.get("color"),"");
     // String madate = param.get("madate");
     // String memo= param.get("memo");
 
@@ -2206,6 +2394,7 @@ System.out.println("날짜확인220919"+str_day1);
     // model.addAttribute("box_qty", box_qty );
     // model.addAttribute("lotno", lotno );
      model.addAttribute("indate", indate );
+     model.addAttribute("color", color );
     // model.addAttribute("madate", madate );
     // model.addAttribute("memo", memo);
     model.addAttribute("board", arrList_Label);
@@ -2236,8 +2425,8 @@ System.out.println("날짜확인220919"+str_day1);
     String lotno = param.get("lotno");
     String prdate = param.get("prdate");
     String branch = param.get("branch");
-   
-    // System.out.println(branch);
+    String color = F.nullCheck(param.get("color"),"");
+    System.out.println(itemname);
 
     WooboTechDao wdao = new WooboTechDao();
 
@@ -2282,6 +2471,7 @@ System.out.println("날짜확인220919"+str_day1);
     model.addAttribute("production2", production2);
     model.addAttribute("production3", production3);
     model.addAttribute("prdate", prdate);
+    model.addAttribute("color", color);
 
     logger.info("◁◀◁◀◁◀ mng_label_add end");
     return "mng/mng_label_add";
@@ -4051,24 +4241,79 @@ System.out.println("페이지 뷰 확인 "+pageView);
     // ModelAndView mav = new ModelAndView();
 
     // String a = (String) request.getAttribute("custcode");
-    String a = custcode;
+    String a = String.format("%04d", Integer.parseInt(custcode));
     logger.info("파라메터:{}", a);
 
     WooboTechDao wdao = new WooboTechDao();
 
     // ArrayList<String> list = wdao.emailList(custcode);
-    int row = wdao.emailCount(custcode);
+    int row = wdao.emailCount(a);
+    wdao.emailList(a);
     logger.info("결과컨트롤러:{}", row);
     if (row == 0) {
-      model.addAttribute("msg", "No registered email.");
+      model.addAttribute("msg", "0");
+      model.addAttribute("list", wdao.emailList(a));
+      model.addAttribute("cuCode", a);
     } else {
-      model.addAttribute("list", wdao.emailList(custcode));
+      model.addAttribute("list", wdao.emailList(a));
+      model.addAttribute("cuCode", a);
     }
 
     // mav.setViewName("mng_partner_email");
 
     return "mng/mng_partner_email";
   }
+  // 관리자가 이메일 저장
+  @RequestMapping(value = "/mng_partner_email_save")
+  public String mng_partner_email_save(Model model, @RequestParam Map<String, String> param,HttpServletRequest request) throws SQLException {
+    // ModelAndView mav = new ModelAndView();
+    logger.info("▷▶▷▶▷▶mng_partner_email_save start");
+    HttpSession session = request.getSession();
+    String cucode = param.get("cucode");
+    
+    System.out.println("cucode확인"+cucode);
+    WooboTechDao wdao = new WooboTechDao();
+    int result =wdao.mng_email_u(param);
+    // ArrayList<String> list = wdao.emailList(custcode);
+    //int row = wdao.emailCount(cucode);
+    
+    //logger.info("결과컨트롤러:{}", row);
+    if (result == 0) {
+      model.addAttribute("saveMsg", "No registered email.");
+      model.addAttribute("result", result);
+      //model.addAttribute("list", wdao.emailList(a));
+    } else {
+      model.addAttribute("result", result);
+    }
+
+    // mav.setViewName("mng_partner_email");
+    logger.info("▷▶▷▶▷▶mng_partner_email_save end");
+    return "ajaxResult";
+  }
+  
+//관리자가 이메일 삭제
+ @RequestMapping(value = "/mng_partner_email_delete")
+ public String mng_partner_email_delete(Model model, @RequestParam Map<String, String> param,HttpServletRequest request) throws SQLException {
+   // ModelAndView mav = new ModelAndView();
+   logger.info("▷▶▷▶▷▶mng_partner_email_delete start");
+   HttpSession session = request.getSession();
+   String cucode = param.get("cucode");
+   String emailA = param.get("emailA");
+   String userA = param.get("userA");
+   System.out.println("emailA확인"+emailA);
+   WooboTechDao wdao = new WooboTechDao();
+   int result =wdao.mng_email_d(param);
+  
+   /*
+    * if (result == 0) { model.addAttribute("saveMsg", "No registered email.");
+    * model.addAttribute("result", result); //model.addAttribute("list", wdao.emailList(a)); } else
+    * { model.addAttribute("result", result); }
+    */
+
+   // mav.setViewName("mng_partner_email");
+   logger.info("▷▶▷▶▷▶mng_partner_email_delete end");
+   return "ajaxResult";
+ }
 
   //관리자관리 - 관리자추가페이지
   @RequestMapping(value = "/mng_add_member")
