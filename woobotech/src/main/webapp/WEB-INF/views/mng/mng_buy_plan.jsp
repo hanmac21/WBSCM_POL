@@ -2541,7 +2541,12 @@ vertical-align:top; !important
 		} */
 				
 		//라벨 출력
+		var isRun = false;
 		function fnLabelPrint() {
+			if(isRun ==true){
+				return;
+			}
+			isRun = true;
 			$('#label_text'+label_idx).text("Issuance completed");
 			//$('#label_2text'+label_idx).text("발행완료");
 			
@@ -2588,6 +2593,15 @@ vertical-align:top; !important
 					if(temp.length == 2){
 						if(!numCheck2.test(temp[0])){
 							alert("You can enter up to two decimal places.");
+							return;
+						}
+						var check3 = /^[0-9]+$/; 
+						if(!check3.test(temp[1])){
+							alert("Only numbers can be entered in the date.");
+							return;
+						}
+						if(temp[1].length!=8){
+							alert("Please enter the date in 8 digits.");
 							return;
 						}
 						if(temp[1] == null || temp[1] == ""){
@@ -2670,6 +2684,8 @@ vertical-align:top; !important
 				console.log(qty+"aa"+production+production2+production3)
 				alert("Order quantity and LOT quantity do not match.");
 				$('#p_production').focus();
+				//var printBtn = document.querySelector("#printBtn");
+				$("#printBtn").attr("disabled", false);
 				return false;
 			}
 			//alert ("메모내용=>"+memo);
@@ -2797,7 +2813,7 @@ vertical-align:top; !important
 					color: color
 				}
 			}).done(function(data) {
-				
+				isRun = false;
 				$("#modalPop2").html("");
 				$("#modalPop2").html(data);
 				$('#modalPop2').modal({backdrop:'static'});

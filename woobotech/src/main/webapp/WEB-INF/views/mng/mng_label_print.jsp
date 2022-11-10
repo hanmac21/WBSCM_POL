@@ -82,7 +82,7 @@ tr.space {
 						<c:when test="${ board.size() > 0 }">
 							<c:forEach var="vo" items="${ board }" varStatus="status">
 									<c:choose>
-									<c:when test="${ board.size() >=1 }">
+									<c:when test="${ board.size() >1 }">
 									<input type="hidden" value="${board.size() }" id="boardSize">
 									<c:if test="${(status.count) %2 ==1}">
 										<tr>
@@ -174,34 +174,40 @@ tr.space {
 									<c:otherwise>
 										<tr>
 										<td>
-											<div class="bar-wrap" style="margin-top: 10px;">
-												<table class="table2" width="100%" height="250px" border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
+											<div class="bar-wrap" style="margin-top: 5px;">
+												<table class="table2" width="100%" height="250px"  border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
 													<tbody>
+													
+														
 														<tr>
-															<td class="td"   width="20%" style="text-align: center;">Item name</td>
+															<td class="td"  width="20%" style="text-align: center;"> Supplier</td>
+															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
+															<td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td>
+														</tr>
+														
+														<tr>
+															<td class="td" width="20%" style="text-align: center;">Part No.</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${itemcode1}</span></td>
+															<td class="td" width="20%" style="text-align: center;">Color</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${color}</span></td>
+														</tr>
+														<tr>
+															<td class="td"   width="20%" style="text-align: center;">Part Name</td>
 															
 															
 															<c:choose>
 															    <c:when test="${fn:length( itemname )> 20}">
-															        <td class="td"  colspan="3" width="80%" style="font-size: 12px;"><strong>${itemname}</strong></td>
+															        <td class="asPname"  colspan="3" width="80%" style="font-size: 12px;text-align: center" id ="asPname${status.count}"><strong>${itemname}</strong></td>
 															    </c:when>
 															    <c:otherwise>
-															       <td class="td"  colspan="3" width="80%"><strong>${itemname}</strong></td>
+															       <td class="asPname"  colspan="3" width="80%" style="text-align: center" id ="asPname${status.count}"><strong>${itemname}</strong></td>
 															    </c:otherwise>
 															</c:choose>
 															
 															
 														</tr>
-														<tr>
-															<!-- <td class="td"  width="20%" style="text-align: center;">공급업체2</td> -->
-															<td class="td"  width="20%" style="text-align: center;">Supplier</td>
-															<td class="td" colspan="3" width="80%" >${custname}</td>
-														</tr>
-														
-														<tr>
-															<td class="td" width="20%" style="text-align: center;">Item code</td>
-															<td class="td" width="30%" style="text-align: center;" ><span style="font-size: 12px;">${itemcode1}</span></td>
-															<td class="td" width="20%" style="text-align: center;">Car</td>
+														<td class="td" width="20%" style="text-align: center;">Program</td>
+															
 															<c:choose>
 																<c:when test="${fn:length( car_type )> 10}">
 																	<td class="td"  width="30%" style="text-align: center;"><strong>
@@ -212,26 +218,21 @@ tr.space {
 																	<td class="td"  width="30%" style="text-align: center;"><strong>${car_type}</strong></td>
 																</c:otherwise>
 															</c:choose>
-															
-														</tr>
-														
-														<tr>
-															
 															<td class="td" style="text-align: center;">Qty</td>
-															<c:set var = "qty" value = "${fn:split(vo.qty, '.')}" />
-															<c:if test="${ qty}"></c:if>
-															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Date</span></td>
+															<td class="td number" style="text-align: center;"><strong>${vo.qty}</strong></td>
+														<tr>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Delivery<br>Date</span></td>
 															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${indate}</span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Lot No.</span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.madate}</span></td>
 															
 														</tr>
 														<tr>
 															<!-- <td class="td" style="font-size: 12px;text-align: center;">바코드번호</td>
 															<td class="td" style="font-size: 12px;text-align: center;">${vo.barcode}</td> -->
-															<td class="td" style="font-size: 12px;text-align: center;">비고</td>
-															<td class="td" style="font-size: 12px;text-align: center;">${memo}</td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Production date</span></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 12px;">${vo.madate}</span></td>
+															<td class="td" style="font-size: 12px;text-align: center;">Remarks</td>
+															<!--<td class="td" style="font-size: 12px;text-align: center;"><input type="text" style="border: none; background: transparent;" value="">${memo}</td> -->
+															<td class="td" style="font-size: 12px;text-align: center;" colspan="3">${memo}</td>
 															
 														</tr>
 														
@@ -247,6 +248,7 @@ tr.space {
 													</tbody>
 												</table>
 											</div>
+
 						
 									</td>
 									<td style="width:50%">

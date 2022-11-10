@@ -19111,7 +19111,7 @@ if(arrCnt == 30) {
       conn = dataSource.getConnection();
       conn.setAutoCommit(false);
 
-      sql.append("DELETE FROM T_SCM_BARCODE WHERE tradebarcode='");
+      sql.append("UPDATE T_SCM_BARCODE SET USEYN='N' WHERE tradebarcode='");
       sql.append(tradebarcode);
       sql.append("'");
       sql.append("AND pno = '");
@@ -19335,6 +19335,7 @@ if(arrCnt == 30) {
     sql.append("AND         B.PNO ='");
     sql.append(pno);
     sql.append("'");
+    sql.append("AND         A.useyn ='Y'");
     sql.append("ORDER BY A.BARCODE");
 
     System.out.println(sql.toString());
@@ -20746,7 +20747,7 @@ if(arrCnt == 30) {
     sql.append(",'"+arrayDay[9]+"'             \n");
     sql.append("                                            ))   A             \n");
     sql.append("left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode             \n");
-    sql.append("        )       A             \n");
+    sql.append("        )       A WHERE branch LIKE '%'          \n");
     
     if (!session_cu_code.equals("master")) {
       sql.append("and a.custcode ='");

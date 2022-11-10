@@ -182,33 +182,40 @@ tr.space {
 									<c:otherwise>
 										<tr>
 										<td>
-											<div class="bar-wrap" style="margin-top: 10px;">
-												<table class="table2" width="100%" height="250px" border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
+											<div class="bar-wrap" style="margin-top: 5px;">
+												<table class="table2" width="100%" height="250px"  border="1" bordercolor="#A2AFCC" bordercolorlight="#ffffff" bodercolordark="#6c717d" cellspacing="0" cellpadding="0">
 													<tbody>
 														<tr>
-															<td class="td"   width="20%" style="text-align: center;">Item name</td>
+															<td class="td"  width="20%" style="text-align: center;"><!-- 공급업체 -->supplier</td>
+															<!--  <td class="td" colspan="3" width="80%" style="text-align: center;" >${custname}</td> -->
+															<td class="td" colspan="3" width="40%" style="text-align: center;" >${vo.cname}</td>
+														</tr>
+														<tr>
+															<td class="td" width="20%" style="text-align: center;"><!-- 품번 -->Part No.</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${vo.pno}</span></td>
+															<td class="td" width="20%" style="text-align: center;">Color</td>
+															<td class="td" width="30%" style="text-align: center;"><span style="font-size: 12px;">${color }</span></td>
+														</tr>
+														<tr>
+															<td class="td"   width="20%" style="text-align: center;"><!-- 품명 -->Part Name</td>
 															
 															
 															<c:choose>
 															    <c:when test="${fn:length( vo.pname )> 20}">
-															        <td class="td"  colspan="3" width="80%" style="font-size: 12px;"  id ="asPname"><strong>${vo.pname}</strong></td>
+															        <td class="asPname"  colspan="3" width="80%" style="font-size: 12px;text-align: center" id ="asPname${status.count}"><strong>${vo.pname}</strong></td>
 															    </c:when>
 															    <c:otherwise>
-															       <td class="td"  colspan="3" width="80%"  id ="asPname"><strong>${vo.pname}</strong></td>
+															       <td class="asPname"  colspan="3" width="80%" style="text-align: center" id ="asPname${status.count}"><strong>${vo.pname}</strong></td>
 															    </c:otherwise>
 															</c:choose>
 															
 															
 														</tr>
-														<tr>
-															<td class="td"  width="20%" style="text-align: center;"><!-- 공급업체 -->Supplier</td>
-															<td class="td" colspan="3" width="80%" >${vo.cname}</td>
-														</tr>
+														
 														
 														<tr>
-															<td class="td" width="20%" style="text-align: center;"><!-- 품번 -->Item code</td>
-															<td class="td" width="30%" style="text-align: center;" ><span style="font-size: 12px;">${vo.pno}</span></td>
-															<td class="td" width="20%" style="text-align: center;"><!-- 차종 -->Car</td>
+															
+															<td class="td" width="20%" style="text-align: center;"><!-- 차종 -->Program</td>
 															<c:choose>
 																<c:when test="${fn:length( vo.carkind )> 10}">
 																	<td class="td"  width="30%" style="text-align: center;"><strong>
@@ -219,26 +226,28 @@ tr.space {
 																	<td class="td"  width="30%" style="text-align: center;"><strong>${vo.carkind}</strong></td>
 																</c:otherwise>
 															</c:choose>
+															<td class="td" style="text-align: center;">Qty</td>
+															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
 															
 														</tr>
 														
 														<tr>
 															
-															<td class="td" style="text-align: center;"><!-- 수량 -->QTY</td>
-															<td class="td" style="text-align: center;"><strong>${vo.qty}</strong></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><!-- 입고일자 -->Date</span></td>
-															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${indate}' /></span></td>
 															
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;">Delivery<br>Date</span></td>
+															<fmt:parseDate value='${vo.indate}' var='indate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${indate}' /></span></td>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><!-- 생산일자 -->Lot No.</span></td>
+															<fmt:parseDate value='${vo.madate}' var='madate' pattern='yyyy-MM-dd'/>
+															<td class="td" style="text-align: center;"><span style="font-size: 12px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${madate}' /></span></td>
 														</tr>
 														<tr>
 															<!-- <td class="td" style="font-size: 12px;text-align: center;">바코드번호</td>
 															<td class="td" style="font-size: 12px;text-align: center;">${vo.barcode}</td> -->
-															<td class="td" style="font-size: 14px;text-align: center;">ETC</td>
-															<td class="td" style="font-size: 14px;text-align: center;"></td>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><!-- 생산일자 -->Production date</span></td>
-															<fmt:parseDate value='${vo.mkdate}' var='mkdate' pattern='yyyy-MM-dd'/>
-															<td class="td" style="text-align: center;"><span style="font-size: 14px;"><fmt:formatDate pattern='dd-MM-yyyy' value='${mkdate}' /></span></td>
+															<td class="td" style="font-size: 12px;text-align: center;">ETC<!-- 비고 --></td>
+															<!--<td class="td" style="font-size: 12px;text-align: center;"><input type="text" style="border: none; background: transparent;" value="">${memo}</td> -->
+															<td class="td" style="font-size: 12px;text-align: center;" colspan="3">${memo}</td>
+															
 															
 														</tr>
 														
@@ -254,6 +263,7 @@ tr.space {
 													</tbody>
 												</table>
 											</div>
+
 						
 									</td>
 									<td style="width:50%">

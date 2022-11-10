@@ -23,7 +23,7 @@
 					<div class="box-body">
 							
 						<input type="hidden" id="p_custcode" name="p_custcode" value="${custcode}">
-						<input type="text" id="p_color" name="p_color" value="${color}">
+						<input type="hidden" id="p_color" name="p_color" value="${color}">
 						
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label"
@@ -238,11 +238,11 @@
 	    $('input[name=p_custname]').attr('value',payment);
 	});
 	
-	var printBtn = document.querySelector("#printBtn");
+	/* var printBtn = document.querySelector("#printBtn");
 	printBtn.addEventListener("click", function (e) {
 	    this.setAttribute("disabled", "disabled");
 	    //폼 서밋
-	});
+	}); */
 	
 	$(document).ready(function() {
 		var batchM = $('input[name="batchMode"]:checked').val();
