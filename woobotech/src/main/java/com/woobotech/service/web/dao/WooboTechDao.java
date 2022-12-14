@@ -1557,6 +1557,7 @@ private RowMapper mapperP15 = new RowMapper() {
       info.setRow_num(rs.getString("seq"));
       info.setPlant(rs.getString("plant"));
       info.setCarkind(rs.getString("carkind"));
+      info.setInvoiceno(rs.getString("invoiceno"));
       return info;
     }
   };
@@ -1570,7 +1571,7 @@ private RowMapper mapperP15 = new RowMapper() {
       info.setItemqty(rs.getString("itemqty"));
       String itemname = rs.getString("itemname");
       info.setColor(rs.getString("color"));
-
+      info.setInvoiceno(rs.getString("invoiceno"));
       if (itemname.length() > 30) {
         itemname = itemname.substring(0, 30) + "<br>" + itemname.substring(30, itemname.length());
       }
@@ -1805,17 +1806,37 @@ private RowMapper mapperP15 = new RowMapper() {
       
       info.setItemname(rs.getString("itemname"));
       info.setItemcode1(rs.getString("itemcode1"));
-      info.setDay1p(StringUtil.nvl(rs.getString(4), "0"));
-      info.setDay2p(StringUtil.nvl(rs.getString(5), "0"));
-      info.setDay3p(StringUtil.nvl(rs.getString(6), "0"));
-      info.setDay4p(StringUtil.nvl(rs.getString(7), "0"));
-      info.setDay5p(StringUtil.nvl(rs.getString(8), "0"));
-      info.setDay6p(StringUtil.nvl(rs.getString(9), "0"));
-      info.setDay7p(StringUtil.nvl(rs.getString(10), "0"));
-      info.setDay8p(StringUtil.nvl(rs.getString(11), "0"));
-      info.setDay9p(StringUtil.nvl(rs.getString(12), "0"));
-      info.setDay10p(StringUtil.nvl(rs.getString(13), "0"));
-      info.setStockQty(StringUtil.nvl(rs.getString(20), "0"));
+      info.setDay1b(StringUtil.nvl(rs.getString(4), "0"));
+      info.setDay2b(StringUtil.nvl(rs.getString(7), "0"));
+      info.setDay3b(StringUtil.nvl(rs.getString(10), "0"));
+      info.setDay4b(StringUtil.nvl(rs.getString(13), "0"));
+      info.setDay5b(StringUtil.nvl(rs.getString(16), "0"));
+      info.setDay6b(StringUtil.nvl(rs.getString(19), "0"));
+      info.setDay7b(StringUtil.nvl(rs.getString(22), "0"));
+      info.setDay8b(StringUtil.nvl(rs.getString(25), "0"));
+      info.setDay9b(StringUtil.nvl(rs.getString(28), "0"));
+      info.setDay10b(StringUtil.nvl(rs.getString(31), "0"));
+      info.setDay1p(StringUtil.nvl(rs.getString(5), "0"));
+      info.setDay2p(StringUtil.nvl(rs.getString(8), "0"));
+      info.setDay3p(StringUtil.nvl(rs.getString(11), "0"));
+      info.setDay4p(StringUtil.nvl(rs.getString(14), "0"));
+      info.setDay5p(StringUtil.nvl(rs.getString(17), "0"));
+      info.setDay6p(StringUtil.nvl(rs.getString(20), "0"));
+      info.setDay7p(StringUtil.nvl(rs.getString(23), "0"));
+      info.setDay8p(StringUtil.nvl(rs.getString(26), "0"));
+      info.setDay9p(StringUtil.nvl(rs.getString(29), "0"));
+      info.setDay10p(StringUtil.nvl(rs.getString(32), "0"));
+      info.setDay1w(StringUtil.nvl(rs.getString(6), "0"));
+      info.setDay2w(StringUtil.nvl(rs.getString(9), "0"));
+      info.setDay3w(StringUtil.nvl(rs.getString(12), "0"));
+      info.setDay4w(StringUtil.nvl(rs.getString(15), "0"));
+      info.setDay5w(StringUtil.nvl(rs.getString(18), "0"));
+      info.setDay6w(StringUtil.nvl(rs.getString(21), "0"));
+      info.setDay7w(StringUtil.nvl(rs.getString(24), "0"));
+      info.setDay8w(StringUtil.nvl(rs.getString(27), "0"));
+      info.setDay9w(StringUtil.nvl(rs.getString(30), "0"));
+      info.setDay10w(StringUtil.nvl(rs.getString(33), "0"));
+      info.setStockQty(StringUtil.nvl(rs.getString("stock_qty"), "0"));
       return info;
     }
   };
@@ -1954,6 +1975,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("        ,t2.cu_juso                          \n");
     sql.append("        ,t2.cu_adcode                          \n");
     sql.append("        ,t3.label_color as color                \n");
+    sql.append("        ,t1.invoiceno                \n");
     sql.append("        ,' '       as bake                   \n");
     sql.append("        ,nvl(t2.cu_uptae, '') as cu_uptae                          \n");
     sql.append("        ,nvl(t2.cu_upjong,'') as cu_upjong                         \n");
@@ -2103,7 +2125,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append(
         "select t.*, rownum seq from(                                                                   \n");
     sql.append(
-        "select x.barcode, x.indate, x.cno, x.cname, x.prdate, x.delivery_yn, x.dstate, x.deliveryno, sum(x.qty) as t_qty, x.plant , REGEXP_REPLACE(LISTAGG(x.carkind,',') within group(order by x.carkind), '([^,]+)(,\\1)*(,|$)', '\\1\\3') as carkind from (select   distinct                          \n");
+        "select x.barcode, x.indate, x.cno, x.cname, x.prdate, x.delivery_yn, x.dstate, x.deliveryno, sum(x.qty) as t_qty, x.plant ,x.invoiceno, REGEXP_REPLACE(LISTAGG(x.carkind,',') within group(order by x.carkind), '([^,]+)(,\\1)*(,|$)', '\\1\\3') as carkind from (select   distinct                          \n");
     sql.append(
         "       a.barcode                                                               \n");
     sql.append("      ,a.indate                                     \n");
@@ -2114,6 +2136,7 @@ private RowMapper mapperP15 = new RowMapper() {
     sql.append("      ,a.plant                                      \n");
     sql.append("      ,a.pno                                        \n");
     sql.append("      ,a.qty                         \n");
+    sql.append("      ,a.invoiceno                         \n");
     sql.append(
         "      ,(select case when count(*)>0 then 'y' else 'n' end  from T_SCM_DELIVERY where tradebarcode =a.barcode ) as delivery_yn                         \n");
     sql.append(
@@ -2152,7 +2175,7 @@ private RowMapper mapperP15 = new RowMapper() {
 
     sql.append("where 1=1                                              \n");
     sql.append(
-        "group by x.barcode, x.indate, x.cno, x.cname, x.prdate, x.plant, x.delivery_yn, x.dstate, x.deliveryno                                              \n");
+        "group by x.barcode, x.indate, x.cno, x.cname, x.prdate, x.plant, x.delivery_yn, x.dstate, x.deliveryno, x.invoiceno                                              \n");
     sql.append("  order by x.barcode desc                           \n");
     sql.append(")t)u                                              \n");
 
@@ -2320,7 +2343,7 @@ private RowMapper mapperP15 = new RowMapper() {
   }
 
   // 구매계획관리 - 거래명세서 비고적용
-  public int mng_trns_memo_u(Map<String, String> map) {
+  public int mng_trns_invoice_u(Map<String, String> map) {
 
     int result = -1;
     PreparedStatement stmtx = null;
@@ -2347,7 +2370,7 @@ private RowMapper mapperP15 = new RowMapper() {
         stmtx.close();
         sql.setLength(0);
         sql.append("update T_SCM_TRADE  \n");
-        sql.append("   set memo=?        \n");
+        sql.append("   set invoiceno=?        \n");
         sql.append(" where barcode =?");
         stmtx = conx.prepareStatement(sql.toString());
         int index = 1;
@@ -19236,9 +19259,9 @@ if(arrCnt == 30) {
     sql.append("AND     cno = '");
     sql.append(cno);
     sql.append("' \n");
-    sql.append("AND     branch = '");
-    sql.append(branch);
-    sql.append("'");
+    /*
+     * sql.append("AND     branch = '"); sql.append(branch); sql.append("'");
+     */
 
     pstmt = conn.prepareStatement(sql.toString());
 
@@ -19264,7 +19287,9 @@ if(arrCnt == 30) {
     String pno = param.get("itemcode1");
     String cno = param.get("custcode");
     String branch = param.get("branch");
-
+    String boxQty = "";
+    conn = dataSource.getConnection();
+    conn.setAutoCommit(false);
     sql.append("SELECT  QTY     \n");
     sql.append("FROM    T_SCM_BOX       \n");
     sql.append("WHERE   pno = '");
@@ -19273,14 +19298,22 @@ if(arrCnt == 30) {
     sql.append("AND     cno = '");
     sql.append(cno);
     sql.append("' \n");
+    
+    pstmt = conn.prepareStatement(sql.toString());
+    rs = pstmt.executeQuery();
+
+    while (rs.next()) {
+      boxQty = rs.getString("qty");
+    }
+    
     /*
      * sql.append("AND      branch = '"); sql.append(branch); sql.append("'");
      */
 
     System.out.println(sql.toString());
 
-
-    return this.jdbcTemplate.queryForObject(sql.toString(), String.class);
+    return boxQty;
+    //return this.jdbcTemplate.queryForObject(sql.toString(), String.class);
   }
 
   // ★★★★★삭제예정220726★★★★★
@@ -20180,7 +20213,7 @@ if(arrCnt == 30) {
   }
   // shortage
   public List<ShortageVO> mng_shortage1(String[] arrayDay, Map<String, String> param, int page,
-      int itemCountPerPage, String temp_date) throws SQLException {
+      int itemCountPerPage, String temp_date, String division) throws SQLException {
     System.out.println("check"+arrayDay[9]);
     String pageView = param.get("pageView");
     StringBuffer sql = new StringBuffer();
@@ -20620,16 +20653,38 @@ if(arrCnt == 30) {
     sql.append("FROM    (             \n");
     sql.append("        SELECT  A.*, q.subname, i.itemcode1,   i.itemname, i.cmb_itemtype, i.cmb_product             \n");
     sql.append("        FROM    (             \n");
-    sql.append("                SELECT  a.gubun,  a.branch, a.itemcode,   a.condate,    sum(planqty)    mrp_qty             \n");
-    sql.append("                FROM    T_MM_WorkPlanSub            a             \n");
+    sql.append("                 SELECT  a.gubun,  a.branch, a.itemcode,   A.condate,    sum(gQTY) as   mrp_qty, 0 as PLAN_QTY   ,0 as work_qty            \n");
+    sql.append("                FROM    t_pp_mrp_requirement2           a                     \n");
+    sql.append("               Left Outer Join t_mi_item       c   ON  a.gubun =   c.gubun AND a.branch    =   c.branch    AND a.itemcode  =   c.itemcode  AND c.cmb_supply    =   '003'                              \n");
     sql.append("                WHERE   A.GUBUN     =   '01'             \n");
     sql.append("                AND     A.BRANCH    =   '000'             \n");
     sql.append("                AND     A.condate     >=  '"+startdate+"'             \n");
     sql.append("                AND     A.condate     <=  '"+arrayDay[9]+"'             \n");
-    sql.append("                GROUP   BY  A.gubun,  A.branch, A.itemcode,   a.condate             \n");
+    sql.append("                GROUP   BY  A.gubun, A.branch, A.itemcode, A.condate, 0           \n");
+    sql.append("                union all            \n");
+    sql.append("                SELECT  x.gubun,x.branch,x.itemcode, A.CONDATE, 0 as mrp_qty, A.PLAN_QTY , 0 as work_qt           \n");
+    sql.append("                FROm    T_SP_PLANPILOT          X           \n");
+    sql.append("                     LEFT OUTER JOIN (           \n");
+    sql.append("                        SELECT * FROM t_SP_DayPlan      \n");
+    sql.append("                        WHERE   GUBUN ='01'      \n");
+    sql.append("                        AND     BRANCH='000'     \n");
+    sql.append("                        AND     condate >='"+startdate+"'     \n");
+    sql.append("                        )       A     \n");
+    sql.append("                     ON  X.GUBUN =   A.GUBUN AND X.BRANCH = A.BRANCH AND X.CUSTCODE = A.CUSTCODE AND X.DELIVERYCODE = A.DELIVERYCODE AND X.ITEMCODE = A.ITEMCODE      \n");
+    sql.append("                WHERE X.GUBUN ='01'      \n");
+    sql.append("                and X.BRANCH='000'           \n");
+    sql.append("                and X.CHK   =   0           \n");
+    sql.append("                union all           \n");
+    sql.append("                SELECT  a.gubun,  a.branch, a.itemcode,   a.condate,  0 as mrp_qty,0 as plan_qty,  sum(planqty)    work_qty           \n");
+    sql.append("                FROM    T_MM_WorkPlanSub            a            \n");
+    sql.append("                WHERE   A.GUBUN     =   '01'           \n");
+    sql.append("                AND     A.BRANCH    =   '000'           \n");
+    sql.append("                AND     A.condate     >=  '"+startdate+"'           \n");
+    sql.append("                AND     A.condate     <=  '"+arrayDay[9]+"'           \n");
+    sql.append("                GROUP   BY  A.gubun,  A.branch, A.itemcode,   a.condate    ,0            \n"); 
     sql.append("        )                 \n");
     sql.append("        PIVOT            (                 \n");
-    sql.append("        SUM(mrp_qty)          FOR CONDATE IN  ( '"+arrayDay[0]+"'             \n");
+    sql.append("        SUM(mrp_qty) as mrpqty, sum(plan_qty) as planqty , sum(work_qty) as workpty          FOR CONDATE IN  ( '"+arrayDay[0]+"'             \n");
     sql.append("                                               ,'"+arrayDay[1]+"'             \n");
     sql.append("                                               ,'"+arrayDay[2]+"'             \n");
     sql.append("                                               ,'"+arrayDay[3]+"'             \n");
@@ -20642,7 +20697,7 @@ if(arrCnt == 30) {
     sql.append("                           ))   A            \n");
     sql.append(" left outer join t_mi_item i on a.gubun=i.gubun and a.itemcode=i.itemcode             \n");
     sql.append(" left outer join (select gubun, typecode, subcode, subname, TO_NCHAR(subname) as ItemType, Extra1  from t_mi_typesub) q on i.gubun=q.gubun and i.cmb_itemtype=q.subcode And q.typecode='MI002'             \n");
-    sql.append("        )       A       WHERE branch LIKE '%'      \n");
+    sql.append("        )       A       WHERE branch LIKE '%' and cmb_itemtype='"+division+"'      \n");
     
     
   

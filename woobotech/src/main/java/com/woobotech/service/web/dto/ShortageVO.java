@@ -30,6 +30,18 @@ public class ShortageVO {
   private String day8p;
   private String day9p;
   private String day10p;
+  private String day1w;
+  private String day2w;
+  private String day3w;
+  private String day4w;
+  private String day5w;
+  private String day6w;
+  private String day7w;
+  private String day8w;
+  private String day9w;
+  private String day10w;
+  
+  
  
 
 
@@ -215,6 +227,86 @@ public class ShortageVO {
 
   public void setDay10p(String day10p) {
     this.day10p = day10p;
+  }
+
+  public String getDay1w() {
+    return day1w;
+  }
+
+  public void setDay1w(String day1w) {
+    this.day1w = day1w;
+  }
+
+  public String getDay2w() {
+    return day2w;
+  }
+
+  public void setDay2w(String day2w) {
+    this.day2w = day2w;
+  }
+
+  public String getDay3w() {
+    return day3w;
+  }
+
+  public void setDay3w(String day3w) {
+    this.day3w = day3w;
+  }
+
+  public String getDay4w() {
+    return day4w;
+  }
+
+  public void setDay4w(String day4w) {
+    this.day4w = day4w;
+  }
+
+  public String getDay5w() {
+    return day5w;
+  }
+
+  public void setDay5w(String day5w) {
+    this.day5w = day5w;
+  }
+
+  public String getDay6w() {
+    return day6w;
+  }
+
+  public void setDay6w(String day6w) {
+    this.day6w = day6w;
+  }
+
+  public String getDay7w() {
+    return day7w;
+  }
+
+  public void setDay7w(String day7w) {
+    this.day7w = day7w;
+  }
+
+  public String getDay8w() {
+    return day8w;
+  }
+
+  public void setDay8w(String day8w) {
+    this.day8w = day8w;
+  }
+
+  public String getDay9w() {
+    return day9w;
+  }
+
+  public void setDay9w(String day9w) {
+    this.day9w = day9w;
+  }
+
+  public String getDay10w() {
+    return day10w;
+  }
+
+  public void setDay10w(String day10w) {
+    this.day10w = day10w;
   }
 
  

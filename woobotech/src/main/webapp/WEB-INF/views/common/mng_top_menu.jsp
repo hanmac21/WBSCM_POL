@@ -71,8 +71,13 @@
 			<li class="<%=menu[8]%>"><a href="mng_re_trns?menu=8" style="font-size:17px;">Transaction statement</a></li>
 			<li class="<%=menu[0]%>"><a href="mng_buy_plan?menu=0" style="font-size:17px;">Purchase Plan</a></li>
 			<li class="<%=menu[1]%>"><a href="mng_biz_plan?menu=1" style="font-size:17px;">sale plan</a></li>
+			<%if("master".equals(admin_id)){ %>
 			<li class="<%=menu[2]%>"><a href="mng_production_plan?menu=2" style="font-size:17px;">Production plan </a></li>
+			<%} %>
 			<li class="<%=menu[3]%>"><a href="mng_stock_plan?menu=3" style="font-size:17px;">Inventory view</a></li>
+			<%if("master".equals(admin_id)){ %>
+				<li class="<%=menu[10]%>"><a href="mng_shortage?menu=10" style="font-size:17px;">Shortage</a></li>
+			<%} %>
 			<!-- li class="<%=menu[5]%>"><a href="mng_delivery?menu=5">배송관리</a></li-->
 			
 			<%-- <li class="<%=menu[11]%>"><a href="mng_export_master?menu=11" style="font-size:17px;"><!-- 반출증 관리 -->Carry-out</a></li>  --%>
@@ -83,7 +88,6 @@
 			
 			<!-- 메일 발송용 협력사 관리자 관리용 관리자 관리 탭 --> 
 			<%if("master".equals(admin_id)){ %>
-				<%-- <li class="<%=menu[10]%>"><a href="mng_shortage?menu=10" style="font-size:17px;">Shortage</a></li> --%>
 				<li class="<%=menu[9]%>"><a href="mng_partner_whole?menu=9"  style="font-size:17px;">Partner management</a></li>
 			<%} %>
 			<%-- <%if("master".equals(admin_id)){ %>

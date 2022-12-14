@@ -33,7 +33,17 @@ public class TrnsDTO {
   private String memo2;
   private String tqty2;
   private String color;
+  private String invoiceno;
   
+  
+  public String getInvoiceno() {
+    return invoiceno;
+  }
+
+  public void setInvoiceno(String invoiceno) {
+    this.invoiceno = invoiceno;
+  }
+
   public String getColor() {
     return color;
   }

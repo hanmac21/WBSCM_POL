@@ -87,7 +87,7 @@ table {
 
 th, td {
 	border: 1px solid #bbc6d3;
-	padding: 10px;
+	padding: 6px;
 }
 
 /* #Progress_Loading {
@@ -188,81 +188,26 @@ th, td {
 						<%
 						if ("master".equals(admin)) {
 						%>
+						<span>Kind : </span>&nbsp;
+						<select
+							id="division" name="division" style="margin-right: 10px; height:27px;">
+							<option value="001" ${division =='001' ? 'selected' :'' }>Production</option>
+							<option value="002" ${division =='002' ? 'selected' :'' }>Goods</option>
+						</select>
 						<input type="hidden" name="p_cno" id="p_cno" placeholder="Partner number"
 							value="" readonly="readonly"> &nbsp;&nbsp;&nbsp; 
-						<!-- <span>협력사명Partner name : </span> &nbsp;
-						<input type="text" class="" name="p_cu_sangho"
-							id="p_cu_sangho" placeholder="" value=""
-							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}">
-						<input type="text" list="sangholist" id="p_cu_sangho" onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}" /> -->	
-							
-						<%-- <datalist id="sangholist">
-							<option value="" selected>전체</option>
-							
-							<c:choose>
-								<c:when test="${colist.size() >= 1 }">
-									<c:forEach var="co" items="${colist }">
-										<option value="${co.cu_sangho }">${co.cu_sangho }</option>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									협력사 없음
-								</c:otherwise>
-							</c:choose>
-							 
-						</datalist>	 --%>
+						
 						&nbsp;&nbsp;&nbsp;
-						<!--  <span> 차종 : </span> &nbsp;<input type="text" id="p_carname"	 autocomplete="off"	name="p_carname" style="margin-right:15px; width: 100px"	value="" onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}" />	&nbsp; -->
-						<!-- img alt="검색" src="resources/img/icon_search.png" style="width: auto; height: 26px;" onclick="fnSearch()"-->
+						
 						<%
 						}
 						%>	
-							
-							
-							<%-- <span>Factory : </span>
-						&nbsp;<select id="branch" name="branch"
-							style="margin-right: 10px; height:27px;">
-							<option value="000" ${branch =='000' ? 'selected' :'' }>POLAND</option>
-							<option value="001" ${branch =='001' ? 'selected' :'' }>울산</option>
-						</select> --%>
+					
 						<input type="hidden" name="branch" id="branch" value="000">
-						 &nbsp; <span>Reserch  : </span> &nbsp;<select
-							id="alldtate" name="alldtate" style="margin-right: 10px; height:27px;">
-							<option value="0" ${alldtate =='0' ? 'selected' :'' }><!-- 계획품목 -->Plan Item</option>
-							<option value="1" ${alldtate =='1' ? 'selected' :'' }><!-- 전체품목 -->Total item</option>
-						</select>
-						<!-- <br> -->
-						<!-- &nbsp;<span>Car : </span> &nbsp;<input type="text" id="p_carname"
-							autocomplete="off" name="p_carname"
-							style="margin-right: 10px; width: 100px" value="" 
-							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}"/> -->
-							
-						<span>Item name
-							: </span> &nbsp;<input type="text" id="p_itemname" autocomplete="off"
-							name="p_itemname" style="margin-right: 10px; width: 100px" value="" 
-							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}"/>	
-							
-						<span>Item code
-							: </span> &nbsp;<input type="text" id="p_itemcode1" autocomplete="off"
-							name="p_itemcode1" style="width: 100px" value="" 
-							onKeypress="javascript:if(event.keyCode==13) {getUserList('1')}"/>
-							
-						&nbsp;&nbsp;&nbsp; <span><!-- 정렬기준(품명) -->Sort by(item name) : </span> &nbsp;<select
-							id="aligndata" name="aligndata" style="height:27px;">
-							<option value="0" ${aligndata =='0' ? 'selected' :'' }>Unchecked</option>
-							<option value="1" ${aligndata =='1' ? 'selected' :'' }>Ascending</option>
-							<option value="2" ${aligndata =='2' ? 'selected' :'' }>Descending</option>
-						</select>	
-							
-						<!-- <br> -->
+						 &nbsp; 
 						<input type="button" class="btn btn-warning"
 							onclick="getUserList('1')" value="View"
 							style="margin-left: 25px;" id="ok"/>
-						<!-- <input type="button"
-							class="btn btn-success" id="btexe" onclick="export()"
-							value="엑셀저장" style="margin-left: 50px;" /> -->
-							
-						<!-- <input type="button" class="btn btn-success" value="Save excel" onclick="showExcel();" style="margin-left: 25px;"/>	 -->
 							
 							<div id="page" style="float:right;">
 						<span>Per page</span>
@@ -306,8 +251,9 @@ th, td {
 												<th style="font-size: 10px">${str_day8}</th>
 												<th style="font-size: 10px">${str_day9}</th>
 												<th style="font-size: 10px">${str_day10}</th>
-												<th style="font-size: 10px">${str_day11}</th>
+												 	
 												<th style="font-size: 10px">Total</th>
+												<th style="font-size: 10px">Expected</th>
 												<!-- th>과부족</th-->
 											</tr>
 										</thead>
@@ -363,7 +309,7 @@ th, td {
 	<div class="row" style="display:flex;">
 
 	<div class="" style="padding-top: 0px; width: 33%; float: left;">
-		<span style="margin-left: 10px;">number : ${ itemCount }</span>
+		<%-- <span style="margin-left: 10px;">number : ${ itemCount }</span> --%>
 	</div>
 	
 	
@@ -726,7 +672,7 @@ th, td {
 		 	var itemcode1 =$('#p_itemcode1').val();
 		 	var carname =$('#p_carname').val();
 		 	var itemname = $('#p_itemname').val();
-		 	var align = $('#aligndata').val();
+		 	var division = $('#division').val();
 		 	var custname = $('#p_cu_sangho').val();
 
 		 	var pageView = "mng_shortage_table";
@@ -754,7 +700,7 @@ th, td {
 		 			itemname: itemname,
 		 			branch : branch,
 		 			itemCountPerPage : itemCountPerPage,
-		 			align : align,
+		 			division : division,
 		 			custname : custname,
 		 			result : result
 		 		}	

@@ -333,7 +333,7 @@ vertical-align:top; !important
 							<option value="000" ${branch =='000' ? 'selected' :'' }>POLAND</option>
 							<option value="001" ${branch =='001' ? 'selected' :'' }>울산</option>
 						</select> --%>
-						 &nbsp;&nbsp;&nbsp; <span>reserch  : </span> &nbsp;<select
+						 &nbsp;&nbsp;&nbsp; <span>research  : </span> &nbsp;<select
 							id="alldtate" name="alldtate" style="height:27px;">
 							<option value="0" ${alldtate =='0' ? 'selected' :'' }>Plan Item</option>
 							<option value="1" ${alldtate =='1' ? 'selected' :'' }>Total item</option>
@@ -1539,7 +1539,7 @@ vertical-align:top; !important
 			}); 
 		}
 		
-		//메모적용
+		//인보이스적용
 		function fnMemoSet(barcode){
 			var memo = $("#s_memo1").val();
 			var len= memo.length;
@@ -1553,16 +1553,16 @@ vertical-align:top; !important
 			}
 			
 			
-			$("#p_memo").text(memo);
-			$("#p_memo2").text(memo);
+			 $("#voiceNo").text("Invocie No : "+memo);
+			//$("#p_memo2").text(memo); 
 			
 			
 			$.ajax({
 				type : "post",
-				url : "mng_trns_memo_u",
+				url : "mng_trns_invoice_u",
 				dataType : "html",
 				data : {
-					memo : memo,
+					memo : memo,			//인보이스
 					barcode : barcode
 					
 				}
@@ -1757,7 +1757,8 @@ vertical-align:top; !important
 			var check_find= check_num_day -1;			
 			var check_cnt = $("input:checkbox[name=box"+check_num_day+"]").length;
 				console.log(check_cnt);
-			for (var i = 1; i <= check_cnt; i++) {				console.log("check num day확인"+check_num_day);
+				console.log("check num day확인"+check_num_day);
+			for (var i = 1; i <= check_cnt; i++) {				
 				if($('#box'+check_num_day+'_'+i).is(':checked')){
 					$('#lot'+check_num_day+'_'+i).val(ma_date);
 				}
@@ -2070,7 +2071,12 @@ vertical-align:top; !important
 			}else{
 				
 				check_date =$("#check_"+box).val();
-				if(box=="box1"){
+				for(var i = 0; i<120; i++){
+					if(box=="box"+(i+1)){
+						check_day = "day"+(i+1);
+					}
+				}
+				/* if(box=="box1"){
 					check_day ="day1";	
 				}else if(box=="box2"){
 					check_day ="day2";	
@@ -2098,7 +2104,7 @@ vertical-align:top; !important
 					check_day ="day13";	
 				}else if(box=="box14"){
 					check_day ="day14";	
-				}
+				} */
 				//alert(check_day & " / " &  check_date);
 			}
 			$('#text_'+lot_id).show();
@@ -2546,7 +2552,7 @@ vertical-align:top; !important
 			if(isRun ==true){
 				return;
 			}
-			isRun = true;
+			
 			$('#label_text'+label_idx).text("Issuance completed");
 			//$('#label_2text'+label_idx).text("발행완료");
 			
@@ -2595,14 +2601,17 @@ vertical-align:top; !important
 							alert("You can enter up to two decimal places.");
 							return;
 						}
-						var check3 = /^[0-9]+$/; 
-						if(!check3.test(temp[1])){
-							alert("Only numbers can be entered in the date.");
-							return;
-						}
-						if(temp[1].length!=8){
-							alert("Please enter the date in 8 digits.");
-							return;
+						var check3 = /^[0-9]+$/;
+						if(temp[1]!=""){
+							if(!check3.test(temp[1])){
+								console.log("확인할"+temp[1]);
+								alert("Only numbers can be entered in the date.");
+								return;
+							}
+							if(temp[1].length!=8){
+								alert("Please enter the date in 8 digits.");
+								return;
+							}
 						}
 						if(temp[1] == null || temp[1] == ""){
 							//lines[i] = temp + batch_date;
@@ -2779,6 +2788,7 @@ vertical-align:top; !important
 					return;
 				}
 			}
+			isRun = true;
 			$("#modalPop").html("");
 			$("#modalPop").modal('hide');
 			FunLoadingBarStart();

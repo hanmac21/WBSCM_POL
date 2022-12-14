@@ -35,18 +35,20 @@
 							<fmt:parseDate value='${str_day8}' var='strDay8' pattern='yyyy-MM-dd'/>
 							<fmt:parseDate value='${str_day9}' var='strDay9' pattern='yyyy-MM-dd'/>
 							<fmt:parseDate value='${str_day10}' var='strDay10' pattern='yyyy-MM-dd'/>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay1}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay2}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay3}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay4}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay5}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay6}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay7}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay8}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay9}' /></th>
-							<th style="font-size: 10px"><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay10}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay1}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay2}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay3}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay4}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay5}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay6}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay7}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay8}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay9}' /></th>
+							<th><fmt:formatDate pattern='dd.MM.yyyy' value='${strDay10}' /></th>
 							
-							<th style="font-size: 10px">Total</th>
+							<th style="width:5%">Total</th>
+							<th>Expected</th>
+							
 							<!-- th>과부족</th-->
 						</tr>
 					</thead>
@@ -54,9 +56,9 @@
 						<c:choose>
 							<c:when test="${ board.size() > 0 }">
 								<c:forEach var="vo" items="${ board }" varStatus="status">
-
+									
 									<c:set var="i" value="${i+1 }" />
-
+									<c:if test="${division=='001'}">
 									<tr>
 										<td style="text-align: center;">${i }</td>
 										<%-- <td>${vo.custcode}</td>
@@ -68,8 +70,8 @@
 										<td style="text-align:center; padding:0 0 0 0;">
 											<table style="margin: 0px; border: 0px;">
 												<tr><td>Production</td></tr>
+												<tr><td>Sales</td></tr>
 												<tr><td>Stock</td></tr>
-												<tr><td>Buy</td></tr>
 											</table>
 										</td>
 										<td id ="bs_${status.count}" style="text-align:center; padding:0 0 0 0;"><f:formatNumber var = "num" value="${vo.stockQty}" type="number"/>${num ne "0" ? num : "0"} </td>
@@ -78,135 +80,260 @@
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro1_${status.count}"><f:formatNumber var = "num" value="${vo.day1p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus1_${status.count}"><f:formatNumber var = "num" value="${vo.day1w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus1_${status.count}"><f:formatNumber var = "num" value="${vo.day1p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock1_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy1_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day1b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro2_${status.count}"><f:formatNumber var = "num" value="${vo.day2p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus2_${status.count}"><f:formatNumber var = "num" value="${vo.day2w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus2_${status.count}"><f:formatNumber var = "num" value="${vo.day2p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock2_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy2_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day2b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro3_${status.count}"><f:formatNumber var = "num" value="${vo.day3p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus3_${status.count}"><f:formatNumber var = "num" value="${vo.day3w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus3_${status.count}"><f:formatNumber var = "num" value="${vo.day3p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock3_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy3_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day3b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro4_${status.count}"><f:formatNumber var = "num" value="${vo.day4p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus4_${status.count}"><f:formatNumber var = "num" value="${vo.day4w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus4_${status.count}"><f:formatNumber var = "num" value="${vo.day4p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock4_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy4_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day4b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>	
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro5_${status.count}"><f:formatNumber var = "num" value="${vo.day5p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus5_${status.count}"><f:formatNumber var = "num" value="${vo.day5w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus5_${status.count}"><f:formatNumber var = "num" value="${vo.day5p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock5_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy5_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day5b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro6_${status.count}"><f:formatNumber var = "num" value="${vo.day6p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus6_${status.count}"><f:formatNumber var = "num" value="${vo.day6w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus6_${status.count}"><f:formatNumber var = "num" value="${vo.day6p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock6_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy6_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day6b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro7_${status.count}"><f:formatNumber var = "num" value="${vo.day7p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus7_${status.count}"><f:formatNumber var = "num" value="${vo.day7w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus7_${status.count}"><f:formatNumber var = "num" value="${vo.day7p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock7_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy7_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day7b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro8_${status.count}"><f:formatNumber var = "num" value="${vo.day8p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus8_${status.count}"><f:formatNumber var = "num" value="${vo.day8w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus8_${status.count}"><f:formatNumber var = "num" value="${vo.day8p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock8_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy8_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day8b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro9_${status.count}"><f:formatNumber var = "num" value="${vo.day9p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus9_${status.count}"><f:formatNumber var = "num" value="${vo.day9w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus9_${status.count}"><f:formatNumber var = "num" value="${vo.day9p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock9_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy9_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day9b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
 										</table>
 										</td>
 										
 										<td style="text-align:right; padding:0 0 0 0;" > 
 										<table style="margin: 0px; border: 0px;">
-											<tr><td id = "pro10_${status.count}"><f:formatNumber var = "num" value="${vo.day10p}" type="number"/>${num ne "0" ? num : "0"}</td>
+											<tr><td id = "plus10_${status.count}"><f:formatNumber var = "num" value="${vo.day10w}" type="number"/>${num ne "0" ? num : "0"}</td>
 											</tr>
+											<tr><td id="minus10_${status.count}"><f:formatNumber var = "num" value="${vo.day10p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 											<tr><td id="stock10_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
-											<tr><td id="buy10_${status.count}"><f:formatNumber var = "num" value="${board2[status.index].day10b}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										<td style="text-align:right; padding:0 0 0 0;">
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "sum1_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="sum2_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td>ㅤ</td></tr>
+										</table>
+										</td>
+										<td style="text-align:right; padding:0 0 0 0;">
+										<table style="margin: 0px; border: 0px;">
+											<tr><td>ㅤ</td></tr>
+											<tr><td>ㅤ</td></tr>
+											<tr><td id="stock_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
 										</table>
 										</td>
 										
-										<%-- <td style="text-align:right; padding:0 0 0 0;" > 
-										<table style="margin: 0px; border: 0px;">
-											<tr><td><f:formatNumber var = "num" value="${vo.day11}" type="number"/>${num ne "0" ? num : "0"}</td>
-											</tr>
-											<tr><td>0</td></tr>
-											<tr><td>0</td></tr>
-										</table>
-										</td>
-										
-										<td style="text-align:right; padding:0 0 0 0;" > 
-										<table style="margin: 0px; border: 0px;">
-											<tr><td><f:formatNumber var = "num" value="${vo.day12}" type="number"/>${num ne "0" ? num : "0"}</td>
-											</tr>
-											<tr><td>0</td></tr>
-											<tr><td>0</td></tr>
-										</table>
-										</td>
-										
-										<td style="text-align:right; padding:0 0 0 0;" > 
-										<table style="margin: 0px; border: 0px;">
-											<tr><td><f:formatNumber var = "num" value="${vo.day13}" type="number"/>${num ne "0" ? num : "0"}</td>
-											</tr>
-											<tr><td>0</td></tr>
-											<tr><td>0</td></tr>
-										</table>
-										</td>
-										
-										<td style="text-align:right; padding:0 0 0 0;" > 
-										<table style="margin: 0px; border: 0px;">
-											<tr><td><f:formatNumber var = "num" value="${vo.day14}" type="number"/>${num ne "0" ? num : "0"}</td>
-											</tr>
-											<tr><td>0</td></tr>
-											<tr><td>0</td></tr>
-										</table>
-										</td> --%>
-										
-										
-										<%-- <td class="number" style="text-align:right;">${vo.day1b+vo.day2+vo.day3+vo.day4+vo.day5+vo.day6+vo.day7+vo.day8+vo.day9+vo.day10+vo.day11+vo.day12+vo.day13+vo.day14 ne "0" ? vo.day1+vo.day2+vo.day3+vo.day4+vo.day5+vo.day6+vo.day7+vo.day8+vo.day9+vo.day10+vo.day11+vo.day12+vo.day13+vo.day14 : ""}</td> --%>
-
 									</tr>
-
+									</c:if>
+									
+									<c:if test="${division=='002'}">
+									<tr>
+										<td style="text-align: center;">${i }</td>
+										<%-- <td>${vo.custcode}</td>
+										<td class="sangho">${vo.cu_sangho}</td> --%>
+										<td class="itemcode">${vo.itemcode1}</td>
+										<td class="itemname">${vo.itemname}</td>
+										<%-- <td>${vo.carname}</td> --%>
+										 <input type="hidden" id='day${i}' value = "${i}"> 
+										<td style="text-align:center; padding:0 0 0 0;">
+											<table style="margin: 0px; border: 0px;">
+												<tr><td>Purchase</td></tr>
+												<tr><td>Sales</td></tr>
+												<tr><td>Stock</td></tr>
+											</table>
+										</td>
+										<td id ="bs_${status.count}" style="text-align:center; padding:0 0 0 0;"><f:formatNumber var = "num" value="${vo.stockQty}" type="number"/>${num ne "0" ? num : "0"} </td>
+										
+										<!-- 0이 아니면 공란 -->
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus1_${status.count}"><f:formatNumber var = "num" value="${vo.day1b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus1_${status.count}"><f:formatNumber var = "num" value="${vo.day1p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock1_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus2_${status.count}"><f:formatNumber var = "num" value="${vo.day2b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus2_${status.count}"><f:formatNumber var = "num" value="${vo.day2p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock2_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus3_${status.count}"><f:formatNumber var = "num" value="${vo.day3b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus3_${status.count}"><f:formatNumber var = "num" value="${vo.day3p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock3_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus4_${status.count}"><f:formatNumber var = "num" value="${vo.day4b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus4_${status.count}"><f:formatNumber var = "num" value="${vo.day4p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock4_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>	
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus5_${status.count}"><f:formatNumber var = "num" value="${vo.day5b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus5_${status.count}"><f:formatNumber var = "num" value="${vo.day5p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock5_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus6_${status.count}"><f:formatNumber var = "num" value="${vo.day6b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus6_${status.count}"><f:formatNumber var = "num" value="${vo.day6p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock6_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus7_${status.count}"><f:formatNumber var = "num" value="${vo.day7b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus7_${status.count}"><f:formatNumber var = "num" value="${vo.day7p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock7_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus8_${status.count}"><f:formatNumber var = "num" value="${vo.day8b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus8_${status.count}"><f:formatNumber var = "num" value="${vo.day8p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock8_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus9_${status.count}"><f:formatNumber var = "num" value="${vo.day9b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus9_${status.count}"><f:formatNumber var = "num" value="${vo.day9p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock9_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+										<td style="text-align:right; padding:0 0 0 0;" > 
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "plus10_${status.count}"><f:formatNumber var = "num" value="${vo.day10b}" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="minus10_${status.count}"><f:formatNumber var = "num" value="${vo.day10p}" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td id="stock10_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										<td style="text-align:right; padding:0 0 0 0;">
+										<table style="margin: 0px; border: 0px;">
+											<tr><td id = "sum1_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td>
+											</tr>
+											<tr><td id="sum2_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											<tr><td>ㅤ</td></tr>
+											
+										</table>
+										</td>
+										<td style="text-align:right; padding:0 0 0 0;">
+										<table style="margin: 0px; border: 0px;">
+											<tr><td>ㅤ</td></tr>
+											<tr><td>ㅤ</td></tr>
+											<tr><td id="stock_${status.count}"><f:formatNumber var = "num" value="" type="number"/>${num ne "0" ? num : "0"}</td></tr>
+											
+										</table>
+										</td>
+										
+									</tr>
+									</c:if>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
@@ -230,8 +357,8 @@
 <div class="row" style="display:flex;">
 
 	<div class="" style="padding-top: 0px; width: 33%; float: left;">
-		<div style="width:25%;"><span style="margin-left: 10px;">number : ${ itemCount }</span></div>
-		<div style=""><span style="margin-left: 40px; margin-top:10px;">Plans whose quantity has changed within the last 12 hours are displayed with an <span style="background-color:#ec971f" >orange</span> background.</span></div>
+		<%-- <div style="width:25%;"><span style="margin-left: 10px;">number : ${ itemCount }</span></div> --%>
+		<!-- <div style=""><span style="margin-left: 40px; margin-top:10px;">Plans whose quantity has changed within the last 12 hours are displayed with an <span style="background-color:#ec971f" >orange</span> background.</span></div> -->
 	</div>
 	
 	<div class="" style="width: 33%; text-align: center; float: left; padding-top: -10px; margin-top: -10px;">
@@ -284,12 +411,16 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-	var test = $("#buy_1").text();
-	var pro = "";
+	var test = $("#minus_1").text();
+	var plus = "";
 	var stock="";
-	var buy = "";
+	var minus = "";
+	
 //한줄확인
 	for(var j = 0; j<${ board.size()}; j++){
+		var sum1 = 0;
+		var sum2 = 0;
+		var stockL = 0;
 		for(var i = 0; i<10; i++){
 			if(i==0){
 				stock=$("#bs_"+(j+1)).text();
@@ -300,19 +431,30 @@ $(document).ready(function() {
 			if(stock==null){
 				stock=0;
 			}
-			pro = $("#pro"+(i+1)+"_"+(j+1)).text();
-			pro = pro.replace(",","");
+			plus = $("#plus"+(i+1)+"_"+(j+1)).text();
+			plus = plus.replace(",","");
 			stock = stock.replace(",","");
-			buy = buy.replace(",","");
-			console.log("재고확인 #pro"+(i+1)+"_"+(j+1)+"|"+pro+"|"+Number(pro));
-			buy = $("#buy"+(i+1)+"_"+(j+1)).text();
-			var stockN = Number(stock)-Number(pro)+Number(buy);
+			minus = $("#minus"+(i+1)+"_"+(j+1)).text();
+			minus = minus.replace(",","");
+			console.log("재고확인 #plus"+(i+1)+"_"+(j+1)+"|"+plus+"|"+Number(plus));
+			var stockN = Number(stock)+Number(plus)-Number(minus);
 			var result = stockN.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-			console.log(i+"확인"+Number(stock)+"|"+Number(pro)+"|"+Number(buy));
+			console.log(i+"확인"+Number(stock)+"|"+Number(plus)+"|"+Number(minus));
+			
 			$("#stock"+(i+1)+"_"+(j+1)).text(result);
-			
-			
+			if(result<0){
+				$("#stock"+(i+1)+"_"+(j+1)).css("color","#ff0000");
+			}
+			sum1 = sum1+Number(plus);
+			sum2 = sum2+Number(minus);
+			stockL = result
 		}
+		$("#sum1"+"_"+(j+1)).text(sum1);
+		$("#sum2"+"_"+(j+1)).text(sum2);
+		if(stockL<0){
+			$("#stock"+"_"+(j+1)).css("color","#ff0000");
+		}
+		$("#stock"+"_"+(j+1)).text(stockL);
 	}
 	
 });

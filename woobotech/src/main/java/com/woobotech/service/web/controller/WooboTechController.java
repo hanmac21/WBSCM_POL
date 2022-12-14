@@ -254,8 +254,8 @@ System.out.println("220926 dtime확인 "+board.get(0));
     return "mng/mng_delivery_detail";
   }
 
-    // 구매계획관리 - 거래명세서  비고적용
-  @RequestMapping(value = "/mng_trns_memo_u", method = {RequestMethod.POST})
+    // 구매계획관리 - 거래명세서  인보이스적용
+  @RequestMapping(value = "/mng_trns_invoice_u", method = {RequestMethod.POST})
   public String mng_trns_memo_u(HttpServletRequest request, Locale locale, Model model,
       @RequestParam Map<String, String> param) {
     logger.info("▷▶▷▶▷▶ mng_trns_memo_u start");
@@ -268,7 +268,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
 
     WooboTechDao dao = new WooboTechDao();
     // MemberBizDTO board = dao.mng_biz_dt(param);
-    result = dao.mng_trns_memo_u(param);
+    result = dao.mng_trns_invoice_u(param);
     model.addAttribute("result", result);
     logger.info("◁◀◁◀◁◀ mng_trns_memo_u end");
     return "ajaxResult";
@@ -465,6 +465,7 @@ System.out.println("220926 dtime확인 "+board.get(0));
     model.addAttribute("pageview", "mng_re_trns_data");
     model.addAttribute("memo", info.getMemo());
     model.addAttribute("memo2", info.getMemo2());
+    model.addAttribute("invoiceno", info.getInvoiceno());
     
     System.out.println(" 재발행 작성일자" + info.getPrdate());
     model.addAttribute("itemcode", info.getItemcode1());
@@ -1710,6 +1711,7 @@ System.out.println("날짜확인220919"+str_day1);
    logger.info("▷▶▷▶▷▶mng_shortage start");
 
    String pageView = F.nullCheck(request.getParameter("pageView"), "mng_shortage");
+   String division = F.nullCheck(request.getParameter("division"), "001");
    String startdate = DateUtil.getConvertDate(F.nullCheck(request.getParameter("startdate"), ""));
    int page = Integer.parseInt(F.nullCheck(request.getParameter("page"), "1"));
    int itemCountPerPage =
@@ -1817,9 +1819,7 @@ System.out.println("날짜확인221103"+temp_date);
 
      if (!"mng_shortage".equals(pageView)) {
        //itemCount = dao.mng_biz_plan_count(arrayDay, param);
-     board = dao.mng_shortage1(arrayDay, param, page, itemCountPerPage, temp_date);
-     board2 = dao.mng_shortage2(arrayDay, param, page, itemCountPerPage, temp_date);
-       // colist = dao.mng_co_list(param);
+       board = dao.mng_shortage1(arrayDay, param, page, itemCountPerPage, temp_date,division);
      }
 
      int maxPage = ListController.getMaxPage(itemCount, itemCountPerPage);
@@ -1828,8 +1828,9 @@ System.out.println("날짜확인221103"+temp_date);
      // colist = dao.mng_co_list(param);
 
      model.addAttribute("board", board);
-     model.addAttribute("board2", board2);
+     //model.addAttribute("board2", board2);
      // model.addAttribute("colist",colist);
+     model.addAttribute("division", division);
      model.addAttribute("itemCount", itemCount);
      model.addAttribute("currentPage", page);
      model.addAttribute("maxPage", maxPage);
@@ -2257,11 +2258,10 @@ System.out.println("날짜확인221103"+temp_date);
    
     System.out.println(is_exist);
 
-    if (is_exist == 1) {
-      dao.mng_update_qty(param);
-      
-    } else {
+    if (is_exist == 0) {
       dao.mng_insert_qty(param);
+    } else { 
+      dao.mng_update_qty(param);
     }
 
     ArrayList<LabelDTO> arrList_Label = null;
@@ -2437,7 +2437,7 @@ System.out.println("날짜확인221103"+temp_date);
     String box_qty = "";
     String box_qty2 = "0";
     String box_qty3 = "0";
-    if (is_exist == 1) {
+    if (is_exist != 0) {
       // wdao.mng_update_qty(param);
       box_qty = wdao.mng_box_qty(param);
     } else {

@@ -16,6 +16,15 @@ public class ReTrnsDTO {
   private String prdate;
   private String row_num;
   private String plant;
+  private String invoiceno;
+  
+  public String getInvoiceno() {
+    return invoiceno;
+  }
+
+  public void setInvoiceno(String invoiceno) {
+    this.invoiceno = invoiceno;
+  }
 
   public String getBarcode() {
     return barcode;

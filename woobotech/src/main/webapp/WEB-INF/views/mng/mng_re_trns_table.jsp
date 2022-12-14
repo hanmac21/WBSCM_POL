@@ -22,13 +22,14 @@
 				<table id="tablebody" width="100%" class="stripe row-border order-column" cellspacing="0" >
 										<thead>
 											<tr>
-												<th width="3%" style="text-align: center;">Number</th>
-												<th width="7%" style="text-align: center;">Barcode number</th>
+												<th width="2%" style="text-align: center;">Number</th>
+												<th width="5%" style="text-align: center;">Barcode number</th>
 												<th width="3%" style="text-align: center;">Area</th>
 												<th width="5%" style="text-align: center;">date</th>
 												<th width="3%" style="text-align: center;">Partner code</th>
-												<th width="11%" style="text-align: center;">Partner name</th>
-												<th width="5%" style="text-align: center;">Car</th>
+												<th width="10%" style="text-align: center;">Partner name</th>
+												<th width="5%" style="text-align: center;">Invoice No</th>
+												<th width="4%" style="text-align: center;">Car</th>
 												<th width="4%" style="text-align: center;">Qty</th>
 												<th width="14%" style="text-align: center;">Delivery status</th>
 												<th width="8%" style="text-align: center;">Date Created</th>
@@ -54,6 +55,7 @@
 
 															<td style="text-align: center;">${vo.cno}</td>
 															<td style="text-align: center;">${vo.cname}</td>
+															<td style="text-align: center;">${vo.invoiceno}</td>
 															<td style="text-align: center;">${vo.carkind}</td>
 															<td  style="font-size: 18px;text-align: center;">${vo.t_qty}</td>
 															<td style="text-align: center;">
@@ -96,7 +98,7 @@
 												<c:otherwise>
 													
 													<tr>
-														<td colspan="11" style="height: 100px; text-align: center;">No data was found.</td>
+														<td colspan="12" style="height: 100px; text-align: center;">No data was found.</td>
 													</tr>
 												</c:otherwise>
 	

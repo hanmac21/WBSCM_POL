@@ -67,13 +67,14 @@ table{
 								<%-- <button type="button" class="btn btn-info pull-right print_btn" 
 									style="margin-left: 10px" onclick="fnTrnsPop('${barcode}','${prdate}')">Report</button> --%>
 									
-								<!--<button type="button" class="btn btn-warning pull-right"
+								<button type="button" class="btn btn-warning pull-right"
 									style="margin-right: 10px" onclick="fnMemoSet('${barcode}')" id="ok2">Apply</button>
 								 <input type="text" class="pull-right"
 									placeholder="Write down" value=""  
 									style="width: 300px; height: 30px; margin-right: 10px"
 									id="s_memo1" onKeypress="javascript:if(event.keyCode==13){$('#ok2').click(); $('#s_memo1').val('');}">
-								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">Remarks :  </span>	 -->
+								<span class="pull-right" style="margin-top:5px; margin-right: 5px;">Invoice No :  </span>	
+								
 								<!--  <button type="button" class="btn btn-info pull-right print_btn" id="labelPrintAll"  
 											style="margin-right: 20px" onclick="fnAllLabel('${barcode }')" disabled>전체 재발행(라벨프린터)</button>-->
 								<c:forEach var="vo" items="${ text }" varStatus="status">
@@ -126,7 +127,8 @@ table{
 													<img src="/resimg/woobo/barcode/${barcode}.png"
 															style="width: 200px; height: 40px;"><br>
 															<span style="font-size:20px;padding-right:50px;"> ${barcode}</span><br>
-													<span style="font-size: 12px">Receiver </span> &nbsp; <br>
+													<span style="font-size: 12px">Receiver </span> &nbsp; 
+													<br>
 													Woobotech<br>
 													Al. Armii Krajowej 39,  <br>
 													44-240 Żory
@@ -138,7 +140,7 @@ table{
 														type="text" id="outdate" name="outdate", autocomplete='off' readonly='true'
 														style="width: 100px;" value="${prdate}" onchange="changed(this)"/>
 														<button type="button" class="btn" onclick="fnMemoSet3('${barcode}')" style="font-size: 12px;  margin-top:-1px;  height:29px;" id="ok2">apply</button><br>
-													<br>
+													<br><span id="voiceNo"></span>
 													<br><span style="font-size: 12px">Supplier </span><br>
 													<span style="font-size: 12px">${cu_code}</span><br>
 													<span style="font-size: 14px">${cu_sangho}</span><br>
