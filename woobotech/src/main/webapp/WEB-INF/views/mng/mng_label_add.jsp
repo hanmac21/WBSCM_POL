@@ -134,6 +134,10 @@
 							</div>
 						</div>
 						<div class="form-group" >
+							<form id="uploadForm" method="POST" enctype="multipart/form-data">
+							    <input type="file" name="file" id="file"/>
+							    <button type="button" id="uploadBtn">Read</button>
+							</form>
 							<label for="name" class="col-sm-2 control-label" style="font-size: 14px">Batch QTY</label>
 							<div class="col-sm-10">
 								<textarea name="p_content" id="p_content" cols="100" rows="10" class="form-control" 
@@ -185,7 +189,76 @@
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js">
+
+</script>
 <script type="text/javascript">
+$(function(){
+	 
+    $('#uploadBtn').on('click', function(){
+        uploadFile();
+    });
+ 
+});
+ 
+function uploadFile(){
+    
+    var form = $('#uploadForm')[0];
+    var formData = new FormData(form);
+    for (var key of formData.keys()) {
+
+    	  console.log(key);
+
+    	}
+ 	console.log(formData);
+    $.ajax({
+        url : '/readExcel',
+        enctype: 'multipart/form-data',
+        type : 'POST',
+        data : formData,
+        contentType : false,
+        processData : false        
+    }).done(function(data){
+        //callback(data);
+        console.log(data);
+    });
+}
+
+function readExcel() {
+	$.ajax({
+		type:"get",
+		url:"excelRead",
+		//dataType:"text",
+		data:{
+			tradebarcode:trbarcode,
+			pno:pno
+		}
+	}).done(function(data){
+		//alert("done!");
+		
+		console.log(typeof data);
+		console.log(data);
+		alert(data);
+		
+		data = data*1
+		
+		if(data>=1){
+			document.getElementById("${vo.itemcode1 }+reTrnsBtn").style.display="block";
+		}
+	});
+    /* var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function(){
+        var fileData = reader.result;
+        var wb = XLSX.read(fileData, {type : 'binary'});
+        var sheetNameList = wb.SheetNames; // 시트 이름 목록 가져오기 
+        var firstSheetName = sheetNameList[0]; // 첫번째 시트명
+        var firstSheet = wb.Sheets[firstSheetName]; // 첫번째 시트 
+        callback(firstSheet);      
+    };
+    reader.readAsBinaryString(input.files[0]);
+    $("#p_content").html(XLSX.utils.sheet_to_html (firstSheet)); */
+}
 	//var h_tag_cnt=0;
 	$(function() {
 	$("#p_madate").datepicker ({ 
